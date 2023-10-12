@@ -20,7 +20,9 @@ export default function Header() {
       <div className="header-bottom">
         <div className="header-search-box">
           <input className="header-search-input" placeholder='검색어를 입력해 주세요.' />
-          <div className="header-search-button">검색</div>
+          <div className="header-search-icon-box">
+            <div className="header-search-icon"></div>
+          </div>
         </div>
       </div>
     </div>
