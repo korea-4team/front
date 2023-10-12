@@ -50,10 +50,10 @@ const PATCH_MY_PAGE_INFO_CHANGE_URL = () => `${API_DOMAIN}/my-page/user-info-cha
 const GET_ADVERTISING_BOARD_LIST_URL = (section: number | string) => `${API_DOMAIN}/advertising-board/current-board/${section}`;
 const GET_ADVERTISING_BOARD_LOCATION_LIST_URL = (location: string) => `${API_DOMAIN}/advertising-board/board-list/location/${location}`;
 const GET_ADVERTISING_BOARD_BUSINESSTYPE_LIST_URL = (businessType: string) => `${API_DOMAIN}/advertising-board/board-list/business-type${businessType}`;
-// const ADVERTISING_BOARD_LOCATION_BUSINESSTYPE_LIST_URL = (location: string, businessType: string) => `${API_DOMAIN}/advertising-board/board-list/${location}/${businessType}`;
+// const GET_ADVERTISING_BOARD_LOCATION_BUSINESSTYPE_LIST_URL = (location: string, businessType: string) => `${API_DOMAIN}/advertising-board/board-list/${location}/${businessType}`;
 const GET_ADVERTISING_BOARD_DETAIL_URL = (boardNumber: number | string) => `${API_DOMAIN}/advertising-board/board-list/${boardNumber}`;
 const GET_ADVERTISING_BOARD_SHORT_REVIEW_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/advertising-board/detail/${boardNumber}/short-review/list`;
-// const ADVERTISING_BOARD_USER_LIST_URL = (email: string) => `${API_DOMAIN}/advertising-board/user-list/${email}`;
+// const GET_ADVERTISING_BOARD_USER_LIST_URL = (email: string) => `${API_DOMAIN}/advertising-board/user-list/${email}`;
 const POST_ADVERTISING_BOARD_URL = () => `${API_DOMAIN}/advertising-board/write`;
 const POST_ADVERTISING_BOARD_SHORT_REVIEW_WRITE_URL = (boardNumber: number | string) => `${API_DOMAIN}/advertising-board/detail/${boardNumber}/short-review`;
 const PUT_ADVERTISING_BOARD_FAVORITE_URL = (boardNumber: number | string) => `${API_DOMAIN}/advertising-board/detail/${boardNumber}/favorite`;
