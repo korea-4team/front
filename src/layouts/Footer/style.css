@@ -1,48 +1,47 @@
 #footer {
-	width: 100%;
-	padding: 50px 0px 40px;
+  width: 100%;
 
   background-color: rgba(0, 0, 0, 1);
 
   color: rgba(255, 255, 255, 1);
 
-	position: absolute;
-	bottom: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .footer-top {
-	display: flex;
-	
-	padding: 10px;
-	margin-bottom: 5px;
+  display: flex;
+
+  padding: 10px;
+  margin-bottom: 5px;
 }
 
 .footer-logo-text {
-	display: flex;
+  display: flex;
 
-	font-family: 'Noto Sans KR';
-	font-size: 25px;
-	font-weight: 400;
+  font-family: "Noto Sans KR";
+  font-size: 25px;
+  font-weight: 400;
 }
 
 .footer-bottom {
-	padding: 10px;
-	display: block;
+  padding: 10px;
+  display: block;
 }
 
 .footer-address {
-	margin-bottom: 5px;
-	display: flex;
+  margin-bottom: 5px;
+  display: flex;
 
-	font-family: 'Noto Sans KR';
-	font-size: 15px;
-	font-weight: 400;
+  font-family: "Noto Sans KR";
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .copyright {
-	display: flex;
+  display: flex;
 
-	font-family: 'Noto Sans KR';
-	font-size: 15px;
-	font-weight: 400;
+  font-family: "Noto Sans KR";
+  font-size: 15px;
+  font-weight: 400;
 }
