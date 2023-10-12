@@ -1,0 +1,34 @@
+.notice-board-list-box {
+	width: 1440px;
+	padding: 10px;
+
+	background-color: rgba(0, 0, 0, 0.5);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.notice-board-number {
+	font-family: Noto Sans KR;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.notice-board-title {
+	font-family: Noto Sans KR;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.notice-board-writer {
+	font-family: Noto Sans KR;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.notice-board-write-date {
+	font-family: Noto Sans KR;
+	font-size: 20px;
+	font-weight: 500;
+}
