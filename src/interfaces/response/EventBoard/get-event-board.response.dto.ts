@@ -1,6 +1,6 @@
 import ResponseDto from "../response.dto";
 
-export default interface GetReviewBoardResponseDto extends ResponseDto {
+export default interface GetEventBoardResponseDto extends ResponseDto {
   boardNumber: number;
   title: string;
   contents: string;
