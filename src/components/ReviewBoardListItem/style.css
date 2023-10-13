@@ -1,0 +1,62 @@
+.review-board-list-item-box {
+  display: flex;
+}
+
+.review-board-list-top {
+  display: flex;
+  width: 1440px;
+  height: 40px;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  align-items: center;
+  text-align: center;
+}
+
+.board-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  background-color: antiquewhite;
+}
+
+.board-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 900px;
+  background-color: bisque;
+}
+
+.board-writer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  background-color: blueviolet;
+}
+
+.board-write-datetime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  background-color: tomato;
+}
+
+.board-favorite-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  background-color: thistle;
+}
+
+.board-view-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  background-color: steelblue;
+}
