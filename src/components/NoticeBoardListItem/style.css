@@ -1,8 +1,15 @@
-.notice-board-list-box {
-	width: 1440px;
-	padding: 10px;
+.notice-board-list-item-box {
+	width: 1000px;
+	margin: 0 auto;
 
-	background-color: rgba(0, 0, 0, 0.5);
+	display: block;
+	align-items: center;
+	justify-content: center;
+}
+
+.notice-board-list-box {
+	margin: 5px 0px 5px;
+	padding: 10px 50px 10px;
 
 	display: flex;
 	align-items: center;
