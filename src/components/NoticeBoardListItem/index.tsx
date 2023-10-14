@@ -24,7 +24,7 @@ export default function NoticeBoardListItem( { item }: Props) {
 	//					event handler					//
 	// description : 컴포넌트 클릭 이벤트 //
 	const onClickHandler = () => {
-		navigator(GET_NOTICE_BOARD_DETAIL_URL(boardNumber));
+		// navigator(GET_NOTICE_BOARD_DETAIL_URL(boardNumber));
 	}
 	
 	//					component					//

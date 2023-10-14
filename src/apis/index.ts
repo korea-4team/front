@@ -1,10 +1,15 @@
+import axios from "axios";
+import ResponseDto from "interfaces/response/response.dto";
+import { GetReviewBoardResponseDto } from "interfaces/response/reviewBoard";
+import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
+
 const API_DOMAIN = 'http://localhost:4040';
 
 // description: AUTH 페이지 URL //
 const SIGN_UP_URL = () => `${API_DOMAIN}/auth/sign-up`;
 const SIGN_IP_URL = () => `${API_DOMAIN}/auth/sign-ip`;
 const ACCOUNT_FIND_EMAIL_URL = () => `${API_DOMAIN}/auth/account-find/email`;
-const ACCOUNT_FIND_PASSWORD_URL = () => `${API_DOMAIN}/account-find/password`;
+const ACCOUNT_FIND_PASSWORD_URL = () => `${API_DOMAIN}/auth/account-find/password`;
 
 // description: 관리자 페이지 URL //
 const GET_ADMIN_ADVERTISING_BOARD_LIST_URL = (adminId: string) => `${API_DOMAIN}/admin/${adminId}/advertising-board-list`;
@@ -19,8 +24,8 @@ const GET_ADMIN_USER_COMMENT_LIST_URL = (adminId: string, userEmail:string, sect
 const GET_ADMIN_BANNER_LIST_URL = (adminId: string) => `${API_DOMAIN}/admin/${adminId}/main-banner/list`;
 const GET_ADMIN_BANNER_DETAIL_URL = (adminId: string, bannerNumber: number | string) => `${API_DOMAIN}/admin/${adminId}/main-banner/detail/${bannerNumber}`;
 const POST_ADMIN_BANNER_URL = (eventBoardNumber: number | string) => `${API_DOMAIN}/admin/${eventBoardNumber}/main-banner`;
-const PATCH_ADMIN_BANNER_URL = (eventBoardNumber: number | string) => `${API_DOMAIN}/admin/${eventBoardNumber}/main-banner`;
-const DELETE_ADMIN_BANNER_URL = (eventBoardNumber: number | string) => `${API_DOMAIN}/admin/${eventBoardNumber}/main-banner`;
+const PATCH_ADMIN_BANNER_URL = (bannerNumber: number | string) => `${API_DOMAIN}/admin/${bannerNumber}/main-banner`;
+const DELETE_ADMIN_BANNER_URL = (bannerNumber: number | string) => `${API_DOMAIN}/admin/${bannerNumber}/main-banner`;
 
 // description: 이벤트게시판 URL //
 const GET_EVENT_BOARD_LIST_URL = (section: number | string) => `${API_DOMAIN}/event-board/board-list/${section}`;
@@ -31,7 +36,7 @@ const DELETE_EVENT_BOARD_URL = (boardNumber: number | string) => `${API_DOMAIN}/
 
 // description: 공지사항게시판 URL //
 const GET_NOTICE_BOARD_LIST_URL = (section: number | string) => `${API_DOMAIN}/notice-board/board-list/${section}`;
-const GET_NOTICE_BOARD_DETAIL_URL = (boardNumber: number | string) => `${API_DOMAIN}/notice-board/${boardNumber}`;
+const GET_NOTICE_BOARD_URL = (boardNumber: number | string) => `${API_DOMAIN}/notice-board/${boardNumber}`;
 const POST_NOTICE_BOARD_URL = () => `${API_DOMAIN}/notice-board`;
 const PATCH_NOTICE_BOARD_URL = (boardNumber: number | string) => `${API_DOMAIN}/notice-board/${boardNumber}`;
 const DELETE_NOTICE_BOARD_URL = (boardNumber: number | string) => `${API_DOMAIN}/notice-board/${boardNumber}`;
@@ -84,4 +89,28 @@ const GET_SEARCH_ADVERTISING_BOARD_LIST_URL = (searchWord: string, section: numb
 
 const UPLOAD_FILE = () => `http://localhost:4040/file/upload`;
 
-export {}
+export const getReviewBoardRequest = async (boardNumber: number | string) => {
+  const result = await axios.get(GET_REVIEW_BOARD_URL(boardNumber))
+  .then((response) => {
+    const responseBody: GetReviewBoardResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+export const getCurrentReviewBoardListRequest = async (section: number) => {
+  const result = await axios.get(GET_REVIEW_BOARD_LIST_URL(section))
+  .then((response) => {
+    const responseBody: GetCurrentReviewBoardResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
