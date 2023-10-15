@@ -1,4 +1,4 @@
-export default interface PatchReviewBoardDto {
+export default interface PatchReviewBoardRequestDto {
     title: string;
     contents: string;
     location: string;

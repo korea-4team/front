@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ReviewBoard() {
+export default function ReviewBoardUpdate() {
   return (
     <div>ReviewBoard</div>
   )

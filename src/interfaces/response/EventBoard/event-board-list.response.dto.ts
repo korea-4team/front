@@ -1,8 +1,7 @@
 export default interface EventBoardListResponseDto {
   boardNumber: number;
-  title: string;
-  contents: string;
   imageUrl: string | null;
+  title: string;
   writeDatetime: string;
   writerNickname: string;
 }

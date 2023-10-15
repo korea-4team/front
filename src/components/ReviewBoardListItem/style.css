@@ -1,79 +1,4 @@
-.review-board-list-item-box {
-  display: flex;
-  flex-direction: column;
-}
-
-.review-board-list-top {
-  display: flex;
-  width: 1440px;
-  height: 30px;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 600;
-  align-items: center;
-  text-align: center;
-}
-
-.board-number, .review-board-number {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 100%;
-  border-right: 1px solid #ccc;
-  background-color: antiquewhite;
-}
-
-.board-title{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 900px;
-  height: 100%;
-  border-right: 1px solid #ccc;
-  background-color: bisque;
-}
-
-.board-writer, .review-board-writer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 150px;
-  height: 100%;
-  border-right: 1px solid #ccc;
-  background-color: blueviolet;
-}
-
-.board-write-datetime {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 150px;
-  height: 100%;
-  border-right: 1px solid #ccc;
-  background-color: tomato;
-}
-
-.board-favorite-count {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 100%;
-  border-right: 1px solid #ccc;
-  background-color: thistle;
-}
-
-.board-view-count {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 100%;
-  background-color: steelblue;
-}
-
-.review-board-list-bottom {
+.review-board-list-box {
   margin-top: 3px;
   display: flex;
   width: 1440px;
@@ -83,6 +8,16 @@
   font-weight: 600;
   align-items: center;
   text-align: center;
+}
+
+.review-board-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 100%;
+  border-right: 1px solid #ccc;
+  background-color: antiquewhite;
 }
 
 .review-board-title-box {
@@ -107,7 +42,7 @@
 
 .review-board-comment-count {
   font-size: 16px;
-  padding-top: 3px;
+  padding-top: 2px;
   margin-left: 5px;
   display: flex;
   justify-content: end;
