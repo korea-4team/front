@@ -1,7 +1,10 @@
 import axios from "axios";
+import { PatchReviewBoardRequestDto, PostCommentRequestDto, PostReviewBoardRequestDto } from "interfaces/request/reviewBoard";
+import { GetCurrentEventBoardResponseDto } from "interfaces/response/EventBoard";
 import ResponseDto from "interfaces/response/response.dto";
-import { GetReviewBoardResponseDto } from "interfaces/response/reviewBoard";
+import { DeleteCommentResponseDto, DeleteReviewBoardResponseDto, GetCommentListResponseDto, GetReviewBoardBusinessTypeListResponseDto, GetReviewBoardLocationBusinessTypeListResponseDto, GetReviewBoardLocationListResponseDto, GetReviewBoardResponseDto, PatchReviewBoardResponseDto, PostCommentResponseDto, PostReviewBoardResponseDto, PutReviewBoardFavoriteResponseDto } from "interfaces/response/reviewBoard";
 import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
+import GetUserReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-user-review-board-list.response.dto";
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -89,6 +92,60 @@ const GET_SEARCH_ADVERTISING_BOARD_LIST_URL = (searchWord: string, section: numb
 
 const UPLOAD_FILE = () => `http://localhost:4040/file/upload`;
 
+
+// description: 기행기 게시판 //
+export const getCurrentReviewBoardListRequest = async (section: number | string) => {
+  const result = await axios.get(GET_REVIEW_BOARD_LIST_URL(section))
+  .then((response) => {
+    const responseBody: GetCurrentReviewBoardResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+export const getReviewBoardLocationListRequest = async (location: string) => {
+  const result = await axios.get(GET_REVIEW_BOARD_LOCATION_LIST_URL(location))
+  .then((response) => {
+    const responseBody: GetReviewBoardLocationListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+export const getReviewBoardBusinessTypeListRequest = async (businessType: string) => {
+  const result = await axios.get(GET_REVIEW_BOARD_BUSINESSTYPE_LIST_URL(businessType))
+  .then((response) => {
+    const responseBody: GetReviewBoardBusinessTypeListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+export const getReviewBoardLocationBusinessTypeListRequest = async (location: string, businessType: string) => {
+  const result = await axios.get(GET_REVIEW_BOARD_LOCATION_BUSINESSTYPE_LIST_URL(location, businessType))
+  .then((response) => {
+    const responseBody: GetReviewBoardLocationBusinessTypeListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
 export const getReviewBoardRequest = async (boardNumber: number | string) => {
   const result = await axios.get(GET_REVIEW_BOARD_URL(boardNumber))
   .then((response) => {
@@ -102,10 +159,126 @@ export const getReviewBoardRequest = async (boardNumber: number | string) => {
   return result;
 }
 
-export const getCurrentReviewBoardListRequest = async (section: number) => {
-  const result = await axios.get(GET_REVIEW_BOARD_LIST_URL(section))
+export const getReviewBoardCommentListRequest = async (boardNumber: number | string) => {
+  const result = await axios.get(GET_REVIEW_BOARD_COMMENT_LIST_URL(boardNumber))
   .then((response) => {
-    const responseBody: GetCurrentReviewBoardResponseDto = response.data;
+    const responseBody: GetCommentListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+export const getReviewBoardUserListRequest = async (email: string) => {
+  const result = await axios.get(GET_REVIEW_BOARD_USER_LIST_URL(email))
+  .then((response) => {
+    const responseBody: GetUserReviewBoardListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+export const postReviewBoardRequest = async (data: PostReviewBoardRequestDto, token: string) => {
+  const result = await axios.post(POST_REVIEW_BOARD_URL(), data, { headers: {Authorization: `Bearer ${token}`} })
+  .then((response) => {
+    const responseBody: PostReviewBoardResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  });
+  return result;
+}
+
+export const postReviewBoardCommentRequest = async (boardNumber: number | string, data: PostCommentRequestDto, token: string) => {
+  const result = await axios.post(POST_REVIEW_BOARD_COMMENT_URL(boardNumber), data, { headers: {Authorization: `Bearer ${token}`} })
+  .then((response) => {
+    const responseBody: PostCommentResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  });
+  return result;
+}
+
+export const putReviewBoardFavoriteRequest = async (boardNumber: number | string, token: any) => {
+  const result = await axios.put(PUT_REVIEW_BOARD_FAVORITE_URL(boardNumber), {}, { headers: {Authorization: `Bearer ${token}`} })
+  .then((response) => {
+    const responseBody: PutReviewBoardFavoriteResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  });
+  return result;
+}
+
+export const patchReviewBoardRequest = async (boardNumber: number | string, data: PatchReviewBoardRequestDto , token: string) => {
+  const result = await axios.patch(PATCH_REVIEW_BOARD_URL(boardNumber), data, { headers: {Authorization: `Bearer ${token}`} })
+  .then((response) => {
+    const responseBody: PatchReviewBoardResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  });
+  return result;
+}
+
+export const deleteReviewBoardRequest = async (boardNumber: number | string, token: string) => {
+  const result = await axios.delete(DELETE_REVIEW_BOARD_URL(boardNumber), { headers: {Authorization: `Bearer ${token}`} })
+  .then((response) => {
+    const responseBody: DeleteReviewBoardResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  });
+  return result;
+}
+
+export const deleteReviewBoardCommentRequest = async (boardNumber: number | string, token: string) => {
+  const result = await axios.delete(DELETE_REVIEW_BOARD_COMMENT_URL(boardNumber), { headers: {Authorization: `Bearer ${token}`} })
+  .then((response) => {
+    const responseBody: DeleteCommentResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  });
+  return result;
+}
+
+export const getCurrentEventBoardListRequest = async (section: number) => {
+  const result = await axios.get(GET_EVENT_BOARD_LIST_URL(section))
+  .then((response) => {
+    const responseBody: GetCurrentEventBoardResponseDto = response.data;
     return responseBody;
   })
   .catch((error) => {
