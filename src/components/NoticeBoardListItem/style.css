@@ -1,16 +1,26 @@
 .notice-board-list-item-box {
-	width: 1000px;
-	margin: 0 auto;
+	width: 1440px;
 
 	display: block;
 	align-items: center;
 	justify-content: center;
 }
 
+.notice-board-list-item-box:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
 .notice-board-list-box {
 	margin: 5px 0px 5px;
 	padding: 10px 50px 10px;
 
+	display: block;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.notice-board-list {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

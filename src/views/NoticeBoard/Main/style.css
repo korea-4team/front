@@ -1,0 +1,64 @@
+.notice-board-list {
+  width: 1440px;
+
+  display: block;
+}
+
+.notice-board-list-top {
+	height: 40px;
+	margin: 30px;
+
+	display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.notice-board-list-name {
+	margin: 15px 0px 10px;
+
+  height: 30px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 18px;
+	font-family: "Courier New";
+  font-weight: 600;
+}
+
+.notice-number {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 100%;
+}
+
+.notice-title {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 900px;
+  height: 100%;
+}
+
+.notice-writer {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100%;
+}
+
+.notice-write-datetime {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100%;
+}
+
