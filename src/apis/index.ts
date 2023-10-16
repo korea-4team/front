@@ -1,6 +1,8 @@
 import axios from "axios";
+import { PatchNoticeBoardRequestDto, PostNoticeBoardRequestDto } from "interfaces/request/noticeBoard";
 import { PatchReviewBoardRequestDto, PostCommentRequestDto, PostReviewBoardRequestDto } from "interfaces/request/reviewBoard";
 import { GetCurrentEventBoardResponseDto } from "interfaces/response/EventBoard";
+import { DeleteNoticeBoardResponseDto, GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, PatchNoticeBoardResponseDto, PostNoticeBoardResponseDto } from "interfaces/response/noticeBoard";
 import ResponseDto from "interfaces/response/response.dto";
 import { DeleteCommentResponseDto, DeleteReviewBoardResponseDto, GetCommentListResponseDto, GetReviewBoardBusinessTypeListResponseDto, GetReviewBoardLocationBusinessTypeListResponseDto, GetReviewBoardLocationListResponseDto, GetReviewBoardResponseDto, PatchReviewBoardResponseDto, PostCommentResponseDto, PostReviewBoardResponseDto, PutReviewBoardFavoriteResponseDto } from "interfaces/response/reviewBoard";
 import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
@@ -285,5 +287,91 @@ export const getCurrentEventBoardListRequest = async (section: number) => {
     const responseBody: ResponseDto = error.response.data;
     return responseBody;
   });
+  return result;
+}
+
+// description : 공지사항 게시판 //
+// 공지사항 리스트 불러오기
+export const getNoticeBoardListRequest = async (section: number) => {
+  const result = await axios.get(GET_NOTICE_BOARD_LIST_URL(section))
+  .then((response) => {
+    const responseBody: GetNoticeBoardListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+// 공지사항 상세보기
+export const getNoticeBoardRequest = async (boardNumber: number) => {
+  const result = await axios.get(GET_NOTICE_BOARD_URL(boardNumber))
+  .then((response) => {
+    const responseBody: GetNoticeBoardResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+// 공지사항 작성하기
+export const postNoticeBoardRequest = async (data: PostNoticeBoardRequestDto, token: string) => {
+  const result = await axios.post(POST_NOTICE_BOARD_URL(),data, {
+    headers: {Authorization: `Bearer ${token}`}
+  })
+  .then((response) => {
+    const responseBody: PostNoticeBoardResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  });
+
+  return result;
+}
+
+// 공지사항 수정하기
+export const patchNoticeBoardRequest = async (boardNumber: string, data: PatchNoticeBoardRequestDto, token: string) => {
+  const result = await axios.patch(PATCH_NOTICE_BOARD_URL(boardNumber), data, {
+    headers: {Authorization: `Bearer ${token}`}
+  })
+  .then((response) => {
+    const responseBody: PatchNoticeBoardResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.datal;
+    const { code } = responseBody;
+    return code;
+  });
+
+  return result;
+}
+
+// 공지사항 삭제하기
+export const deleteNoticeBoardRequest =async (boardNumber: number, token: string) => {
+  const result = await axios.delete(DELETE_NOTICE_BOARD_URL(boardNumber), {
+    headers: {Authorization: `Bearer ${token}`}
+  })
+  .then((response) => {
+    const responseBody: DeleteNoticeBoardResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } =responseBody;
+    return code;
+  });
+
   return result;
 }

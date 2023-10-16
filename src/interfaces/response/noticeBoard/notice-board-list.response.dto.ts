@@ -1,4 +1,5 @@
-export default interface NoticeListResponseDto {
+export default interface NoticeBoardListResponseDto {
+	
 	boardNumber: number;
 	title: string;
 	contents: string;
@@ -6,4 +7,5 @@ export default interface NoticeListResponseDto {
 	writeDatetime: string;
 	writerEmail: string | null;
 	writerNickname: string;
+
 }
