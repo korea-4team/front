@@ -3,6 +3,8 @@ import './style.css';
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { NOTICE_BOARD_DEATIL_PATH } from 'constant';
+import { dateFormat } from 'utils';
 
 interface Props {
 	item: NoticeBoardListResponseDto;
@@ -24,7 +26,7 @@ export default function NoticeBoardListItem( { item }: Props) {
 	//					event handler					//
 	// description : 컴포넌트 클릭 이벤트 //
 	const onClickHandler = () => {
-		// navigator(GET_NOTICE_BOARD_DETAIL_URL(boardNumber));
+		navigator(NOTICE_BOARD_DEATIL_PATH(boardNumber));
 	}
 	
 	//					component					//
@@ -36,13 +38,13 @@ export default function NoticeBoardListItem( { item }: Props) {
 		<div className='notice-board-list-item-box' onClick={onClickHandler}>
 			<div className='divider'></div>
 			<div className='notice-board-list-box'>
-				<div className='notice-board-number'>{ boardNumber }</div>
-				<div className='notice-board-title'>{ title }</div>
-				<div className='notice-board-writer'>{ writerEmail }</div>
-				<div className='notice-board-write-date'> { writeDatetime }</div>
+				<div className='notice-board-list'>
+					<div className='notice-board-number'>{ boardNumber }</div>
+					<div className='notice-board-title'>{ title }</div>
+					<div className='notice-board-writer'>{ writerEmail }</div>
+					<div className='notice-board-write-date'> { dateFormat(writeDatetime) }</div>
+				</div>
 			</div>
 		</div>
-
-		
 	)
 }

@@ -5,6 +5,7 @@ export default function Footer() {
   //          render           //
   return (
       <div id = 'footer'>
+        <div className='divider'></div>
         <div className='footer-top'>
             <div className='footer-logo-text'> 4TEAM </div>
         </div>
