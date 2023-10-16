@@ -14,6 +14,8 @@ export default function Authentication() {
 
   //          state: cookie 상태          //
   const [cookies, setCookie] = useCookies();
+  //          state: 페이지 처리 상태           //
+  const [page, setPage] = useState<'sign-in' | 'sign-up' | 'find'>('sign-in');
 
   //          function: 네비게이트 함수          //
   const navigator = useNavigate();
@@ -75,7 +77,6 @@ export default function Authentication() {
       setPasswordErrorMessage('');
       setPassword(value);
     }
-    
     //          event handler: 로그인 버튼 클릭 이벤트 처리          //
     const onSignInButtonClickHandler = () => {
       if (!email) {
@@ -92,6 +93,14 @@ export default function Authentication() {
       const requestBody: SignInRequestDto = { email, password };
       signInRequest(requestBody).then(signInResponse)
     }
+    //          event handler: 찾기 링크 클릭 이벤트 처리          //
+    const onFindLinkClickHandler = () => {
+      setPage('find');
+    }
+    //          event handler: 회원가입 링크 클릭 이벤트 처리          //
+    const onSignUpLinkClickHandler = () => {
+      setPage('sign-up');
+    }
 
     //          render: 로그인 컴포넌트 렌더링          //
     return (
@@ -104,8 +113,8 @@ export default function Authentication() {
           { isError && <div className='sign-in-error-message'>{'로그인 정보가 일치하지 않습니다.'}</div> }
           <div className='large-button' onClick={onSignInButtonClickHandler}>{'로그인'}</div>
           <div className='sign-in-link-box'>
-            <div className='link'>{'아이디 / 비밀번호 찾기'}</div>
-            <div className='link'>{'회원가입'}</div>
+            <div className='link' onClick={onFindLinkClickHandler}>{'아이디 / 비밀번호 찾기'}</div>
+            <div className='link' onClick={onSignUpLinkClickHandler}>{'회원가입'}</div>
           </div>
         </div>
       </div>
@@ -116,9 +125,18 @@ export default function Authentication() {
   //          component: 회원가입 컴포넌트          //
   const SignUp = () => {
 
+    //          event handler: 로그인 버튼 클릭 이벤트 처리          //
+    const onSignUpButtonClickHandler = () => {
+    }
+
     //          render: 회원가입 컴포넌트 렌더링          //
     return (
-      <div></div>
+      <div id='sign-up-card'>
+        <div className='sign-up-input-container'></div>
+        <div className='sign-up-action-container'>
+          <div className='large-button' onClick={onSignUpButtonClickHandler}>{'회원가입'}</div>
+        </div>
+      </div>
     );
 
   }
@@ -136,7 +154,9 @@ export default function Authentication() {
   //          render: 인증 페이지 컴포넌트 렌더링          //
   return (
     <div id='auth-container'>
-      <SignIn />
+      { page === 'sign-in' && <SignIn /> }
+      { page === 'sign-up' && <SignUp /> }
+      { page === 'find' && <Find /> }
     </div>
   );
 }
