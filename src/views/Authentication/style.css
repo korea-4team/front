@@ -1,0 +1,56 @@
+#auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sign-in-card {
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    width: 600px;
+    height: 400px;
+    padding: 80px 40px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.sign-in-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.sign-in-action-container {
+    padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.sign-in-error-message {
+    text-align: center;
+    color: rgba(255, 0, 0, 0.7);
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 140%;
+}
+
+.sign-in-link-box {
+    display: flex;
+    gap: 8px;
+}
+
+.link {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.link:hover {
+    opacity: 0.85;
+}
