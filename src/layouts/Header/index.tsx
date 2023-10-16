@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate,  } from 'react-router-dom';
 import './style.css';
 import { useUserStore } from 'stores';
 import { useCookies } from 'react-cookie';
@@ -8,6 +8,14 @@ import { AUTH_PATH, MAIN_PATH, MY_PAGE_PATH, SEARCH_PATH } from 'constant';
 //          component          //
 // description: Header 레이아웃 //
 export default function Header() {
+  
+  //          function: 네비게이트 함수          //
+  const navigator = useNavigate();
+
+  //           event handler: 로그인 버튼 클릭 이벤트 처리         //
+  const onSignUpButtonClickHandler = () => {
+    navigator(AUTH_PATH);
+  }
 
   //          state          //
   // description: 검색 버튼 Ref 상태 //
@@ -24,7 +32,7 @@ export default function Header() {
   const [search, setSearch] = useState<string>('');
 
   //          function          //
-  const navigator = useNavigate();
+  // const navigator = useNavigate();
 
   const isAuth = pathname === AUTH_PATH;
   const isMyPage = user && pathname.includes(MY_PAGE_PATH(user.email));
