@@ -1,8 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import './style.css';
+import { AUTH_PATH } from 'constant';
 
 //          component          //
 // description: Header 레이아웃 //
 export default function Header() {
+  
+  //          function: 네비게이트 함수          //
+  const navigator = useNavigate();
+
+  //           event handler: 로그인 버튼 클릭 이벤트 처리         //
+  const onSignUpButtonClickHandler = () => {
+    navigator(AUTH_PATH);
+  }
 
 //          render          //
   return (
@@ -12,7 +22,7 @@ export default function Header() {
           <div className="header-left-logo-text">Team Project</div>
         </div>
         <div className="header-top-right">
-          <div className="button">로그인</div>
+          <div className="button" onClick={onSignUpButtonClickHandler}>로그인</div>
           <div className="button">로그아웃</div>
           <div className="button">마이페이지</div>
         </div>
