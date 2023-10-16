@@ -1,7 +1,7 @@
 import { usePagination } from 'hooks';
 import './style.css';
 import { useEffect, useState } from 'react';
-import { EventBoardListResponseDto, GetCurrentEventBoardResponseDto, GetEventBoardResponseDto } from 'interfaces/response/EventBoard';
+import { EventBoardListResponseDto, GetCurrentEventBoardResponseDto } from 'interfaces/response/EventBoard';
 import ResponseDto from 'interfaces/response/response.dto';
 import { COUNT_BY_PAGE } from 'constant';
 import { getCurrentEventBoardListRequest } from 'apis';
@@ -35,7 +35,9 @@ export default function EventBoardMain() {
     //          render          //
     return (
       <div className="event-board-list-item-box">
-        {/* {eventBoardList.map((item) => (<EventBoardListItem item={item} />))} */}
+        <div className="event-board-list-item">
+          {eventBoardList.map((item) => (<EventBoardListItem item={item} />))}
+        </div>
         <Pagination
           totalPage= {totalPage}
           currentPage={currentPage}
