@@ -1,7 +1,7 @@
 #footer {
   width: 1440px;
   
-  position: fixed;
+  position: relative;
   bottom: 0;
 }
 
