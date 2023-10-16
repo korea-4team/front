@@ -1,6 +1,8 @@
 import axios from "axios";
+import { SignInRequestDto } from "interfaces/request/auth";
 import { PatchReviewBoardRequestDto, PostCommentRequestDto, PostReviewBoardRequestDto } from "interfaces/request/reviewBoard";
 import { GetCurrentEventBoardResponseDto } from "interfaces/response/EventBoard";
+import { SignInResponseDto } from "interfaces/response/auth";
 import ResponseDto from "interfaces/response/response.dto";
 import { DeleteCommentResponseDto, DeleteReviewBoardResponseDto, GetCommentListResponseDto, GetReviewBoardBusinessTypeListResponseDto, GetReviewBoardLocationBusinessTypeListResponseDto, GetReviewBoardLocationListResponseDto, GetReviewBoardResponseDto, PatchReviewBoardResponseDto, PostCommentResponseDto, PostReviewBoardResponseDto, PutReviewBoardFavoriteResponseDto } from "interfaces/response/reviewBoard";
 import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
@@ -10,7 +12,7 @@ const API_DOMAIN = 'http://localhost:4040';
 
 // description: AUTH 페이지 URL //
 const SIGN_UP_URL = () => `${API_DOMAIN}/auth/sign-up`;
-const SIGN_IP_URL = () => `${API_DOMAIN}/auth/sign-ip`;
+const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`;
 const ACCOUNT_FIND_EMAIL_URL = () => `${API_DOMAIN}/auth/account-find/email`;
 const ACCOUNT_FIND_PASSWORD_URL = () => `${API_DOMAIN}/auth/account-find/password`;
 
@@ -92,6 +94,19 @@ const GET_SEARCH_ADVERTISING_BOARD_LIST_URL = (searchWord: string, section: numb
 
 const UPLOAD_FILE = () => `http://localhost:4040/file/upload`;
 
+// description: 인증 //
+export const signInRequest = async (requestBody: SignInRequestDto) => {
+  const result = await axios.post(SIGN_IN_URL(), requestBody)
+    .then(response => {
+      const responseBody: SignInResponseDto = response.data;
+      return responseBody;
+    })
+    .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+}
 
 // description: 기행기 게시판 //
 export const getCurrentReviewBoardListRequest = async (section: number | string) => {
