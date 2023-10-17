@@ -53,17 +53,24 @@ export default function AdvertisingBoardMain() {
    
 // render //
 return (
-  <div className="advertising-board-list-item-box">
-    <div className="advertising-board-list-item">
-      {AdvertisingBoardList.map((item) => (<AdvertisingBoardListItem item={item}/>))}
+  <div id="advertising-board-wrapper">
+    <div className="advertising-board-location-list"></div>
+    <div className="advertising-board-container">
+        <div className="advertising-board-box" >
+      </div>
+      <div className="advertising-board-businesstype-list"></div>
+      <div className="advertising-board-list-bottom">
+        {AdvertisingBoardList.map((item)=>(<AdvertisingBoardListItem item={item}/>))}
+      </div>
+      <Pagination
+          totalPage= {totalPage}
+          currentPage={currentPage}
+          onPageClickHandler={onPageClickHandler}
+          onNextClickHandler={onNextClickHandler}
+          onPreviusClickHandler={onPreviusClickHandler} />
     </div>
-    <Pagination
-      totalPage={totalPage}
-      currentPage={currentPage}
-      onPageClickHandler={onPageClickHandler}
-      onNextClickHandler={onNextClickHandler}
-      onPreviusClickHandler={onPreviusClickHandler} />
-  </div>
+</div>
+ 
 )
 
   }
