@@ -9,7 +9,7 @@ import { getNoticeBoardListRequest } from 'apis';
 import './style.css';
 
 //          component : 공지사항 게시판         //
-export default function NoticeBoard() {
+export default function NoticeBoardMain() {
 
   //          state         //
 

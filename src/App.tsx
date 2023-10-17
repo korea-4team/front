@@ -12,9 +12,9 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Authentication from "views/Authentication";
 import EventBoard from "views/EventBoard/Main";
 import Main from "views/Main";
-import NoticeBoard from "views/NoticeBoard/Main";
 import ReviewBoardList from "views/ReviewBoard/Main";
 import "./App.css";
+import NoticeBoardMain from "views/NoticeBoard/Main";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -38,7 +38,7 @@ function App() {
         <Route path={MAIN_PATH} element={<Main />} />
         <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
         <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
-        <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
+        <Route path={NOTICE_BOARD_PATH} element={<NoticeBoardMain />} />
         <Route element={<Container />}>
           <Route path={MAIN_PATH} element={<Main />} />
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />

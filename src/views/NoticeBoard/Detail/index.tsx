@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function NoticeBoard() {
+export default function NoticeBoardDetail() {
   return (
     <div>NoticeBoard</div>
   )
