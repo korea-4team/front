@@ -31,8 +31,6 @@ export const ADVERTISING_BOARD_DETAIL_PATH = (boardNumber: number | string) => `
 export const REVIEW_BOARD_WRITE_PATH = () => `${REVIEW_BOARD_PATH}/${WRITE_PATH}`;
 export const REVIEW_BOARD_UPDATE_PATH = (boardNumber: number | string) => `${REVIEW_BOARD_PATH}/${UPDATE_PATH(boardNumber)}`;
 export const REVIEW_BOARD_DETAIL_PATH = (boardNumber: number | string) => `${REVIEW_BOARD_PATH}/${DETAIL_PATH(boardNumber)}`;
-export const REVIEW_BOARD_LOCATION_PATH = (location: string) => `${REVIEW_BOARD_PATH}/${LOCATION_PATH(location)}`;
-export const REVIEW_BOARD_BUSINESS_TYPE_PATH = (businessType: string) => `${REVIEW_BOARD_PATH}/${BUSINESS_TYPE_PATH(businessType)}`;
 
 export const EVENT_BOARD_WRITE_PATH = () => `${EVENT_BOARD_PATH}/${WRITE_PATH}`;
 export const EVENT_BOARD_UPDATE_PATH = (boardNumber: number | string) => `${EVENT_BOARD_PATH}/${UPDATE_PATH(boardNumber)}`;
