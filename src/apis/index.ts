@@ -482,6 +482,7 @@ export const deleteReviewBoardCommentRequest = async (
   return result;
 };
 
+// description: 이벤트 게시판 //
 export const getCurrentEventBoardListRequest = async (section: number) => {
   const result = await axios
     .get(GET_EVENT_BOARD_LIST_URL(section))
