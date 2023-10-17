@@ -1,5 +1,5 @@
 import { getCurrentReviewBoardListRequest, getReviewBoardLocationListRequest } from "apis";
-import { COUNT_BY_PAGE, REVIEW_BOARD_BUSINESS_TYPE_PATH, REVIEW_BOARD_LOCATION_PATH } from "constant";
+import { COUNT_BY_PAGE, REVIEW_BOARD_BUSINESS_TYPE_PATH, REVIEW_BOARD_LOCATION_PATH, REVIEW_BOARD_PATH } from "constant";
 import { usePagination } from "hooks"
 import ResponseDto from "interfaces/response/response.dto";
 import { GetReviewBoardLocationListResponseDto, ReviewBoardListResponseDto } from "interfaces/response/reviewBoard";
@@ -77,13 +77,11 @@ export default function ReviewBoardList() {
 
     useEffect(() => {
       if (!location) {
-        alert('')
+        alert('지역을 선택해 주세요.')
+        navigator(REVIEW_BOARD_PATH);
         return;
       }
-
       getReviewBoardLocationListRequest(location).then(getReviewBoardLocationListResponseHandler);
-      
-
     },[location])
 
     //          render          //
