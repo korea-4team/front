@@ -35,14 +35,11 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={MAIN_PATH} element={<Main />} />
-        <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
-        <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
-        <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
         <Route element={<Container />}>
           <Route path={MAIN_PATH} element={<Main />} />
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
+          <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
           <Route path={AUTH_PATH} element={<Authentication />} />
         </Route>
       </Routes>
