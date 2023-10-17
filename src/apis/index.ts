@@ -514,7 +514,7 @@ export const getNoticeBoardListRequest = async (section: number) => {
 };
 
 // 공지사항 상세보기
-export const getNoticeBoardRequest = async (boardNumber: number) => {
+export const getNoticeBoardRequest = async (boardNumber: number | string) => {
   const result = await axios
     .get(GET_NOTICE_BOARD_URL(boardNumber))
     .then((response) => {
@@ -577,7 +577,7 @@ export const patchNoticeBoardRequest = async (
 
 // 공지사항 삭제하기
 export const deleteNoticeBoardRequest = async (
-  boardNumber: number,
+  boardNumber: number | string,
   token: string
 ) => {
   const result = await axios
