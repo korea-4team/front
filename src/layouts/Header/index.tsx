@@ -12,11 +12,6 @@ export default function Header() {
   //          function: 네비게이트 함수          //
   const navigator = useNavigate();
 
-  //           event handler: 로그인 버튼 클릭 이벤트 처리         //
-  const onSignUpButtonClickHandler = () => {
-    navigator(AUTH_PATH);
-  }
-
   //          state          //
   // description: 검색 버튼 Ref 상태 //
   const searchButtonRef = useRef<HTMLDivElement | null>(null);
