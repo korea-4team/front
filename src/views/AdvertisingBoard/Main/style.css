@@ -1,0 +1,12 @@
+.advertising-board-list-item-box {
+  display: block;
+  /* width: 1440px; */
+  align-items: center;
+  justify-content: center;
+}
+
+.advertising-board-list-item {
+  width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+}
