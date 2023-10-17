@@ -47,6 +47,7 @@ function App() {
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
           <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
+          <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
           <Route path={AUTH_PATH} element={<Authentication />} />
         </Route>
       </Routes>
