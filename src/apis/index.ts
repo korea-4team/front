@@ -1,4 +1,6 @@
 import axios from "axios";
+import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
+import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
 import { SignInRequestDto } from "interfaces/request/auth";
 import {
   PatchNoticeBoardRequestDto,
@@ -10,6 +12,18 @@ import {
   PostReviewBoardRequestDto,
 } from "interfaces/request/reviewBoard";
 import { GetCurrentEventBoardResponseDto } from "interfaces/response/EventBoard";
+import DeleteAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-advertising-board.response.dto";
+import DeleteShortCommentAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-shortcomment-advertising-board.response.dto";
+import GetAdvertisingBoardBusinessTypeResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-businessType-list-responsedto";
+import GetAdvertisingBoardBusinessTypeLocationResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-businessType-location.Response.dto";
+import GetAdvertisingLocationListResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-location-list.response.dto";
+import GetAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-advertising-board.response.dto";
+import GetCurrentAdvertisingBoardResponeDto from "interfaces/response/advertisingBoard/get-current-advertising-board-response.dto";
+import GetShortReviewListResponseDto from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
+import PatchAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/patch-advertising-board.response.dto";
+import PostAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/post-advertising-board.response.dto";
+import PostShortReviewResponseDto from "interfaces/response/advertisingBoard/post-short-review.response.dto";
+import PutAdvertisingFavoriteListResponseDto from "interfaces/response/advertisingBoard/put-advertising-favorite-list.response.dto";
 import { SignInResponseDto } from "interfaces/response/auth";
 import {
   DeleteNoticeBoardResponseDto,
@@ -34,6 +48,7 @@ import {
 } from "interfaces/response/reviewBoard";
 import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
 import GetUserReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-user-review-board-list.response.dto";
+import { async } from "q";
 
 const API_DOMAIN = "http://localhost:4040";
 
@@ -467,6 +482,7 @@ export const deleteReviewBoardCommentRequest = async (
   return result;
 };
 
+// description: 이벤트 게시판 //
 export const getCurrentEventBoardListRequest = async (section: number) => {
   const result = await axios
     .get(GET_EVENT_BOARD_LIST_URL(section))
@@ -498,7 +514,7 @@ export const getNoticeBoardListRequest = async (section: number) => {
 };
 
 // 공지사항 상세보기
-export const getNoticeBoardRequest = async (boardNumber: number) => {
+export const getNoticeBoardRequest = async (boardNumber: number | string) => {
   const result = await axios
     .get(GET_NOTICE_BOARD_URL(boardNumber))
     .then((response) => {
@@ -561,7 +577,7 @@ export const patchNoticeBoardRequest = async (
 
 // 공지사항 삭제하기
 export const deleteNoticeBoardRequest = async (
-  boardNumber: number,
+  boardNumber: number | string,
   token: string
 ) => {
   const result = await axios
@@ -581,3 +597,229 @@ export const deleteNoticeBoardRequest = async (
 
   return result;
 };
+
+export const getCurrentAdvertisingBoardListRequest = async (
+  section: number | string
+) => {
+  const result = await axios
+    .get(GET_ADVERTISING_BOARD_LIST_URL(section))
+    .then((response) => {
+      const responseBody: GetCurrentAdvertisingBoardResponeDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+    return result;
+};
+
+export const getAdvertisingBoardLocationListRequest = async(location: string) => {
+  const result = await axios
+    .get(GET_ADVERTISING_BOARD_LOCATION_LIST_URL(location))
+    .then((response) => {
+      const responseBody: GetAdvertisingLocationListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) =>{
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+    return result;
+};
+
+export const getAdvertisingBoardBusinessTypeListRequest = async (
+  businessType: string
+) => {
+  const result = await axios
+    .get(GET_ADVERTISING_BOARD_BUSINESSTYPE_LIST_URL(businessType))
+    .then((response) => {
+      const responseBody: GetAdvertisingBoardBusinessTypeResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+    return result;
+};
+
+
+export const getAdvertisingBoardLocationBusinessTypeListRequest = async (
+  location : string,
+  businessType : string
+) => {
+  const result = await axios
+    .get(GET_ADVERTISING_BOARD_LOCATION_BUSINESSTYPE_LIST_URL(location,businessType))
+    .then((response) => {
+      const responseBody: GetAdvertisingBoardBusinessTypeLocationResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+    return result;
+};
+
+export const getAdvertisingBoardRequest = async (boardNumber: number | string) => {
+  const result = await axios
+    .get(GET_ADVERTISING_BOARD_URL(boardNumber))
+    .then((response) => {
+      const responseBody: GetAdvertisingBoardResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+    return result;
+};
+
+
+export const getAdvertisingBoardShortReviewListRequest = async (
+  boardNumber: number | string
+) => {
+  const result = await axios
+    .get(GET_ADVERTISING_BOARD_SHORT_REVIEW_LIST_URL(boardNumber))
+    .then((response) => {
+      const responseBody: GetShortReviewListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+    return result;
+};
+
+export const postAdvertisingBoardRequest = async (
+  data: PostAdvertisingBoardDto,
+  token : string
+) => {
+  const result = await axios 
+    .post(POST_ADVERTISING_BOARD_URL(), data, {
+      headers: {Authorization: `Bearer ${token}`}
+    })
+    .then((response) => {
+      const responseBody: PostAdvertisingBoardResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+    return result;
+};
+
+
+export const postAdvertisingBoardShortReviewRequest = async (
+  boardNumber : number | string,
+  data: PostShortReviewResponseDto,
+  token: string
+) => {
+  const result = await axios
+    .post(POST_ADVERTISING_BOARD_SHORT_REVIEW_URL(boardNumber),data, {
+      headers: {Authorization: `Bearer ${token}`}
+    })
+    .then((response) => {
+      const responseBody: PostShortReviewResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+    return result;
+};
+
+export const putAdvertisingBoardFavoriteRequest = async (
+  boardNumber: number | string,
+  token: any
+) => {
+  const result = await axios
+    .put(PUT_ADVERTISING_BOARD_FAVORITE_URL(boardNumber),{},
+    { headers: { Authorization: `Bearer ${token}`}})
+    .then((response) => {
+      const  responseBody: PutAdvertisingFavoriteListResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+    return result;
+  };
+
+
+export const patchAdvertisingBoardRequest = async (
+  boardNumber: number | string,
+  data: PatchAdvertisingBoardDto,
+  token: string
+) => {
+  const result = await axios
+    .patch(PATCH_ADVERTISING_BOARD_URL(boardNumber),data,{
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then((response) => {
+      const responseBody : PatchAdvertisingBoardResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+    return result;
+};
+
+export const deleteAdvertisingBoardRequest = async (
+  boardNumber: number | string,
+  token: string
+) => {
+  const result = await axios
+    .delete(DELETE_ADVERTISING_BOARD_URL(boardNumber),{
+      headers: {Authorization: `Bearer${token}`}
+    })
+    .then((response) => {
+      const responseBody: DeleteAdvertisingBoardResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+    return result;
+};
+
+export const deleteAdvertisingShortReviewRequest = async (
+  boardNumber: number | string,
+  token: string
+) => {
+  const result = await axios
+  .delete(DELETE_ADVERTISING_BOARD_SHORT_REVIEW_URL(boardNumber),{
+    headers: { Authorization: `Bearer${token}`}
+  })
+  .then((response) => {
+    const responseBody : DeleteShortCommentAdvertisingBoardResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  });
+  return result;
+};
+
+

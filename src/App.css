@@ -24,3 +24,27 @@
 .large-button:hover {
   opacity: 0.85;
 }
+
+.black-button {
+	margin-left: 15px;
+
+	border-radius: 46px;
+
+	width: 95px;
+	height: 30px;
+
+	background-color: #000000;
+
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: 500;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.black-button:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.7);
+}

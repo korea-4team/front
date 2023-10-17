@@ -7,15 +7,11 @@ import { useState, useEffect } from "react";
 import { getNoticeBoardListRequest } from 'apis';
 
 import './style.css';
+import { useNavigate } from 'react-router';
+import { NOTICE_BOARD_WRITE_PATH } from 'constant';
 
 //          component : 공지사항 게시판         //
 export default function NoticeBoardMain() {
-
-  //          state         //
-
-  //          function          //
-
-  //          event handler          //
 
   //          component : 공지사항 리스트 컴포넌트         //
   const NoticeBoardList = () => {
@@ -28,6 +24,9 @@ export default function NoticeBoardMain() {
     const [ noticeBoardList, setNoticeList ] = useState<NoticeBoardListResponseDto[]>([]);
 
     //          function          //
+    // description : 페이지 이동을 위한 네비게이트 함수 //
+    const navigator = useNavigate();
+
     // description : 공지사항 불러오기 응답 처리 함수 //
     const getNoticeBoardListResponseHandler = (
       responseBody: GetNoticeBoardListResponseDto | ResponseDto
@@ -42,6 +41,10 @@ export default function NoticeBoardMain() {
 
 
     //          event handler          //
+    // description : 컴포넌트 클릭 이벤트 //
+    const onClickHandler = () => {
+      navigator(NOTICE_BOARD_WRITE_PATH());
+    }
 
     //          component         //
     
@@ -56,6 +59,7 @@ export default function NoticeBoardMain() {
       <div className='notice-board-list'>
         <div className='notice-board-list-top'>
           <div className='notice-board'>공지사항</div>
+          <div className='black-button' onClick={onClickHandler}>작성하기</div>
         </div>
         <div className='divider'></div>
         <div className='notice-board-list-bottom'>
