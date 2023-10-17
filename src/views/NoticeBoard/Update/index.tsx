@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function NoticeBoard() {
+import './style.css';
+
+export default function NoticeBoardUpdate() {
   return (
-    <div>NoticeBoard</div>
+    <div>NoticeBoardUpdate</div>
   )
 }

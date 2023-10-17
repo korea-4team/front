@@ -6,7 +6,7 @@ export default interface GetNoticeBoardResponseDto extends ResponseDto {
 	title : string;
 	contents : string;
 	imageUrl : string;
-	WriteDatetime : string;
+	writeDatetime : string;
 	adminId : string;
 	adminNickname : string;
 

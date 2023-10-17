@@ -1,9 +1,13 @@
 import {
   AUTH_PATH,
+  BOARD_NUMBER_PATH_VARIABLE,
+  DETAIL_PATH,
   EVENT_BOARD_PATH,
   MAIN_PATH,
   NOTICE_BOARD_PATH,
   REVIEW_BOARD_PATH,
+  UPDATE_PATH,
+  WRITE_PATH,
 } from "constant";
 import Container from "layouts/Container";
 import { useEffect } from "react";
@@ -12,9 +16,12 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Authentication from "views/Authentication";
 import EventBoard from "views/EventBoard/Main";
 import Main from "views/Main";
+import NoticeBoardDetail from "views/NoticeBoard/Detail";
 import NoticeBoard from "views/NoticeBoard/Main";
 import ReviewBoardList from "views/ReviewBoard/Main";
 import "./App.css";
+import NoticeBoardWrite from "views/NoticeBoard/Write";
+import NoticeBoardUpdate from "views/NoticeBoard/Update";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -38,7 +45,14 @@ function App() {
         <Route path={MAIN_PATH} element={<Main />} />
         <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
         <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
-        <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
+
+        <Route path={NOTICE_BOARD_PATH}>
+          <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
+          <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<NoticeBoardDetail />} />
+          <Route path={WRITE_PATH} element={ <NoticeBoardWrite /> }/>
+          <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={ <NoticeBoardUpdate /> }/>
+        </Route>
+
         <Route element={<Container />}>
           <Route path={MAIN_PATH} element={<Main />} />
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />

@@ -11,10 +11,14 @@
 	display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.notice-board {
   font-size: 30px;
   font-weight: 500;
 }
+
+
 
 .notice-board-list-name {
 	margin: 15px 0px 10px;
