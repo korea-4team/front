@@ -6,4 +6,6 @@ export default interface ReviewBoardListResponseDto {
   favoriteCount: number;
   writeDatetime: string;
   writerNickname: string;
+  location: string;
+  businessType: string;
 }

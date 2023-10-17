@@ -3,11 +3,12 @@ import { create } from "zustand";
 interface User {
   email: string;
   nickname: string;
+  role: string;
 }
 
 interface UserStore {
   user: User | null;
-  setUser: (user: User | null) => void; 
+  setUser: (user: User | null) => void;
 }
 
 const useStore = create<UserStore>((set) => ({
