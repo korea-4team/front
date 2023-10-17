@@ -7,6 +7,7 @@ import { COUNT_BY_PAGE } from 'constant';
 import { getCurrentEventBoardListRequest } from 'apis';
 import EventBoardListItem from 'components/EventBoardListItem';
 import Pagination from 'components/Pagination';
+import React from 'react';
 
 export default function EventBoardMain() {
 
