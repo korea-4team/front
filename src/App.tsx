@@ -1,4 +1,5 @@
 import {
+  ADVERTISING_BOARD_PATH,
   AUTH_PATH,
   BOARD_NUMBER_PATH_VARIABLE,
   DETAIL_PATH,
@@ -6,6 +7,7 @@ import {
   MAIN_PATH,
   NOTICE_BOARD_PATH,
   REVIEW_BOARD_PATH,
+
   UPDATE_PATH,
   WRITE_PATH,
 } from "constant";
@@ -20,8 +22,9 @@ import NoticeBoardDetail from "views/NoticeBoard/Detail";
 import NoticeBoard from "views/NoticeBoard/Main";
 import ReviewBoardList from "views/ReviewBoard/Main";
 import "./App.css";
-import NoticeBoardWrite from "views/NoticeBoard/Write";
+import AdvertisingBoardMain from "views/AdvertisingBoard/Main";
 import NoticeBoardUpdate from "views/NoticeBoard/Update";
+import NoticeBoardWrite from "views/NoticeBoard/Write";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -42,21 +45,20 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={MAIN_PATH} element={<Main />} />
-        <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
-        <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
-
-        <Route path={NOTICE_BOARD_PATH}>
-          <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
-          <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<NoticeBoardDetail />} />
-          <Route path={WRITE_PATH} element={ <NoticeBoardWrite /> }/>
-          <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={ <NoticeBoardUpdate /> }/>
-        </Route>
-
         <Route element={<Container />}>
           <Route path={MAIN_PATH} element={<Main />} />
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
+          <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
+
+
+          <Route path={NOTICE_BOARD_PATH}>
+            <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
+            <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<NoticeBoardDetail />} />
+            <Route path={WRITE_PATH} element={ <NoticeBoardWrite /> }/>
+            <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={ <NoticeBoardUpdate /> }/>
+          </Route>
+
           <Route path={AUTH_PATH} element={<Authentication />} />
         </Route>
       </Routes>
