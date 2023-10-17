@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router';
 import { NOTICE_BOARD_WRITE_PATH } from 'constant';
 
 //          component : 공지사항 게시판         //
-export default function NoticeBoard() {
+export default function NoticeBoardMain() {
 
   //          component : 공지사항 리스트 컴포넌트         //
   const NoticeBoardList = () => {

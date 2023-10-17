@@ -18,13 +18,13 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Authentication from "views/Authentication";
 import EventBoard from "views/EventBoard/Main";
 import Main from "views/Main";
+import NoticeBoardMain from "views/NoticeBoard/Main";
 import NoticeBoardDetail from "views/NoticeBoard/Detail";
-import NoticeBoard from "views/NoticeBoard/Main";
+import NoticeBoardUpdate from "views/NoticeBoard/Update";
+import NoticeBoardWrite from "views/NoticeBoard/Write";
 import ReviewBoardList from "views/ReviewBoard/Main";
 import "./App.css";
 import AdvertisingBoardMain from "views/AdvertisingBoard/Main";
-import NoticeBoardUpdate from "views/NoticeBoard/Update";
-import NoticeBoardWrite from "views/NoticeBoard/Write";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -53,7 +53,7 @@ function App() {
 
 
           <Route path={NOTICE_BOARD_PATH}>
-            <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
+            <Route path={NOTICE_BOARD_PATH} element={<NoticeBoardMain />} />
             <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<NoticeBoardDetail />} />
             <Route path={WRITE_PATH} element={ <NoticeBoardWrite /> }/>
             <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={ <NoticeBoardUpdate /> }/>
