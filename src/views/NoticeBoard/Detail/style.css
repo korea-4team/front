@@ -1,7 +1,9 @@
 .notice-board-detail-item-list {
 	width: 1000px;
+
 	display: flex;
 	flex-direction: column;
+	gap: 20px;
 }
 
 .notice-board-detail-header {
