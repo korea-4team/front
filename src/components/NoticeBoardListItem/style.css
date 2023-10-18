@@ -1,51 +1,51 @@
-.notice-board-list-item-box {
-	width: 1440px;
+.notice-board-list-item {
+  margin-top: 3px;
 
-	display: block;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+
+  font-size: 18px;
+  font-weight: 600;
 }
 
-.notice-board-list-item-box:hover {
-	cursor: pointer;
-	background-color: rgba(0, 0, 0, 0.1);
-}
-
-.notice-board-list-box {
-	margin: 5px 0px 5px;
-	padding: 10px 50px 10px;
-
-	display: block;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.notice-board-list {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.notice-board-list-item:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .notice-board-number {
-	font-family: Noto Sans KR;
-	font-size: 20px;
-	font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+  height: 100%;
 }
 
 .notice-board-title {
-	font-family: Noto Sans KR;
-	font-size: 20px;
-	font-weight: 500;
+  display: flex;
+  justify-content: center;
+
+  width: 930px;
+  height: 100%;
 }
 
 .notice-board-writer {
-	font-family: Noto Sans KR;
-	font-size: 20px;
-	font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 150px;
+  height: 100%;
+  font-size: 14px;
 }
 
 .notice-board-write-date {
-	font-family: Noto Sans KR;
-	font-size: 20px;
-	font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 150px;
+  height: 100%;
+  font-size: 14px;
 }

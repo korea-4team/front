@@ -5,7 +5,7 @@ import { NOTICE_BOARD_PATH } from 'constant';
 import { useNoticeBoardWriteStore } from 'stores';
 import { Cookies, useCookies } from 'react-cookie';
 import { PostNoticeBoardRequestDto } from 'interfaces/request/noticeBoard';
-import { postNoticeBoardRequest } from 'apis';
+import { postNoticeBoardRequest, uploadFileRequest } from 'apis';
 
 //          component : 공지사항 작성하기         //
 export default function NoticeBoardWrite() {
@@ -36,10 +36,11 @@ export default function NoticeBoardWrite() {
     const data = new FormData();  // 이미지 생성을 위한 폼데이터 객체 생성
     data.append("file", noticeBoardImage);
 
-    // const imageUrl = await uploadFileRequest(data);
+    const imageUrl = await uploadFileRequest(data);
 
-    // return imageUrl;
+    return imageUrl;
   }
+  
   // description : 게시물 작성 요청 함수 //
   const postNoticeBoardResponseHandler = (code: string) => {
     if (code === "NA") alert("관리자 아이디가 아닙니다.");
@@ -58,7 +59,7 @@ export default function NoticeBoardWrite() {
   }
 
   // description : 본문 내용이 바뀔 시 text area 높이 변경 이벤트 //
-  const onContentChandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onContentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setNoticeBoardContent(event.target.value);
 
     if (!textAreaRef.current) return;
@@ -109,6 +110,8 @@ export default function NoticeBoardWrite() {
       imageUrl,
     }
     postNoticeBoardRequest(data, token).then(postNoticeBoardResponseHandler);
+
+    navigator(NOTICE_BOARD_PATH);
   }
 
   //          effect          //
@@ -123,7 +126,7 @@ export default function NoticeBoardWrite() {
         <div className='divider'></div>
         <div className='notice-board-write-content-container'>
           <div className='notice-board-write-content-input-box'>
-            <textarea ref={ textAreaRef } className='notice-board-write-content-textarea' placeholder='내용을 작성해주세요.' onChange={onContentChandler} value={noticeBoardContent}></textarea>
+            <textarea ref={ textAreaRef } className='notice-board-write-content-textarea' placeholder='내용을 작성해주세요.' onChange={onContentChangeHandler} value={noticeBoardContent}></textarea>
           </div>
           <div className='notice-board-write-content-button-box'>
             <div className='image-upload-button' onClick={onImageUploadButtonClickHandler}>
