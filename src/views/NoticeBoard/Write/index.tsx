@@ -59,7 +59,7 @@ export default function NoticeBoardWrite() {
   }
 
   // description : 본문 내용이 바뀔 시 text area 높이 변경 이벤트 //
-  const onContentChandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onContentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setNoticeBoardContent(event.target.value);
 
     if (!textAreaRef.current) return;
@@ -126,7 +126,7 @@ export default function NoticeBoardWrite() {
         <div className='divider'></div>
         <div className='notice-board-write-content-container'>
           <div className='notice-board-write-content-input-box'>
-            <textarea ref={ textAreaRef } className='notice-board-write-content-textarea' placeholder='내용을 작성해주세요.' onChange={onContentChandler} value={noticeBoardContent}></textarea>
+            <textarea ref={ textAreaRef } className='notice-board-write-content-textarea' placeholder='내용을 작성해주세요.' onChange={onContentChangeHandler} value={noticeBoardContent}></textarea>
           </div>
           <div className='notice-board-write-content-button-box'>
             <div className='image-upload-button' onClick={onImageUploadButtonClickHandler}>
