@@ -60,7 +60,7 @@ export default function EventBoardMain() {
     //          render          //
     return (
       <div className="event-board-list-item-box">
-        {user?.role === 'admin' && <div className="event-board-write-button">글쓰기</div>}
+        {user?.role === 'admin' && <div className="event-board-write-button" onClick={onEventBoardWriteButtonClickHandler}>글쓰기</div>}
         {boardCount ?
         (
           <div className="event-board-list-item">
