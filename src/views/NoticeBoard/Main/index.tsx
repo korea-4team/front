@@ -9,6 +9,7 @@ import { getNoticeBoardListRequest } from 'apis';
 import './style.css';
 import { useNavigate } from 'react-router';
 import { NOTICE_BOARD_WRITE_PATH } from 'constant';
+import { useUserStore } from 'stores';
 
 //          component : 공지사항 게시판         //
 export default function NoticeBoardMain() {
@@ -17,11 +18,16 @@ export default function NoticeBoardMain() {
   const NoticeBoardList = () => {
     
     //          state         //
+    // description : 유저 상태 //
+    const { user } = useUserStore();
     // description : 페이지 네이션 관련 상태 및 함수 //
     const { totalPage, currentPage, onPageClickHandler, onPreviusClickHandler, onNextClickHandler, changeSection}  = usePagination();
 
     // description : 게시물 리스트 상태 //
     const [ noticeBoardList, setNoticeList ] = useState<NoticeBoardListResponseDto[]>([]);
+
+    // description : 작성 버튼 노출 상태 //
+    const [ writeButton, setWriteButton ] = useState<boolean>(true);
 
     //          function          //
     // description : 페이지 이동을 위한 네비게이트 함수 //
@@ -52,6 +58,8 @@ export default function NoticeBoardMain() {
     // description : 첫 시작 시 공지사항 게시물 불러오기 //
     useEffect(() => {
       getNoticeBoardListRequest(1).then(getNoticeBoardListResponseHandler);
+
+      if(user && user.role !== "admin") setWriteButton(false);
     },[]);
 
     //          render          //
@@ -59,7 +67,11 @@ export default function NoticeBoardMain() {
       <div className='notice-board-list'>
         <div className='notice-board-list-top'>
           <div className='notice-board'>공지사항</div>
-          <div className='black-button' onClick={onClickHandler}>작성하기</div>
+          { writeButton &&
+            <div className='write-button'>
+              <div className='black-button' onClick={onClickHandler}>작성하기</div>
+            </div>
+          }
         </div>
         <div className='divider'></div>
         <div className='notice-board-list-bottom'>

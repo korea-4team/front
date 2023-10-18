@@ -1,6 +1,8 @@
 .notice-board-list {
   width: 1440px;
 
+  margin-bottom: 20px;
+
   display: block;
 }
 
@@ -10,15 +12,13 @@
 
 	display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .notice-board {
   font-size: 30px;
   font-weight: 500;
 }
-
-
 
 .notice-board-list-name {
 	margin: 15px 0px 10px;
@@ -34,11 +34,17 @@
   font-weight: 600;
 }
 
+.notice-board-list-box {
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
+
 .notice-number {
 	display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
+  width: 50px;
   height: 100%;
 }
 
@@ -46,7 +52,7 @@
 	display: flex;
   justify-content: center;
   align-items: center;
-  width: 900px;
+  width: 930px;
   height: 100%;
 }
 
@@ -64,5 +70,9 @@
   align-items: center;
   width: 150px;
   height: 100%;
+}
+
+.notice-board-list-bottom {
+  margin-bottom: 20px;
 }
 
