@@ -1,4 +1,4 @@
-.notice-board-list {
+.notice-board-list-box {
   width: 1440px;
 
   margin-bottom: 20px;
@@ -34,7 +34,7 @@
   font-weight: 600;
 }
 
-.notice-board-list-box {
+.notice-board-list {
   display: block;
   align-items: center;
   justify-content: center;

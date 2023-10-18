@@ -64,7 +64,7 @@ export default function NoticeBoardMain() {
 
     //          render          //
     return (
-      <div className='notice-board-list'>
+      <div className='notice-board-list-box'>
         <div className='notice-board-list-top'>
           <div className='notice-board'>공지사항</div>
           { writeButton &&
@@ -81,7 +81,7 @@ export default function NoticeBoardMain() {
             <div className='notice-writer'> 작성자 </div>
             <div className='notice-write-datetime'> 작성일자 </div>
           </div>
-          <div className='notice-board-list-box'>
+          <div className='notice-board-list'>
             {noticeBoardList.map((item) => (
               <NoticeBoardListItem item={item} />
             ))}
