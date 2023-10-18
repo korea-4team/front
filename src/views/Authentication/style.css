@@ -18,6 +18,14 @@
     gap: 40px;
 }
 
+.sign-in-title {
+    display: flex;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
 .sign-in-input-container {
     display: flex;
     flex-direction: column;
@@ -69,6 +77,14 @@
     gap: 40px;
 }
 
+.sign-up-title {
+    display: flex;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
 .sign-up-input-container {
     display: flex;
     flex-direction: column;
@@ -76,6 +92,60 @@
 }
 
 .sign-up-action-container {
+    padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#find-card {
+    margin: 80px 0;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    width: 600px;
+    padding: 80px 40px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#find-email-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.find-email-title {
+    display: flex;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.find-email-action-container {
+    padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#find-password-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.find-password-title {
+    display: flex;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.find-password-action-container {
     padding: 0 80px;
     display: flex;
     flex-direction: column;

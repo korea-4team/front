@@ -1,8 +1,8 @@
 import InputBox from 'components/InputBox';
 import React, { useState, useRef, ChangeEvent } from 'react';
 import './style.css';
-import { SignInRequestDto } from 'interfaces/request/auth';
-import { signInRequest } from 'apis';
+import { SignInRequestDto, SignUpRequestDto } from 'interfaces/request/auth';
+import { signInRequest, signUpRequest } from 'apis';
 import { MAIN_PATH } from 'constant';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -105,6 +105,7 @@ export default function Authentication() {
     //          render: 로그인 컴포넌트 렌더링          //
     return (
       <div id='sign-in-card'>
+        <div className='sign-in-title'>{'로그인'}</div>
         <div className='sign-in-input-container'>
           <InputBox ref={emailRef} label='이메일' type='text' placeholder='이메일을 입력하세요.' value={email} onChange={onEmailChangeHandler} error={isEmailError} errorMessage={emailErrorMessage} />
           <InputBox ref={passwordRef} label='비밀번호' type='password' placeholder='비밀번호를 입력하세요.' value={password} onChange={onPasswordChangeHandler} error={isPasswordError} errorMessage={passwordErrorMessage} />
@@ -184,6 +185,27 @@ export default function Authentication() {
     //          state: 휴대전화번호 에러 메세지 상태          //
     const [telNumberErrorMessage, setTelNumberErrorMessage] = useState<string>('');
 
+    //          function: sign up response 처리 함수          //
+    const signUpResponse = (code: string) => {
+      if (code === 'EE') {
+        setEmailError(true);
+        setEmailErrorMessage('중복되는 이메일입니다.');
+      }
+      if (code === 'EN') {
+        setNicknameError(true);
+        setNicknameErrorMessage('중복되는 닉네임입니다.');
+      }
+      if (code === 'ET') {
+        setTelNumberError(true);
+        setTelNumberErrorMessage('중복되는 전화번호입니다.');
+      }
+      if (code === 'DE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU') return;
+
+      alert('회원가입에 성공했습니다.');
+      setPage('sign-in');
+    }
+
     //          event handler: 이메일 변경 이벤트 처리          //
     const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
@@ -198,35 +220,35 @@ export default function Authentication() {
       setPasswordErrorMessage('');
       setPassword(value);
     }
-    //          event handler: 이메일 변경 이벤트 처리          //
+    //          event handler: 비밀번호 확인 변경 이벤트 처리          //
     const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       setPasswordCheckError(false);
       setPasswordCheckErrorMessage('');
       setPasswordCheck(value);
     }
-    //          event handler: 비밀번호 변경 이벤트 처리          //
+    //          event handler: 닉네임 변경 이벤트 처리          //
     const onNicknameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       setNicknameError(false);
       setNicknameErrorMessage('');
       setNickname(value);
     }
-    //          event handler: 이메일 변경 이벤트 처리          //
+    //          event handler: 주소 변경 이벤트 처리          //
     const onAddressChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       setAddressError(false);
       setAddressErrorMessage('');
       setAddress(value);
     }
-    //          event handler: 비밀번호 변경 이벤트 처리          //
+    //          event handler: 상세 주소 변경 이벤트 처리          //
     const onAddressDetailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       setAddressDetailError(false);
       setAddressDetailErrorMessage('');
       setAddressDetail(value);
     }
-    //          event handler: 이메일 변경 이벤트 처리          //
+    //          event handler: 전화번호 변경 이벤트 처리          //
     const onTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       setTelNumberError(false);
@@ -236,15 +258,83 @@ export default function Authentication() {
 
     //          event handler: 회원가입 버튼 클릭 이벤트 처리          //
     const onSignUpButtonClickHandler = () => {
+      setEmailError(false);
+      setEmailErrorMessage('');
+      setPasswordError(false);
+      setPasswordErrorMessage('');
+      setPasswordCheckError(false);
+      setPasswordCheckErrorMessage('');
+      setNicknameError(false);
+      setNicknameErrorMessage('');
+      setAddressError(false);
+      setNicknameErrorMessage('');
+      setTelNumberError(false);
+      setTelNumberErrorMessage('');
+      
+      // description: 이메일 패턴 확인 //
+      const emailPattern = /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
+      const checkedEmail = !emailPattern.test(email);
+      if (checkedEmail) {
+        setEmailError(true);
+        setEmailErrorMessage('이메일주소 포맷이 맞지않습니다.');
+      }
+      // description: 비밀번호 길이 확인 //
+      const checkedPassword = password.trim().length < 8;
+      if (checkedPassword) {
+        setPasswordError(true);
+        setPasswordErrorMessage('비밀번호는 8자 이상 입력해주세요.');
+      }
+      // description: 비밀번호 일치 여부 확인 //
+      const checkedPasswordCheck = password !== passwordCheck;
+      if (checkedPasswordCheck) {
+        setPasswordCheckError(true);
+        setPasswordCheckErrorMessage('비밀번호가 일치하지않습니다.');
+      }
+      // description: 닉네임 길이 확인 //
+      const nicknameCheck = nickname.trim().length > 12;
+      if (nicknameCheck) {
+        setNicknameError(true);
+        setNicknameErrorMessage('닉네임은 12자 이하로 입력해주세요.');
+      }
+      // description: 주소 입력 확인 //
+      const addressCheck = !address;
+      if (addressCheck) {
+        setAddressError(true);
+        setAddressErrorMessage('주소는 필수 입력입니다.');
+      }
+      // description: 핸드폰 번호 입력 여부 확인 //
+      const telNumberPattern = /^[0-9]{10,12}$/;
+      const telNumberCheck = !telNumberPattern.test(telNumber);
+      if (telNumberCheck) {
+        setTelNumberError(true);
+        setTelNumberErrorMessage('숫자만 입력해주세요.');
+      }
+
+      if (checkedEmail || checkedPassword || checkedPasswordCheck || nicknameCheck || addressCheck || telNumberCheck) return;
+
+      const requestBody: SignUpRequestDto = {
+        email,
+        password,
+        nickname,
+        telNumber,
+        address,
+        addressDetail,
+      }
+
+      signUpRequest(requestBody).then(signUpResponse);
+
     }
-    //          event handler: 회원가입 링크 클릭 이벤트 처리          //
-    const onSignUpLinkClickHandler = () => {
+    //          event handler: 로그인 링크 클릭 이벤트 처리          //
+    const onSignInLinkClickHandler = () => {
       setPage('sign-in');
     }
 
+    // TODO: 비밀번호, 비밀번호 확인, 주소 아이콘 버튼 추가
+    // TODO: 주소 검색 기능 추가
     //          render: 회원가입 컴포넌트 렌더링          //
     return (
       <div id='sign-up-card'>
+        <div className='sign-up-title'>{'회원가입'}</div>
         <div className='sign-up-input-container'>
           <InputBox ref={emailRef} label='이메일' type='text' placeholder='이메일을 입력하세요.' value={email} onChange={onEmailChangeHandler} error={isEmailError} errorMessage={emailErrorMessage} />
           <InputBox ref={passwordRef} label='비밀번호' type='password' placeholder='비밀번호를 입력하세요.' value={password} onChange={onPasswordChangeHandler} error={isPasswordError} errorMessage={passwordErrorMessage} />
@@ -257,7 +347,7 @@ export default function Authentication() {
         <div className='sign-up-action-container'>
           <div className='large-button' onClick={onSignUpButtonClickHandler}>{'회원가입'}</div>
           <div className='sign-in-link-box'>
-            <div className='link' onClick={onSignUpLinkClickHandler}>{'로그인'}</div>
+            <div className='link' onClick={onSignInLinkClickHandler}>{'로그인'}</div>
           </div>
         </div>
       </div>
@@ -268,9 +358,94 @@ export default function Authentication() {
   //          component: 정보 찾기 컴포넌트          //
   const Find = () => {
 
+    //          state: 이메일 찾기 tel number input 참조 상태          //
+    const emailTelNumberRef = useRef<HTMLInputElement | null>(null);
+    //          state: 이메일 찾기 전화번호 상태          //
+    const [emailTelNumber, setEmailTelNumber] = useState<string>('');
+    //          state: 이메일 찾기 전화번호 에러 상태          //
+    const [isEmailTelNumberError, setEmailTelNumberError] = useState<boolean>(false);
+    //          state: 이메일 찾기 전화번호 에러 메세지 상태          //
+    const [emailTelNumberErrorMessage, setEmailTelNumberErrorMessage] = useState<string>('');
+
+    //          state: 비밀번호 찾기 email input 참조 상태          //
+    const passwordEmailRef = useRef<HTMLInputElement | null>(null);
+    //          state: 비밀번호 찾기 tel number input 참조 상태          //
+    const passwordTelNumberRef = useRef<HTMLInputElement | null>(null);
+    //          state: 비밀번호 찾기 이메일 상태          //
+    const [passwordEmail, setPasswordEmail] = useState<string>('');
+    //          state: 비밀번호 찾기 전화번호 상태          //
+    const [passwordTelNumber, setPasswordTelNumber] = useState<string>('');
+    //          state: 비밀번호 찾기 이메일 에러 상태          //
+    const [isPasswordEmailError, setPasswordEmailError] = useState<boolean>(false);
+    //          state: 비밀번호 찾기 전화번호 에러 상태          //
+    const [isPasswordTelNumberError, setPasswordTelNumberError] = useState<boolean>(false);
+    //          state: 비밀번호 찾기 이메일 에러 메세지 상태          //
+    const [passwordEmailErrorMessage, setPasswordEmailErrorMessage] = useState<string>('');
+    //          state: 비밀번호 찾기 전화번호 에러 메세지 상태          //
+    const [passwordTelNumberErrorMessage, setPasswordTelNumberErrorMessage] = useState<string>('');
+
+    //          event handler: 이메일 찾기 전화번호 변경 이벤트 처리          //
+    const onEmailTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      setEmailTelNumberError(false);
+      setEmailTelNumberErrorMessage('');
+      setEmailTelNumber(value);
+    }
+    //          event handler: 비밀번호 찾기 이메일 변경 이벤트 처리          //
+    const onPasswordEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      setPasswordEmailError(false);
+      setPasswordEmailErrorMessage('');
+      setPasswordEmail(value);
+    }
+    //          event handler: 비밀번호 찾기 전화번호 변경 이벤트 처리          //
+    const onPasswordTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      setPasswordTelNumberError(false);
+      setPasswordTelNumberErrorMessage('');
+      setPasswordTelNumber(value);
+    }
+
+    //          event handler: 이메일 찾기 클릭 이벤트 처리          //
+    const onFindEmailButtonClickHandler = () => {
+
+    }
+    //          event handler: 비밀번호 찾기 클릭 이벤트 처리          //
+    const onFindFindButtonClickHandler = () => {
+
+    }
+    //          event handler: 로그인 링크 클릭 이벤트 처리          //
+    const onSignInLinkClickHandler = () => {
+      setPage('sign-in');
+    }
+
     //          render: 정보 찾기 컴포넌트 렌더링          //
     return (
-      <div></div>
+      <div id="find-card">
+        <div id="find-email-container">
+          <div className='find-email-title'>{'이메일 찾기'}</div>
+          <div className='find-email-input-container'>
+            <InputBox ref={emailTelNumberRef} label='휴대 전화번호' type='text' placeholder='휴대전화 번호를 입력하세요.' value={emailTelNumber} onChange={onEmailTelNumberChangeHandler} error={isEmailTelNumberError} errorMessage={emailTelNumberErrorMessage} />
+          </div>
+          <div className='find-email-action-container'>
+            <div className='large-button' onClick={onFindEmailButtonClickHandler}>{'이메일 찾기'}</div>
+          </div>
+        </div>
+        <div className='divider'></div>
+        <div id="find-password-container">
+          <div className='find-password-title'>{'비밀번호 찾기'}</div>
+          <div className='find-password-input-container'>
+          <InputBox ref={passwordEmailRef} label='이메일' type='text' placeholder='이메일을 입력하세요.' value={passwordEmail} onChange={onPasswordEmailChangeHandler} error={isPasswordEmailError} errorMessage={passwordEmailErrorMessage} />
+          <InputBox ref={passwordTelNumberRef} label='휴대 전화번호' type='text' placeholder='휴대전화 번호를 입력하세요.' value={passwordTelNumber} onChange={onPasswordTelNumberChangeHandler} error={isPasswordTelNumberError} errorMessage={passwordTelNumberErrorMessage} />
+          </div>
+          <div className='find-password-action-container'>
+          <div className='large-button' onClick={onFindFindButtonClickHandler}>{'비밀번호 찾기'}</div>
+          </div>
+        </div>
+        <div className='find-link-box'>
+          <div className='link' onClick={onSignInLinkClickHandler}>{'로그인'}</div>
+        </div>
+      </div>
     );
 
   }
