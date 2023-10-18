@@ -58,7 +58,6 @@ function App() {
       return;
     }
     getSignInUserRequest(accessToken).then(getSignInUserResponse);
-    // TODO: accessToken이 존재하면서 user가 존재하지 않으면 user 정보 저장
   }, [pathname]);
 
   //          render: 메인 컴포넌트 렌더링          //
