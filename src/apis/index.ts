@@ -240,6 +240,20 @@ export const signInRequest = async (requestBody: SignInRequestDto) => {
   return result;
 };
 
+// description : 파일 업로드 //
+export const uploadFileRequest = async (data: FormData) => {
+  const result = await axios.post(UPLOAD_FILE(), data, {
+    headers: { "Content-Type" : "multipart/form-data" },
+  })
+  .then((response) => {
+    const imageUrl: string = response.data;
+    return imageUrl;
+  })
+  .catch((error) => null);
+
+  return result;
+}
+
 // description: 기행기 게시판 //
 export const getCurrentReviewBoardListRequest = async (
   section: number | string

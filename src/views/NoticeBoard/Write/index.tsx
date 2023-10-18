@@ -5,7 +5,7 @@ import { NOTICE_BOARD_PATH } from 'constant';
 import { useNoticeBoardWriteStore } from 'stores';
 import { Cookies, useCookies } from 'react-cookie';
 import { PostNoticeBoardRequestDto } from 'interfaces/request/noticeBoard';
-import { postNoticeBoardRequest } from 'apis';
+import { postNoticeBoardRequest, uploadFileRequest } from 'apis';
 
 //          component : 공지사항 작성하기         //
 export default function NoticeBoardWrite() {
@@ -36,10 +36,11 @@ export default function NoticeBoardWrite() {
     const data = new FormData();  // 이미지 생성을 위한 폼데이터 객체 생성
     data.append("file", noticeBoardImage);
 
-    // const imageUrl = await uploadFileRequest(data);
+    const imageUrl = await uploadFileRequest(data);
 
-    // return imageUrl;
+    return imageUrl;
   }
+  
   // description : 게시물 작성 요청 함수 //
   const postNoticeBoardResponseHandler = (code: string) => {
     if (code === "NA") alert("관리자 아이디가 아닙니다.");
@@ -109,6 +110,8 @@ export default function NoticeBoardWrite() {
       imageUrl,
     }
     postNoticeBoardRequest(data, token).then(postNoticeBoardResponseHandler);
+
+    navigator(NOTICE_BOARD_PATH);
   }
 
   //          effect          //
