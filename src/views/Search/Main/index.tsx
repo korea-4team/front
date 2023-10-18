@@ -17,6 +17,8 @@ export default function Search() {
     //          state          //
     const { searchWord, location } = useParams();
     const [boardCount, setBoardCount] = useState<number>(0);
+    const [reviewBoardCount, setReviewBoardCount] = useState<number>(0);
+    const [advertisingBoardCount, setAdvertisingBoardCount] = useState<number>(0);
     const [reviewBoardList, setReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
     const [advertisingBoardList, setAdvertisingBoardList] = useState<AdvertisingBoardListResponseDto[]>([]);
 
@@ -32,7 +34,9 @@ export default function Search() {
       const { advertisingBoardList, reviewBoardList } = responseBody as GetSearchResponseDto;
       setAdvertisingBoardList(advertisingBoardList);
       setReviewBoardList(reviewBoardList);
-      setBoardCount(advertisingBoardList.length + reviewBoardList.length);
+      setBoardCount(reviewBoardCount + advertisingBoardCount);
+      setAdvertisingBoardCount(advertisingBoardList.length);
+      setReviewBoardCount(reviewBoardList.length);
     }
 
     //          event handler          //
@@ -62,18 +66,23 @@ export default function Search() {
           <div className="search-text-empasis">{boardCount}</div>
         </div>
         <div className="advertising-board-search-box">
-          <div className="board-title">광고 게시판</div>
-          <div className="advertising-board-search-list-box">
+          <div className="search-board-title">광고 게시판</div>
+          {
+            advertisingBoardCount ? 
+          (<><div className="advertising-board-search-list-box">
             {advertisingBoardList.map((item) => (<AdvertisingBoardListItem item={item} />))}
-          </div>
-          <div className="search-list-more-button">검색결과 더보기</div>
+          </div><div className="search-list-more-button" onClick={() => onAdvertisingBoardMoerButtonClickHandler}>검색결과 더보기</div></>) : (<div className="search-board-nothing">검색결과가 없습니다.</div>)
+          }
+          <div className="search-list-more-button" onClick={() => onAdvertisingBoardMoerButtonClickHandler}>검색결과 더보기</div>
         </div>
         <div className="review-board-search-box">
-          <div className="board-title">기행기 게시판</div>
-          <div className="review-board-search-list-box">
+          <div className="search-board-title">기행기 게시판</div>
+          {
+            reviewBoardCount ?
+            (<><div className="review-board-search-list-box">
             {reviewBoardList.map((item) => (<ReviewBoardListItem item={item} />))}
-          </div>
-          <div className="search-list-more-button">검색결과 더보기</div>
+          </div><div className="search-list-more-button" onClick={() => onReviewBoardMoerButtonClickHandler}>검색결과 더보기</div></>) : (<div className="search-board-nothing">검색결과가 없습니다.</div>)
+          }
         </div>
       </div>
     )

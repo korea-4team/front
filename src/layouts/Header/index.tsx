@@ -93,7 +93,7 @@ export default function Header() {
   }
 
   const onLocationButtonClickHandler = () => {
-
+    
   }
 
   //          effect          //
@@ -117,8 +117,9 @@ export default function Header() {
         </div>
         <div className="header-top-right">
           {
-            !isAuth && ( isMyPage ? (<div className="button" onClick={onSignOutButtonClickHandler}>로그아웃</div>) : login ? (<div className="button" onClick={onMyPageButtonClickHandler}>마이페이지</div>) :
-            <div className="button" onClick={onSignInButtonClickHandler}>로그인</div>)
+            !login ? (<div className="button" onClick={onSignInButtonClickHandler}>로그인</div>) :
+              (<><div className="button" onClick={onMyPageButtonClickHandler}>마이페이지</div>
+              <div className="button" onClick={onSignOutButtonClickHandler}>로그아웃</div></>)
           }
         </div>
       </div>
@@ -132,27 +133,29 @@ export default function Header() {
       </div>
       <div className="header-bottom">
         <div className="header-search-box">
-          {showMore && (
-            <div className="location-button-group">
-              <div className="location-button">{'서울'}</div>
-              <div className="location-button">{'대전'}</div>
-              <div className="location-button">{'대구'}</div>
-              <div className="location-button">{'부산'}</div>
-              <div className="location-button">{'인천'}</div>
-              <div className="location-button">{'광주'}</div>
-              <div className="location-button">{'울산'}</div>
-              <div className="location-button">{'제주'}</div>
-              <div className="location-button">{'경기'}</div>
-              <div className="location-button">{'강원'}</div>
-              <div className="location-button">{'충북'}</div>
-              <div className="location-button">{'충남'}</div>
-              <div className="location-button">{'전북'}</div>
-              <div className="location-button">{'전남'}</div>
-              <div className="location-button">{'경북'}</div>
-              <div className="location-button">{'경남'}</div>
-            </div>
-          )}
-          <div className="location-group" onClick={onLocationMoreButtonClickHandler}>{'지역'}</div>
+          <div className="location-group">
+            <div className="location-top" onClick={onLocationMoreButtonClickHandler}>{'지역'}</div>
+            {showMore && (
+              <div className="location-button-group">
+                <div className="location-button">{'서울'}</div>
+                <div className="location-button">{'대전'}</div>
+                <div className="location-button">{'대구'}</div>
+                <div className="location-button">{'부산'}</div>
+                <div className="location-button">{'인천'}</div>
+                <div className="location-button">{'광주'}</div>
+                <div className="location-button">{'울산'}</div>
+                <div className="location-button">{'제주'}</div>
+                <div className="location-button">{'경기'}</div>
+                <div className="location-button">{'강원'}</div>
+                <div className="location-button">{'충북'}</div>
+                <div className="location-button">{'충남'}</div>
+                <div className="location-button">{'전북'}</div>
+                <div className="location-button">{'전남'}</div>
+                <div className="location-button">{'경북'}</div>
+                <div className="location-button">{'경남'}</div>
+              </div>
+            )}  
+          </div>
           <input className="header-search-input" placeholder='검색어를 입력해 주세요.' value={search} onChange={onSearchChangeHandler} onKeyDown={onSearchEnterPressHandler}/>
           <div ref={searchButtonRef} className="header-search-icon-box" onClick={onSearchButtonClickHandler}>
             <div className="header-search-icon"></div>

@@ -1,5 +1,6 @@
 import {
   ADVERTISING_BOARD_PATH,
+  ADVERTISING_BOARD_SEARCH_LIST_PATH,
   AUTH_PATH,
   BOARD_NUMBER_PATH_VARIABLE,
   DETAIL_PATH,
@@ -35,6 +36,7 @@ import { getSignInUserRequest } from "apis";
 import GetUserResponseDto from "interfaces/response/admin/get-user.response.dto";
 import ResponseDto from "interfaces/response/response.dto";
 import { GetSignInUserResponseDto } from "interfaces/response/user";
+import AdvertisingBoardSearchList from "views/Search/AdvertisingBoardSearch";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -74,7 +76,11 @@ function App() {
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
           <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
-          <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
+          
+          <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)}>
+            <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
+            {/* <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} /> */}
+          </Route>
 
 
           <Route path={NOTICE_BOARD_PATH}>

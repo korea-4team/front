@@ -6,37 +6,73 @@
   display: flex;
   width: 100%;
   margin-bottom: 30px;
+  align-items: end;
 }
 
 .search-text-empasis {
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 500;
 }
 
 .search-text {
+  margin: 0 10px;
+  font-size: 26px;
+}
 
+.search-board-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 50px;
 }
 
 .advertising-board-search-box {
-
-}
-
-.advertising-board-title {
-
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  margin: 100px 0;
 }
 
 .advertising-board-search-list-box {
-
+  width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .review-board-search-box {
-
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  margin: 100px 0;
 }
 
 .review-board-search-list-box {
+  width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.search-board-nothing {
+ font-size: 32px;
+ margin-bottom: 30px;
 }
 
 .search-list-more-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 30px;
+  width: 220px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 42px;
+}
 
+.search-list-more-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
