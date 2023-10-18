@@ -25,20 +25,39 @@ import NoticeBoardWrite from "views/NoticeBoard/Write";
 import ReviewBoardList from "views/ReviewBoard/Main";
 import "./App.css";
 import AdvertisingBoardMain from "views/AdvertisingBoard/Main";
+import { useUserStore } from "stores";
+import { getSignInUserRequest } from "apis";
+import GetUserResponseDto from "interfaces/response/admin/get-user.response.dto";
+import ResponseDto from "interfaces/response/response.dto";
+import { GetSignInUserResponseDto } from "interfaces/response/user";
 
 //          component: 메인 컴포넌트          //
 function App() {
   //          state: path 상태          //
   const { pathname } = useLocation();
+  //          state: user 상태          //
+  const { user, setUser } = useUserStore();
   //          state: cookie 상태          //
   const [cookies, setCookie] = useCookies();
+
+  //          function: get sign in user response 처리 함수          //
+  const getSignInUserResponse = (responseBody: GetSignInUserResponseDto | ResponseDto) => {
+    const { code } = responseBody;
+    if (code === 'NU') alert('존재하지 않는 유저입니다.');
+    if (code === 'DE') alert('데이터베이스 오류입니다.');
+    if (code !== 'SU') return;
+
+    setUser({ ...responseBody as GetUserResponseDto });
+  }
 
   //          effect: path가 변경될 때 마다 실행될 함수          //
   useEffect(() => {
     const accessToken = cookies.accessToken;
-    // TODO: accessToken이 존재하지 않으면 user 정보 초기화
-    if (!accessToken) return;
-    // TODO: accessToken이 존재하면서 user가 존재하지 않으면 user 정보 저장
+    if (!accessToken) {
+      setUser(null);
+      return;
+    }
+    getSignInUserRequest(accessToken).then(getSignInUserResponse);
   }, [pathname]);
 
   //          render: 메인 컴포넌트 렌더링          //

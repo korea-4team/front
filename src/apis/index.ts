@@ -48,6 +48,7 @@ import {
 } from "interfaces/response/reviewBoard";
 import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
 import GetUserReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-user-review-board-list.response.dto";
+import { GetSignInUserResponseDto } from "interfaces/response/user";
 import { async } from "q";
 
 const API_DOMAIN = "http://localhost:4040";
@@ -58,6 +59,9 @@ const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`;
 const ACCOUNT_FIND_EMAIL_URL = () => `${API_DOMAIN}/auth/account-find/email`;
 const ACCOUNT_FIND_PASSWORD_URL = () =>
   `${API_DOMAIN}/auth/account-find/password`;
+
+// description: 유저 모듈 URL //
+const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
 
 // description: 관리자 페이지 URL //
 const GET_ADMIN_ADVERTISING_BOARD_LIST_URL = (adminId: string) =>
@@ -250,7 +254,19 @@ export const uploadFileRequest = async (data: FormData) => {
     return imageUrl;
   })
   .catch((error) => null);
+}
 
+// description: 유저 모듈 //
+export const getSignInUserRequest = async (token: string) => {
+  const result = await axios.get(GET_SIGN_IN_USER_URL(), { headers: { Authorization: `Bearer ${token}` }})
+    .then(response => {
+      const responseBody: GetSignInUserResponseDto = response.data;
+      return responseBody;
+    })
+    .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
   return result;
 }
 
@@ -835,5 +851,3 @@ export const deleteAdvertisingShortReviewRequest = async (
   });
   return result;
 };
-
-
