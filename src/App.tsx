@@ -8,6 +8,10 @@ import {
   NOTICE_BOARD_PATH,
   REVIEW_BOARD_PATH,
 
+  SEARCH_PATH,
+
+  SEARCH_WORD_PATH_VARIABLE,
+
   UPDATE_PATH,
   WRITE_PATH,
 } from "constant";
@@ -25,6 +29,7 @@ import NoticeBoardWrite from "views/NoticeBoard/Write";
 import ReviewBoardList from "views/ReviewBoard/Main";
 import "./App.css";
 import AdvertisingBoardMain from "views/AdvertisingBoard/Main";
+import Search from "views/Search/Main";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -50,6 +55,7 @@ function App() {
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
           <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
+          <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
 
 
           <Route path={NOTICE_BOARD_PATH}>

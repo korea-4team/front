@@ -3,7 +3,7 @@ import './style.css';
 import { useUserStore } from 'stores';
 import { useCookies } from 'react-cookie';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { AUTH_PATH, MAIN_PATH, MY_PAGE_PATH, SEARCH_PATH } from 'constant';
+import { ADVERTISING_BOARD_PATH, AUTH_PATH, EVENT_BOARD_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_PATH, REVIEW_BOARD_PATH, SEARCH_PATH } from 'constant';
 
 //          component          //
 // description: Header 레이아웃 //
@@ -72,6 +72,22 @@ export default function Header() {
     searchButtonRef.current.click();
   }
 
+  const onAdvertisingButtonClickHandler = () => {
+    navigator(ADVERTISING_BOARD_PATH);
+  }
+
+  const onReviewBoardButtonClickHandler = () => {
+    navigator(REVIEW_BOARD_PATH);
+  }
+
+  const onEventBoardButtonClickHandler = () => {
+    navigator(EVENT_BOARD_PATH);
+  }
+
+  const onNoticeBoardButtonClickHandler = () => {
+    navigator(NOTICE_BOARD_PATH);
+  }
+
   //          effect          //
   // description: 로그인 유저 정보가 바뀔 때 마다 실행 //
   useEffect(() => {
@@ -96,6 +112,14 @@ export default function Header() {
             !isAuth && ( isMyPage ? (<div className="button" onClick={onSignOutButtonClickHandler}>로그아웃</div>) : login ? (<div className="button" onClick={onMyPageButtonClickHandler}>마이페이지</div>) :
             <div className="button" onClick={onSignInButtonClickHandler}>로그인</div>)
           }
+        </div>
+      </div>
+      <div className="header-middle">
+        <div className="header-category">
+          <div className="category-button" onClick={onAdvertisingButtonClickHandler}>광고</div>
+          <div className="category-button" onClick={onReviewBoardButtonClickHandler}>기행기</div>
+          <div className="category-button" onClick={onEventBoardButtonClickHandler}>이벤트</div>
+          <div className="category-button" onClick={onNoticeBoardButtonClickHandler}>공지사항</div>
         </div>
       </div>
       <div className="header-bottom">
