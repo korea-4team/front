@@ -1,5 +1,5 @@
 export default interface PatchNoticeBoardRequestDto {
-	titls : string;
+	title : string;
 	contents : string;
 	imageUrl : string | null;
 }

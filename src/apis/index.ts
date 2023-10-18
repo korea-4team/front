@@ -49,7 +49,6 @@ import {
 import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
 import GetUserReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-user-review-board-list.response.dto";
 import { GetSignInUserResponseDto } from "interfaces/response/user";
-import { async } from "q";
 
 const API_DOMAIN = "http://localhost:4040";
 
@@ -244,6 +243,20 @@ export const signInRequest = async (requestBody: SignInRequestDto) => {
   return result;
 };
 
+// description : 파일 업로드 //
+export const uploadFileRequest = async (data: FormData) => {
+  const result = await axios
+    .post(UPLOAD_FILE(), data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    .then((response) => {
+      const imageUrl: string = response.data;
+      return imageUrl;
+    })
+    .catch((error) => null);
+    
+  return result;
+};
 export const signUpRequest = async (requestBody: SignUpRequestDto) => {
   const result = await axios
     .post(SIGN_UP_URL(), requestBody)
@@ -262,17 +275,20 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
 
 // description: 유저 모듈 //
 export const getSignInUserRequest = async (token: string) => {
-  const result = await axios.get(GET_SIGN_IN_USER_URL(), { headers: { Authorization: `Bearer ${token}` }})
-    .then(response => {
+  const result = await axios
+    .get(GET_SIGN_IN_USER_URL(), {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
       const responseBody: GetSignInUserResponseDto = response.data;
       return responseBody;
     })
-    .catch(error => {
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
   return result;
-}
+};
 
 // description: 기행기 게시판 //
 export const getCurrentReviewBoardListRequest = async (
@@ -645,21 +661,23 @@ export const getCurrentAdvertisingBoardListRequest = async (
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
-    return result;
+  return result;
 };
 
-export const getAdvertisingBoardLocationListRequest = async(location: string) => {
+export const getAdvertisingBoardLocationListRequest = async (
+  location: string
+) => {
   const result = await axios
     .get(GET_ADVERTISING_BOARD_LOCATION_LIST_URL(location))
     .then((response) => {
       const responseBody: GetAdvertisingLocationListResponseDto = response.data;
       return responseBody;
     })
-    .catch((error) =>{
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
-    return result;
+  return result;
 };
 
 export const getAdvertisingBoardBusinessTypeListRequest = async (
@@ -668,35 +686,43 @@ export const getAdvertisingBoardBusinessTypeListRequest = async (
   const result = await axios
     .get(GET_ADVERTISING_BOARD_BUSINESSTYPE_LIST_URL(businessType))
     .then((response) => {
-      const responseBody: GetAdvertisingBoardBusinessTypeResponseDto = response.data;
+      const responseBody: GetAdvertisingBoardBusinessTypeResponseDto =
+        response.data;
       return responseBody;
     })
     .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
-    return result;
+  return result;
 };
-
 
 export const getAdvertisingBoardLocationBusinessTypeListRequest = async (
-  location : string,
-  businessType : string
+  location: string,
+  businessType: string
 ) => {
   const result = await axios
-    .get(GET_ADVERTISING_BOARD_LOCATION_BUSINESSTYPE_LIST_URL(location,businessType))
+    .get(
+      GET_ADVERTISING_BOARD_LOCATION_BUSINESSTYPE_LIST_URL(
+        location,
+        businessType
+      )
+    )
     .then((response) => {
-      const responseBody: GetAdvertisingBoardBusinessTypeLocationResponseDto = response.data;
+      const responseBody: GetAdvertisingBoardBusinessTypeLocationResponseDto =
+        response.data;
       return responseBody;
     })
     .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
-    return result;
+  return result;
 };
 
-export const getAdvertisingBoardRequest = async (boardNumber: number | string) => {
+export const getAdvertisingBoardRequest = async (
+  boardNumber: number | string
+) => {
   const result = await axios
     .get(GET_ADVERTISING_BOARD_URL(boardNumber))
     .then((response) => {
@@ -707,9 +733,8 @@ export const getAdvertisingBoardRequest = async (boardNumber: number | string) =
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
-    return result;
+  return result;
 };
-
 
 export const getAdvertisingBoardShortReviewListRequest = async (
   boardNumber: number | string
@@ -724,16 +749,16 @@ export const getAdvertisingBoardShortReviewListRequest = async (
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
-    return result;
+  return result;
 };
 
 export const postAdvertisingBoardRequest = async (
   data: PostAdvertisingBoardDto,
-  token : string
+  token: string
 ) => {
-  const result = await axios 
+  const result = await axios
     .post(POST_ADVERTISING_BOARD_URL(), data, {
-      headers: {Authorization: `Bearer ${token}`}
+      headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
       const responseBody: PostAdvertisingBoardResponseDto = response.data;
@@ -745,18 +770,17 @@ export const postAdvertisingBoardRequest = async (
       const { code } = responseBody;
       return code;
     });
-    return result;
+  return result;
 };
 
-
 export const postAdvertisingBoardShortReviewRequest = async (
-  boardNumber : number | string,
+  boardNumber: number | string,
   data: PostShortReviewResponseDto,
   token: string
 ) => {
   const result = await axios
-    .post(POST_ADVERTISING_BOARD_SHORT_REVIEW_URL(boardNumber),data, {
-      headers: {Authorization: `Bearer ${token}`}
+    .post(POST_ADVERTISING_BOARD_SHORT_REVIEW_URL(boardNumber), data, {
+      headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
       const responseBody: PostShortReviewResponseDto = response.data;
@@ -768,7 +792,7 @@ export const postAdvertisingBoardShortReviewRequest = async (
       const { code } = responseBody;
       return code;
     });
-    return result;
+  return result;
 };
 
 export const putAdvertisingBoardFavoriteRequest = async (
@@ -776,10 +800,13 @@ export const putAdvertisingBoardFavoriteRequest = async (
   token: any
 ) => {
   const result = await axios
-    .put(PUT_ADVERTISING_BOARD_FAVORITE_URL(boardNumber),{},
-    { headers: { Authorization: `Bearer ${token}`}})
+    .put(
+      PUT_ADVERTISING_BOARD_FAVORITE_URL(boardNumber),
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
     .then((response) => {
-      const  responseBody: PutAdvertisingFavoriteListResponseDto = response.data;
+      const responseBody: PutAdvertisingFavoriteListResponseDto = response.data;
       const { code } = responseBody;
       return code;
     })
@@ -788,9 +815,8 @@ export const putAdvertisingBoardFavoriteRequest = async (
       const { code } = responseBody;
       return code;
     });
-    return result;
-  };
-
+  return result;
+};
 
 export const patchAdvertisingBoardRequest = async (
   boardNumber: number | string,
@@ -798,11 +824,11 @@ export const patchAdvertisingBoardRequest = async (
   token: string
 ) => {
   const result = await axios
-    .patch(PATCH_ADVERTISING_BOARD_URL(boardNumber),data,{
-      headers: { Authorization: `Bearer ${token}`}
+    .patch(PATCH_ADVERTISING_BOARD_URL(boardNumber), data, {
+      headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
-      const responseBody : PatchAdvertisingBoardResponseDto = response.data;
+      const responseBody: PatchAdvertisingBoardResponseDto = response.data;
       const { code } = responseBody;
       return code;
     })
@@ -811,7 +837,7 @@ export const patchAdvertisingBoardRequest = async (
       const { code } = responseBody;
       return code;
     });
-    return result;
+  return result;
 };
 
 export const deleteAdvertisingBoardRequest = async (
@@ -819,8 +845,8 @@ export const deleteAdvertisingBoardRequest = async (
   token: string
 ) => {
   const result = await axios
-    .delete(DELETE_ADVERTISING_BOARD_URL(boardNumber),{
-      headers: {Authorization: `Bearer${token}`}
+    .delete(DELETE_ADVERTISING_BOARD_URL(boardNumber), {
+      headers: { Authorization: `Bearer${token}` },
     })
     .then((response) => {
       const responseBody: DeleteAdvertisingBoardResponseDto = response.data;
@@ -832,7 +858,7 @@ export const deleteAdvertisingBoardRequest = async (
       const { code } = responseBody;
       return code;
     });
-    return result;
+  return result;
 };
 
 export const deleteAdvertisingShortReviewRequest = async (
@@ -840,20 +866,19 @@ export const deleteAdvertisingShortReviewRequest = async (
   token: string
 ) => {
   const result = await axios
-  .delete(DELETE_ADVERTISING_BOARD_SHORT_REVIEW_URL(boardNumber),{
-    headers: { Authorization: `Bearer${token}`}
-  })
-  .then((response) => {
-    const responseBody : DeleteShortCommentAdvertisingBoardResponseDto = response.data;
-    const { code } = responseBody;
-    return code;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    const { code } = responseBody;
-    return code;
-  });
+    .delete(DELETE_ADVERTISING_BOARD_SHORT_REVIEW_URL(boardNumber), {
+      headers: { Authorization: `Bearer${token}` },
+    })
+    .then((response) => {
+      const responseBody: DeleteShortCommentAdvertisingBoardResponseDto =
+        response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
   return result;
 };
-
-
