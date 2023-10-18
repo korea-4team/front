@@ -5,8 +5,8 @@
 
 .review-board-write-button {
   display: flex;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -15,15 +15,14 @@
   width: 95px;
   height: 30px;
   border-radius: 46px;
-  background-color: #fff;
-  color: #000;
+  background-color: #000;
+  color: #fff;
   border: 1px solid #2f2f2f;
 }
 
 .review-board-write-button:hover {
   cursor: pointer;
-  background-color: #000;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .review-board-location-container {
@@ -99,7 +98,7 @@
   margin-bottom: 15px;
 }
 
-.board-number {
+.review-board-number {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,7 +106,7 @@
   height: 100%;
 }
 
-.board-title{
+.review-board-title{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,7 +114,7 @@
   height: 100%;
 }
 
-.board-writer {
+.review-board-writer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,7 +122,7 @@
   height: 100%;
 }
 
-.board-write-datetime {
+.review-board-write-datetime {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,7 +130,7 @@
   height: 100%;
 }
 
-.board-favorite-count {
+.review-board-favorite-count {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,7 +138,7 @@
   height: 100%;
 }
 
-.board-view-count {
+.review-board-view-count {
   display: flex;
   justify-content: center;
   align-items: center;

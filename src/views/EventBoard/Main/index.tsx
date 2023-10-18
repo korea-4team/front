@@ -3,11 +3,12 @@ import './style.css';
 import { useEffect, useState } from 'react';
 import { EventBoardListResponseDto, GetCurrentEventBoardResponseDto } from 'interfaces/response/EventBoard';
 import ResponseDto from 'interfaces/response/response.dto';
-import { COUNT_BY_PAGE } from 'constant';
+import { COUNT_BY_PAGE, EVENT_BOARD_WRITE_PATH } from 'constant';
 import { getCurrentEventBoardListRequest } from 'apis';
 import EventBoardListItem from 'components/EventBoardListItem';
 import Pagination from 'components/Pagination';
 import { useNavigate } from 'react-router-dom';
+import { useUserStore } from 'stores';
 
 export default function EventBoardMain() {
 
@@ -18,6 +19,7 @@ export default function EventBoardMain() {
     const [boardCount, setBoardCount] = useState<number>(0);
     const [eventBoardList, setEventBoardList] = useState<EventBoardListResponseDto[]>([]);
     const [pageEventBoardList, setPageEventBoardList] = useState<EventBoardListResponseDto[]>([]);
+    const {user, setUser} = useUserStore();
 
 
     //          function          //
@@ -46,7 +48,7 @@ export default function EventBoardMain() {
 
     //          event handler          //
     const onEventBoardWriteButtonClickHandler = () => {
-
+      navigator(EVENT_BOARD_WRITE_PATH());
     }
     
 
@@ -58,6 +60,7 @@ export default function EventBoardMain() {
     //          render          //
     return (
       <div className="event-board-list-item-box">
+        {user?.role === 'admin' && <div className="event-board-write-button">글쓰기</div>}
         {boardCount ?
         (
           <div className="event-board-list-item">

@@ -100,7 +100,7 @@ export default function NoticeBoardDetail() {
 
     getNoticeBoardRequest(boardNumber).then(getBoardResponseHandler);
 
-    if (user && user.role === "admin") setViewMore(false);
+    if (user && user.role !== "admin") setViewMore(false);
     
   }, [boardNumber]);
 

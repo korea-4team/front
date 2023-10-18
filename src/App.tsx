@@ -8,6 +8,10 @@ import {
   NOTICE_BOARD_PATH,
   REVIEW_BOARD_PATH,
 
+  SEARCH_PATH,
+
+  SEARCH_WORD_PATH_VARIABLE,
+
   UPDATE_PATH,
   WRITE_PATH,
 } from "constant";
@@ -18,27 +22,47 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Authentication from "views/Authentication";
 import EventBoard from "views/EventBoard/Main";
 import Main from "views/Main";
+import NoticeBoardMain from "views/NoticeBoard/Main";
 import NoticeBoardDetail from "views/NoticeBoard/Detail";
-import NoticeBoard from "views/NoticeBoard/Main";
+import NoticeBoardUpdate from "views/NoticeBoard/Update";
+import NoticeBoardWrite from "views/NoticeBoard/Write";
 import ReviewBoardList from "views/ReviewBoard/Main";
 import "./App.css";
 import AdvertisingBoardMain from "views/AdvertisingBoard/Main";
-import NoticeBoardUpdate from "views/NoticeBoard/Update";
-import NoticeBoardWrite from "views/NoticeBoard/Write";
+import Search from "views/Search/Main";
+import { useUserStore } from "stores";
+import { getSignInUserRequest } from "apis";
+import GetUserResponseDto from "interfaces/response/admin/get-user.response.dto";
+import ResponseDto from "interfaces/response/response.dto";
+import { GetSignInUserResponseDto } from "interfaces/response/user";
 
 //          component: 메인 컴포넌트          //
 function App() {
   //          state: path 상태          //
   const { pathname } = useLocation();
+  //          state: user 상태          //
+  const { user, setUser } = useUserStore();
   //          state: cookie 상태          //
   const [cookies, setCookie] = useCookies();
+
+  //          function: get sign in user response 처리 함수          //
+  const getSignInUserResponse = (responseBody: GetSignInUserResponseDto | ResponseDto) => {
+    const { code } = responseBody;
+    if (code === 'NU') alert('존재하지 않는 유저입니다.');
+    if (code === 'DE') alert('데이터베이스 오류입니다.');
+    if (code !== 'SU') return;
+
+    setUser({ ...responseBody as GetUserResponseDto });
+  }
 
   //          effect: path가 변경될 때 마다 실행될 함수          //
   useEffect(() => {
     const accessToken = cookies.accessToken;
-    // TODO: accessToken이 존재하지 않으면 user 정보 초기화
-    if (!accessToken) return;
-    // TODO: accessToken이 존재하면서 user가 존재하지 않으면 user 정보 저장
+    if (!accessToken) {
+      setUser(null);
+      return;
+    }
+    getSignInUserRequest(accessToken).then(getSignInUserResponse);
   }, [pathname]);
 
   //          render: 메인 컴포넌트 렌더링          //
@@ -50,10 +74,11 @@ function App() {
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
           <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
+          <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
 
 
           <Route path={NOTICE_BOARD_PATH}>
-            <Route path={NOTICE_BOARD_PATH} element={<NoticeBoard />} />
+            <Route path={NOTICE_BOARD_PATH} element={<NoticeBoardMain />} />
             <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<NoticeBoardDetail />} />
             <Route path={WRITE_PATH} element={ <NoticeBoardWrite /> }/>
             <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={ <NoticeBoardUpdate /> }/>
