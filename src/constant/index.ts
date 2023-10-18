@@ -42,3 +42,5 @@ export const NOTICE_BOARD_DEATIL_PATH = (boardNumber: number | string) => `${NOT
 
 export const MY_PAGE_PATH = (email: string) => `/my-page/${email}`;
 export const SEARCH_PATH = (searchWord: string) => `/search/${searchWord}`;
+export const ADVERTISING_BOARD_SEARCH_LIST_PATH = (searchWord: string) => `/search/more/${searchWord}`;
+export const REVIEW_BOARD_SEARCH_LIST_PATH = (searchWord: string) => `/search/more/${searchWord}`;

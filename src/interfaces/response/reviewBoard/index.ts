@@ -12,6 +12,7 @@ import PutReviewBoardFavoriteResponseDto from "./put-review-board-favorite.respo
 import DeleteReviewBoardResponseDto from "./delete-review-board.response.dto"
 import DeleteCommentResponseDto from "./delete-comment.response.dto"
 import ReviewBoardListResponseDto from "./review-board-list.response.dto"
+import GetSearchReviewBoardListResponseDto from "./get-search-review-board-list.response.dto"
 
 export type {
   ReviewBoardListResponseDto,
@@ -27,5 +28,6 @@ export type {
   PatchReviewBoardResponseDto,
   PostCommentResponseDto,
   PostReviewBoardResponseDto,
-  PutReviewBoardFavoriteResponseDto
+  PutReviewBoardFavoriteResponseDto,
+  GetSearchReviewBoardListResponseDto
 }

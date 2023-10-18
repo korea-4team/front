@@ -9,6 +9,7 @@ import './style.css';
 import Pagination from "components/Pagination";
 import ReviewBoardListItem from "components/ReviewBoardListItem";
 import { useNavigate, useParams } from "react-router-dom";
+import { useUserStore } from "stores";
 
 
 //          component          //
@@ -25,6 +26,7 @@ export default function ReviewBoardList() {
     const [reviewBoardList, setReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
     // description: 현재 페이지에서 보여줄 게시물 리스트 상태 //
     const [pageReviewBoardList, setPageReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
+    const { user , setUser} = useUserStore();
 
     //          function          //
     const navigator = useNavigate();
@@ -141,15 +143,15 @@ export default function ReviewBoardList() {
             <div className="review-board-businesstype-list" onClick={() => onBusinessTypeClickHandler('건축')}>건축</div>
             <div className="review-board-businesstype-list" onClick={() => onBusinessTypeClickHandler('기타')}>기타</div>
           </div>
-          <div className="review-board-write-button" onClick={onReviewBoardWriteButtonClickHandler}>글쓰기</div>
+          {user != null && <div className="review-board-write-button" onClick={onReviewBoardWriteButtonClickHandler}>글쓰기</div>}
           {boardCount ?
           (<div className="review-board-list-top">
-              <div className="board-number">번호</div>
-              <div className="board-title">제목</div>
-              <div className="board-writer">작성자</div>
-              <div className="board-write-datetime">작성일자</div>
-              <div className="board-favorite-count">추천</div>
-              <div className="board-view-count">조회</div>
+              <div className="review-board-number">번호</div>
+              <div className="review-board-title">제목</div>
+              <div className="review-board-writer">작성자</div>
+              <div className="review-board-write-datetime">작성일자</div>
+              <div className="review-board-favorite-count">추천</div>
+              <div className="review-board-view-count">조회</div>
             </div>) : (<></>)}
           {boardCount ?
           (<div className="review-board-list-bottom">

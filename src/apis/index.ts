@@ -1,4 +1,5 @@
 import axios from "axios";
+import { error } from "console";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
 import { SignInRequestDto, SignUpRequestDto } from "interfaces/request/auth";
@@ -19,6 +20,7 @@ import GetAdvertisingBoardBusinessTypeLocationResponseDto from "interfaces/respo
 import GetAdvertisingLocationListResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-location-list.response.dto";
 import GetAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-advertising-board.response.dto";
 import GetCurrentAdvertisingBoardResponeDto from "interfaces/response/advertisingBoard/get-current-advertising-board-response.dto";
+import GetSearchAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-search-advertising-board.response.dto";
 import GetShortReviewListResponseDto from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
 import PatchAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/patch-advertising-board.response.dto";
 import PostAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/post-advertising-board.response.dto";
@@ -41,6 +43,7 @@ import {
   GetReviewBoardLocationBusinessTypeListResponseDto,
   GetReviewBoardLocationListResponseDto,
   GetReviewBoardResponseDto,
+  GetSearchReviewBoardListResponseDto,
   PatchReviewBoardResponseDto,
   PostCommentResponseDto,
   PostReviewBoardResponseDto,
@@ -48,6 +51,7 @@ import {
 } from "interfaces/response/reviewBoard";
 import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
 import GetUserReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-user-review-board-list.response.dto";
+import GetSearchResponseDto from "interfaces/response/search/get-search.response.dto";
 import { GetSignInUserResponseDto } from "interfaces/response/user";
 
 const API_DOMAIN = "http://localhost:4040";
@@ -648,6 +652,7 @@ export const deleteNoticeBoardRequest = async (
   return result;
 };
 
+// description: 광고게시판 //
 export const getCurrentAdvertisingBoardListRequest = async (
   section: number | string
 ) => {
@@ -860,7 +865,6 @@ export const deleteAdvertisingBoardRequest = async (
     });
   return result;
 };
-
 export const deleteAdvertisingShortReviewRequest = async (
   boardNumber: number | string,
   token: string
@@ -882,3 +886,44 @@ export const deleteAdvertisingShortReviewRequest = async (
     });
   return result;
 };
+
+
+// description: 검색게시판 //
+export const getSearchListRequest = async (searchWord: string, location?: string) => {
+  const result = await axios.get(GET_SEARCH_LIST_URL(searchWord, location))
+  .then((response) => {
+    const responseBody: GetSearchResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+export const getSearchReviewBoardListRequest = async (searchWord: string, section: number | string, location?: string) => {
+  const result = await axios.get(GET_SEARCH_REVIEW_BOARD_LIST_URL(searchWord, section, location))
+  .then((response) => {
+    const responseBody: GetSearchReviewBoardListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
+export const getSearchAdvertisingBoardListRequest = async (searchWord: string, section: number | string, location?: string) => {
+  const result = await axios.get(GET_SEARCH_ADVERTISING_BOARD_LIST_URL(searchWord, section, location))
+  .then((response) => {
+    const responseBody: GetSearchAdvertisingBoardResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}

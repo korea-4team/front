@@ -2,6 +2,7 @@ import { ReviewBoardListResponseDto } from 'interfaces/response/reviewBoard';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { REVIEW_BOARD_DETAIL_PATH } from 'constant';
+import GetSearchResponseDto from 'interfaces/response/search/get-search.response.dto';
 
 interface Props {
   item: ReviewBoardListResponseDto;
