@@ -146,12 +146,12 @@ export default function ReviewBoardList() {
           {user != null && <div className="review-board-write-button" onClick={onReviewBoardWriteButtonClickHandler}>글쓰기</div>}
           {boardCount ?
           (<div className="review-board-list-top">
-              <div className="board-number">번호</div>
-              <div className="board-title">제목</div>
-              <div className="board-writer">작성자</div>
-              <div className="board-write-datetime">작성일자</div>
-              <div className="board-favorite-count">추천</div>
-              <div className="board-view-count">조회</div>
+              <div className="review-board-number">번호</div>
+              <div className="review-board-title">제목</div>
+              <div className="review-board-writer">작성자</div>
+              <div className="review-board-write-datetime">작성일자</div>
+              <div className="review-board-favorite-count">추천</div>
+              <div className="review-board-view-count">조회</div>
             </div>) : (<></>)}
           {boardCount ?
           (<div className="review-board-list-bottom">
