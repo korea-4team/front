@@ -1,7 +1,7 @@
 import axios from "axios";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
-import { SignInRequestDto } from "interfaces/request/auth";
+import { SignInRequestDto, SignUpRequestDto } from "interfaces/request/auth";
 import {
   PatchNoticeBoardRequestDto,
   PostNoticeBoardRequestDto,
@@ -24,7 +24,7 @@ import PatchAdvertisingBoardResponseDto from "interfaces/response/advertisingBoa
 import PostAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/post-advertising-board.response.dto";
 import PostShortReviewResponseDto from "interfaces/response/advertisingBoard/post-short-review.response.dto";
 import PutAdvertisingFavoriteListResponseDto from "interfaces/response/advertisingBoard/put-advertising-favorite-list.response.dto";
-import { SignInResponseDto } from "interfaces/response/auth";
+import { SignInResponseDto, SignUpResponseDto } from "interfaces/response/auth";
 import {
   DeleteNoticeBoardResponseDto,
   GetNoticeBoardListResponseDto,
@@ -243,6 +243,22 @@ export const signInRequest = async (requestBody: SignInRequestDto) => {
     });
   return result;
 };
+
+export const signUpRequest = async (requestBody: SignUpRequestDto) => {
+  const result = await axios
+    .post(SIGN_UP_URL(), requestBody)
+    .then(response => {
+      const responseBody: SignUpResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+  return result;
+}
 
 // description: 유저 모듈 //
 export const getSignInUserRequest = async (token: string) => {

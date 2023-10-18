@@ -5,5 +5,4 @@ export default interface SignUpRequestDto {
   telNumber:string;
   address: string;
   addressDetail?: string | null;
-  role: string;
 }
