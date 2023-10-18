@@ -1,8 +1,12 @@
 .notice-board-list-item {
+  width: 1440px;
+  height: 30px;
+  
   margin-top: 3px;
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   font-size: 18px;
   font-weight: 600;
