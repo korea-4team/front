@@ -90,6 +90,8 @@ function App() {
             <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
             <Route path={REVIEW_BOARD_DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardDetail />} />
             <Route path={WRITE_PATH} element={ <ReviewBoardWrite /> }/>
+          </Route>
+
           <Route path={ADVERTISING_BOARD_PATH}>
             <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
             <Route path={WRITE_PATH} element={<AdvertisingBoardWrite />} />

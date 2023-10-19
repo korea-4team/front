@@ -2,9 +2,10 @@ import { postReviewBoardRequest, uploadFileRequest } from "apis";
 import { MAIN_PATH, REVIEW_BOARD_PATH } from "constant";
 import { PostReviewBoardRequestDto } from "interfaces/request/reviewBoard";
 import { ChangeEvent, useRef, useState } from "react"
-import { Cookies, useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "stores";
+import './style.css';
 
 export default function ReviewBoardWrite() {
 
@@ -52,8 +53,13 @@ export default function ReviewBoardWrite() {
   }
 
   //          event handler          //
+    // description : 제목이 바뀔 시 실행 될 이벤트 //
+    const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      setReviewBoardTitle(event.target.value);
+    }
   // description: 본문 내용이 바뀔시 textarea 높이 변경 이벤트 //
   const onContentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setReviewBoardContents(event.target.value);
     if (!textAreaRef.current) return;
     textAreaRef.current.style.height = 'auto';
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
@@ -102,12 +108,12 @@ export default function ReviewBoardWrite() {
     <div className="review-board-write-wrapper">
       <div className="review-board-write-container">
         <div className="review-board-title-container">
-          <input type="text" className="review-board-write-title-input" placeholder="제목을 작성해 주세요." />
+          <input type="text" className="review-board-write-title-input" placeholder="제목을 작성해 주세요." onChange={onTitleChangeHandler} value={reviewBoardTitle} />
         </div>
       <div className="divider"></div>
       <div className="review-board-write-content-container">
         <div className="review-board-write-content-input-box">
-          <textarea ref={textAreaRef} className="review-board-write-content-textarea" placeholder="본문을 작성해주세요." value={reviewBoardContents}></textarea>
+          <textarea ref={textAreaRef} className="review-board-write-content-textarea" placeholder="본문을 작성해주세요." value={reviewBoardContents} onChange={onContentChangeHandler}></textarea>
         </div>
         <div className="review-board-write-content-button-box">
           <div className="review-board-image-upload-button" onClick={onImageUploadButtonClickHandler}>
@@ -126,8 +132,8 @@ export default function ReviewBoardWrite() {
       )}
       </div>
       <div className="review-board-write-button-box">
-        <div className="reivew-board-write-button"></div>
-        <div className="review-board-back-button"></div>
+        <div className="black-button" onClick={onBackButtonClickHandler}>목록</div>
+        <div className="black-button" onClick={onWriteButtonClickHandler}>작성</div>
       </div>
     </div>
   )
