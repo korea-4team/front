@@ -27,6 +27,8 @@ export default function Header() {
   const [search, setSearch] = useState<string>('');
   // description: more 버튼 상태 //
   const [showMore, setShowMore] = useState<boolean>(false);
+  // description: 지역 상태 //
+  const [location, setLocation] = useState<string>('');
 
   //          function          //
   const isAuth = pathname === AUTH_PATH;
@@ -92,8 +94,9 @@ export default function Header() {
     setShowMore(!showMore);
   }
 
-  const onLocationButtonClickHandler = () => {
-    
+  const onLocationButtonClickHandler = (location: string) => {
+    setLocation(location);
+    setShowMore(false);
   }
 
   //          effect          //
@@ -134,25 +137,25 @@ export default function Header() {
       <div className="header-bottom">
         <div className="header-search-box">
           <div className="location-group">
-            <div className="location-top" onClick={onLocationMoreButtonClickHandler}>{'지역'}</div>
+            <div className="location-top" onClick={onLocationMoreButtonClickHandler}>{location ? location : '지역'}</div>
             {showMore && (
               <div className="location-button-group">
-                <div className="location-button">{'서울'}</div>
-                <div className="location-button">{'대전'}</div>
-                <div className="location-button">{'대구'}</div>
-                <div className="location-button">{'부산'}</div>
-                <div className="location-button">{'인천'}</div>
-                <div className="location-button">{'광주'}</div>
-                <div className="location-button">{'울산'}</div>
-                <div className="location-button">{'제주'}</div>
-                <div className="location-button">{'경기'}</div>
-                <div className="location-button">{'강원'}</div>
-                <div className="location-button">{'충북'}</div>
-                <div className="location-button">{'충남'}</div>
-                <div className="location-button">{'전북'}</div>
-                <div className="location-button">{'전남'}</div>
-                <div className="location-button">{'경북'}</div>
-                <div className="location-button">{'경남'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('서울')}>{'서울'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('대전')}>{'대전'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('대구')}>{'대구'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('부산')}>{'부산'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('인천')}>{'인천'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('광주')}>{'광주'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('울산')}>{'울산'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('제주')}>{'제주'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('경기')}>{'경기'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('강원')}>{'강원'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('충북')}>{'충북'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('충남')}>{'충남'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('전북')}>{'전북'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('전남')}>{'전남'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('경북')}>{'경북'}</div>
+                <div className="location-button" onClick={() => onLocationButtonClickHandler('경남')}>{'경남'}</div>
               </div>
             )}
           </div>
