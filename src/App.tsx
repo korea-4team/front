@@ -1,6 +1,7 @@
 import {
   ADVERTISING_BOARD_PATH,
   ADVERTISING_BOARD_SEARCH_LIST_PATH,
+  ADVERTISING_BOARD_WRITE_PATH,
   AUTH_PATH,
   BOARD_NUMBER_PATH_VARIABLE,
   DETAIL_PATH,
@@ -37,6 +38,7 @@ import GetUserResponseDto from "interfaces/response/admin/get-user.response.dto"
 import ResponseDto from "interfaces/response/response.dto";
 import { GetSignInUserResponseDto } from "interfaces/response/user";
 import AdvertisingBoardSearchList from "views/Search/AdvertisingBoardSearch";
+import AdvertisingBoardWrite from "views/AdvertisingBoard/Write";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -75,11 +77,16 @@ function App() {
           <Route path={MAIN_PATH} element={<Main />} />
           <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
-          <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
+          
           
           <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)}>
             <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
             {/* <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} /> */}
+          </Route>
+
+          <Route path={ADVERTISING_BOARD_PATH}>
+            <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
+            <Route path={WRITE_PATH} element={<AdvertisingBoardWrite />} />
           </Route>
 
 
