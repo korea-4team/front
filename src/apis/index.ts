@@ -2,7 +2,7 @@ import axios from "axios";
 import { error } from "console";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
-import { SignInRequestDto, SignUpRequestDto } from "interfaces/request/auth";
+import { AccountFindEmailRequestDto, AccountFindPasswordRequestDto, SignInRequestDto, SignUpRequestDto } from "interfaces/request/auth";
 import {
   PatchNoticeBoardRequestDto,
   PostNoticeBoardRequestDto,
@@ -26,7 +26,7 @@ import PatchAdvertisingBoardResponseDto from "interfaces/response/advertisingBoa
 import PostAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/post-advertising-board.response.dto";
 import PostShortReviewResponseDto from "interfaces/response/advertisingBoard/post-short-review.response.dto";
 import PutAdvertisingFavoriteListResponseDto from "interfaces/response/advertisingBoard/put-advertising-favorite-list.response.dto";
-import { SignInResponseDto, SignUpResponseDto } from "interfaces/response/auth";
+import { AccountFindEmailResponseDto, AccountFindPasswordResponseDto, SignInResponseDto, SignUpResponseDto } from "interfaces/response/auth";
 import {
   DeleteNoticeBoardResponseDto,
   GetNoticeBoardListResponseDto,
@@ -266,6 +266,36 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
     .post(SIGN_UP_URL(), requestBody)
     .then(response => {
       const responseBody: SignUpResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+  return result;
+}
+
+export const accountFindEmailRequest = async (requestBody: AccountFindEmailRequestDto) => {
+  const result = await axios
+    .post(ACCOUNT_FIND_EMAIL_URL(), requestBody)
+    .then(response => {
+      const responseBody: AccountFindEmailResponseDto = response.data;
+      return responseBody;
+    })
+    .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+}
+
+export const accountFindPasswordRequest = async (requestBody: AccountFindPasswordRequestDto) => {
+  const result = await axios
+    .post(ACCOUNT_FIND_PASSWORD_URL(), requestBody)
+    .then(response => {
+      const responseBody: AccountFindPasswordResponseDto = response.data;
       const { code } = responseBody;
       return code;
     })
