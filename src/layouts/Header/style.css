@@ -79,6 +79,7 @@
 .header-bottom {
     margin-bottom: 30px;
     display: flex;
+    z-index: 1;
 }
 
 .header-search-box {
@@ -123,6 +124,7 @@
     position: absolute;
     top: 40px;
     width: 120px;
+    background-color: #fff;
     color: #000;
     border: 1px solid #000;
 }
