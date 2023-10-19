@@ -1,8 +1,8 @@
 .notice-board-list-item {
   width: 1440px;
   height: 30px;
-  
-  margin-top: 3px;
+
+  padding: 2px 0;
 
   display: flex;
   align-items: center;
@@ -28,6 +28,7 @@
 
 .notice-board-title {
   display: flex;
+  align-items: center;
   justify-content: center;
 
   width: 930px;
