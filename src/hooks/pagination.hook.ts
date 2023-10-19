@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import { getPagination } from 'utils';
+import { useState } from "react";
+import { getPagination } from "utils";
 
 //          hook          //
 // description: 페이지네이션 관련 상태관리 훅 함수 //
 const usePagination = () => {
-
   //          state         //
   // description: 현재 페이지 상태 //
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -25,26 +24,30 @@ const usePagination = () => {
   // description: 페이지 클릭 이벤트 //
   const onPageClickHandler = (page: number) => {
     setCurrentPage(page);
-  }
+  };
   // description: 이전 버튼 클릭 이벤트 //
   const onPreviusClickHandler = () => {
     // description: 한 페이지씩 이동 + 섹션 이동 //
     if (currentPage == 1) return;
     if (currentPage == minPage) setCurrentSection(currentSection - 1);
     setCurrentPage(currentPage - 1);
-  }
+  };
   // description: 다음 버튼 클릭 이벤트 //
   const onNextClickHandler = () => {
     // description: 한 페이지씩 이동 + 섹션 이동 //
     if (currentPage == totalPageCount) return;
     if (currentPage == maxPage) setCurrentSection(currentSection + 1);
     setCurrentPage(currentPage + 1);
-  }
+  };
 
   //          function          //
   // description: 현재 섹션이 변경될 때 호출할 함수 //
   const changeSection = (boardCount: number, countByPage: number) => {
-    const { section, minPage, maxPage, totalPageCount } = getPagination(boardCount, currentSection, countByPage);
+    const { section, minPage, maxPage, totalPageCount } = getPagination(
+      boardCount,
+      currentSection,
+      countByPage
+    );
 
     setTotalSection(section);
     setMinPage(minPage);
@@ -54,10 +57,17 @@ const usePagination = () => {
     const pageList = [];
     for (let page = minPage; page <= maxPage; page++) pageList.push(page);
     setTotalPage(pageList);
-  }
+  };
 
-  return { totalPage, currentPage, currentSection, onPageClickHandler, onPreviusClickHandler, onNextClickHandler, changeSection }
-
-}
+  return {
+    totalPage,
+    currentPage,
+    currentSection,
+    onPageClickHandler,
+    onPreviusClickHandler,
+    onNextClickHandler,
+    changeSection,
+  };
+};
 
 export default usePagination;

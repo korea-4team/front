@@ -105,6 +105,14 @@ export default function NoticeBoardMain() {
       );
     }, [currentSection]);
 
+    useEffect(() => {
+      if (boardCount) changeSection(boardCount, COUNT_BY_PAGE);
+    }, [currentSection]);
+
+    useEffect(() => {
+      getNoticeBoardList(noticeBoardList);
+    }, [currentPage]);
+
     //          render          //
     return (
       <div className="notice-board-list-box">
