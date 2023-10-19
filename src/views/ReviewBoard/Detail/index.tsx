@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router-dom"
 import { useUserStore } from "stores";
+import { dateFormat } from "utils";
 
 export default function ReviewBoardDetail() {
 
@@ -101,8 +102,10 @@ export default function ReviewBoardDetail() {
     return (
       <div className="review-board-detail-container">
         <div className="review-board-detail-title">{reviewBoard?.title}</div>
-        <div className="review-board-detail-writer">
-          <div className="review-board-detail-write-data"></div>
+        <div className="review-board-detail-write-data">
+          <div className="review-board-detail-writer-nickname">{reviewBoard?.writerNickname}</div>
+          <div className="review-board-detail-divider">{'\|'}</div>
+          <div className="review-board-detail-write-date">{dateFormat(reviewBoard?.writeDatetime as string)}</div>
         </div>
         <div className="review-board-detail-contents"></div>
         <div className="review-board-detail-button"></div>

@@ -39,6 +39,7 @@ import ResponseDto from "interfaces/response/response.dto";
 import { GetSignInUserResponseDto } from "interfaces/response/user";
 import AdvertisingBoardSearchList from "views/Search/AdvertisingBoardSearch";
 import ReviewBoardDetail from "views/ReviewBoard/Detail";
+import ReviewBoardWrite from "views/ReviewBoard/Write";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -81,12 +82,13 @@ function App() {
           
           <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)}>
             <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
-            <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} />
+            {/* <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} /> */}
           </Route>
 
           <Route path={REVIEW_BOARD_PATH}>
             <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
             <Route path={REVIEW_BOARD_DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardDetail />} />
+            <Route path={WRITE_PATH} element={ <ReviewBoardWrite /> }/>
           </Route>
 
 
