@@ -25,11 +25,8 @@ export default function NoticeBoardDetail() {
   // description : 게시물 정보 상태 //
   const [board, setBoard] = useState<GetNoticeBoardResponseDto | null>(null);
 
-  // description : more 버튼 출력 상태 //
-  const [viewMore, setViewMore] = useState<boolean>(true);
-
-  // description : more 버튼 클릭 상태 //
-  const [openMore, setOpenMore] = useState<boolean>(false);
+  // description : 수정, 삭제 버튼 출력 상태 //
+  const [adminButton, setAdminButton] = useState<boolean>(true);
 
   //          function          //
   // description : 페이지 이동을 위한 네비게이트 함수 //
@@ -66,10 +63,6 @@ export default function NoticeBoardDetail() {
   };
 
   //          event handler         //
-  // description : more 버튼 클릭 이벤트 //
-  const onMoreButtonClickHandler = () => {
-    setOpenMore(!openMore);
-  };
   // description : 수정 버튼 클릭 이벤트 //
   const onUpdateButtonClickHandler = () => {
     if (!board) return;
@@ -100,8 +93,7 @@ export default function NoticeBoardDetail() {
 
     getNoticeBoardRequest(boardNumber).then(getBoardResponseHandler);
 
-    if (user && user.role !== "admin") setViewMore(false);
-    
+    if (user && user.role !== "admin") setAdminButton(false);
   }, [boardNumber]);
 
   //          render          //
@@ -111,23 +103,9 @@ export default function NoticeBoardDetail() {
         <div className="notice-board-detail-title"> {board?.title} </div>
         <div className="notice-board-detail-data">
           <div className="notice-board-detail-writer">
-            <div className="notice-board-detail-nickname"> {board?.adminNickname} </div>
+            <div className="notice-board-detail-nickname">{board?.adminNickname} </div>
             <div className="board-detail-meta-divider">{"|"}</div>
-            <div className="notice-board-detail-writedatetime"> {dateFormat(board?.writeDatetime as string)} </div>
-          </div>
-          <div className="notice-board-more-buttons">
-            {openMore && (
-              <div className="more-button-group">
-                <div className="update-button" onClick={onUpdateButtonClickHandler}> 수정 </div>
-                <div className="divider"></div>
-                <div className="delete-button" onClick={onDeleteButtonClickHandler}> 삭제 </div>
-              </div>
-            )}
-            {viewMore && (
-              <div className="notice-board-detail-more-button" onClick={onMoreButtonClickHandler}>
-                <div className="more-icon"></div>
-              </div>
-            )}
+            <div className="notice-board-detail-writedatetime"> {dateFormat(board?.writeDatetime as string)}</div>
           </div>
         </div>
       </div>
@@ -138,9 +116,17 @@ export default function NoticeBoardDetail() {
           <img className="notice-board-detail-image" src={board?.imageUrl ? board.imageUrl : ""} />
         </div>
       </div>
-      <div className="back-button">
-        <div className="black-button" onClick={onBackButtonClickHandler}> 목록 </div>
-      </div>
+      { adminButton === true ? (
+        <div className="back-button">
+          <div className="black-button" onClick={onUpdateButtonClickHandler}> 수정 </div>
+          <div className="black-button" onClick={onDeleteButtonClickHandler}> 삭제 </div>
+          <div className="black-button" onClick={onBackButtonClickHandler}> 목록 </div>
+        </div>
+      ) : (
+        <div className="back-button">
+          <div className="black-button" onClick={onBackButtonClickHandler}>목록</div>
+        </div>)
+      }
     </div>
   );
 }

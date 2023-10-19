@@ -21,6 +21,7 @@ export default function AdvertisingBoardWrite(){
   const[advertisingBoardContent, setAdvertisingBoardContent] = useState<string>('');
   const[advertisingBoardImage, setAdvertisingBoardImage] = useState<File | null>();
   const[advertisingBoardLocation, setAdvertisingBoardLocation] = useState<string>('');
+  const[showMore, setShowMore] = useState<boolean>(false);
 
 
 
@@ -72,6 +73,10 @@ export default function AdvertisingBoardWrite(){
     fileInputRef.current.click();
   }
 
+  const onLocationButtonClickHandler = () => {
+    setShowMore(!showMore);
+  }
+
 
   const onImageCloseButtonClickHandler = () => {
     if (!fileInputRef.current) return;
@@ -110,7 +115,7 @@ export default function AdvertisingBoardWrite(){
         <div className='divider'></div>
         <div className='advertising-board-write-content-container'>
           <div className='advertising-board-write-content-input-box'>
-            <textarea ref ={textAreaRef} className='advertising-board-write-content-textarea' placeholder='내용을 작성해주세요' onChange={onContenthandler} value={advertisingBoardContent}></textarea>
+            <textarea ref ={textAreaRef} className='advertising-board-write-content-textarea' placeholder='작성해주세요' onChange={onContenthandler} value={advertisingBoardContent}></textarea>
         </div>
         <div className='advertising-board-write-content-button-box'>
           <div className='image-upload-icon' onClick={onImageUploadButtonClickHandler}></div>

@@ -15,5 +15,114 @@
   margin-bottom: 20px;
 }
 
+.advertising-board-writer-title-input{
+  width: 100%;
+
+  border: none;
+  outline: none;
+  background: none;
+
+  display: block;
+
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.advertising-board-write-content-container {
+  margin-top: 20px;
+  display: flex;
+}
+
+.advertising-board-write-content-input-box{
+  float: 1;
+}
+
+.advertising-board-write-content-textarea{
+  display: block;
+  width: 100%;
+
+  border: none;
+  outline: none;
+  background: none;
+  resize: none;
+
+  overflow: hidden;
+
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.advertising-board-write-content-button-box {
+  margin-left: 15px;
+}
+
+.image-upload-button {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+}
+
+.image-upload-button:hover{
+  background-color: cyan;
+}
+
+.image-upload-icon{
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/img_box.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.advertising-board-write-image-box{
+  margin-top: 15px;
+
+  position: relative;
+}
+
+.advertising-board-write-image{
+  display: block;
+
+  width: 100%;
+}
+
+
+.advertising-board-write-image-delete-button {
+  width: 24px;
+  height: 24px;
+
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.advertising-board-write-image-delete-button:hover{
+  background-color: black;
+}
+
+.image-close-button{
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/close_square.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.back-button{
+  margin: 10px 0px 20px;
+}
 
 

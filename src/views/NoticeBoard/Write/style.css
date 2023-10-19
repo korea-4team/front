@@ -1,7 +1,8 @@
 .notice-board-write-item-list {
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-
-	padding: 0 153px;
+    width: 1440px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .notice-board-write-item {
