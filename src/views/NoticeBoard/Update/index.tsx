@@ -71,6 +71,7 @@ export default function NoticeBoardUpdate() {
       navigator(NOTICE_BOARD_PATH);
       return;
     }
+    
     const { title, contents, imageUrl } = responseBody as GetNoticeBoardResponseDto;
     setNoticeBoardTitle(title);
     setNoticeBoardContent(contents);
