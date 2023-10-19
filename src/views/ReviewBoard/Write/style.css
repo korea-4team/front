@@ -1,0 +1,128 @@
+.review-board-write-wrapper {
+  width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-board-write-container {
+  padding: 100px 24px;
+	background-color: #ffffff;
+}
+
+.review-board-title-container {
+  margin-bottom: 20px;
+}
+
+.review-board-write-title-input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+  background: none;
+
+  display: block;
+
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.review-board-write-content-container {
+  margin-top: 20px;
+  display: flex;
+}
+
+.review-board-write-content-input-box {
+  flex: 1;
+}
+
+.review-board-write-content-textarea {
+  display: block;
+
+  width: 100%;
+
+  border: none;
+  outline: none;
+  background: none;
+  resize: none;
+
+  overflow: hidden;
+
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.review-board-write-content-button-box {
+  margin-left: 15px;
+}
+
+.review-board-image-upload-button {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+}
+
+.review-board-image-upload-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.review-board-image-upload-iocon {
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/img_box.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.review-board-write-image-container {
+  margin-top: 15px;
+
+  position: relative;
+}
+
+.review-board-write-image {
+  display: block;
+
+  width: 100%;
+}
+
+.review-board-write-image-delete-button {
+  width: 24px;
+  height: 24px;
+
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.review-board-write-image-delete-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.review-board-image-close-icon {
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/close_square.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.review-board-write-button-box {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  margin-bottom: 30px;
+}

@@ -8,6 +8,7 @@ import {
   EVENT_BOARD_PATH,
   MAIN_PATH,
   NOTICE_BOARD_PATH,
+  REVIEW_BOARD_DETAIL_PATH,
   REVIEW_BOARD_PATH,
 
   SEARCH_PATH,
@@ -37,7 +38,8 @@ import { getSignInUserRequest } from "apis";
 import GetUserResponseDto from "interfaces/response/admin/get-user.response.dto";
 import ResponseDto from "interfaces/response/response.dto";
 import { GetSignInUserResponseDto } from "interfaces/response/user";
-import AdvertisingBoardSearchList from "views/Search/AdvertisingBoardSearch";
+import ReviewBoardDetail from "views/ReviewBoard/Detail";
+import ReviewBoardWrite from "views/ReviewBoard/Write";
 import AdvertisingBoardWrite from "views/AdvertisingBoard/Write";
 
 //          component: 메인 컴포넌트          //
@@ -75,13 +77,19 @@ function App() {
       <Routes>
         <Route element={<Container />}>
           <Route path={MAIN_PATH} element={<Main />} />
-          <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
+          
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
           
           
           <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)}>
             <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
             {/* <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} /> */}
+          </Route>
+
+          <Route path={REVIEW_BOARD_PATH}>
+            <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
+            <Route path={REVIEW_BOARD_DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardDetail />} />
+            <Route path={WRITE_PATH} element={ <ReviewBoardWrite /> }/>
           </Route>
 
           <Route path={ADVERTISING_BOARD_PATH}>
