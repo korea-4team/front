@@ -11,7 +11,71 @@
 }
 
 .review-board-title-container {
+  display: flex;
   margin-bottom: 20px;
+  align-items: center;
+}
+
+.review-board-location-group {
+  display: flex;
+  margin-right: 10px;
+  flex-direction: column;
+  width: 120px;
+  height: 30px;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: default;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  z-index: 1;
+}
+
+.review-board-location-top {
+  width: 120px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(asset/downarrow.png);
+  background-position: 95% 50%;
+  background-size: 13px 13px;
+  background-repeat: no-repeat;
+}
+
+.review-board-location-top:hover {
+  background-color: #ccc;
+  
+}
+
+.review-board-location-button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 30px;
+  width: 120px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.review-board-location-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  width: 100%;
+  height: 20px;
+  border-bottom: 0.5px solid #000;
+}
+
+.review-board-location-button:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 .review-board-write-title-input {
@@ -72,7 +136,7 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.review-board-image-upload-iocon {
+.review-board-image-upload-icon {
   width: 21px;
   height: 21px;
 

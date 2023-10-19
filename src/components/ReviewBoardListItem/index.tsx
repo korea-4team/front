@@ -3,6 +3,7 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { REVIEW_BOARD_DETAIL_PATH } from 'constant';
 import GetSearchResponseDto from 'interfaces/response/search/get-search.response.dto';
+import { dateFormat } from 'utils';
 
 interface Props {
   item: ReviewBoardListResponseDto;
@@ -34,7 +35,7 @@ export default function ReviewBoardListItem({item}: Props) {
           <div className="review-board-comment-count">[{commentCount}]</div>
         </div>
         <div className="review-board-writer">{writerNickname}</div>
-        <div className="review-board-write-datetime">{writeDatetime}</div>
+        <div className="review-board-write-datetime">{dateFormat(writeDatetime)}</div>
         <div className="review-board-favorite-count">{favoriteCount}</div>
         <div className="review-board-view-count">{viewCount}</div>
       </div>

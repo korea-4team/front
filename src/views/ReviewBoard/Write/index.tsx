@@ -24,6 +24,9 @@ export default function ReviewBoardWrite() {
   const [reviewBoardBusinessType, setReviewBoardBusinessType] = useState<string>('');
   // description: 로그인 유저 정보 상태 //
   const { user, setUser } = useUserStore();
+  // description: more 버튼 상태 //
+  const [locationShowMore, setLocationShowMore] = useState<boolean>(false);
+  const [businessTypeShowMore, setBusinessTypeShowMore] = useState<boolean>(false);
 
   //          function          //
   // description : 페이지 이동을 위한 네비게이트 함수 //
@@ -49,7 +52,7 @@ export default function ReviewBoardWrite() {
     if (code !== "SU") return;
 
     if (!user) return;
-    navigator(MAIN_PATH);
+    navigator(REVIEW_BOARD_PATH);
   }
 
   //          event handler          //
@@ -103,11 +106,69 @@ export default function ReviewBoardWrite() {
     postReviewBoardRequest(data, token).then(postReviewBoardResponseHandler);
   }
 
+  const onLocationMoreButtonClickHandler = () => {
+    setLocationShowMore(!locationShowMore);
+  }
+
+  const onBusinessTypeMoreButtonClickHandler = () => {
+    setBusinessTypeShowMore(!businessTypeShowMore);
+  }
+
+  const onLocationButtonClickHandler = (reviewBoardlocation: string) => {
+    setReviewBoardLocation(reviewBoardlocation);
+    setLocationShowMore(false);
+  }
+
+  const onBusinessTypeButtonClickHandler = (reviewBoardBusinessType: string) => {
+    setReviewBoardBusinessType(reviewBoardBusinessType);
+    setBusinessTypeShowMore(false);
+  }
+
   //          render          //
   return (
     <div className="review-board-write-wrapper">
       <div className="review-board-write-container">
         <div className="review-board-title-container">
+          <div className="review-board-location-group">
+            <div className="review-board-location-top" onClick={onLocationMoreButtonClickHandler}>{reviewBoardLocation ? reviewBoardLocation : '지역'}</div>
+            {locationShowMore && (
+              <div className="review-board-location-button-group">
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('서울')}>{'서울'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('대전')}>{'대전'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('대구')}>{'대구'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('부산')}>{'부산'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('인천')}>{'인천'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('광주')}>{'광주'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('울산')}>{'울산'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('제주')}>{'제주'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('경기')}>{'경기'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('강원')}>{'강원'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('충북')}>{'충북'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('충남')}>{'충남'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('전북')}>{'전북'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('전남')}>{'전남'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('경북')}>{'경북'}</div>
+                <div className="review-board-location-button" onClick={() => onLocationButtonClickHandler('경남')}>{'경남'}</div>
+              </div>
+            )}
+          </div>
+          <div className="review-board-location-group">
+            <div className="review-board-location-top" onClick={onBusinessTypeMoreButtonClickHandler}>{reviewBoardBusinessType ? reviewBoardBusinessType : '업종선택'}</div>
+            {businessTypeShowMore && (
+              <div className="review-board-location-button-group">
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('음식점')}>{'음식점'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('음료')}>{'음료'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('문화')}>{'문화'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('의료')}>{'의료'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('미용')}>{'미용'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('편의시설')}>{'편의시설'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('교육')}>{'교육'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('관광')}>{'관광'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('건축')}>{'건축'}</div>
+                <div className="review-board-location-button" onClick={() => onBusinessTypeButtonClickHandler('기타')}>{'기타'}</div>
+              </div>
+            )}
+          </div>
           <input type="text" className="review-board-write-title-input" placeholder="제목을 작성해 주세요." onChange={onTitleChangeHandler} value={reviewBoardTitle} />
         </div>
       <div className="divider"></div>

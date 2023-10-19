@@ -82,19 +82,19 @@
     background-size: 100% 100%;
 }
 
-.notice-board-write-image-box {
+.review-board-write-image-box {
     margin-top: 15px;
 
     position: relative;
 }
 
-.notice-board-write-image {
+.review-board-write-image {
     display: block;
 
     width: 100%;
 }
 
-.notice-board-write-image-delete-button {
+.review-board-write-image-delete-button {
     width: 24px;
     height: 24px;
 
@@ -108,9 +108,10 @@
     align-items: center;
 }
 
-.notice-board-write-image-delete-button :hover {
+.review-board-write-image-delete-button :hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
+
 .image-close-button {
     width: 21px;
     height: 21px;
