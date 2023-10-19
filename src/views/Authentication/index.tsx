@@ -1,12 +1,12 @@
 import InputBox from 'components/InputBox';
 import React, { useState, useRef, ChangeEvent } from 'react';
 import './style.css';
-import { SignInRequestDto, SignUpRequestDto } from 'interfaces/request/auth';
-import { signInRequest, signUpRequest } from 'apis';
+import { AccountFindEmailRequestDto, AccountFindPasswordRequestDto, SignInRequestDto, SignUpRequestDto } from 'interfaces/request/auth';
+import { accountFindEmailRequest, accountFindPasswordRequest, signInRequest, signUpRequest } from 'apis';
 import { MAIN_PATH } from 'constant';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { SignInResponseDto } from 'interfaces/response/auth';
+import { AccountFindEmailResponseDto, AccountFindPasswordResponseDto, SignInResponseDto, SignUpResponseDto } from 'interfaces/response/auth';
 import ResponseDto from 'interfaces/response/response.dto';
 
 //          component: 인증 페이지 컴포넌트          //
@@ -384,6 +384,30 @@ export default function Authentication() {
     //          state: 비밀번호 찾기 전화번호 에러 메세지 상태          //
     const [passwordTelNumberErrorMessage, setPasswordTelNumberErrorMessage] = useState<string>('');
 
+    //          state: 이메일 찾기 결과 메세지 상태          //
+    const [findEmailMessage, setFindEmailMessage] = useState<string>('');
+    //          state: 비밀번호 찾기 결과 메세지 상태          //
+    const [findPasswordMessage, setFindPasswordMessage] = useState<string>('');
+
+    //          function: account find email response 처리 함수          //
+    const accountFindEmailResponse = (responseBody: AccountFindEmailResponseDto | ResponseDto) => {
+      const { code } = responseBody;
+      if (code === 'NU') setFindEmailMessage('일치하는 계정 정보를 찾을 수 없습니다.');
+      if (code === 'DE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU') return;
+
+      const { email } = responseBody as AccountFindEmailResponseDto;
+      setFindEmailMessage(`일치하는 이메일은 [ ${email} ] 입니다.`);
+    }
+    //          function: account find password response 처리 함수          //
+    const accountFindPasswordResponse = (code: string) => {
+      if (code === 'NU') setFindPasswordMessage('일치하는 계정 정보를 찾을 수 없습니다.');
+      if (code === 'DE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU') return;
+
+      setFindPasswordMessage('일치하는 이메일로 임시 비밀번호를 전송했습니다.');
+    }
+
     //          event handler: 이메일 찾기 전화번호 변경 이벤트 처리          //
     const onEmailTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
@@ -408,11 +432,18 @@ export default function Authentication() {
 
     //          event handler: 이메일 찾기 클릭 이벤트 처리          //
     const onFindEmailButtonClickHandler = () => {
-
+      const requestBody: AccountFindEmailRequestDto = {
+        telNumber: emailTelNumber
+      };
+      accountFindEmailRequest(requestBody).then(accountFindEmailResponse);
     }
     //          event handler: 비밀번호 찾기 클릭 이벤트 처리          //
     const onFindFindButtonClickHandler = () => {
-
+      const requestBody: AccountFindPasswordRequestDto = {
+        email: passwordEmail,
+        telNumber: passwordTelNumber
+      };
+      accountFindPasswordRequest(requestBody).then(accountFindPasswordResponse);
     }
     //          event handler: 로그인 링크 클릭 이벤트 처리          //
     const onSignInLinkClickHandler = () => {
@@ -427,6 +458,7 @@ export default function Authentication() {
           <div className='find-email-input-container'>
             <InputBox ref={emailTelNumberRef} label='휴대 전화번호' type='text' placeholder='휴대전화 번호를 입력하세요.' value={emailTelNumber} onChange={onEmailTelNumberChangeHandler} error={isEmailTelNumberError} errorMessage={emailTelNumberErrorMessage} />
           </div>
+          {findEmailMessage !== '' && <div className='find-message'>{findEmailMessage}</div>}
           <div className='find-email-action-container'>
             <div className='large-button' onClick={onFindEmailButtonClickHandler}>{'이메일 찾기'}</div>
           </div>
@@ -435,15 +467,16 @@ export default function Authentication() {
         <div id="find-password-container">
           <div className='find-password-title'>{'비밀번호 찾기'}</div>
           <div className='find-password-input-container'>
-          <InputBox ref={passwordEmailRef} label='이메일' type='text' placeholder='이메일을 입력하세요.' value={passwordEmail} onChange={onPasswordEmailChangeHandler} error={isPasswordEmailError} errorMessage={passwordEmailErrorMessage} />
-          <InputBox ref={passwordTelNumberRef} label='휴대 전화번호' type='text' placeholder='휴대전화 번호를 입력하세요.' value={passwordTelNumber} onChange={onPasswordTelNumberChangeHandler} error={isPasswordTelNumberError} errorMessage={passwordTelNumberErrorMessage} />
+            <InputBox ref={passwordEmailRef} label='이메일' type='text' placeholder='이메일을 입력하세요.' value={passwordEmail} onChange={onPasswordEmailChangeHandler} error={isPasswordEmailError} errorMessage={passwordEmailErrorMessage} />
+            <InputBox ref={passwordTelNumberRef} label='휴대 전화번호' type='text' placeholder='휴대전화 번호를 입력하세요.' value={passwordTelNumber} onChange={onPasswordTelNumberChangeHandler} error={isPasswordTelNumberError} errorMessage={passwordTelNumberErrorMessage} />
           </div>
+          {findPasswordMessage !== '' && <div className='find-message'>{findPasswordMessage}</div>}
           <div className='find-password-action-container'>
-          <div className='large-button' onClick={onFindFindButtonClickHandler}>{'비밀번호 찾기'}</div>
+            <div className='large-button' onClick={onFindFindButtonClickHandler}>{'비밀번호 찾기'}</div>
           </div>
         </div>
         <div className='find-link-box'>
-          <div className='link' onClick={onSignInLinkClickHandler}>{'로그인'}</div>
+          <div className='link' onClick={onSignInLinkClickHandler}>{'로그인 화면으로'}</div>
         </div>
       </div>
     );
