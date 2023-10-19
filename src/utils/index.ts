@@ -1,8 +1,8 @@
 import { PAGE_BY_SECTION } from "constant"
 
-export const getPagination = (boardCount: number, currentSection: number, conutByPage: number) => {
-  const section = Math.ceil(boardCount / (PAGE_BY_SECTION * conutByPage));
-  const totalPageCount = Math.ceil(boardCount / conutByPage);
+export const getPagination = (boardCount: number, currentSection: number, countByPage: number) => {
+  const section = Math.ceil(boardCount / (PAGE_BY_SECTION * countByPage));
+  const totalPageCount = Math.ceil(boardCount / countByPage);
 
   const maxPage = totalPageCount >= currentSection * PAGE_BY_SECTION ? currentSection * PAGE_BY_SECTION : totalPageCount;
   const minPage = 10 * (currentSection - 1) + 1;
