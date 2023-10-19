@@ -1,15 +1,15 @@
-import { getCurrentReviewBoardListRequest, getReviewBoardBusinessTypeListRequest, getReviewBoardLocationListRequest } from "apis";
+import { getReviewBoardBusinessTypeListRequest, getReviewBoardListRequest, getReviewBoardLocationListRequest, getReviewBoardRequest } from "apis";
 import { COUNT_BY_PAGE, REVIEW_BOARD_WRITE_PATH } from "constant";
 import { usePagination } from "hooks"
 import ResponseDto from "interfaces/response/response.dto";
 import { GetReviewBoardBusinessTypeListResponseDto, GetReviewBoardLocationListResponseDto, ReviewBoardListResponseDto } from "interfaces/response/reviewBoard";
-import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
 import { useEffect, useState } from "react";
 import './style.css';
 import Pagination from "components/Pagination";
 import ReviewBoardListItem from "components/ReviewBoardListItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUserStore } from "stores";
+import GetReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-review-board-list.response.dto";
 
 
 //          component          //
@@ -22,7 +22,7 @@ export default function ReviewBoardList() {
     const { totalPage, currentPage, currentSection, onPageClickHandler, onPreviusClickHandler, onNextClickHandler, changeSection } = usePagination();
     // description: 게시물 수를 저장하는 상태 //
     const [boardCount, setBoardCount] = useState<number>(0);
-    // description: 게시물 리스트 상태 //
+    // description: 전체 게시물 리스트 상태 //
     const [reviewBoardList, setReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
     // description: 현재 페이지에서 보여줄 게시물 리스트 상태 //
     const [pageReviewBoardList, setPageReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
@@ -40,13 +40,13 @@ export default function ReviewBoardList() {
     }
 
     // description: 게시물 리스트 불러오기 응답 처리 함수 //
-    const getReviewBoardListResponseHandler = (responseBody: GetCurrentReviewBoardResponseDto | ResponseDto) => {
+    const getReviewBoardListResponseHandler = (responseBody: GetReviewBoardListResponseDto | ResponseDto) => {
       const { code } = responseBody;
       if (code === 'VF') alert('섹션이 잘못되었습니다.');
       if (code === 'DE') alert('데이터베이스 에러입니다.');
       if (code !== 'SU') return;
 
-      const { reviewBoardList } = responseBody as GetCurrentReviewBoardResponseDto;
+      const { reviewBoardList } = responseBody as GetReviewBoardListResponseDto;
       setReviewBoardList(reviewBoardList);
       setBoardCount(reviewBoardList.length);
       getPageReviewBoardList(reviewBoardList);
@@ -98,7 +98,7 @@ export default function ReviewBoardList() {
 
     //          effect          //
     useEffect(() => {
-      getCurrentReviewBoardListRequest(currentSection).then(getReviewBoardListResponseHandler);
+      getReviewBoardListRequest(currentSection).then(getReviewBoardListResponseHandler);
     },[currentSection]);
 
     useEffect(() => {

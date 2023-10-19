@@ -49,7 +49,7 @@ import {
   PostReviewBoardResponseDto,
   PutReviewBoardFavoriteResponseDto,
 } from "interfaces/response/reviewBoard";
-import GetCurrentReviewBoardResponseDto from "interfaces/response/reviewBoard/get-current-review-board.response.dto";
+import GetReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-review-board-list.response.dto";
 import GetUserReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-user-review-board-list.response.dto";
 import GetSearchResponseDto from "interfaces/response/search/get-search.response.dto";
 import { GetSignInUserResponseDto } from "interfaces/response/user";
@@ -325,13 +325,13 @@ export const getSignInUserRequest = async (token: string) => {
 };
 
 // description: 기행기 게시판 //
-export const getCurrentReviewBoardListRequest = async (
+export const getReviewBoardListRequest = async (
   section: number | string
 ) => {
   const result = await axios
     .get(GET_REVIEW_BOARD_LIST_URL(section))
     .then((response) => {
-      const responseBody: GetCurrentReviewBoardResponseDto = response.data;
+      const responseBody: GetReviewBoardListResponseDto = response.data;
       return responseBody;
     })
     .catch((error) => {

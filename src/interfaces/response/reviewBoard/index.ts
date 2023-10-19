@@ -1,5 +1,5 @@
 import GetCommentListResponseDto from "./get-comment-list.response.dto"
-import GetCurrentReviewBoardREsponseDto from "./get-current-review-board.response.dto"
+import GetReviewBoardListResponseDto from "./get-review-board-list.response.dto"
 import GetReviewBoardResponseDto from "./get-review-board.response.dto"
 import GetReviewBoardLocationListResponseDto from "./get-review-board-location-list.response.dto"
 import GetReviewBoardBusinessTypeListResponseDto from "./get-review-board-business-type-list.response.dto"
@@ -19,7 +19,7 @@ export type {
   DeleteCommentResponseDto,
   DeleteReviewBoardResponseDto,
   GetCommentListResponseDto,
-  GetCurrentReviewBoardREsponseDto,
+  GetReviewBoardListResponseDto,
   GetReviewBoardBusinessTypeListResponseDto,
   GetReviewBoardLocationBusinessTypeListResponseDto,
   GetReviewBoardLocationListResponseDto,
