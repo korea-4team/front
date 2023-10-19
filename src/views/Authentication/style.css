@@ -124,6 +124,14 @@
     font-weight: 600;
 }
 
+.find-message {
+    text-align: center;
+
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 16px;
+    font-weight: 500;
+}
+
 .find-email-action-container {
     padding: 0 80px;
     display: flex;
@@ -143,6 +151,12 @@
 
     font-size: 24px;
     font-weight: 600;
+}
+
+.find-password-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .find-password-action-container {
