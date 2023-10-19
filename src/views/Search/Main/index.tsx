@@ -73,7 +73,6 @@ export default function Search() {
             {advertisingBoardList.map((item) => (<AdvertisingBoardListItem item={item} />))}
           </div><div className="search-list-more-button" onClick={() => onAdvertisingBoardMoerButtonClickHandler}>검색결과 더보기</div></>) : (<div className="search-board-nothing">검색결과가 없습니다.</div>)
           }
-          <div className="search-list-more-button" onClick={() => onAdvertisingBoardMoerButtonClickHandler}>검색결과 더보기</div>
         </div>
         <div className="review-board-search-box">
           <div className="search-board-title">기행기 게시판</div>

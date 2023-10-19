@@ -154,7 +154,7 @@ export default function Header() {
                 <div className="location-button">{'경북'}</div>
                 <div className="location-button">{'경남'}</div>
               </div>
-            )}  
+            )}
           </div>
           <input className="header-search-input" placeholder='검색어를 입력해 주세요.' value={search} onChange={onSearchChangeHandler} onKeyDown={onSearchEnterPressHandler}/>
           <div ref={searchButtonRef} className="header-search-icon-box" onClick={onSearchButtonClickHandler}>
