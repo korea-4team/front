@@ -72,8 +72,8 @@ export default function ReviewBoardDetail() {
       deleteReviewBoardRequest(boardNumber, accessToken).then(deleteReviewBoardResponseHandler);
     }
 
-    const onListViewButtonClickHandler = () => {
-
+    const onBackButtonClickHandler = () => {
+      navigator(REVIEW_BOARD_PATH);
     }
 
     //          effect          //
@@ -101,14 +101,23 @@ export default function ReviewBoardDetail() {
     //          render          //
     return (
       <div className="review-board-detail-container">
-        <div className="review-board-detail-title">{reviewBoard?.title}</div>
+        <div className="review-board-detail-data">
+          <div className="review-board-detail-title">{reviewBoard?.title}</div>
+          <div className="review-board-detail-location-businesstype">[{reviewBoard?.location},{reviewBoard?.businessType}]</div>
+        </div>
         <div className="review-board-detail-write-data">
           <div className="review-board-detail-writer-nickname">{reviewBoard?.writerNickname}</div>
           <div className="review-board-detail-divider">{'\|'}</div>
           <div className="review-board-detail-write-date">{dateFormat(reviewBoard?.writeDatetime as string)}</div>
         </div>
-        <div className="review-board-detail-contents"></div>
-        <div className="review-board-detail-button"></div>
+        <div className="divider"></div>
+        <div className="review-board-detail-body">
+          <div className="review-board-detail-contents">{reviewBoard?.contents}</div>
+          <div className="review-board-detatil-image-box">
+            <img className="review-board-detail-image" src={reviewBoard?.imageUrl ? reviewBoard.imageUrl : ''} />
+          </div>
+        </div>
+        <div className="review-board-back-button" onClick={onBackButtonClickHandler}>돌아가기</div>
       </div>
     )
   }

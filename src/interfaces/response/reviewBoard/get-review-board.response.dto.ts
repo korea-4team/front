@@ -8,4 +8,6 @@ export default interface GetReviewBoardResponseDto extends ResponseDto {
   writeDatetime: string;
   writerNickname: string;
   writerEmail: string;
+  location: string;
+  businessType: string;
 }
