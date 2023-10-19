@@ -15,15 +15,20 @@ export default function AdvertisingBoardWrite(){
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const{advertisingBoardTitle, advertisingContent, advertisingBoardImage, advertisingBoardLocation,advertisingBoardBusinessType,setAdvertisingBoardTitle,setAdvertisingBoardContent, setAdvertisingBoardImage, setAdvertisingBoardLocation,setAdvertisingBoardBusinessType,resetAdvertisingBoard} = useAdvertisingWriteStore();
+  const[advertisingBoardBusinessType,setAdvertisingBoardBusinessType] = useState<string>('');
+  const[advertisingBoardTitle, setAdvertisingBoardTitle] = useState<string>('');
+  const[advertisingBoardImageUrl,setAdvertisingBoardImageUrl] = useState<string | null>('');
+  const[advertisingBoardContent, setAdvertisingBoardContent] = useState<string>('');
+  const[advertisingBoardImage, setAdvertisingBoardImage] = useState<File | null>();
+  const[advertisingBoardLocation, setAdvertisingBoardLocation] = useState<string>('');
 
-  const[ advertisingBoardImageUrl,setAdvertisingBoardImageUrl] = useState<string>('');
+
 
   const navigator = useNavigate();
 
 
   const fileUpload = async() => {
-    if (advertisingBoardImage === null) return null;
+    if (!advertisingBoardImage) return;
 
     const data = new FormData();
     data.append("file", advertisingBoardImage);
@@ -35,7 +40,6 @@ export default function AdvertisingBoardWrite(){
     if (code === "DE") alert("데이터베이스 에러입니다.");
     if (code !== "SU") return;
 
-    resetAdvertisingBoard();
   }
 
 
@@ -87,18 +91,50 @@ export default function AdvertisingBoardWrite(){
 
     const data: PostAdvertisingBoardDto = {
       title: advertisingBoardTitle,
-      contents: advertisingContent,
+      contents: advertisingBoardContent,
       location: advertisingBoardLocation,
       businessType: advertisingBoardBusinessType,
-      imageUrl,
+      imageUrl : advertisingBoardImageUrl
     }
     postAdvertisingBoardRequest(data,token).then(postAdvertisingBoardResponseHandler);
+
+    navigator(ADVERTISING_BOARD_PATH);
   }
 
   return(
-    <div></div>
+    <div className='advertising-board-write-item-list'>
+      <div className='advertising-board-write-item'>
+        <div className='advertising-board-write-title-container'>
+          <input className='advertising-board-writer-title-input' type='text' placeholder='제목을 작성해주세요' onChange={onTitleChangeHandler} value={advertisingBoardTitle}/>
+        </div>
+        <div className='divider'></div>
+        <div className='advertising-board-write-content-container'>
+          <div className='advertising-board-write-content-input-box'>
+            <textarea ref ={textAreaRef} className='advertising-board-write-content-textarea' placeholder='내용을 작성해주세요' onChange={onContenthandler} value={advertisingBoardContent}></textarea>
+        </div>
+        <div className='advertising-board-write-content-button-box'>
+          <div className='image-upload-icon' onClick={onImageUploadButtonClickHandler}></div>
+          <input ref={fileInputRef} type='file' accept='image/*' style={{display: 'none'}} onChange={onImageInputChangeHandler}/>
+        </div>
+      </div>
+    </div>
+    {advertisingBoardImageUrl && (
+      <div className='advertising-board-write-image-box'>
+        <div className='advertising-board-write-image'>
+          <img className='advertising-board-write-image' src={advertisingBoardImageUrl} />
+          <div className='advertising-board-write-image-delete-button' onClick={onImageCloseButtonClickHandler}>
+            <div className='image-close-button'></div>       
+        </div>
+      </div>
+    </div>
+    )}
+    <div className='back-button'>
+      <div className='black-button' onClick={onUploadButtonClickHandler}>작성</div>
+      <div className='black-button' onClick={onBackButtonClickHandler}>목록</div>
+    </div>
+    
+    </div>
+    
+    
   )
-
-
-
 }
