@@ -1,5 +1,5 @@
 .notice-board-detail-item-list {
-	width: 1000px;
+	width: 1440px;
 
 	display: flex;
 	flex-direction: column;
@@ -134,7 +134,7 @@
 .notice-board-detail-contents {
 	font-size: 18px;
 	font-weight: 500;
-	line-height: 100%;
+	line-height: 150%;
 }
 
 .notice-board-detail-image-box {

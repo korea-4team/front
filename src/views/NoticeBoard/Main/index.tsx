@@ -29,6 +29,9 @@ export default function NoticeBoardMain() {
     // description : 작성 버튼 노출 상태 //
     const [ writeButton, setWriteButton ] = useState<boolean>(true);
 
+    // description : 전체 게시물 갯수 상태 //
+    const [boardCount, setBoardCount] = useState<number>(0);
+
     //          function          //
     // description : 페이지 이동을 위한 네비게이트 함수 //
     const navigator = useNavigate();
@@ -43,6 +46,8 @@ export default function NoticeBoardMain() {
 
       const { noticeBoardList } = responseBody as GetNoticeBoardListResponseDto;
       setNoticeList(noticeBoardList);
+      setBoardCount(noticeBoardList.length);
+      
     }
 
 
@@ -81,11 +86,16 @@ export default function NoticeBoardMain() {
             <div className='notice-writer'> 작성자 </div>
             <div className='notice-write-datetime'> 작성일자 </div>
           </div>
-          <div className='notice-board-list'>
+          { boardCount ? (
+            <div className='notice-board-list'>
             {noticeBoardList.map((item) => (
               <NoticeBoardListItem item={item} />
             ))}
           </div>
+          ) : (
+            <div className="my-page-bottom-list-nothing"> 공지사항이 없습니다. </div>
+          )}
+          
         </div>
         <Pagination
           totalPage={totalPage}
