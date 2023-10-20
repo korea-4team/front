@@ -25,6 +25,25 @@
   opacity: 0.85;
 }
 
+.disable-button {
+  margin-left: 15px;
+  width: 95px;
+  height: 30px;
+  border-radius: 46px;
+  background-color: #000;
+  opacity: 0.4;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disable-button:hover {
+  cursor: not-allowed;
+}
+
 .black-button {
 	margin-left: 15px;
 

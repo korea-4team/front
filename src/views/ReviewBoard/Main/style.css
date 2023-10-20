@@ -1,5 +1,6 @@
 .review-board-container {
   width: 1440px;
+  margin-bottom: 30px;
   position: relative;
 }
 
@@ -11,6 +12,7 @@
   align-items: center;
   position: absolute;
   right: 0;
+  top: 80px;
   margin-left: 10px;
   width: 95px;
   height: 30px;

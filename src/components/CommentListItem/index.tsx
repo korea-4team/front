@@ -35,6 +35,7 @@ export default function CommentListItem({item}: Props) {
         <div className="comment-list-item-write-time">{ getTimeGap() }</div>
       </div>
       <div className="comment-list-item-comment">{contents}</div>
+      <div className="divider"></div>
     </div>
   )
 }

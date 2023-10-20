@@ -29,15 +29,17 @@ export default function ReviewBoardListItem({item}: Props) {
   return (
     <div className="review-board-list-item-box">
       <div className="review-board-list-box">
-        <div className="review-board-number">{boardNumber}</div>
-        <div className="review-board-title-box" onClick={onClickHandler}>
-          <div className="review-board-title">{title}</div>
-          <div className="review-board-comment-count">[{commentCount}]</div>
+        <div className="review-board-item-number">{boardNumber}</div>
+        <div className="review-board-item-title-box" >
+          <div className="review-board-item-title" onClick={onClickHandler}>
+            { title.length > 30 ? title.substring(0, 30) + '...' : title }
+          </div>
+          <div className="review-board-item-comment-count">[{commentCount}]</div>
         </div>
-        <div className="review-board-writer">{writerNickname}</div>
-        <div className="review-board-write-datetime">{dateFormat(writeDatetime)}</div>
-        <div className="review-board-favorite-count">{favoriteCount}</div>
-        <div className="review-board-view-count">{viewCount}</div>
+        <div className="review-board-item-writer">{writerNickname}</div>
+        <div className="review-board-item-write-datetime">{dateFormat(writeDatetime)}</div>
+        <div className="review-board-item-favorite-count">{favoriteCount}</div>
+        <div className="review-board-item-view-count">{viewCount}</div>
       </div>
     </div>
   )

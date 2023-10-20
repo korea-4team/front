@@ -46,11 +46,11 @@ export default function ReviewBoardList() {
       if (code === 'DE') alert('데이터베이스 에러입니다.');
       if (code !== 'SU') return;
 
-      const { reviewBoardList } = responseBody as GetReviewBoardListResponseDto;
-      setReviewBoardList(reviewBoardList);
-      setBoardCount(reviewBoardList.length);
-      getPageReviewBoardList(reviewBoardList);
-      changeSection(reviewBoardList.length, COUNT_BY_PAGE);
+      const { boardList } = responseBody as GetReviewBoardListResponseDto;
+      setReviewBoardList(boardList);
+      setBoardCount(boardList.length);
+      getPageReviewBoardList(boardList);
+      changeSection(boardList.length, COUNT_BY_PAGE);
     }
     
     // description: 기행기 게시물 지역별 리스트 불러오기 //
@@ -60,11 +60,11 @@ export default function ReviewBoardList() {
       if (code === 'DE') alert('데이터베이스 에러입니다.');
       if (code !== 'SU') return;
 
-      const { reviewBoardLocationList } = responseBody as GetReviewBoardLocationListResponseDto;
-      setReviewBoardList(reviewBoardLocationList);
-      setBoardCount(reviewBoardLocationList.length)
-      getPageReviewBoardList(reviewBoardLocationList);
-      changeSection(reviewBoardLocationList.length, COUNT_BY_PAGE);
+      const { boardList } = responseBody as GetReviewBoardLocationListResponseDto;
+      setReviewBoardList(boardList);
+      setBoardCount(boardList.length)
+      getPageReviewBoardList(boardList);
+      changeSection(boardList.length, COUNT_BY_PAGE);
     }
 
     // description: 기행기 게시물 업종별 리스트 불러오기 //
@@ -74,11 +74,11 @@ export default function ReviewBoardList() {
       if (code === 'DE') alert('데이터베이스 에러입니다.');
       if (code !== 'SU') return;
 
-      const { reviewBoardBusinessTypeList } = responseBody as GetReviewBoardBusinessTypeListResponseDto;
-      setReviewBoardList(reviewBoardBusinessTypeList);
-      setBoardCount(reviewBoardBusinessTypeList.length);
-      getPageReviewBoardList(reviewBoardBusinessTypeList);
-      changeSection(reviewBoardBusinessTypeList.length, COUNT_BY_PAGE);
+      const { boardList } = responseBody as GetReviewBoardBusinessTypeListResponseDto;
+      setReviewBoardList(boardList);
+      setBoardCount(boardList.length);
+      getPageReviewBoardList(boardList);
+      changeSection(boardList.length, COUNT_BY_PAGE);
     }
 
     //          event handler          //
