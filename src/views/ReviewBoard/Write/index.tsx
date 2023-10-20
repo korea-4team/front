@@ -72,6 +72,7 @@ export default function ReviewBoardWrite() {
     if (!event.target.files || !event.target.files.length) return;
     const imageUrl = URL.createObjectURL(event.target.files[0]);
     setReviewBoardImageUrl(imageUrl);
+    setReviewBoardImage(event.target.files[0]);
   }
   // description: 이미지 업로드 버튼 클릭 이벤트 //
   const onImageUploadButtonClickHandler = () => {
@@ -101,7 +102,7 @@ export default function ReviewBoardWrite() {
       contents: reviewBoardContents,
       location: reviewBoardLocation,
       businessType: reviewBoardBusinessType,
-      imageUrl
+      imageUrl,
     }
     postReviewBoardRequest(data, token).then(postReviewBoardResponseHandler);
   }

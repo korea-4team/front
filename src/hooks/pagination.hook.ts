@@ -54,7 +54,8 @@ const usePagination = () => {
     setMaxPage(maxPage);
     setTotalPageCount(totalPageCount);
 
-    const pageList = [];
+    const pageList = [];    
+
     for (let page = minPage; page <= maxPage; page++) pageList.push(page);
     setTotalPage(pageList);
   };

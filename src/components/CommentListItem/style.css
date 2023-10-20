@@ -1,5 +1,6 @@
 .comment-list-item-box {
   display: block;
+  margin-bottom: 10px;
 }
 
 .comment-list-item-writer {
@@ -28,7 +29,7 @@
 }
 
 .comment-list-item-comment {
-  margin-top: 12px;
+  margin: 10px 0;
   color: rgba(0, 0, 0, 0.7);
   font-size: 18px;
   font-weight: 500;
