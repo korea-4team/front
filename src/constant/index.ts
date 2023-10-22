@@ -17,6 +17,7 @@ export const ADVERTISING_BOARD_PATH = '/advertising-board';
 export const REVIEW_BOARD_PATH = '/review-board';
 export const EVENT_BOARD_PATH = '/event-board';
 export const NOTICE_BOARD_PATH = '/notice-board';
+export const ADMIN_PATH = '/admin';
 export const WRITE_PATH = 'write';
 
 export const DETAIL_PATH = (boardNumber: number | string) => `detail/${boardNumber}`;
@@ -39,6 +40,8 @@ export const EVENT_BOARD_DETAIL_PATH = (boardNumber: number | string) => `${EVEN
 export const NOTICE_BOARD_WRITE_PATH = () => `${NOTICE_BOARD_PATH}/${WRITE_PATH}`;
 export const NOTICE_BOARD_UPDATE_PATH = (boardNumber: number | string) => `${NOTICE_BOARD_PATH}/${UPDATE_PATH(boardNumber)}`;
 export const NOTICE_BOARD_DEATIL_PATH = (boardNumber: number | string) => `${NOTICE_BOARD_PATH}/${DETAIL_PATH(boardNumber)}`;
+
+export const ADMIN_GET_REVIEW_BOARD_LIST_PATH = () => `${ADMIN_PATH}/${ADMIN_ID_PATH_VARIABLE}/review-board-list`;
 
 export const MY_PAGE_PATH = (email: string) => `/my-page/${email}`;
 export const SEARCH_PATH = (searchWord: string) => `/search/${searchWord}`;

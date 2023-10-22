@@ -3,7 +3,7 @@ import './style.css';
 import { useUserStore } from 'stores';
 import { useCookies } from 'react-cookie';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { ADVERTISING_BOARD_PATH, AUTH_PATH, EVENT_BOARD_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_PATH, REVIEW_BOARD_PATH, SEARCH_PATH } from 'constant';
+import { ADMIN_PATH, ADVERTISING_BOARD_PATH, AUTH_PATH, EVENT_BOARD_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_PATH, REVIEW_BOARD_PATH, SEARCH_PATH } from 'constant';
 
 //          component          //
 // description: Header 레이아웃 //
@@ -90,6 +90,10 @@ export default function Header() {
     navigator(NOTICE_BOARD_PATH);
   }
 
+  const onAdminBoardButtonClickHandler = () => {
+    navigator(ADMIN_PATH);
+  }
+
   const onLocationMoreButtonClickHandler = () => {
     setShowMore(!showMore);
   }
@@ -132,6 +136,7 @@ export default function Header() {
           <div className="category-button" onClick={onReviewBoardButtonClickHandler}>기행기</div>
           <div className="category-button" onClick={onEventBoardButtonClickHandler}>이벤트</div>
           <div className="category-button" onClick={onNoticeBoardButtonClickHandler}>공지사항</div>
+          <div className="category-button" onClick={onAdminBoardButtonClickHandler}>관리자</div>
         </div>
       </div>
       <div className="header-bottom">
