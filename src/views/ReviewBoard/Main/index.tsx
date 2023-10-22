@@ -156,7 +156,7 @@ export default function ReviewBoardList() {
           {boardCount ?
           (<div className="review-board-list-bottom">
           {pageReviewBoardList.map((item) => (<ReviewBoardListItem item={item} />))}
-          </div>) : (<div className="reivew-board-list-nothing">게시물이 존재하지 않습니다.</div>)}
+          </div>) : (<div className="review-board-list-nothing">게시물이 존재하지 않습니다.</div>)}
           { boardCount !== 0 && (
             <Pagination
             totalPage= {totalPage}

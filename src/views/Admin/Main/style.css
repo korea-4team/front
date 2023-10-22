@@ -1,0 +1,45 @@
+.admin-main {
+    width: 1440px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+}
+
+.admin-main-left {
+    padding: 20px;
+
+    flex: 1;
+
+    background-color: rgba(0,0,0,0.5);
+}
+
+.admin-main-right {
+    margin-left: 50px;
+    
+    padding: 20px;
+    flex: 6;
+
+    background-color: rgba(0,0,0,0.3);
+}
+
+.admin-main-left-button {
+    margin-bottom: 20px;
+
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 3px;
+    font-size: 18px;
+}
+
+.admin-main-left-button:hover {
+    cursor: pointer;
+
+    background-color: rgba(0,0,0,0.1);
+}
+

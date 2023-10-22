@@ -39,7 +39,7 @@ export default function NoticeBoardMain() {
     >([]);
 
     // description : 작성 버튼 노출 상태 //
-    const [writeButton, setWriteButton] = useState<boolean>(true);
+    const [writeButton, setWriteButton] = useState<boolean>(false);
 
     // description : 전체 게시물 갯수 상태 //
     const [boardCount, setBoardCount] = useState<number>(0);
@@ -95,7 +95,8 @@ export default function NoticeBoardMain() {
     useEffect(() => {
       getNoticeBoardListRequest(1).then(getNoticeBoardListResponseHandler);
 
-      if (user && user.role !== "admin") setWriteButton(false);
+      if (user && user.role === "admin") setWriteButton(true);
+      
     }, []);
 
     // description : 현재 섹션이 바뀔 때마다 페이지 리스트 변경 및 공지사항 불러오기//

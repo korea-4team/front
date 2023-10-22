@@ -1,4 +1,6 @@
 import {
+  ADMIN_ID_PATH_VARIABLE,
+  ADMIN_PATH,
   ADVERTISING_BOARD_PATH,
   ADVERTISING_BOARD_SEARCH_LIST_PATH,
   ADVERTISING_BOARD_WRITE_PATH,
@@ -41,6 +43,7 @@ import { GetSignInUserResponseDto } from "interfaces/response/user";
 import ReviewBoardDetail from "views/ReviewBoard/Detail";
 import ReviewBoardWrite from "views/ReviewBoard/Write";
 import AdvertisingBoardWrite from "views/AdvertisingBoard/Write";
+import AdminMain from "views/Admin/Main";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -97,12 +100,15 @@ function App() {
             <Route path={WRITE_PATH} element={<AdvertisingBoardWrite />} />
           </Route>
 
-
           <Route path={NOTICE_BOARD_PATH}>
             <Route path={NOTICE_BOARD_PATH} element={<NoticeBoardMain />} />
             <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<NoticeBoardDetail />} />
             <Route path={WRITE_PATH} element={ <NoticeBoardWrite /> }/>
             <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={ <NoticeBoardUpdate /> }/>
+          </Route>
+
+          <Route path={ADMIN_PATH}>
+            <Route path={ADMIN_PATH} element={<AdminMain />} />
           </Route>
 
           <Route path={AUTH_PATH} element={<Authentication />} />

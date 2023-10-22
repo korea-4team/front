@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import './style.css';
 import { useNavigate } from 'react-router';
 import { NOTICE_BOARD_PATH } from 'constant';
@@ -115,6 +115,9 @@ export default function NoticeBoardWrite() {
   }
 
   //          effect          //
+  useEffect(() => {
+    resetNoticeBoard();
+  },[]);
 
   //          render          //
   return (

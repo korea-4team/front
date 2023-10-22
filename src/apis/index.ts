@@ -1,5 +1,6 @@
 import axios from "axios";
 import { error } from "console";
+import { ADMIN_ID_PATH_VARIABLE } from "constant";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
 import { AccountFindEmailRequestDto, AccountFindPasswordRequestDto, SignInRequestDto, SignUpRequestDto } from "interfaces/request/auth";
@@ -13,6 +14,7 @@ import {
   PostReviewBoardRequestDto,
 } from "interfaces/request/reviewBoard";
 import { GetCurrentEventBoardResponseDto } from "interfaces/response/EventBoard";
+import { GetUserListResponseDto } from "interfaces/response/admin";
 import DeleteAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-advertising-board.response.dto";
 import DeleteShortCommentAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-shortcomment-advertising-board.response.dto";
 import GetAdvertisingBoardBusinessTypeResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-businessType-list-responsedto";
@@ -67,16 +69,16 @@ const ACCOUNT_FIND_PASSWORD_URL = () =>
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
 
 // description: 관리자 페이지 URL //
-const GET_ADMIN_ADVERTISING_BOARD_LIST_URL = (adminId: string) =>
-  `${API_DOMAIN}/admin/${adminId}/advertising-board-list`;
-const GET_ADMIN_REVIEW_BOARD_LIST_URL = (adminId: string) =>
-  `${API_DOMAIN}/admin/${adminId}/review-board-list`;
+const GET_ADMIN_REVIEW_BOARD_LIST_URL = (adminId: string, section: number) =>
+  `${API_DOMAIN}/admin/${adminId}/review-board-list/${section}`;
 const GET_ADMIN_SHORT_REVIEW_LIST_URL = (adminId: string) =>
   `${API_DOMAIN}/admin/${adminId}/short-review-list`;
 const GET_ADMIN_USER_LIST_URL = (adminId: string, section: number | string) =>
   `${API_DOMAIN}/admin/${adminId}/user-list/${section}`;
 const GET_ADMIN_USER_DETAIL_URL = (adminId: string, userEmail: string) =>
   `${API_DOMAIN}/admin/${adminId}/user-list/${userEmail}`;
+const GET_ADMIN_ADVERTISING_BOARD_LIST_URL = (adminId: string) =>
+`${API_DOMAIN}/admin/${adminId}/advertising-board-list`;
 const GET_ADMIN_USER_STORE_INFO_URL = (adminId: string, userEmail: string) =>
   `${API_DOMAIN}/admin/${adminId}/user-list/${userEmail}/store-info`;
 const GET_ADMIN_USER_REVIEW_BOARD_LIST_URL = (
@@ -103,8 +105,8 @@ const GET_ADMIN_BANNER_DETAIL_URL = (
   adminId: string,
   bannerNumber: number | string
 ) => `${API_DOMAIN}/admin/${adminId}/main-banner/detail/${bannerNumber}`;
-const POST_ADMIN_BANNER_URL = (eventBoardNumber: number | string) =>
-  `${API_DOMAIN}/admin/${eventBoardNumber}/main-banner`;
+const POST_ADMIN_BANNER_URL = () =>
+  `${API_DOMAIN}/admin/main-banner`;
 const PATCH_ADMIN_BANNER_URL = (bannerNumber: number | string) =>
   `${API_DOMAIN}/admin/${bannerNumber}/main-banner`;
 const DELETE_ADMIN_BANNER_URL = (bannerNumber: number | string) =>
@@ -681,6 +683,57 @@ export const deleteNoticeBoardRequest = async (
 
   return result;
 };
+
+// description : 관리자 게시판 //
+// 기행기 게시글 불러오기
+export const getAdminReviewBoardListRequest = async (adminId: string, section: number) => {
+  const result = await axios
+  .get(GET_ADMIN_REVIEW_BOARD_LIST_URL(adminId, section))
+  .then((response) => {
+    const responseBody: GetReviewBoardListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+
+  return result;
+}
+
+// 한줄 리뷰 불러오기
+export const getAdminShortReviewListRequest = async (adminId: string) => {
+  const result = await axios
+  .get(GET_ADMIN_SHORT_REVIEW_LIST_URL(adminId))
+  .then((response) => {
+    const responseBody: GetShortReviewListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+
+  return result;
+}
+
+// 유저 목록 불러오기
+export const getAdminUserListRequest = async (
+    adminId: string, section: string | number
+  ) => {
+  const result = await axios
+  .get(GET_ADMIN_USER_LIST_URL(adminId, section))
+  .then((response) => {
+    const responseBody: GetUserListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
+
+  return result;
+}
 
 // description: 광고게시판 //
 export const getCurrentAdvertisingBoardListRequest = async (
