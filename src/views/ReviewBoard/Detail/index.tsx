@@ -1,4 +1,4 @@
-import { deleteReviewBoardRequest, getReviewBoardCommentListRequest, getReviewBoardRequest, postReviewBoardCommentRequest, putReviewBoardFavoriteRequest } from "apis";
+import { deleteReviewBoardCommentRequest, deleteReviewBoardRequest, getReviewBoardCommentListRequest, getReviewBoardRequest, postReviewBoardCommentRequest, putReviewBoardFavoriteRequest } from "apis";
 import { COUNT_BY_PAGE, COUNT_BY_PAGE_COMMENT, REVIEW_BOARD_PATH, REVIEW_BOARD_UPDATE_PATH } from "constant";
 import ResponseDto from "interfaces/response/response.dto";
 import { GetReviewBoardResponseDto } from "interfaces/response/reviewBoard";
@@ -13,6 +13,7 @@ import { usePagination } from "hooks";
 import { PostCommentRequestDto } from "interfaces/request/reviewBoard";
 import CommentListItem from "components/CommentListItem";
 import Pagination from "components/Pagination";
+import { FavoriteListResponseDto } from "interfaces/response/reviewBoard/get-review-board-favorite-list-response.dto";
 
 export default function ReviewBoardDetail() {
 
@@ -41,8 +42,12 @@ export default function ReviewBoardDetail() {
     const [viewCommentList, setViewCommentList] = useState<CommentListResponseDto[]>([]);
     // description: 댓글 상태 //
     const [comment, setComment] = useState<string>('');
+    // description: 추천 리스트 상태 //
+    const [favoriteList, setFavoriteList] = useState<FavoriteListResponseDto[]>([]);
     // description: 추천 갯수 상태 //
     const [favoriteCount, setFavoriteCount] = useState<number>(0);
+    // description: 사용자 추천 상태//
+    const [isFavorite, setFavorite] = useState<boolean>(false);
     // description: 페이지네이션 관련 상태 //
     const { totalPage, currentPage, currentSection, onNextClickHandler, onPreviusClickHandler, onPageClickHandler, changeSection } = usePagination();
 
@@ -115,6 +120,21 @@ export default function ReviewBoardDetail() {
       getReviewBoardCommentListRequest(boardNumber).then(getCommentListResponseHandler);
     }
 
+    // description: 댓글삭제 응답 처리 함수 //
+    const deleteCommentResponseHandler = (code: string) => {
+      if (code === 'NU') alert('존재하지 않는 유저입니다.');
+      if (code === 'NB') alert('존재하지 않는 게시물입니다.');
+      if (code === 'NP') alert('권한이 없습니다.');
+      if (code === 'VF') alert('잘못된 게시물입니다.');
+      if (code === 'AF') alert('로그인이 필요합니다.');
+      if (code === 'DE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU') return;
+  
+      alert('댓글 삭제에 성공했습니다.');
+      if (!boardNumber) return;
+      getReviewBoardCommentListRequest(boardNumber).then(getCommentListResponseHandler);
+    }
+
     // description: 현재 페이지의 댓글 리스트 분류 함수 //
     const getViewCommentList = (commentList: CommentListResponseDto[]) => {
       const lastIndex = commentList.length > COUNT_BY_PAGE_COMMENT * currentPage ? COUNT_BY_PAGE_COMMENT * currentPage : commentList.length;
@@ -137,6 +157,7 @@ export default function ReviewBoardDetail() {
       deleteReviewBoardRequest(boardNumber, accessToken).then(deleteReviewBoardResponseHandler);
     }
 
+    // description: 목록 버튼 클릭 이벤트 처리 //
     const onBackButtonClickHandler = () => {
       navigator(REVIEW_BOARD_PATH);
     }
@@ -174,6 +195,14 @@ export default function ReviewBoardDetail() {
         contents: comment
       }
       postReviewBoardCommentRequest(boardNumber, data, token).then(postCommentResponseHandler);
+    }
+  
+    // description: 댓글삭제 버튼 클릭 이벤트 처리 함수 //
+    const onDeleteCommentButtonClickHandler = (commentNumber: number) => {
+      const accessToken = cookies.accessToken;
+      console.log(commentNumber);
+      if(!commentNumber) return;
+      deleteReviewBoardCommentRequest(commentNumber, accessToken).then(deleteCommentResponseHandler);
     }
 
     //          effect          //
@@ -229,17 +258,28 @@ export default function ReviewBoardDetail() {
         </div>
         <div className="review-board-button-box">
           <div className="black-button" onClick={onBackButtonClickHandler}>목록</div>
-          <div className="black-button" onClick={onUpdateButtonClickHandler}>수정</div>
-          <div className="black-button" onClick={onDeleteButtonClickHandler}>삭제</div>
+          {isWriter &&
+            <div className="review-board-writer-button-box">
+              <div className="black-button" onClick={onUpdateButtonClickHandler}>수정</div>
+              <div className="black-button" onClick={onDeleteButtonClickHandler}>삭제</div>
+            </div>
+          }
         </div>
         <div className="review-board-bottom-container">
           <div className="review-board-count-box">
             <div className="review-board-count-title">{'댓글 '}<span className="review-board-count-emphasis">{commentCount}</span></div>
             <div className="review-board-count-title">{'추천 '}<span className="review-board-count-emphasis">{favoriteCount}</span></div>
-          </div>
-            <div className="review-board-comment-list">
-              {viewCommentList.map(CommentItem => <CommentListItem item={CommentItem} />)}
+            <div className="review-board-favorite-button" onClick={onFavoriteButtonClickHandler}>
+              {isFavorite ? (
+                <div className="review-board-favorite-fill-icon"></div>
+              ) : (
+                <div className="review-board-favorite-icon"></div>
+              )}
             </div>
+          </div>
+          <div className="review-board-comment-list">
+            {viewCommentList.map(CommentItem => <CommentListItem item={CommentItem} onDelete={onDeleteCommentButtonClickHandler} />)}
+          </div>
           <div className="review-board-comment-pagination-box">
             {commentCount !== 0 && (
               <Pagination

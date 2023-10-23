@@ -17,6 +17,8 @@ import {
   REVIEW_BOARD_DETAIL_PATH,
   REVIEW_BOARD_PATH,
 
+  REVIEW_BOARD_UPDATE_PATH,
+
   SEARCH_PATH,
 
   SEARCH_WORD_PATH_VARIABLE,
@@ -51,6 +53,8 @@ import AdminMain from "views/Admin/Main";
 import AdminGetShortReview from "views/Admin/GetShortReview";
 import AdminGetUserList from "views/Admin/GetUser";
 import AdminBanner from "views/Admin/Banner";
+import ReviewBoardUpdate from "views/ReviewBoard/Update";
+import AdvertisingBoardDetail from "views/AdvertisingBoard/Detail";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -100,10 +104,12 @@ function App() {
             <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
             <Route path={REVIEW_BOARD_DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardDetail />} />
             <Route path={WRITE_PATH} element={ <ReviewBoardWrite /> }/>
+            <Route path={REVIEW_BOARD_UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardUpdate />}/>
           </Route>
 
           <Route path={ADVERTISING_BOARD_PATH}>
             <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
+            <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<AdvertisingBoardDetail/>} />
             <Route path={WRITE_PATH} element={<AdvertisingBoardWrite />} />
           </Route>
 
