@@ -21,7 +21,6 @@
 }
 
 .advertising-board-write-button:hover{
-  cursor: pointer;
   background-color: #000;
   color: #fff;
 }
