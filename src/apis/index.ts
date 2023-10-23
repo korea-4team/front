@@ -51,6 +51,7 @@ import {
   PostReviewBoardResponseDto,
   PutReviewBoardFavoriteResponseDto,
 } from "interfaces/response/reviewBoard";
+import GetFavoriteListResponseDto from "interfaces/response/reviewBoard/get-review-board-favorite-list-response.dto";
 import GetReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-review-board-list.response.dto";
 import GetUserReviewBoardListResponseDto from "interfaces/response/reviewBoard/get-user-review-board-list.response.dto";
 import GetSearchResponseDto from "interfaces/response/search/get-search.response.dto";
@@ -194,6 +195,7 @@ const GET_REVIEW_BOARD_LOCATION_BUSINESSTYPE_LIST_URL = (
 ) => `${API_DOMAIN}/review-board/board-list/${location}/${businessType}`;
 const GET_REVIEW_BOARD_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/review-board/${boardNumber}`;
+const GET_REVIEW_BOARD_FAVORITE_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/review-board/${boardNumber}/favorite-list`
 const GET_REVIEW_BOARD_COMMENT_LIST_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/review-board/${boardNumber}/comment-list`;
 const GET_REVIEW_BOARD_USER_LIST_URL = (email: string) =>
@@ -207,8 +209,8 @@ const PATCH_REVIEW_BOARD_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/review-board/${boardNumber}`;
 const DELETE_REVIEW_BOARD_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/review-board/${boardNumber}`;
-const DELETE_REVIEW_BOARD_COMMENT_URL = (boardNumber: number | string) =>
-  `${API_DOMAIN}/review-board/${boardNumber}/comment`;
+const DELETE_REVIEW_BOARD_COMMENT_URL = (commentNumber: number | string) =>
+  `${API_DOMAIN}/review-board/${commentNumber}/comment`;
 
 // description: 검색게시판 URL //
 const GET_SEARCH_LIST_URL = (searchWord: string, location?: string) =>
@@ -408,6 +410,19 @@ export const getReviewBoardRequest = async (boardNumber: number | string) => {
   return result;
 };
 
+export const getFavoriteListRequest = async (boardNumber: number | string) => {
+  const result = await axios.get(GET_REVIEW_BOARD_FAVORITE_LIST_URL(boardNumber))
+  .then((response) => {
+    const responseBody: GetFavoriteListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  return result;
+}
+
 export const getReviewBoardCommentListRequest = async (
   boardNumber: number | string
 ) => {
@@ -548,11 +563,12 @@ export const deleteReviewBoardRequest = async (
 };
 
 export const deleteReviewBoardCommentRequest = async (
-  boardNumber: number | string,
+  commentNumber: number | string,
+  // boardNumber: number | string,
   token: string
 ) => {
   const result = await axios
-    .delete(DELETE_REVIEW_BOARD_COMMENT_URL(boardNumber), {
+    .delete(DELETE_REVIEW_BOARD_COMMENT_URL(commentNumber), {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {

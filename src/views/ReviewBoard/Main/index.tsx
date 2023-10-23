@@ -152,7 +152,7 @@ export default function ReviewBoardList() {
               <div className="review-board-write-datetime">작성일자</div>
               <div className="review-board-favorite-count">추천</div>
               <div className="review-board-view-count">조회</div>
-            </div>) : (<></>)}
+            </div>) : null}
           {boardCount ?
           (<div className="review-board-list-bottom">
           {pageReviewBoardList.map((item) => (<ReviewBoardListItem item={item} />))}
