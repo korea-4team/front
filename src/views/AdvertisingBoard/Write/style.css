@@ -1,21 +1,84 @@
-.advertising-board-write-item-list{
-
-  border-top:1px solid rgba(0,0,0,0.2);
-
-  padding: 0 153px;
+.advertising-board-write-wrapper {
+  width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.advertising-board-write-item{
+.advertising-board-write-container {
   padding: 100px 24px;
-
   background-color: #ffffff;
 }
 
-.advertising-board-write-title-container {
+.advertising-board-title-container {
+  display: flex;
   margin-bottom: 20px;
+  align-items: center;
 }
 
-.advertising-board-writer-title-input{
+.advertising-board-location-group{
+  display: flex;
+  margin-right: 10px;
+  flex-direction: column;
+  width: 120px;
+  height: 30px;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: default;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  z-index: 1;
+}
+
+.advertising-board-location-top{
+  width: 120px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(asset/downarrow.png);
+  background-position: 95% 50%;
+  background-size: 13px 13px;
+  background-repeat: no-repeat;
+}
+
+.advertising-board-location-top:hover{
+  background-color: #ccc;
+}
+
+.advertising-board-location-button-group{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 30px;
+  width: 120px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.advertising-board-location-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  width: 100%;
+  height: 20px;
+  border-bottom: 0.5px solid #000;
+}
+
+
+.advertising-board-location-button:hover{
+  background-color: #000;
+  color: #fff;
+}
+
+.advertising-board-write-title-input{
   width: 100%;
 
   border: none;
@@ -35,29 +98,29 @@
 }
 
 .advertising-board-write-content-input-box{
-  float: 1;
+  flex: 1;
 }
 
 .advertising-board-write-content-textarea{
   display: block;
+
   width: 100%;
 
   border: none;
-  outline: none;
+  outline: auto;
   background: none;
   resize: none;
 
   overflow: hidden;
-
   font-size: 18px;
   font-weight: 500;
 }
 
-.advertising-board-write-content-button-box {
+.advertising-board-write-content-button-box{
   margin-left: 15px;
 }
 
-.image-upload-button {
+.advertising-board-image-upload-button{
   width: 24px;
   height: 24px;
 
@@ -68,11 +131,11 @@
   border-radius: 5px;
 }
 
-.image-upload-button:hover{
-  background-color: cyan;
+.advertising-board-image-upload-button:hover{
+  background-color: rgba(0,0,0,0.2);
 }
 
-.image-upload-icon{
+.advertising-board-image-upload-icon{
   width: 21px;
   height: 21px;
 
@@ -81,20 +144,21 @@
   background-size: 100% 100%;
 }
 
-.advertising-board-write-image-box{
+.advertising-board-write-image-container {
   margin-top: 15px;
-
   position: relative;
 }
 
 .advertising-board-write-image{
+  position: relative;
   display: block;
-
+  object-fit: cover;
   width: 100%;
+  height: 100%;
+  
 }
 
-
-.advertising-board-write-image-delete-button {
+.advertising-board-write-image-delete-button{
   width: 24px;
   height: 24px;
 
@@ -109,10 +173,10 @@
 }
 
 .advertising-board-write-image-delete-button:hover{
-  background-color: black;
+  background-color: rgba(0,0,0,0.2);
 }
 
-.image-close-button{
+.advertising-board-image-close-icon{
   width: 21px;
   height: 21px;
 
@@ -121,8 +185,99 @@
   background-size: 100% 100%;
 }
 
-.back-button{
-  margin: 10px 0px 20px;
+.advertising-board-write-button-box{
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  margin-bottom: 30px;
+}
+
+.advertising-board-image-miri-container{
+  margin-top: 15px;
+  justify-content: end;
+  position: relative;
+}
+
+.advertising-board-img-miri{
+  display: flex;
+  justify-content: end;
+
+}
+
+.advertising-board-image-upload-button-miri{
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+
+}
+
+.advertising-board-image-upload-button-miri:hover{
+  background-color: rgba(0,0,0,0.2);
+}
+
+.advertising-board-image-upload-icon-miri{
+  width: 21px;
+  height: 21px;
+  justify-content: end;
+
+  background-image: url(asset/img_box.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+
+}
+
+.advertising-board-write-image-delete-button-miri{
+  width: 24px;
+  height: 24px;
+
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.advertising-board-write-image-delete-button-miri:hover{
+  background-color: rgba(0,0,0,0.2);
+}
+
+.advertising-board-image-close-icon-miri{
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/close_square.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.advertising-board-write-image-miri{
+  position: relative;
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 
+.advertising-board-write-image-miri-container{
+  margin-top: 15px;
+  position: relative;
+}
+
+.miri-image-miri{
+  gap: 15px;
+  display: flex;
+}
+
+.image-image{
+  display: flex;
+  gap: 15px;
+}
