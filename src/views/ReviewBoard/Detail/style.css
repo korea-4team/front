@@ -64,6 +64,10 @@
   justify-content: end;
 }
 
+.review-board-writer-button-box {
+  display: flex;
+}
+
 .review-board-bottom-container {
 	margin: 30px 0;
 }
@@ -81,6 +85,40 @@
 
 .review-board-count-emphasis {
 	font-size: 18px;
+}
+
+.review-board-favorite-button {
+  border-radius: 24px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.review-board-favorite-button:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.rview-board-favorite-fill-icon {
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/favorite_fill.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.review-board-favorite-icon {
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/favorite_light.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
 
 .review-board-comment-list {

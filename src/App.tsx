@@ -13,6 +13,8 @@ import {
   REVIEW_BOARD_DETAIL_PATH,
   REVIEW_BOARD_PATH,
 
+  REVIEW_BOARD_UPDATE_PATH,
+
   SEARCH_PATH,
 
   SEARCH_WORD_PATH_VARIABLE,
@@ -44,6 +46,7 @@ import ReviewBoardDetail from "views/ReviewBoard/Detail";
 import ReviewBoardWrite from "views/ReviewBoard/Write";
 import AdvertisingBoardWrite from "views/AdvertisingBoard/Write";
 import AdminMain from "views/Admin/Main";
+import ReviewBoardUpdate from "views/ReviewBoard/Update";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -93,6 +96,7 @@ function App() {
             <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
             <Route path={REVIEW_BOARD_DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardDetail />} />
             <Route path={WRITE_PATH} element={ <ReviewBoardWrite /> }/>
+            <Route path={REVIEW_BOARD_UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardUpdate />}/>
           </Route>
 
           <Route path={ADVERTISING_BOARD_PATH}>
