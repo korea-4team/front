@@ -59,11 +59,11 @@ export default function AdvertisingBoardMain() {
       if(code === 'DE') alert ('데이터베이스 에러입니다.');
       if(code !== 'SU') return;
 
-      const { advertisingBoardLocationList } = responseBody as GetAdvertisingLocationListResponseDto;
-      setAdvertisingBoardList(advertisingBoardLocationList);
-      setBoardCount(advertisingBoardLocationList.length);
-      getPageAdvertisingBoardList(advertisingBoardLocationList);
-      changeSection(advertisingBoardLocationList.length,COUNT_BY_PAGE);
+      const { advertisingboardlist } = responseBody as GetAdvertisingLocationListResponseDto;
+      setAdvertisingBoardList(advertisingboardlist);
+      setBoardCount(advertisingboardlist.length);
+      getPageAdvertisingBoardList(advertisingboardlist);
+      changeSection(advertisingboardlist.length,COUNT_BY_PAGE);
     }
 
     const getAdvertisingBoardBusinessTypeListResponseHandler = (responseBody : GetAdvertisingBoardBusinessTypeResponseDto | ResponseDto) => {
@@ -72,11 +72,11 @@ export default function AdvertisingBoardMain() {
       if(code === 'DE') alert('데이터베이스 에러입니다.');
       if(code !== 'SU') return;
 
-      const {advertisingBoardBusinessTypeList} = responseBody as GetAdvertisingBoardBusinessTypeResponseDto;
-      setAdvertisingBoardList(advertisingBoardBusinessTypeList);
-      setBoardCount(advertisingBoardBusinessTypeList.length);
-      getPageAdvertisingBoardList(advertisingBoardBusinessTypeList);
-      changeSection(advertisingBoardBusinessTypeList.length,COUNT_BY_PAGE);
+      const {advertisingboardList} = responseBody as GetAdvertisingBoardBusinessTypeResponseDto;
+      setAdvertisingBoardList(advertisingboardList);
+      setBoardCount(advertisingboardList.length);
+      getPageAdvertisingBoardList(advertisingboardList);
+      changeSection(advertisingboardList.length,COUNT_BY_PAGE);
     }
 
     const onAdvertisingboardLocationClickHandler = (location: string) => {
@@ -138,7 +138,7 @@ return (
         <div className="advertising-board-businesstype-list" onClick={() => onAdvertisingboardBusinessTypeClickHandler('건축')}>건축</div>
         <div className="advertising-board-businesstype-list" onClick={() => onAdvertisingboardBusinessTypeClickHandler('기타')}>기타</div>
       </div>
-        {user != null && <div className="advertising-board-write-button" onClick={onAdvertisingboardWriteButtonClickHandler}>글쓰기</div>}
+        {user?.role === 'owner'  && <div className="advertising-board-write-button" onClick={onAdvertisingboardWriteButtonClickHandler}>글쓰기</div>}
         {boardCount ?
         (<div className="advertising-board-list-bottom">
         {pageAdvertisingBoardList.map((item) => (<AdvertisingBoardListItem item={item} />))}

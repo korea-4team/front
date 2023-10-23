@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ADVERTISING_BOARD_PATH } from 'constant';
 import { PostAdvertisingBoardDto } from 'interfaces/request/advertisingBoard';
 import { postAdvertisingBoardRequest } from 'apis';
+import { useUserStore } from 'stores';
 
 export default function AdvertisingBoardWrite(){
 
@@ -22,6 +23,7 @@ export default function AdvertisingBoardWrite(){
   const[advertisingBoardImage, setAdvertisingBoardImage] = useState<File | null>();
   const[advertisingBoardLocation, setAdvertisingBoardLocation] = useState<string>('');
   const[showMore, setShowMore] = useState<boolean>(false);
+  const {user, setUser} = useUserStore();
 
 
 

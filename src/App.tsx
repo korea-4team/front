@@ -44,6 +44,7 @@ import ReviewBoardDetail from "views/ReviewBoard/Detail";
 import ReviewBoardWrite from "views/ReviewBoard/Write";
 import AdvertisingBoardWrite from "views/AdvertisingBoard/Write";
 import AdminMain from "views/Admin/Main";
+import AdvertisingBoardDetail from "views/AdvertisingBoard/Detail";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -97,6 +98,7 @@ function App() {
 
           <Route path={ADVERTISING_BOARD_PATH}>
             <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
+            <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<AdvertisingBoardDetail/>} />
             <Route path={WRITE_PATH} element={<AdvertisingBoardWrite />} />
           </Route>
 
