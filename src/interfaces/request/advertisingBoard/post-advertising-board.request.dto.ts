@@ -3,5 +3,5 @@ export default interface PostAdvertisingBoardDto{
   contents : string;
   location : string;
   businessType: string;
-  imageUrl? : string | null;
+  imageUrls : string[];
 }
