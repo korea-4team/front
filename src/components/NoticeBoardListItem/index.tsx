@@ -37,7 +37,7 @@ export default function NoticeBoardListItem({ item }: Props) {
       <div className="divider"></div>
       <div className="notice-board-list-item">
         <div className="notice-board-number">{boardNumber}</div>
-        <div className="notice-board-title">{title}</div>
+        <div className="notice-board-title">{ title.length > 30 ? title.substring(0, 30) + '...' : title }</div>
         <div className="notice-board-writer">{writerEmail}</div>
         <div className="notice-board-write-date">
           {" "}

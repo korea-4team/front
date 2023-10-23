@@ -8,4 +8,6 @@ export interface CommentListResponseDto {
   nickname: string;
   contents: string;
   writeDatetime: string;
+  commentNumber: number;
+  writerEmail: string;
 }

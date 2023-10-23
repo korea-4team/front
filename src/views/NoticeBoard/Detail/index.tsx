@@ -26,7 +26,7 @@ export default function NoticeBoardDetail() {
   const [board, setBoard] = useState<GetNoticeBoardResponseDto | null>(null);
 
   // description : 수정, 삭제 버튼 출력 상태 //
-  const [adminButton, setAdminButton] = useState<boolean>(true);
+  const [adminButton, setAdminButton] = useState<boolean>(false);
 
   //          function          //
   // description : 페이지 이동을 위한 네비게이트 함수 //
@@ -93,7 +93,7 @@ export default function NoticeBoardDetail() {
 
     getNoticeBoardRequest(boardNumber).then(getBoardResponseHandler);
 
-    if (user && user.role !== "admin") setAdminButton(false);
+    if (user && user.role === "admin") setAdminButton(true);
   }, [boardNumber]);
 
   //          render          //

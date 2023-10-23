@@ -1,5 +1,9 @@
 import {
+  ADMIN_BANNER_PATH,
+  ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH,
+  ADMIN_GET_USER_LIST_PATH,
   ADMIN_ID_PATH_VARIABLE,
+  ADMIN_PAGE_PATH,
   ADMIN_PATH,
   ADVERTISING_BOARD_PATH,
   ADVERTISING_BOARD_SEARCH_LIST_PATH,
@@ -12,6 +16,8 @@ import {
   NOTICE_BOARD_PATH,
   REVIEW_BOARD_DETAIL_PATH,
   REVIEW_BOARD_PATH,
+
+  REVIEW_BOARD_UPDATE_PATH,
 
   SEARCH_PATH,
 
@@ -44,6 +50,10 @@ import ReviewBoardDetail from "views/ReviewBoard/Detail";
 import ReviewBoardWrite from "views/ReviewBoard/Write";
 import AdvertisingBoardWrite from "views/AdvertisingBoard/Write";
 import AdminMain from "views/Admin/Main";
+import AdminGetShortReview from "views/Admin/GetShortReview";
+import AdminGetUserList from "views/Admin/GetUser";
+import AdminBanner from "views/Admin/Banner";
+import ReviewBoardUpdate from "views/ReviewBoard/Update";
 import AdvertisingBoardDetail from "views/AdvertisingBoard/Detail";
 
 //          component: 메인 컴포넌트          //
@@ -94,6 +104,7 @@ function App() {
             <Route path={REVIEW_BOARD_PATH} element={<ReviewBoardList />} />
             <Route path={REVIEW_BOARD_DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardDetail />} />
             <Route path={WRITE_PATH} element={ <ReviewBoardWrite /> }/>
+            <Route path={REVIEW_BOARD_UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<ReviewBoardUpdate />}/>
           </Route>
 
           <Route path={ADVERTISING_BOARD_PATH}>
@@ -110,7 +121,10 @@ function App() {
           </Route>
 
           <Route path={ADMIN_PATH}>
-            <Route path={ADMIN_PATH} element={<AdminMain />} />
+            <Route path={ADMIN_PAGE_PATH(user?.email as string)} element={<AdminMain />} />
+            <Route path={ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH(user?.email as string)} element={<AdminGetShortReview />} />
+            <Route path={ADMIN_GET_USER_LIST_PATH(user?.email as string)} element={<AdminGetUserList />} />
+            <Route path={ADMIN_BANNER_PATH(user?.email as string)} element={<AdminBanner />} />
           </Route>
 
           <Route path={AUTH_PATH} element={<Authentication />} />

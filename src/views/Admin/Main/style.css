@@ -7,20 +7,21 @@
 }
 
 .admin-main-left {
+    width: 288px;
+    height: 250px;
     padding: 20px;
 
-    flex: 1;
+    flex: 2;
 
-    background-color: rgba(0,0,0,0.5);
+    background-color: #d0d0d0;
 }
 
 .admin-main-right {
+    width: 1152px;
     margin-left: 50px;
     
-    padding: 20px;
-    flex: 6;
+    flex: 7;
 
-    background-color: rgba(0,0,0,0.3);
 }
 
 .admin-main-left-button {
@@ -43,3 +44,63 @@
     background-color: rgba(0,0,0,0.1);
 }
 
+.admin-main-list-name {
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-family: "Courier New";
+    font-weight: 600;
+}
+
+.admin-main-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 100%;
+}
+
+.admin-main-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 742px;
+  height: 100%;
+}
+
+.admin-main-writer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+}
+
+.admin-main-write-datetime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+}
+
+.admin-main-favorite-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 100%;
+  }
+  
+  .admin-main-view-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 100%;
+  }
