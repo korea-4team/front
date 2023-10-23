@@ -3,7 +3,7 @@ import './style.css';
 import { useUserStore } from 'stores';
 import { useCookies } from 'react-cookie';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { ADMIN_PATH, ADVERTISING_BOARD_PATH, AUTH_PATH, EVENT_BOARD_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_PATH, REVIEW_BOARD_PATH, SEARCH_PATH } from 'constant';
+import { ADMIN_ID_PATH_VARIABLE, ADMIN_PAGE_PATH, ADMIN_PATH, ADVERTISING_BOARD_PATH, AUTH_PATH, EVENT_BOARD_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_PATH, REVIEW_BOARD_PATH, SEARCH_PATH } from 'constant';
 
 //          component          //
 // description: Header 레이아웃 //
@@ -91,7 +91,7 @@ export default function Header() {
   }
 
   const onAdminBoardButtonClickHandler = () => {
-    navigator(ADMIN_PATH);
+    navigator(ADMIN_PAGE_PATH(user?.email as string));
   }
 
   const onLocationMoreButtonClickHandler = () => {

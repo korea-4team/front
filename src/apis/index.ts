@@ -72,8 +72,8 @@ const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
 // description: 관리자 페이지 URL //
 const GET_ADMIN_REVIEW_BOARD_LIST_URL = (adminId: string, section: number) =>
   `${API_DOMAIN}/admin/${adminId}/review-board-list/${section}`;
-const GET_ADMIN_SHORT_REVIEW_LIST_URL = (adminId: string) =>
-  `${API_DOMAIN}/admin/${adminId}/short-review-list`;
+const GET_ADMIN_SHORT_REVIEW_LIST_URL = (adminId: string, section: number) =>
+  `${API_DOMAIN}/admin/${adminId}/short-review-list/${section}`;
 const GET_ADMIN_USER_LIST_URL = (adminId: string, section: number | string) =>
   `${API_DOMAIN}/admin/${adminId}/user-list/${section}`;
 const GET_ADMIN_USER_DETAIL_URL = (adminId: string, userEmail: string) =>
@@ -718,9 +718,9 @@ export const getAdminReviewBoardListRequest = async (adminId: string, section: n
 }
 
 // 한줄 리뷰 불러오기
-export const getAdminShortReviewListRequest = async (adminId: string) => {
+export const getAdminShortReviewListRequest = async (adminId: string, section: number) => {
   const result = await axios
-  .get(GET_ADMIN_SHORT_REVIEW_LIST_URL(adminId))
+  .get(GET_ADMIN_SHORT_REVIEW_LIST_URL(adminId, section))
   .then((response) => {
     const responseBody: GetShortReviewListResponseDto = response.data;
     return responseBody;
