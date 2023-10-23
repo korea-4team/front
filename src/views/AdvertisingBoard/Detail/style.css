@@ -1,0 +1,81 @@
+.advertising-board-detail-item-list{
+  width: 1440px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.advertising-board-detail-header{
+  margin: 20px 0px 20px;
+}
+
+.advertising-board-detail-title{
+  margin-bottom: 20px;
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.advertising-board-detail-data{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.advertising-board-detail-writer{
+  display: flex;
+  align-items: center;
+}
+
+.advertising-board-detail-nickname{
+  margin-right: 10px;
+
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.advertising-board-detail-writedatetime{
+  margin-left: 10px;
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 100%;
+
+  color: rgba(0,0,0,0.7);
+}
+
+.advertising-board-detail-footer{
+  margin-top: 20px;
+}
+
+.advertising-board-detail-contents{
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.advertising-board-detail-image-box{
+  margin-top: 20px;
+}
+
+.advertising-board-detail-image{
+  width: 100%;
+}
+
+.back-button{
+  margin-top: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.owner-button{
+  margin-top: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}

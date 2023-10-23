@@ -155,7 +155,7 @@ const GET_ADVERTISING_BOARD_LIST_URL = (section: number | string) =>
 const GET_ADVERTISING_BOARD_LOCATION_LIST_URL = (location: string) =>
   `${API_DOMAIN}/advertising-board/board-list/location/${location}`;
 const GET_ADVERTISING_BOARD_BUSINESSTYPE_LIST_URL = (businessType: string) =>
-  `${API_DOMAIN}/advertising-board/board-list/businesstype${businessType}`;
+  `${API_DOMAIN}/advertising-board/board-list/businesstype/${businessType}`;
 const GET_ADVERTISING_BOARD_LOCATION_BUSINESSTYPE_LIST_URL = (
   location: string,
   businessType: string
