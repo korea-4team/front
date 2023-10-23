@@ -1,5 +1,9 @@
 import {
+  ADMIN_BANNER_PATH,
+  ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH,
+  ADMIN_GET_USER_LIST_PATH,
   ADMIN_ID_PATH_VARIABLE,
+  ADMIN_PAGE_PATH,
   ADMIN_PATH,
   ADVERTISING_BOARD_PATH,
   ADVERTISING_BOARD_SEARCH_LIST_PATH,
@@ -44,6 +48,9 @@ import ReviewBoardDetail from "views/ReviewBoard/Detail";
 import ReviewBoardWrite from "views/ReviewBoard/Write";
 import AdvertisingBoardWrite from "views/AdvertisingBoard/Write";
 import AdminMain from "views/Admin/Main";
+import AdminGetShortReview from "views/Admin/GetShortReview";
+import AdminGetUserList from "views/Admin/GetUser";
+import AdminBanner from "views/Admin/Banner";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -108,7 +115,10 @@ function App() {
           </Route>
 
           <Route path={ADMIN_PATH}>
-            <Route path={ADMIN_PATH} element={<AdminMain />} />
+            <Route path={ADMIN_PAGE_PATH(user?.email as string)} element={<AdminMain />} />
+            <Route path={ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH(user?.email as string)} element={<AdminGetShortReview />} />
+            <Route path={ADMIN_GET_USER_LIST_PATH(user?.email as string)} element={<AdminGetUserList />} />
+            <Route path={ADMIN_BANNER_PATH(user?.email as string)} element={<AdminBanner />} />
           </Route>
 
           <Route path={AUTH_PATH} element={<Authentication />} />

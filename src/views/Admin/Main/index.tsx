@@ -1,24 +1,26 @@
 import "./style.css";
 import Pagination from 'components/Pagination';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { usePagination } from 'hooks';
-import { useUserStore } from 'stores';
 import { useState,useEffect } from 'react';
 import { GetReviewBoardListResponseDto, ReviewBoardListResponseDto } from "interfaces/response/reviewBoard";
-import { COUNT_BY_PAGE } from "constant";
+import { ADMIN_BANNER_PATH, ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH, ADMIN_GET_USER_LIST_PATH, ADMIN_PAGE_PATH, COUNT_BY_PAGE } from "constant";
 import ResponseDto from "interfaces/response/response.dto";
 import { getAdminReviewBoardListRequest } from "apis";
-import ReviewBoardListItem from "components/ReviewBoardListItem";
-import ReviewBoardList from "views/ReviewBoard/Main";
-import { useCookies } from "react-cookie";
+import { useUserStore } from "stores";
+import AdminReviewBoardListItem from "components/AdminReviewBoardListItem";
 
 //          component          //
 export default function AdminMain() {
 
   //          state         //
-  
+  // description : 유저 정보 상태 //
+  const {user, setUser} = useUserStore();
+
   //          function          //
+  // description : 페이지 이동을 위한 네비게이트 함수 //
   const navigator = useNavigate();
+
   //          event handler         //
   
   //           component : 관리자 메인 페이지 왼쪽         //
@@ -26,8 +28,26 @@ export default function AdminMain() {
     //          state         //
 
     //          function          //
-    // description : 페이지 이동을 위한 네비게이트 함수 //
-    
+    // description : 기행기 목록 버튼 클릭 이벤트 //
+    const onReviewButtonClickButton = () => {
+      navigator(ADMIN_PAGE_PATH(user?.email as string));
+    }
+
+    // description : 한 줄 목록 버튼 클릭 이벤트 //
+    const onShortReviewButtonClickButton = () => {
+      navigator(ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH(user?.email as string));
+    }
+
+    // description : 유저 목록 버튼 클릭 이벤트 //
+    const onUserButtonClickButton = () => {
+      navigator(ADMIN_GET_USER_LIST_PATH(user?.email as string));
+    }
+
+    // description : 베너 버튼 클릭 이벤트 //
+    const onBannerButtonClickButton = () => {
+      navigator(ADMIN_BANNER_PATH(user?.email as string));
+    }
+
 
     //          event handler         //
 
@@ -36,20 +56,17 @@ export default function AdminMain() {
     //          render          //
     return (
       <div className='admin-main-left'>
-        <div className='admin-main-left-button'>기행기 목록</div>
-        <div className='admin-main-left-button'>한 줄 리뷰 목록</div>
-        <div className='admin-main-left-button'>유저 목록</div>
-        <div className='admin-main-left-button'>배너</div>
+        <div className='admin-main-left-button' onClick={onReviewButtonClickButton}>기행기 목록</div>
+        <div className='admin-main-left-button' onClick={onShortReviewButtonClickButton}>한 줄 리뷰 목록</div>
+        <div className='admin-main-left-button' onClick={onUserButtonClickButton}>유저 목록</div>
+        <div className='admin-main-left-button' onClick={onBannerButtonClickButton}>배너</div>
       </div>
     )
   };
 
-
   //           component : 관리자 메인 페이지 오른쪽         //
   const AdminMainRight = () => {
     //          state         //
-    const { adminId } = useParams();
-
     // description : 페이지네이션 관련 상태 및 함수 //
     const {totalPage, currentPage, currentSection, onPageClickHandler, onPreviusClickHandler, onNextClickHandler, changeSection} = usePagination();
 
@@ -94,7 +111,7 @@ export default function AdminMain() {
     //          effect          //
     // description : 기행기 게시글 불러오기 //
     useEffect(() => {
-      getAdminReviewBoardListRequest(adminId as string, currentSection).then(getReviewBoardListResponseHandler);
+      getAdminReviewBoardListRequest(user?.email as string, currentSection).then(getReviewBoardListResponseHandler);
     },[currentSection]);
 
     useEffect(() => {
@@ -109,17 +126,25 @@ export default function AdminMain() {
     return (
       <div className='admin-main-right'>
         <div className='admin-main-right-top'>
+          <div className="admin-main-list-name">
+            <div className="admin-main-number"> 번호 </div>
+            <div className="admin-main-title"> 제목 </div>
+            <div className="admin-main-writer"> 작성자 </div>
+            <div className="admin-main-write-datetime"> 작성일자 </div>
+            <div className="admin-main-favorite-count">추천</div>
+            <div className="admin-main-view-count">조회</div>
+          </div>
+          <div className="divider"></div>
           {boardCount ? (
             <div className="review-board-list">
             {pageReviewBoardList.map((item) => (
-              <ReviewBoardListItem item={item} />
+              <AdminReviewBoardListItem item={item} />
             ))}
           </div>
           ) : (
             <div className="review-board-list-nothing"> 게시물이 존재하지 않습니다.</div>
           )}
         </div>
-        <div className='admin-main-right-bottom'>
           {boardCount !== 0 && (
             <Pagination
             totalPage={totalPage}
@@ -128,7 +153,6 @@ export default function AdminMain() {
             onPreviusClickHandler={onPreviusClickHandler}
             onNextClickHandler={onNextClickHandler} />
           )}
-        </div>
       </div>
     )
   };

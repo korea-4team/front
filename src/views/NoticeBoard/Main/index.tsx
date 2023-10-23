@@ -149,13 +149,16 @@ export default function NoticeBoardMain() {
           )}
         </div>
         {boardCount !== 0 && (
-          <Pagination
+          <div className="notice-pagination">
+            <Pagination
             totalPage={totalPage}
             currentPage={currentPage}
             onPageClickHandler={onPageClickHandler}
             onPreviusClickHandler={onPreviusClickHandler}
             onNextClickHandler={onNextClickHandler}
           />
+          </div>
+          
         )}
       </div>
     );

@@ -1,5 +1,10 @@
-import ResponseDto from "../response.dto";
-
-export default interface ShortReivewResponseDto extends ResponseDto{
+export default interface ShortReivewResponseDto {
+  
+  shortReviewNumber: number;
+  contents : string;
+  score : number;
+  writeDatetime : string;
+  writerNickname : string;
+  writerEmail: string;
 
 }
