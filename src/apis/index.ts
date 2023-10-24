@@ -1062,7 +1062,7 @@ export const deleteAdvertisingShortReviewRequest = async (
 ) => {
   const result = await axios
     .delete(DELETE_ADVERTISING_BOARD_SHORT_REVIEW_URL(boardNumber), {
-      headers: { Authorization: `Bearer${token}` },
+      headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
       const responseBody: DeleteShortCommentAdvertisingBoardResponseDto =

@@ -1,5 +1,6 @@
 import { ShortReviewListResponseDto } from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
 import { useUserStore } from "stores";
+import './style.css'
 
 
 interface Props{
@@ -35,13 +36,13 @@ export default function ShortReviewListItem({item, onDelete}:Props){
     <div className="shortReview-list-item-box">
       <div className="shortReview-list-item-writer">
         <div className="shortReview-list-item-writer-nickname">{writerNickname}</div>
-        <div className="shortReview-list-item-writer-divider">|</div>
-        <div className="shortReview-list-item-write-tiem">{getTimeGap()}</div>
-        {writerEmail === user?.email && (
-          <div className="shortReview-delete-button" onClick={() => onDelete(shortReviewNumber)}>{'삭제'}</div>
-        )}
+        <div className="shortReview-list-item-writer-divider"></div>
+        <div className="shortReview-list-item-write-item">{getTimeGap()}</div>
+        <div className="shortReview-delete-button" onClick={() => onDelete(shortReviewNumber)}>{'삭제'}</div>
+        {/* {writerEmail === user?.email && (
+        )} */}
       </div>
-      <div className="shortReview-list-item-comment">{contents}</div>
+      <div className="short-review-list-item-comment">{contents}</div>
       <div className="divider"></div>
     </div>
   )
