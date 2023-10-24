@@ -45,7 +45,7 @@ export default function Header() {
       alert('검색어를 입력해주세요.');
       return
     }
-    navigator(SEARCH_PATH(search))
+    navigator(SEARCH_PATH(location, search))
   }
 
   const onLogoClickHandler = () => {
@@ -110,7 +110,7 @@ export default function Header() {
   }, [user]);
   // description: path url이 바뀔 때 마다 실행 //
   useEffect(() => {
-    if (!pathname.includes(SEARCH_PATH(''))) {
+    if (!pathname.includes('/search/')) {
     setSearch('');
     }
   }, [pathname]);

@@ -56,10 +56,10 @@ export default function ReviewBoardWrite() {
   }
 
   //          event handler          //
-    // description : 제목이 바뀔 시 실행 될 이벤트 //
-    const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-      setReviewBoardTitle(event.target.value);
-    }
+  // description : 제목이 바뀔 시 실행 될 이벤트 //
+  const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setReviewBoardTitle(event.target.value);
+  }
   // description: 본문 내용이 바뀔시 textarea 높이 변경 이벤트 //
   const onContentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setReviewBoardContents(event.target.value);

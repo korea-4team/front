@@ -1,4 +1,4 @@
-import { deleteReviewBoardCommentRequest, deleteReviewBoardRequest, getReviewBoardCommentListRequest, getReviewBoardRequest, postReviewBoardCommentRequest, putReviewBoardFavoriteRequest } from "apis";
+import { deleteReviewBoardCommentRequest, deleteReviewBoardRequest, getReviewBoardCommentListRequest, getReviewBoardFavoriteListRequest, getReviewBoardRequest, postReviewBoardCommentRequest, putReviewBoardFavoriteRequest } from "apis";
 import { COUNT_BY_PAGE, COUNT_BY_PAGE_COMMENT, REVIEW_BOARD_PATH, REVIEW_BOARD_UPDATE_PATH } from "constant";
 import ResponseDto from "interfaces/response/response.dto";
 import { GetReviewBoardResponseDto } from "interfaces/response/reviewBoard";
@@ -13,7 +13,7 @@ import { usePagination } from "hooks";
 import { PostCommentRequestDto } from "interfaces/request/reviewBoard";
 import CommentListItem from "components/CommentListItem";
 import Pagination from "components/Pagination";
-import { FavoriteListResponseDto } from "interfaces/response/reviewBoard/get-review-board-favorite-list-response.dto";
+import GetFavoriteListResponseDto, { FavoriteListResponseDto } from "interfaces/response/reviewBoard/get-review-board-favorite-list-response.dto";
 
 export default function ReviewBoardDetail() {
 
@@ -79,6 +79,22 @@ export default function ReviewBoardDetail() {
       navigator(REVIEW_BOARD_PATH);
     }
 
+    // description: 좋아요 리스트 불러오기 응답 처리 함수 //
+    const getFavoriteListResponseHandler = (responseBody: GetFavoriteListResponseDto | ResponseDto) => {
+      const { code } = responseBody;
+      if (code === 'VF') alert('잘못된 게시물번호입니다.');
+      if (code === 'DE') alert('데이터베이스 에러입니다.');
+      if (code !== 'SU') {
+        setFavoriteList([]);
+        setFavoriteCount(0);
+        return;
+      }
+
+      const { favoriteList } = responseBody as GetFavoriteListResponseDto;
+      setFavoriteList(favoriteList);
+      setFavoriteCount(favoriteList.length);
+    }
+
     // description: 좋아요 응답 처리 함수 //
     const putFavoriteResponseHandler = (code: string) => {
       if (code === 'NU') alert('존재하지 않는 유저입니다.');
@@ -87,6 +103,9 @@ export default function ReviewBoardDetail() {
       if (code === 'AF') alert('로그인이 필요합니다.');
       if (code === 'DE') alert('데이터베이스 오류입니다.');
       if (code !== 'SU') return;
+
+      if (!boardNumber) return;
+      getReviewBoardFavoriteListRequest(boardNumber).then(getFavoriteListResponseHandler);
     }
 
     // description: 댓글 리스트 불러오기 응답 처리 함수 //
@@ -220,6 +239,7 @@ export default function ReviewBoardDetail() {
       }
       getReviewBoardRequest(boardNumber).then(getReviewBoardResponseHandler);
       getReviewBoardCommentListRequest(boardNumber).then(getCommentListResponseHandler);
+      getReviewBoardFavoriteListRequest(boardNumber).then(getFavoriteListResponseHandler);
     },[boardNumber])
 
     // description: 게시물과 유저 정보가 바뀔 때 마다 실행 //
@@ -227,6 +247,13 @@ export default function ReviewBoardDetail() {
       const isWriter = user?.email === reviewBoard?.writerEmail;
       setWriter(isWriter);
     },[reviewBoard, user])
+
+    // description: favorite list가 변경될 때 마다 실행될 함수 //
+    useEffect(() => {
+      setFavorite(false);
+      if (!user) return;
+      favoriteList.forEach(item => {if(item.email === user.email) setFavorite(true)})
+    }, [favoriteList]);
 
     // description: current page가 변경될 때 마다 실행될 함수 //
     useEffect(() => {

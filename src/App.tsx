@@ -17,7 +17,11 @@ import {
   REVIEW_BOARD_DETAIL_PATH,
   REVIEW_BOARD_PATH,
 
+  REVIEW_BOARD_SEARCH_LIST_PATH,
+
   REVIEW_BOARD_UPDATE_PATH,
+
+  SEARCH_LOCATION_PATH_VARIABLE,
 
   SEARCH_PATH,
 
@@ -55,6 +59,8 @@ import AdminGetUserList from "views/Admin/GetUser";
 import AdminBanner from "views/Admin/Banner";
 import ReviewBoardUpdate from "views/ReviewBoard/Update";
 import AdvertisingBoardDetail from "views/AdvertisingBoard/Detail";
+import AdvertisingBoardSearchList from "views/Search/AdvertisingBoardSearch";
+import ReviewBoardSearchList from "views/Search/ReviewBoardSearch";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -95,9 +101,10 @@ function App() {
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
           
           
-          <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)}>
-            <Route path={SEARCH_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
+          <Route path={SEARCH_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)}>
+            <Route path={SEARCH_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
             {/* <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} /> */}
+            {/* <Route path={REVIEW_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<ReviewBoardSearchList />} /> */}
           </Route>
 
           <Route path={REVIEW_BOARD_PATH}>
