@@ -1,11 +1,11 @@
 import UserListResponseDto from "./user-list.response.dto"
-import GetUserListAdvertisingBoardResponseDto from "../advertisingBoard/get-user-list-advertising.response.dto"
 import GetUserListResponseDto from "./get-user-list.response.dto"
+import GetUserResponseDto from "./get-user.response.dto"
 
 export type {
 	
 	UserListResponseDto,
-	GetUserListAdvertisingBoardResponseDto,
-	GetUserListResponseDto
+	GetUserListResponseDto,
+	GetUserResponseDto
 
 }

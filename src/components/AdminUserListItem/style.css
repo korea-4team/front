@@ -1,4 +1,4 @@
-.admin-user-list-item-box {
+.admin-user-list-box {
   margin-top: 3px;
   display: flex;
   width: 1152px;
@@ -14,50 +14,66 @@
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-.admin-user-item-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.admin-user-item-content:hover {
-  cursor: pointer;
-  text-decoration: underline 1px solid #000;
-  opacity: 0.7;
-}
-
-.admin-user-item-number {
+.admin-user-item-email {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70px;
+  width: 252px;
   height: 100%;
 
 }
 
-.admin-user-item-writer {
+.admin-user-item-password {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
+  width: 200px;
   height: 100%;
   font-size: 14px;
 }
 
-.admin-user-item-write-datetime {
+.admin-user-item-nickname{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
+  width: 100px;
   height: 100%;
   font-size: 14px;
 }
 
-.admin-user-item-score {
+.admin-user-item-address {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
+  width: 200px;
+  height: 100%;
+  font-size: 14px;
+}
+
+.admin-user-item-address-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100%;
+  font-size: 14px;
+}
+
+
+.admin-user-item-role {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+  font-size: 14px;
+}
+
+.admin-user-item-telnumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
   height: 100%;
   font-size: 14px;
 }

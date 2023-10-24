@@ -1,8 +1,14 @@
-import { ADMIN_BANNER_PATH, ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH, ADMIN_GET_USER_LIST_PATH, ADMIN_PAGE_PATH } from 'constant';
-import React from 'react'
+import { ADMIN_BANNER_PATH, ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH, ADMIN_GET_USER_LIST_PATH, ADMIN_PATH, COUNT_BY_PAGE } from 'constant';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import { useUserStore } from 'stores';
 import "./style.css";
+import { usePagination } from 'hooks';
+import { GetUserListResponseDto, UserListResponseDto } from 'interfaces/response/admin';
+import ResponseDto from 'interfaces/response/response.dto';
+import { getAdminUserListRequest } from 'apis';
+import AdminUserListItem from 'components/AdminUserListItem';
+import Pagination from 'components/Pagination';
 
 //          component : 유저 목록 불러오기          //
 export default function AdminGetUserList() {
@@ -24,22 +30,22 @@ export default function AdminGetUserList() {
     //          function          //
     // description : 기행기 목록 버튼 클릭 이벤트 //
     const onReviewButtonClickButton = () => {
-      navigator(ADMIN_PAGE_PATH(user?.email as string));
+      navigator(ADMIN_PATH);
     }
 
     // description : 한 줄 목록 버튼 클릭 이벤트 //
     const onShortReviewButtonClickButton = () => {
-      navigator(ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH(user?.email as string));
+      navigator(ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH());
     }
 
     // description : 유저 목록 버튼 클릭 이벤트 //
     const onUserButtonClickButton = () => {
-      navigator(ADMIN_GET_USER_LIST_PATH(user?.email as string));
+      navigator(ADMIN_GET_USER_LIST_PATH());
     }
 
-    // description : 베너 버튼 클릭 이벤트 //
+    // description : 배너 버튼 클릭 이벤트 //
     const onBannerButtonClickButton = () => {
-      navigator(ADMIN_BANNER_PATH(user?.email as string));
+      navigator(ADMIN_BANNER_PATH());
     }
 
 
@@ -61,13 +67,63 @@ export default function AdminGetUserList() {
   //          component : 오른쪽 메뉴 컴포넌트         //
   const AdminUserListRight = () => {
     //          state         //
+    // description : 페이지 네이션 관련 상태 및 함수 //
+    const { totalPage, currentPage, currentSection, onPageClickHandler, onPreviusClickHandler, onNextClickHandler, changeSection} = usePagination();
 
+    // description : 전체 유저 리스트 상태 //
+    const [userList, setUserList] = useState<UserListResponseDto[]>([]);
+
+    // description : 전체 유저 리스트 갯수 상태 //
+    const [boardCount, setBoardCount] = useState<number>(0);
+
+    // description : 현재 페이지에서 보여줄 유저 리스트 상태 //
+    const [pageUserList, setPageUserList] = useState<UserListResponseDto[]>([]);
+    
     //          function          //
+    // description : 현재 페이지의 유저 리스트 분류 함수 //
+    const getUserList = (
+      UserList: UserListResponseDto[]
+    ) => {
+      const startIndex = COUNT_BY_PAGE * (currentPage -1);
+      const lastIndex = UserList.length > COUNT_BY_PAGE * currentPage
+                        ? COUNT_BY_PAGE * currentPage
+                        : UserList.length;
+      const pageUserList = UserList.slice(startIndex, lastIndex);
 
+      setPageUserList(pageUserList);
+    }
+
+    // description : 유저 리스트 불러오기 응답 처리 함수 //
+    const getUserListResponseHandler = (
+      responseBody: GetUserListResponseDto | ResponseDto
+    ) => {
+      const { code } = responseBody;
+      if (code === "DE") alert("데이터 베이스 에러입니다.");
+      if (code !== "SU") return;
+
+      const { userList } = responseBody as GetUserListResponseDto;
+      setUserList(userList);
+      setBoardCount(userList.length);
+      getUserList(userList);
+      changeSection(userList.length, COUNT_BY_PAGE);
+
+    };
 
     //          event handler         //
 
     //          effect          //
+    // description : 유저 리스트 불러오기 //
+    useEffect(() => {
+      getAdminUserListRequest(user?.email as string, currentSection).then(getUserListResponseHandler);
+    },[currentSection]);
+
+    useEffect(() => {
+      if (boardCount) changeSection(boardCount, COUNT_BY_PAGE);
+    }, [currentSection]);
+
+    useEffect(() => {
+      getUserList(userList);
+    },[currentPage]);
 
     //          render          //
     return (
@@ -83,12 +139,28 @@ export default function AdminGetUserList() {
             <div className="admin-main-role"> 권한 </div>
           </div>
           <div className='divider'></div>
+          {boardCount ? (
+            <div className='user-list'>
+              {pageUserList.map((item) => (
+                <AdminUserListItem item={item} />
+              ))}
+            </div>
+          ) : (
+            <div className='user-list-nothing'> 회원이 존재하지 않습니다. </div>
+          )}
         </div>
+        {boardCount !== 0 && (
+          <Pagination
+            totalPage={totalPage}
+            currentPage={currentPage}
+            onPageClickHandler={onPageClickHandler}
+            onPreviusClickHandler={onPreviusClickHandler}
+            onNextClickHandler={onNextClickHandler} />
+        )}
       </div>
     )
   };
-
-
+  
   //          effect          //
 
   //          render          //
