@@ -129,12 +129,12 @@
 
 
 .advertising-board-comment-list{
-
+  
 }
 
 
 .advertising-board-comment-pagination-box{
-
+  display: flex;
 }
 
 .advertising-board-comment-input-box{

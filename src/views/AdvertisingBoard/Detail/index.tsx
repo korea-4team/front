@@ -1,10 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
 import "./style.css"
-import { useUserStore } from "stores";
-import { useCookies } from "react-cookie";
-import { ChangeEvent, useEffect, useState } from "react";
-import GetAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-advertising-board.response.dto";
-import ResponseDto from "interfaces/response/response.dto";;
 import { FavoriteListResponseDto } from "interfaces/response/advertisingBoard/get-advertising-board-favorite-list-response.dto";
 import { usePagination } from "hooks";
 import { ADVERTISING_BOARD_PATH, ADVERTISING_BOARD_UPDATE_PATH, COUNT_BY_PAGE, COUNT_BY_PAGE_COMMENT } from "constant";
@@ -14,6 +9,12 @@ import { PostShortReviewDto } from "interfaces/request/advertisingBoard";
 import { dateFormat } from "utils";
 import Pagination from "components/Pagination";
 import ShortReviewListItem from "components/ShortReviewListItem";
+import { useUserStore } from "stores";
+import { useCookies } from "react-cookie";
+import { ChangeEvent, useEffect, useState } from "react";
+import GetAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-advertising-board.response.dto";
+import ResponseDto from "interfaces/response/response.dto";;
+
 
 
 
@@ -172,7 +173,7 @@ export default function AdvertisingBoardDetail(){
      
     const onPostCommentButtonclickHandler =() => {
       if (!boardNumber) return;
-      const token = cookies.accexxToken;
+      const token = cookies.accessToken;
       if (!token) {
         alert('로그인이 필요합니다.');
         return;
@@ -188,11 +189,11 @@ export default function AdvertisingBoardDetail(){
     }
 
 
-    const onDeleteShortReviewButtonClickHandler = (shortReviewNumber : number) => {
+    const onDeleteShortReviewButtonClickHandler = (getShortReviewNumber : number) => {
       const accessToken = cookies.accessToken;
-      console.log(shortReviewNumber);
-      if(!shortReviewNumber) return;
-      deleteAdvertisingShortReviewRequest(shortReviewNumber, accessToken).then(deleteAdvertisingBoardResponseHandler);
+      console.log(getShortReviewNumber);
+      if(!getShortReviewNumber) return;
+      deleteAdvertisingShortReviewRequest(getShortReviewNumber, accessToken).then(deleteAdvertisingBoardResponseHandler);
     }
 
     let boardNumberFlag = true;
