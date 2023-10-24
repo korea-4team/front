@@ -75,12 +75,14 @@
 .review-board-count-box {
 	display: flex;
 	width: 100%;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .review-board-count-title {
 	font-size: 20px;
 	font-weight: 600;
-	margin: 0 15px 15px 0;
+	margin-right: 15px;
 }
 
 .review-board-count-emphasis {
@@ -103,7 +105,7 @@
   background-color: rgba(0, 0, 0, 0.08);
 }
 
-.rview-board-favorite-fill-icon {
+.review-board-favorite-fill-icon {
   width: 21px;
   height: 21px;
 

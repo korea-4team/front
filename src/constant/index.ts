@@ -6,6 +6,7 @@ export const COUNT_BY_PAGE_COMMENT = 10;
 export const PAGE_BY_SECTION = 10;
 
 export const BOARD_NUMBER_PATH_VARIABLE = ':boardNumber';
+export const SEARCH_LOCATION_PATH_VARIABLE = ':searchLocation';
 export const SEARCH_WORD_PATH_VARIABLE = ':searchWord';
 export const USER_EMAIL_PATH_VARIABLE = ':userEmail';
 export const ADMIN_ID_PATH_VARIABLE = ':adminId';
@@ -47,6 +48,6 @@ export const ADMIN_GET_USER_LIST_PATH = (adminId: string) => `${ADMIN_PAGE_PATH(
 export const ADMIN_BANNER_PATH = (adminId: string) => `${ADMIN_PAGE_PATH(adminId)}/main-banner`;
 
 export const MY_PAGE_PATH = (email: string) => `/my-page/${email}`;
-export const SEARCH_PATH = (searchWord: string) => `/search/${searchWord}`;
+export const SEARCH_PATH = (location: string, searchWord: string) => `/search/${location}/${searchWord}`;
 export const ADVERTISING_BOARD_SEARCH_LIST_PATH = (searchWord: string) => `/search/more/${searchWord}`;
 export const REVIEW_BOARD_SEARCH_LIST_PATH = (searchWord: string) => `/search/more/${searchWord}`;

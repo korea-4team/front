@@ -414,7 +414,7 @@ export const getReviewBoardRequest = async (boardNumber: number | string) => {
   return result;
 };
 
-export const getFavoriteListRequest = async (boardNumber: number | string) => {
+export const getReviewBoardFavoriteListRequest = async (boardNumber: number | string) => {
   const result = await axios.get(GET_REVIEW_BOARD_FAVORITE_LIST_URL(boardNumber))
   .then((response) => {
     const responseBody: GetFavoriteListResponseDto = response.data;

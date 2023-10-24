@@ -28,7 +28,7 @@ export default function Header() {
   // description: more 버튼 상태 //
   const [showMore, setShowMore] = useState<boolean>(false);
   // description: 지역 상태 //
-  const [location, setLocation] = useState<string>('');
+  const [location, setLocation] = useState<string>('전체');
 
   //          function          //
   const isAuth = pathname === AUTH_PATH;
@@ -45,7 +45,7 @@ export default function Header() {
       alert('검색어를 입력해주세요.');
       return
     }
-    navigator(SEARCH_PATH(search))
+    navigator(SEARCH_PATH(location, search))
   }
 
   const onLogoClickHandler = () => {
@@ -110,8 +110,9 @@ export default function Header() {
   }, [user]);
   // description: path url이 바뀔 때 마다 실행 //
   useEffect(() => {
-    if (!pathname.includes(SEARCH_PATH(''))) {
+    if (!pathname.includes('/search/')) {
     setSearch('');
+    setLocation('전체');
     }
   }, [pathname]);
 
@@ -142,7 +143,7 @@ export default function Header() {
       <div className="header-bottom">
         <div className="header-search-box">
           <div className="location-group">
-            <div className="location-top" onClick={onLocationMoreButtonClickHandler}>{location ? location : '지역'}</div>
+            <div className="location-top" onClick={onLocationMoreButtonClickHandler}>{location !== '전체' ? location : '지역'}</div>
             {showMore && (
               <div className="location-button-group">
                 <div className="location-button" onClick={() => onLocationButtonClickHandler('서울')}>{'서울'}</div>

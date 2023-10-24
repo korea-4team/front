@@ -15,7 +15,7 @@ export default function Search() {
   const SearchBoardList = () => {
 
     //          state          //
-    const { searchWord, location } = useParams();
+    const { searchWord, searchLocation } = useParams();
     const [boardCount, setBoardCount] = useState<number>(0);
     const [reviewBoardCount, setReviewBoardCount] = useState<number>(0);
     const [advertisingBoardCount, setAdvertisingBoardCount] = useState<number>(0);
@@ -34,18 +34,18 @@ export default function Search() {
       const { advertisingBoardList, reviewBoardList } = responseBody as GetSearchResponseDto;
       setAdvertisingBoardList(advertisingBoardList);
       setReviewBoardList(reviewBoardList);
-      setBoardCount(reviewBoardCount + advertisingBoardCount);
       setAdvertisingBoardCount(advertisingBoardList.length);
       setReviewBoardCount(reviewBoardList.length);
+      setBoardCount(reviewBoardCount + advertisingBoardCount);
     }
 
     //          event handler          //
-    const onAdvertisingBoardMoerButtonClickHandler = (word: string) => {
-      navigator(ADVERTISING_BOARD_SEARCH_LIST_PATH(word));
+    const onAdvertisingBoardMoerButtonClickHandler = (searchWord: string) => {
+      navigator(ADVERTISING_BOARD_SEARCH_LIST_PATH(searchWord));
     }
 
-    const onReviewBoardMoerButtonClickHandler = (word: string) => {
-      navigator(REVIEW_BOARD_SEARCH_LIST_PATH(word));
+    const onReviewBoardMoerButtonClickHandler = (searchWord: string) => {
+      navigator(REVIEW_BOARD_SEARCH_LIST_PATH(searchWord));
     }
 
     //          effect          //
@@ -55,9 +55,10 @@ export default function Search() {
         navigator(MAIN_PATH);
         return;
       }
-      getSearchListRequest(searchWord).then(getSearchListResponseHandler);
-    },[searchWord])
+      getSearchListRequest(searchWord, searchLocation).then(getSearchListResponseHandler);
+    },[searchWord, searchLocation])
 
+    //          render          //
     return (
       <div className="search-container">
         <div className="search-text-container">
