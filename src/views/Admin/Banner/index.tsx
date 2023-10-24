@@ -9,6 +9,7 @@ import { useState, useEffect }from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from 'stores';
 
+import "./style.css";
 //          component : 배너 컴포넌트         //
 export default function AdminBanner() {
   //          state         //
@@ -53,11 +54,11 @@ export default function AdminBanner() {
 
     //          render          //
     return (
-      <div className='admin-main-left'>
-        <div className='admin-main-left-button' onClick={onReviewButtonClickButton}>기행기 목록</div>
-        <div className='admin-main-left-button' onClick={onShortReviewButtonClickButton}>한 줄 리뷰 목록</div>
-        <div className='admin-main-left-button' onClick={onUserButtonClickButton}>유저 목록</div>
-        <div className='admin-main-left-button' onClick={onBannerButtonClickButton}>배너</div>
+      <div className='admin-banner-left'>
+        <div className='admin-banner-left-button' onClick={onReviewButtonClickButton}>기행기 목록</div>
+        <div className='admin-banner-left-button' onClick={onShortReviewButtonClickButton}>한 줄 리뷰 목록</div>
+        <div className='admin-banner-left-button' onClick={onUserButtonClickButton}>유저 목록</div>
+        <div className='admin-banner-left-button' onClick={onBannerButtonClickButton}>배너</div>
       </div>
     )
   };
@@ -123,6 +124,9 @@ export default function AdminBanner() {
     //          render          //
     return(
       <div className='admin-banner-list-item'>
+        <div className='admin-banner-write-button'>
+          <div className='black-button'> 베너 등록 </div>
+        </div>
         <div className='admin-banner-list'>
          { boardCount ? (
             <div className='banner-list'>

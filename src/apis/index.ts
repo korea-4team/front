@@ -799,7 +799,7 @@ export const postAdminBanenrRequest = async (
 
 // 베너 수정하기
 export const patchBannerRequest = async (
-  bannerNumber: string,
+  bannerNumber: number,
   data: PatchMainBannerRequestDto,
   token: string
 ) => {
@@ -823,7 +823,7 @@ export const patchBannerRequest = async (
 
 // 베너 삭제하기
 export const deleteBanenrRequest = async (
-  bannerNumber: string,
+  bannerNumber: number,
   token: string
 ) => {
   const result = await axios
