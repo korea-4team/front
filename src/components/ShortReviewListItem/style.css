@@ -1,0 +1,45 @@
+.shortReview-list-item-box {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.shortReview-list-item-writer{
+  display: flex;
+  align-items: end;
+}
+
+.shortReview-list-item-writer-nickname{
+  color: rgba(0,0,0,0.7);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.shortReview-list-time-writer-divider{
+  color: rgba(0,0,0,0.4);
+  margin: 0 8px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.shortReview-list-item-write-time{
+  color: rgba(0,0,0,0.6);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.shortReview-list-item-comment{
+  margin: 10px 0;
+  color: rgba(0,0,0,0.8);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.shortReview-delete-button{
+  margin-left: 15px;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.shortReview-delete-button:hover{
+  cursor: pointer;
+}
