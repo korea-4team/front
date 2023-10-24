@@ -1,4 +1,4 @@
-.admin-short-review-board-list-box {
+.admin-banner-list-item-box {
   margin-top: 3px;
   display: flex;
   width: 1152px;
@@ -10,30 +10,30 @@
   text-align: center;
 }
 
-.admin-short-review-board-list-box:hover {
+.admin-banner-list-box:hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-.admin-short-review-board-item-content-box {
+.admin-banner-item-image-box {
   display: flex;
   justify-content: center;
   width: 742px;
   height: 100%;
 }
 
-.admin-short-review-board-item-content {
+.admin-banner-item-image {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.admin-short-review-board-item-content:hover {
+.admin-banner-item-image:hover {
   cursor: pointer;
   text-decoration: underline 1px solid #000;
   opacity: 0.7;
 }
 
-.admin-short-review-board-item-number {
+.admin-banner-item-number {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,7 +42,7 @@
 
 }
 
-.admin-short-review-board-item-writer {
+.admin-banner-item-writer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +51,7 @@
   font-size: 14px;
 }
 
-.admin-short-review-board-item-write-datetime {
+.admin-banner-item-write-datetime {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,7 @@
   font-size: 14px;
 }
 
-.admin-short-review-board-item-score {
+.admin-banner-item-sequence {
   display: flex;
   justify-content: center;
   align-items: center;
