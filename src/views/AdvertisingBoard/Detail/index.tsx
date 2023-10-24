@@ -193,7 +193,7 @@ export default function AdvertisingBoardDetail(){
       const accessToken = cookies.accessToken;
       console.log(getShortReviewNumber);
       if(!getShortReviewNumber) return;
-      deleteAdvertisingShortReviewRequest(getShortReviewNumber, accessToken).then(deleteAdvertisingBoardResponseHandler);
+      deleteAdvertisingShortReviewRequest(getShortReviewNumber, accessToken).then(deleteShortReviewResponseHandler);
     }
 
     let boardNumberFlag = true;

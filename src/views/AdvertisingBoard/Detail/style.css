@@ -135,6 +135,7 @@
 
 .advertising-board-comment-pagination-box{
   display: flex;
+  justify-content: center;
 }
 
 .advertising-board-comment-input-box{
