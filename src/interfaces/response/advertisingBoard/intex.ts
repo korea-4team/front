@@ -16,7 +16,6 @@ import PostReservationResponseDto from "./post-reservation.response.dto";
 import PostShortReviewResponseDto from "./post-short-review.response.dto";
 import PutAdvertisingFavoriteListResponseDto from "./put-advertising-favorite-list.response.dto";
 import ReservationResponseDto from "./reservation.response.dto";
-import ShortReivewResponseDto from "./short-review.response.dto";
 import GetAdvertisingBoardBusinessTypeLocationResponseDto from "./get-advertising-board-businessType-location.Response.dto";
 
 export type{
@@ -38,6 +37,5 @@ export type{
   PostShortReviewResponseDto,
   PutAdvertisingFavoriteListResponseDto,
   ReservationResponseDto,
-  ShortReivewResponseDto,
   GetAdvertisingBoardBusinessTypeLocationResponseDto
 }
