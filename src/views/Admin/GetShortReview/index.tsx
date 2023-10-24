@@ -9,7 +9,7 @@ import {
   COUNT_BY_PAGE,
 } from "constant";
 import { usePagination } from "hooks";
-import GetShortReviewListResponseDto from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
+import GetShortReviewListResponseDto, { ShortReviewListResponseDto } from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
 
 import ResponseDto from "interfaces/response/response.dto";
 import { useEffect, useState } from "react";
@@ -61,30 +61,10 @@ export default function AdminGetShortReview() {
     //          render          //
     return (
       <div className="admin-short-review-left">
-        <div
-          className="admin-short-review-left-button"
-          onClick={onReviewButtonClickButton}
-        >
-          기행기 목록
-        </div>
-        <div
-          className="admin-short-review-left-button"
-          onClick={onShortReviewButtonClickButton}
-        >
-          한 줄 리뷰 목록
-        </div>
-        <div
-          className="admin-short-review-left-button"
-          onClick={onUserButtonClickButton}
-        >
-          유저 목록
-        </div>
-        <div
-          className="admin-short-review-left-button"
-          onClick={onBannerButtonClickButton}
-        >
-          배너
-        </div>
+        <div className="admin-short-review-left-button" onClick={onReviewButtonClickButton}> 기행기 목록</div>
+        <div className="admin-short-review-left-button" onClick={onShortReviewButtonClickButton}> 한 줄 리뷰 목록 </div>
+        <div className="admin-short-review-left-button" onClick={onUserButtonClickButton}> 유저 목록 </div>
+        <div className="admin-short-review-left-button" onClick={onBannerButtonClickButton}> 배너 </div>
       </div>
     );
   };
@@ -104,22 +84,18 @@ export default function AdminGetShortReview() {
     } = usePagination();
 
     // description : 전체 한 줄 리뷰 리스트 상태 //
-    const [shortReviewBoardList, setShortReviewBoardList] = useState<
-      GetShortReviewListResponseDto[]
-    >([]);
+    const [shortReviewBoardList, setShortReviewBoardList] = useState<ShortReviewListResponseDto[]>([]);
 
     // description : 전체 한 줄 리뷰 게시물 갯수 상태 //
     const [boardCount, setBoardCount] = useState<number>(0);
 
     // description : 현재 페이지에서 보여줄 한 줄 리뷰 리스트 상태 //
-    const [pageShortReviewBoardList, setPageShortReviewBoardList] = useState<
-    GetShortReviewListResponseDto[]
-    >([]);
+    const [pageShortReviewBoardList, setPageShortReviewBoardList] = useState<ShortReviewListResponseDto[]>([]);
 
     //          function          //
     // description : 현재 페이지의 한 줄 리뷰 리스트 분류 함수 //
     const getShortReviewBoardList = (
-      ShortReviewBoardList: GetShortReviewListResponseDto[]
+      ShortReviewBoardList: ShortReviewListResponseDto[]
     ) => {
       const startIndex = COUNT_BY_PAGE * (currentPage - 1);
       const lastIndex =

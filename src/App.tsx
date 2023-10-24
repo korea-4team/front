@@ -109,7 +109,7 @@ function App() {
 
           <Route path={ADVERTISING_BOARD_PATH}>
             <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
-            <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<AdvertisingBoardDetail/>} />
+            <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<AdvertisingBoardDetail />} />
             <Route path={WRITE_PATH} element={<AdvertisingBoardWrite />} />
           </Route>
 

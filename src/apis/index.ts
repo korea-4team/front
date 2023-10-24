@@ -4,6 +4,8 @@ import { ADMIN_ID_PATH_VARIABLE } from "constant";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
 import { AccountFindEmailRequestDto, AccountFindPasswordRequestDto, SignInRequestDto, SignUpRequestDto } from "interfaces/request/auth";
+import PatchMainBannerRequestDto from "interfaces/request/banner/patch-main-banner.request.dto";
+import PostMainBannerRequestDto from "interfaces/request/banner/post-main-banner.request.dto";
 import {
   PatchNoticeBoardRequestDto,
   PostNoticeBoardRequestDto,
@@ -29,6 +31,7 @@ import PostAdvertisingBoardResponseDto from "interfaces/response/advertisingBoar
 import PostShortReviewResponseDto from "interfaces/response/advertisingBoard/post-short-review.response.dto";
 import PutAdvertisingFavoriteListResponseDto from "interfaces/response/advertisingBoard/put-advertising-favorite-list.response.dto";
 import { AccountFindEmailResponseDto, AccountFindPasswordResponseDto, SignInResponseDto, SignUpResponseDto } from "interfaces/response/auth";
+import { DeleteMainBannerResponseDto, GetMainBannerListResponseDto, PatchMainBannerResponseDto, PostMainBannerResponseDto } from "interfaces/response/banner";
 import {
   DeleteNoticeBoardResponseDto,
   GetNoticeBoardListResponseDto,
@@ -715,7 +718,7 @@ export const getAdminReviewBoardListRequest = async (adminId: string, section: n
   });
 
   return result;
-}
+};
 
 // 한줄 리뷰 불러오기
 export const getAdminShortReviewListRequest = async (adminId: string, section: number) => {
@@ -731,7 +734,7 @@ export const getAdminShortReviewListRequest = async (adminId: string, section: n
   });
 
   return result;
-}
+};
 
 // 유저 목록 불러오기
 export const getAdminUserListRequest = async (
@@ -746,6 +749,94 @@ export const getAdminUserListRequest = async (
   .catch((error) => {
     const responseBody: ResponseDto = error.response.data;
     return responseBody;
+  })
+
+  return result;
+};
+
+// 베너 리스트 불러오기
+export const getAdminBannerListRequest = async (
+  adminId: string
+) => {
+  const result = await axios
+  .get(GET_ADMIN_BANNER_LIST_URL(adminId))
+  .then((response) => {
+    const responseBody: GetMainBannerListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
+
+  return result;
+};
+
+// 베너 상세 보기
+
+// 베너 작성하기
+export const postAdminBanenrRequest = async (
+  data: PostMainBannerRequestDto,
+  token: string
+) => {
+  const result = await axios
+  .post(POST_ADMIN_BANNER_URL(), data, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  .then((response) => {
+    const responseBody: PostMainBannerResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  })
+
+  return result;
+};
+
+// 베너 수정하기
+export const patchBannerRequest = async (
+  bannerNumber: number,
+  data: PatchMainBannerRequestDto,
+  token: string
+) => {
+  const result = await axios
+  .patch(PATCH_ADMIN_BANNER_URL(bannerNumber), data, {
+    headers: { Authorization: `Bearer ${token}`}
+  })
+  .then((response) => {
+    const responseBody: PatchMainBannerResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
+  })
+
+  return result;
+};
+
+// 베너 삭제하기
+export const deleteBanenrRequest = async (
+  bannerNumber: number,
+  token: string
+) => {
+  const result = await axios
+  .delete(DELETE_ADMIN_BANNER_URL(bannerNumber), { headers: { Authorization: `Bearer ${token}`}})
+  .then((response) => {
+    const responseBody: DeleteMainBannerResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    const { code } = responseBody;
+    return code;
   })
 
   return result;
