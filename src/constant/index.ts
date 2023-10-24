@@ -10,6 +10,7 @@ export const SEARCH_LOCATION_PATH_VARIABLE = ':searchLocation';
 export const SEARCH_WORD_PATH_VARIABLE = ':searchWord';
 export const USER_EMAIL_PATH_VARIABLE = ':userEmail';
 export const ADMIN_ID_PATH_VARIABLE = ':adminId';
+export const BANNER_NUMBER_PATH_VARIABLE = ':bannerNumber';
 
 export const MAIN_PATH = '/';
 export const AUTH_PATH = '/auth';
@@ -19,6 +20,7 @@ export const REVIEW_BOARD_PATH = '/review-board';
 export const EVENT_BOARD_PATH = '/event-board';
 export const NOTICE_BOARD_PATH = '/notice-board';
 export const ADMIN_PATH = '/admin';
+export const BANNER_PATH = 'main-banner';
 export const WRITE_PATH = 'write';
 
 export const DETAIL_PATH = (boardNumber: number | string) => `detail/${boardNumber}`;
@@ -42,10 +44,13 @@ export const NOTICE_BOARD_WRITE_PATH = () => `${NOTICE_BOARD_PATH}/${WRITE_PATH}
 export const NOTICE_BOARD_UPDATE_PATH = (boardNumber: number | string) => `${NOTICE_BOARD_PATH}/${UPDATE_PATH(boardNumber)}`;
 export const NOTICE_BOARD_DEATIL_PATH = (boardNumber: number | string) => `${NOTICE_BOARD_PATH}/${DETAIL_PATH(boardNumber)}`;
 
-export const ADMIN_PAGE_PATH = (adminId: string) => `${ADMIN_PATH}/${adminId}`;
-export const ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH = (adminId: string) => `${ADMIN_PAGE_PATH(adminId)}/short-review-board-list`;
-export const ADMIN_GET_USER_LIST_PATH = (adminId: string) => `${ADMIN_PAGE_PATH(adminId)}/user-list`;
-export const ADMIN_BANNER_PATH = (adminId: string) => `${ADMIN_PAGE_PATH(adminId)}/main-banner`;
+export const ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH = () => `${ADMIN_PATH}/short-review-board-list`;
+export const ADMIN_GET_USER_LIST_PATH = () => `${ADMIN_PATH}/user-list`;
+export const ADMIN_USER_DETAIL_PATH = (userEmail: string) => `${ADMIN_PATH}/user-list/${userEmail}`;
+
+export const ADMIN_BANNER_PATH = () => `${ADMIN_PATH}/${BANNER_PATH}`;
+export const ADMIN_BANNER_WRITE_PATH = () => `${ADMIN_PATH}/${BANNER_PATH}/${WRITE_PATH}`;
+export const ADMIN_BANNER_UPDATE_PATH = (bannerNumber: number | string) => `${ADMIN_PATH}/${BANNER_PATH}/${UPDATE_PATH(bannerNumber)}`;
 
 export const MY_PAGE_PATH = (email: string) => `/my-page/${email}`;
 export const SEARCH_PATH = (location: string, searchWord: string) => `/search/${location}/${searchWord}`;

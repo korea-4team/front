@@ -5,7 +5,7 @@ import {
   ADMIN_BANNER_PATH,
   ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH,
   ADMIN_GET_USER_LIST_PATH,
-  ADMIN_PAGE_PATH,
+  ADMIN_PATH,
   COUNT_BY_PAGE,
 } from "constant";
 import { usePagination } from "hooks";
@@ -36,22 +36,22 @@ export default function AdminGetShortReview() {
     //          function          //
     // description : 기행기 목록 버튼 클릭 이벤트 //
     const onReviewButtonClickButton = () => {
-      navigator(ADMIN_PAGE_PATH(user?.email as string));
+      navigator(ADMIN_PATH);
     };
 
     // description : 한 줄 목록 버튼 클릭 이벤트 //
     const onShortReviewButtonClickButton = () => {
-      navigator(ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH(user?.email as string));
+      navigator(ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH());
     };
 
     // description : 유저 목록 버튼 클릭 이벤트 //
     const onUserButtonClickButton = () => {
-      navigator(ADMIN_GET_USER_LIST_PATH(user?.email as string));
+      navigator(ADMIN_GET_USER_LIST_PATH());
     };
 
-    // description : 베너 버튼 클릭 이벤트 //
+    // description : 배너 버튼 클릭 이벤트 //
     const onBannerButtonClickButton = () => {
-      navigator(ADMIN_BANNER_PATH(user?.email as string));
+      navigator(ADMIN_BANNER_PATH());
     };
 
     //          event handler         //

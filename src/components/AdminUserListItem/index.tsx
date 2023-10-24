@@ -2,12 +2,13 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { dateFormat } from 'utils';
 import { UserListResponseDto } from 'interfaces/response/admin';
+import { ADMIN_USER_DETAIL_PATH } from 'constant';
 interface Props {
   item: UserListResponseDto;
 }
 
 //          component          //
-export default function AdminShortReviewBoardListItem({item}: Props) {
+export default function AdminUserListItem({item}: Props) {
 
   //          state          //
   const { email, password, nickname, address, addressDetail, role, telNumber } = item;
@@ -17,6 +18,7 @@ export default function AdminShortReviewBoardListItem({item}: Props) {
 
   //          event handler          //
   const onClickHandler = () => {
+    navigator(ADMIN_USER_DETAIL_PATH(email));
   }
 
   //          effect          //
@@ -24,14 +26,14 @@ export default function AdminShortReviewBoardListItem({item}: Props) {
   //          render          //
   return (
     <div className="admin-user-list-item-box" onClick={onClickHandler}>
-      <div className="admin-user-board-list-box">
+      <div className="admin-user-list-box">
         <div className="admin-user-item-email">{email}</div>
-        <div className="admin-user-item-password">{password}</div>
+        <div className="admin-user-item-password">**********</div>
         <div className="admin-user-item-nickname">{nickname}</div>
         <div className="admin-user-item-address">{address}</div>
         <div className="admin-user-item-address-detail">{addressDetail}</div>
-        <div className="admin-user-item-role">{role}</div>
         <div className="admin-user-item-telnumber">{telNumber}</div>
+        <div className="admin-user-item-role">{role}</div>
       </div>
     </div>
   )

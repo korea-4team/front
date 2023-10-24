@@ -1,6 +1,4 @@
 import axios from "axios";
-import { error } from "console";
-import { ADMIN_ID_PATH_VARIABLE } from "constant";
 import { PostShortReviewDto } from "interfaces/request/advertisingBoard";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
@@ -17,7 +15,7 @@ import {
   PostReviewBoardRequestDto,
 } from "interfaces/request/reviewBoard";
 import { GetCurrentEventBoardResponseDto } from "interfaces/response/EventBoard";
-import { GetUserListResponseDto } from "interfaces/response/admin";
+import { GetUserListResponseDto, GetUserResponseDto } from "interfaces/response/admin";
 import DeleteAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-advertising-board.response.dto";
 import DeleteShortCommentAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-shortcomment-advertising-board.response.dto";
 import GetAdvertisingBoardBusinessTypeResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-businessType-list-responsedto";
@@ -755,7 +753,25 @@ export const getAdminUserListRequest = async (
   return result;
 };
 
-// 베너 리스트 불러오기
+// 유저 정보 상세 보기
+export const getAdminUserDetailRequest = async (
+  adminId: string, userEmail: string
+) => {
+  const result = await axios
+  .get(GET_ADMIN_USER_DETAIL_URL(adminId, userEmail))
+  .then((response) => {
+    const responseBody: GetUserResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto =error.response.data;
+    return responseBody;
+  })
+
+  return result;
+};
+
+// 배너 리스트 불러오기
 export const getAdminBannerListRequest = async (
   adminId: string
 ) => {
@@ -773,9 +789,9 @@ export const getAdminBannerListRequest = async (
   return result;
 };
 
-// 베너 상세 보기
+// 배너 상세 보기
 
-// 베너 작성하기
+// 배너 작성하기
 export const postAdminBanenrRequest = async (
   data: PostMainBannerRequestDto,
   token: string
@@ -798,7 +814,7 @@ export const postAdminBanenrRequest = async (
   return result;
 };
 
-// 베너 수정하기
+// 배너 수정하기
 export const patchBannerRequest = async (
   bannerNumber: number,
   data: PatchMainBannerRequestDto,
@@ -822,7 +838,7 @@ export const patchBannerRequest = async (
   return result;
 };
 
-// 베너 삭제하기
+// 배너 삭제하기
 export const deleteBanenrRequest = async (
   bannerNumber: number,
   token: string

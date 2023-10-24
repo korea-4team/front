@@ -27,12 +27,6 @@
   justify-content: center;
 }
 
-.admin-short-review-board-item-content:hover {
-  cursor: pointer;
-  text-decoration: underline 1px solid #000;
-  opacity: 0.7;
-}
-
 .admin-short-review-board-item-number {
   display: flex;
   justify-content: center;
