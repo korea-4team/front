@@ -1,6 +1,16 @@
 import ResponseDto from "../response.dto";
-import ShortReivewResponseDto from "./short-review.response.dto";
 
 export default interface GetShortReviewListResponseDto extends ResponseDto {
-  shortList: ShortReivewResponseDto[];
+  shortList: ShortReviewListResponseDto[];
+}
+
+export interface ShortReviewListResponseDto {
+
+  shortReviewNumber: number;
+  contents : string;
+  score : number;
+  writeDatetime : string;
+  writerNickname : string;
+  writerEmail: string;
+
 }
