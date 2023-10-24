@@ -10,7 +10,7 @@ import {
 } from "constant";
 import { usePagination } from "hooks";
 import GetShortReviewListResponseDto from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
-import ShortReivewResponseDto from "interfaces/response/advertisingBoard/short-review.response.dto";
+
 import ResponseDto from "interfaces/response/response.dto";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -105,7 +105,7 @@ export default function AdminGetShortReview() {
 
     // description : 전체 한 줄 리뷰 리스트 상태 //
     const [shortReviewBoardList, setShortReviewBoardList] = useState<
-      ShortReivewResponseDto[]
+      GetShortReviewListResponseDto[]
     >([]);
 
     // description : 전체 한 줄 리뷰 게시물 갯수 상태 //
@@ -113,13 +113,13 @@ export default function AdminGetShortReview() {
 
     // description : 현재 페이지에서 보여줄 한 줄 리뷰 리스트 상태 //
     const [pageShortReviewBoardList, setPageShortReviewBoardList] = useState<
-      ShortReivewResponseDto[]
+    GetShortReviewListResponseDto[]
     >([]);
 
     //          function          //
     // description : 현재 페이지의 한 줄 리뷰 리스트 분류 함수 //
     const getShortReviewBoardList = (
-      ShortReviewBoardList: ShortReivewResponseDto[]
+      ShortReviewBoardList: GetShortReviewListResponseDto[]
     ) => {
       const startIndex = COUNT_BY_PAGE * (currentPage - 1);
       const lastIndex =
