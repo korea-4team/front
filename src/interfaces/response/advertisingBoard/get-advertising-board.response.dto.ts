@@ -9,4 +9,6 @@ export default interface GetAdvertisingBoardResponseDto extends ResponseDto{
   writeDatetime: string;
   writerNickname: string;
   wrtierEmail: string;
+  location: string;
+  businessType: string;
 }

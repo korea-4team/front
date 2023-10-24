@@ -1,15 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom"
 import "./style.css"
-import { useUserStore } from "stores";
-import { useCookies } from "react-cookie";
-import { useState } from "react";
-import GetAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-advertising-board.response.dto";
-import ResponseDto from "interfaces/response/response.dto";;
 import { FavoriteListResponseDto } from "interfaces/response/advertisingBoard/get-advertising-board-favorite-list-response.dto";
 import { usePagination } from "hooks";
-import { ADVERTISING_BOARD_PATH, COUNT_BY_PAGE, COUNT_BY_PAGE_COMMENT } from "constant";
-import { getAdvertisingBoardShortReviewListRequest } from "apis";
+import { ADVERTISING_BOARD_PATH, ADVERTISING_BOARD_UPDATE_PATH, COUNT_BY_PAGE, COUNT_BY_PAGE_COMMENT } from "constant";
+import { deleteAdvertisingBoardRequest, deleteAdvertisingShortReviewRequest, getAdvertisingBoardRequest, getAdvertisingBoardShortReviewListRequest, postAdvertisingBoardShortReviewRequest, putAdvertisingBoardFavoriteRequest } from "apis";
 import GetShortReviewListResponseDto, { ShortReviewListResponseDto } from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
+import { PostShortReviewDto } from "interfaces/request/advertisingBoard";
+import { dateFormat } from "utils";
+import Pagination from "components/Pagination";
+import ShortReviewListItem from "components/ShortReviewListItem";
+import { useUserStore } from "stores";
+import { useCookies } from "react-cookie";
+import { ChangeEvent, useEffect, useState } from "react";
+import GetAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-advertising-board.response.dto";
+import ResponseDto from "interfaces/response/response.dto";;
+
 
 
 
@@ -22,7 +27,7 @@ export default function AdvertisingBoardDetail(){
   const navigator = useNavigate();
 
 
-  const advertisingBoard = () => {
+  const AdvertisingBoard = () => {
 
 
     const [advertisingBoard, setAdvertisingBoard] = useState<GetAdvertisingBoardResponseDto | null>(null);
@@ -133,7 +138,169 @@ export default function AdvertisingBoardDetail(){
       setViewShortReviewList(viewShortReviewList);
     }
 
+    const onUpdateButtonClickHandler = () => {
+      if (!boardNumber) return;
+      navigator(ADVERTISING_BOARD_UPDATE_PATH(boardNumber));
+    }
 
+    const onDeleteButtonClickHandler = () => {
+      const accessToken = cookies.accessToken;
+      if(!boardNumber) return;
+      deleteAdvertisingBoardRequest(boardNumber, accessToken).then(deleteAdvertisingBoardResponseHandler);
+
+    }
+
+    const onBackButtonClickHandler = () => {
+      navigator(ADVERTISING_BOARD_PATH);
+    }
+
+    const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+      const comment = event.target.value;
+      setShortReview(comment);
+    }
+
+    const onFavoriteButtonClickHandler = () => {
+      if (!boardNumber) return;
+      const token = cookies.accessToken;
+      if(!token) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
+      putAdvertisingBoardFavoriteRequest(boardNumber, token) .then(putFavoriteResponseHandler);
+    }
+
+
+     
+    const onPostCommentButtonclickHandler =() => {
+      if (!boardNumber) return;
+      const token = cookies.accessToken;
+      if (!token) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
+      if (!shortReview) {
+        alert('내용을 입력하세요');
+        return;
+      }
+      const data: PostShortReviewDto = {
+        contents : shortReview
+      }
+      postAdvertisingBoardShortReviewRequest(boardNumber, data, token).then(postShortReviewResponseHandler);
+    }
+
+
+    const onDeleteShortReviewButtonClickHandler = (getShortReviewNumber : number) => {
+      const accessToken = cookies.accessToken;
+      console.log(getShortReviewNumber);
+      if(!getShortReviewNumber) return;
+      deleteAdvertisingShortReviewRequest(getShortReviewNumber, accessToken).then(deleteAdvertisingBoardResponseHandler);
+    }
+
+    let boardNumberFlag = true;
+    useEffect(() => {
+      if (boardNumberFlag) {
+        boardNumberFlag = false;
+        return
+      }
+      if (!boardNumber) {
+        alert('게시물 번호가 잘못되었습니다.');
+        navigator(ADVERTISING_BOARD_PATH);
+        return;
+      }
+      getAdvertisingBoardRequest(boardNumber).then(getAdvertisingBoardResponseHandler);
+      getAdvertisingBoardShortReviewListRequest(boardNumber).then(getShortReviewResponseHandler);
+    },[boardNumber])
+
+
+    useEffect(() => {
+      const isWriter = user?.email === advertisingBoard?.wrtierEmail;
+      setWriter(isWriter);
+    },[advertisingBoard,user])
+
+
+    useEffect(() => {
+      getViewShortReviewList(shortReviewList);
+    },[currentPage]);
+
+    useEffect(() => {
+      changeSection(shortReviewCount,COUNT_BY_PAGE_COMMENT);
+    },[currentSection]);
+
+
+
+
+
+    return(
+      <div className="advertising-board-detail-container">
+        <div className="advertising-board-detail-data">
+          <div className="advertising-board-detail-title">{advertisingBoard?.title}</div>
+          <div className="advertising-board-detail-location-businesstype">[{advertisingBoard?.location},{advertisingBoard?.businessType}]</div>
+        </div>
+        <div className="advertising-board-detail-write-data">
+          <div className="advertising-board-detail-writer-nickname">{advertisingBoard?.writerNickname}</div>
+          <div className="advertising-board-detail-divider">{'\|'}</div>
+          <div className="advertising-board-detail-write-date">{dateFormat(advertisingBoard?.writeDatetime as string)}</div>
+        </div>
+        <div className="divider"></div>
+        <div className="advertising-board-detail-body">
+          <div className="advertising-board-detail-contents">{advertisingBoard?.contents}</div>
+          <div className="advertising-board-detail-image-box">
+            <img className="advertising-board-detail-image" src = {advertisingBoard?.imageUrl ? advertisingBoard.imageUrl: ''} />
+          </div>
+        </div>
+        <div className="advertising-board-button-box">
+          <div className="black-button" onClick={onBackButtonClickHandler}>목록</div>
+          {isWriter &&
+            <div className="advertising-board-writer-button-box">
+              <div className="black-button" onClick={onUpdateButtonClickHandler}>수정</div>
+              <div className="black-button" onClick={onDeleteButtonClickHandler}>삭제</div>
+            </div>
+          }
+        </div>
+        <div className="advertising-board-bottom-container">
+          <div className="advertising-board-count-box">
+            <div className="advertising-board-count-title">{'댓글'}<span className="advertising-board-count-emphasis">{shortReviewCount}</span></div>
+            <div className="advertising-board-count-title">{'추천'}<span className="advertising-board-count-emphasis">{favoriteCount}</span></div>
+            <div className="advertising-board-favorite-button" onClick={onFavoriteButtonClickHandler}>
+              {isFavorite ? (
+                <div className="advertising-board-favorite-fill-icon"></div>
+              ) : (
+                <div className="advertising-board-favorite-icon"></div>
+              )}
+            </div>
+          </div>
+          <div className="advertising-board-comment-list">
+            {viewShortReviewList.map(shortReviewListItem => <ShortReviewListItem item={shortReviewListItem} onDelete = {onDeleteShortReviewButtonClickHandler}/> )}
+          </div>
+          <div className="advertising-board-comment-pagination-box">
+            {shortReviewCount !== 0 && (
+              <Pagination
+                totalPage={totalPage}
+                currentPage={currentPage}
+                onPageClickHandler={onPageClickHandler}
+                onNextClickHandler={onNextClickHandler}
+                onPreviusClickHandler={onPreviusClickHandler} />
+            )}
+          </div>
+          <div className="advertising-board-comment-input-box">
+            <div className="advertsing-board-comment-input-container">
+              <textarea className="advertising-board-comment-input" placeholder="댓글을 작성해주세요" value={shortReview} onChange={onCommentChangeHandler} />
+              <div className="advertising-board-comment-button-box">
+                {shortReview.length ===0 ? (
+                  <div className="disable-button">댓글달기</div>
+                ) : (
+                  <div className="black-button" onClick={onPostCommentButtonclickHandler}>댓글달기</div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
+
+  return(
+    <AdvertisingBoard />
+  )
 
 }

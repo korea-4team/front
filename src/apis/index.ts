@@ -1,6 +1,7 @@
 import axios from "axios";
 import { error } from "console";
 import { ADMIN_ID_PATH_VARIABLE } from "constant";
+import { PostShortReviewDto } from "interfaces/request/advertisingBoard";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
 import { AccountFindEmailRequestDto, AccountFindPasswordRequestDto, SignInRequestDto, SignUpRequestDto } from "interfaces/request/auth";
@@ -970,7 +971,7 @@ export const postAdvertisingBoardRequest = async (
 
 export const postAdvertisingBoardShortReviewRequest = async (
   boardNumber: number | string,
-  data: PostShortReviewResponseDto,
+  data: PostShortReviewDto,
   token: string
 ) => {
   const result = await axios
