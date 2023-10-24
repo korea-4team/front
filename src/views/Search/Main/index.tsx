@@ -58,6 +58,7 @@ export default function Search() {
       getSearchListRequest(searchWord, searchLocation).then(getSearchListResponseHandler);
     },[searchWord, searchLocation])
 
+    //          render          //
     return (
       <div className="search-container">
         <div className="search-text-container">
