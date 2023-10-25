@@ -33,19 +33,21 @@ export default function Search() {
 
       const { advertisingBoardList, reviewBoardList } = responseBody as GetSearchResponseDto;
       setAdvertisingBoardList(advertisingBoardList);
-      setReviewBoardList(reviewBoardList);
       setAdvertisingBoardCount(advertisingBoardList.length);
+      setReviewBoardList(reviewBoardList);
       setReviewBoardCount(reviewBoardList.length);
-      setBoardCount(reviewBoardCount + advertisingBoardCount);
+      setBoardCount(reviewBoardList.length + advertisingBoardList.length);
     }
 
     //          event handler          //
-    const onAdvertisingBoardMoerButtonClickHandler = (searchWord: string) => {
-      navigator(ADVERTISING_BOARD_SEARCH_LIST_PATH(searchWord));
+    const onAdvertisingBoardMoerButtonClickHandler = () => {
+      if (!searchLocation || !searchWord) return;
+      navigator(ADVERTISING_BOARD_SEARCH_LIST_PATH(searchLocation, searchWord));
     }
 
-    const onReviewBoardMoerButtonClickHandler = (searchWord: string) => {
-      navigator(REVIEW_BOARD_SEARCH_LIST_PATH(searchWord));
+    const onReviewBoardMoerButtonClickHandler = () => {
+      if (!searchLocation || !searchWord) return;
+      navigator(REVIEW_BOARD_SEARCH_LIST_PATH(searchLocation, searchWord));
     }
 
     //          effect          //
@@ -72,7 +74,7 @@ export default function Search() {
             advertisingBoardCount ? 
           (<><div className="advertising-board-search-list-box">
             {advertisingBoardList.map((item) => (<AdvertisingBoardListItem item={item} />))}
-          </div><div className="search-list-more-button" onClick={() => onAdvertisingBoardMoerButtonClickHandler}>검색결과 더보기</div></>) : (<div className="search-board-nothing">검색결과가 없습니다.</div>)
+          </div><div className="search-list-more-button" onClick={onAdvertisingBoardMoerButtonClickHandler}>검색결과 더보기</div></>) : (<div className="search-board-nothing">검색결과가 없습니다.</div>)
           }
         </div>
         <div className="review-board-search-box">
@@ -81,13 +83,12 @@ export default function Search() {
             reviewBoardCount ?
             (<><div className="review-board-search-list-box">
             {reviewBoardList.map((item) => (<ReviewBoardListItem item={item} />))}
-          </div><div className="search-list-more-button" onClick={() => onReviewBoardMoerButtonClickHandler}>검색결과 더보기</div></>) : (<div className="search-board-nothing">검색결과가 없습니다.</div>)
+          </div><div className="search-list-more-button" onClick={onReviewBoardMoerButtonClickHandler}>검색결과 더보기</div></>) : (<div className="search-board-nothing">검색결과가 없습니다.</div>)
           }
         </div>
       </div>
     )
   }
-
 
   return (
     <SearchBoardList />

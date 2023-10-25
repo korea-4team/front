@@ -23,6 +23,8 @@ import {
 
   REVIEW_BOARD_UPDATE_PATH,
 
+  SEARCH_BOARD_PATH,
+
   SEARCH_LOCATION_PATH_VARIABLE,
 
   SEARCH_PATH,
@@ -66,6 +68,9 @@ import AdvertisingBoardSearchList from "views/Search/AdvertisingBoardSearch";
 import ReviewBoardSearchList from "views/Search/ReviewBoardSearch";
 import AdminBannerWrite from "views/Admin/Banner/Write";
 import AdminGetUserDetail from "views/Admin/GetUserDetail";
+import EventBoardDetail from "views/EventBoard/Detail";
+import EventBoardWrite from "views/EventBoard/Write";
+import EventBoardUpdate from "views/EventBoard/Update";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -103,13 +108,18 @@ function App() {
         <Route element={<Container />}>
           <Route path={MAIN_PATH} element={<Main />} />
           
-          <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
+          <Route path={EVENT_BOARD_PATH}>
+            <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
+            <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<EventBoardDetail />} />
+            <Route path={WRITE_PATH} element={<EventBoardWrite />} />
+            <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<EventBoardUpdate />} />
+          </Route>
           
           
-          <Route path={SEARCH_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)}>
-            <Route path={SEARCH_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
-            {/* <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} /> */}
-            {/* <Route path={REVIEW_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<ReviewBoardSearchList />} /> */}
+          <Route path={SEARCH_PATH}>
+            <Route path={SEARCH_BOARD_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
+            <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} />
+            <Route path={REVIEW_BOARD_SEARCH_LIST_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<ReviewBoardSearchList />} />
           </Route>
 
           <Route path={REVIEW_BOARD_PATH}>

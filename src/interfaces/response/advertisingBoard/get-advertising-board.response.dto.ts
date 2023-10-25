@@ -8,7 +8,7 @@ export default interface GetAdvertisingBoardResponseDto extends ResponseDto{
   imageUrl: string | null;
   writeDatetime: string;
   writerNickname: string;
-  wrtierEmail: string;
+  writerEmail: string;
   location: string;
   businessType: string;
 }

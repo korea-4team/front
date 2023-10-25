@@ -22,6 +22,8 @@ export const NOTICE_BOARD_PATH = '/notice-board';
 export const ADMIN_PATH = '/admin';
 export const BANNER_PATH = 'main-banner';
 export const WRITE_PATH = 'write';
+export const SEARCH_PATH = '/search';
+
 
 export const DETAIL_PATH = (boardNumber: number | string) => `detail/${boardNumber}`;
 export const UPDATE_PATH = (boardNumber: number | string) => `update/${boardNumber}`;
@@ -53,6 +55,6 @@ export const ADMIN_BANNER_WRITE_PATH = () => `${ADMIN_PATH}/${BANNER_PATH}/${WRI
 export const ADMIN_BANNER_UPDATE_PATH = (bannerNumber: number | string) => `${ADMIN_PATH}/${BANNER_PATH}/${UPDATE_PATH(bannerNumber)}`;
 
 export const MY_PAGE_PATH = (email: string) => `/my-page/${email}`;
-export const SEARCH_PATH = (location: string, searchWord: string) => `/search/${location}/${searchWord}`;
-export const ADVERTISING_BOARD_SEARCH_LIST_PATH = (searchWord: string) => `/search/more/${searchWord}`;
-export const REVIEW_BOARD_SEARCH_LIST_PATH = (searchWord: string) => `/search/more/${searchWord}`;
+export const SEARCH_BOARD_PATH = (location: string, searchWord: string) => `${SEARCH_PATH}/${location}/${searchWord}`;
+export const ADVERTISING_BOARD_SEARCH_LIST_PATH = (location: string, searchWord: string) => `${SEARCH_PATH}/advertising-board/more/${location}/${searchWord}`;
+export const REVIEW_BOARD_SEARCH_LIST_PATH = (location: string, searchWord: string) => `${SEARCH_PATH}/review-board/more/${location}/${searchWord}`;
