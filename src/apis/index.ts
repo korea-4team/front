@@ -1058,7 +1058,7 @@ export const deleteAdvertisingBoardRequest = async (
 ) => {
   const result = await axios
     .delete(DELETE_ADVERTISING_BOARD_URL(boardNumber), {
-      headers: { Authorization: `Bearer${token}` },
+      headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
       const responseBody: DeleteAdvertisingBoardResponseDto = response.data;

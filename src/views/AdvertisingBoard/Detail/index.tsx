@@ -213,7 +213,7 @@ export default function AdvertisingBoardDetail(){
 
 
     useEffect(() => {
-      const isWriter = user?.email === advertisingBoard?.wrtierEmail;
+      const isWriter = user?.email === advertisingBoard?.writerEmail;
       setWriter(isWriter);
     },[advertisingBoard,user])
 
