@@ -70,6 +70,9 @@ import ReviewBoardSearchList from "views/Search/ReviewBoardSearch";
 import AdminBannerWrite from "views/Admin/Banner/Write";
 import AdminBannerUpdate from "views/Admin/Banner/Update";
 import AdminGetUserDetail from "views/Admin/GetUserDetail";
+import EventBoardDetail from "views/EventBoard/Detail";
+import EventBoardWrite from "views/EventBoard/Write";
+import EventBoardUpdate from "views/EventBoard/Update";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -107,7 +110,12 @@ function App() {
         <Route element={<Container />}>
           <Route path={MAIN_PATH} element={<Main />} />
           
-          <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
+          <Route path={EVENT_BOARD_PATH}>
+            <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
+            <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<EventBoardDetail />} />
+            <Route path={WRITE_PATH} element={<EventBoardWrite />} />
+            <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<EventBoardUpdate />} />
+          </Route>
           
           
           <Route path={SEARCH_PATH}>
