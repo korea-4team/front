@@ -24,6 +24,8 @@ import {
 
   REVIEW_BOARD_UPDATE_PATH,
 
+  SEARCH_BOARD_PATH,
+
   SEARCH_LOCATION_PATH_VARIABLE,
 
   SEARCH_PATH,
@@ -108,10 +110,10 @@ function App() {
           <Route path={EVENT_BOARD_PATH} element={<EventBoard />} />
           
           
-          <Route path={SEARCH_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)}>
-            <Route path={SEARCH_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
-            {/* <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} /> */}
-            {/* <Route path={REVIEW_BOARD_SEARCH_LIST_PATH(SEARCH_WORD_PATH_VARIABLE)} element={<ReviewBoardSearchList />} /> */}
+          <Route path={SEARCH_PATH}>
+            <Route path={SEARCH_BOARD_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<Search />} />
+            <Route path={ADVERTISING_BOARD_SEARCH_LIST_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<AdvertisingBoardSearchList />} />
+            <Route path={REVIEW_BOARD_SEARCH_LIST_PATH(SEARCH_LOCATION_PATH_VARIABLE, SEARCH_WORD_PATH_VARIABLE)} element={<ReviewBoardSearchList />} />
           </Route>
 
           <Route path={REVIEW_BOARD_PATH}>

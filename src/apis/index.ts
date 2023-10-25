@@ -1109,7 +1109,7 @@ export const getSearchListRequest = async (searchWord: string, location?: string
   return result;
 }
 
-export const getSearchReviewBoardListRequest = async (searchWord: string, section: number | string, location?: string) => {
+export const getSearchReviewBoardListRequest = async (searchWord: string, location: string, section: number | string) => {
   const result = await axios.get(GET_SEARCH_REVIEW_BOARD_LIST_URL(searchWord, section, location))
   .then((response) => {
     const responseBody: GetSearchReviewBoardListResponseDto = response.data;
@@ -1122,7 +1122,7 @@ export const getSearchReviewBoardListRequest = async (searchWord: string, sectio
   return result;
 }
 
-export const getSearchAdvertisingBoardListRequest = async (searchWord: string, section: number | string, location?: string) => {
+export const getSearchAdvertisingBoardListRequest = async (searchWord: string, location: string, section: number | string) => {
   const result = await axios.get(GET_SEARCH_ADVERTISING_BOARD_LIST_URL(searchWord, section, location))
   .then((response) => {
     const responseBody: GetSearchAdvertisingBoardResponseDto = response.data;

@@ -3,7 +3,7 @@ import './style.css';
 import { useUserStore } from 'stores';
 import { useCookies } from 'react-cookie';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { ADMIN_PATH, ADVERTISING_BOARD_PATH, AUTH_PATH, EVENT_BOARD_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_PATH, REVIEW_BOARD_PATH, SEARCH_PATH } from 'constant';
+import { ADMIN_PATH, ADVERTISING_BOARD_PATH, AUTH_PATH, EVENT_BOARD_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_PATH, REVIEW_BOARD_PATH, SEARCH_BOARD_PATH, SEARCH_PATH } from 'constant';
 
 //          component          //
 // description: Header 레이아웃 //
@@ -47,7 +47,7 @@ export default function Header() {
       alert('검색어를 입력해주세요.');
       return
     }
-    navigator(SEARCH_PATH(location, search))
+    navigator(SEARCH_BOARD_PATH(location, search))
   }
 
   const onLogoClickHandler = () => {
