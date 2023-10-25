@@ -14,7 +14,13 @@ export default function AdvertisingBoardWrite(){
 
   // description //
   const[cookies,setCooke] = useCookies();
+  const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const nametextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const teltextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const timetextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const numbertextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const addresstextAreaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fileInputRefmiri = useRef<HTMLInputElement>(null);
 
@@ -82,55 +88,55 @@ export default function AdvertisingBoardWrite(){
   const onContenthandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAdvertisingBoardContent(event.target.value);
 
-    if (!textAreaRef.current) return;
+    if (!contentTextAreaRef.current) return;
 
-    textAreaRef.current.style.height = 'auto';
-    textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    contentTextAreaRef.current.style.height = 'auto';
+    contentTextAreaRef.current.style.height = `${contentTextAreaRef.current.scrollHeight}px`;
   }
 
   const onStoreNamehandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAdvertisingBoardStore(event.target.value);
 
-    if (!textAreaRef.current) return;
+    if (!nametextAreaRef.current) return;
 
-    textAreaRef.current.style.height = 'auto';
-    textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    nametextAreaRef.current.style.height = 'auto';
+    nametextAreaRef.current.style.height = `${nametextAreaRef.current.scrollHeight}px`;
   }
 
   const onStoreTelhandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAdvertisingBoardStoreTel(event.target.value);
 
-    if(!textAreaRef.current) return;
+    if(!teltextAreaRef.current) return;
 
-    textAreaRef.current.style.height = 'auto';
-    textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    teltextAreaRef.current.style.height = 'auto';
+    teltextAreaRef.current.style.height = `${teltextAreaRef.current.scrollHeight}px`;
   }
 
   const onStoreTimehandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAdvertisingBoardStoreTime(event.target.value);
 
-    if(!textAreaRef.current) return;
+    if(!timetextAreaRef.current) return;
 
-    textAreaRef.current.style.height = 'auto';
-    textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    timetextAreaRef.current.style.height = 'auto';
+    timetextAreaRef.current.style.height = `${timetextAreaRef.current.scrollHeight}px`;
   }
 
   const onStoreNumberhandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAdvertisingBoardStoreNumber(event.target.value);
 
-    if(!textAreaRef.current) return;
+    if(!numbertextAreaRef.current) return;
 
-    textAreaRef.current.style.height = 'auto';
-    textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    numbertextAreaRef.current.style.height = 'auto';
+    numbertextAreaRef.current.style.height = `${numbertextAreaRef.current.scrollHeight}px`;
   }
 
   const onStoreAddresshandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAdvertisingBoardStoreAddress(event.target.value);
 
-    if(!textAreaRef.current) return;
+    if(!addresstextAreaRef.current) return;
 
-    textAreaRef.current.style.height = 'auto';
-    textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    addresstextAreaRef.current.style.height = 'auto';
+    addresstextAreaRef.current.style.height = `${addresstextAreaRef.current.scrollHeight}px`;
   }
   
 
@@ -308,6 +314,7 @@ export default function AdvertisingBoardWrite(){
           <input type='text' className='advertising-board-write-title-input' placeholder='제목을 입력해주십시오.' onChange={onTitleChangeHandler} value={advertisingBoardTitle} />
         </div>
         <div className='divider'></div>
+        <div className='advertising-board-write-store'>업종 사진</div>
         <div className='advertising-board-image-miri-container'>
         {advertisingBoardImagemiriUrls.map( (url, index) =>
           <div className='advertising-board-write-image-miri-container'>
@@ -317,21 +324,20 @@ export default function AdvertisingBoardWrite(){
             </div>
           </div>
         )}
-        <div className='miri-image-miri'>
           <div className='advertising-board-img-miri'>
             <div className='advertising-board-image-upload-button-miri' onClick={onImageUploadButtonClickHandlermiri}>
               <div className='advertising-board-image-upload-icon-miri'></div>
             </div>
             <input ref={fileInputRefmiri} type='file' accept='image/*' style={{display:'none'}} onChange={onImageInputChangeHandlermiri} />
           </div>
-        </div>
        </div>
-        
+       <div className='advertising-board-write-store'>업종 소개</div>
         <div className='advertising-board-write-content-container'>
           <div className='advertising-board-write-content-input-box'>
-            <textarea ref={textAreaRef} className='advertising-board-write-content-textarea' placeholder='가게에 대한 설명을 적어주세요.' value={advertisingBoardContent} onChange={onContenthandler}></textarea>
+            <textarea ref={contentTextAreaRef} className='advertising-board-write-content-textarea' placeholder='가게에 대한 설명을 적어주세요.' value={advertisingBoardContent} onChange={onContenthandler}></textarea>
           </div>
         </div>
+        <div className='advertising-board-write-store'>판매목록</div>
         <div className='image-image'>
           
         {advertisingBoardImageUrls.map( (url, index) =>
@@ -349,13 +355,14 @@ export default function AdvertisingBoardWrite(){
             <input ref={fileInputRef} type='file' accept='image/*' style={{display: 'none'}} onChange={onImageInputChangeHandler} />
           </div>
         </div>
+        <div className='advertising-board-write-store'>업종 세부사항</div>
         <div className='advertising-board-store-conent'>
           <div className='advertising-board-store-input-box'>
-            <textarea ref={textAreaRef} className='advertising-board-store-content-textarea' placeholder='가게 이름을 작성해주십시오' value={advertisingBoardStore} onChange={onStoreNamehandler}></textarea>
-            <textarea ref={textAreaRef} className='advertising-board-store-content-textarea' placeholder='전화번호를 작성해주십시오' value={advertisingBoardStoreTel} onChange={onStoreTelhandler}></textarea>
-            <textarea ref={textAreaRef} className='advertising-board-store-content-textarea' placeholder='영업시간을 작성해주십시오' value={advertisingBoardStoreTime} onChange={onStoreTimehandler}></textarea>
-            <textarea ref={textAreaRef} className='advertising-board-store-content-textarea' placeholder='사업자등록번호를 작성해주십시오.' value={advertisingBoardStoreNumber} onChange={onStoreNumberhandler}></textarea>
-            <textarea ref={textAreaRef} className='advertising-board-store-content-textarea' placeholder='상세 주소를 입력해주십시오.' value={advertisingBoardStoreAddress} onChange={onStoreAddresshandler}></textarea>
+            <textarea ref={nametextAreaRef} className='advertising-board-store-content-textarea' placeholder='가게 이름을 작성해주십시오' value={advertisingBoardStore} onChange={onStoreNamehandler}></textarea>
+            <textarea ref={teltextAreaRef} className='advertising-board-store-content-textarea' placeholder='전화번호를 작성해주십시오' value={advertisingBoardStoreTel} onChange={onStoreTelhandler}></textarea>
+            <textarea ref={timetextAreaRef} className='advertising-board-store-content-textarea' placeholder='영업시간을 작성해주십시오' value={advertisingBoardStoreTime} onChange={onStoreTimehandler}></textarea>
+            <textarea ref={numbertextAreaRef} className='advertising-board-store-content-textarea' placeholder='사업자등록번호를 작성해주십시오.' value={advertisingBoardStoreNumber} onChange={onStoreNumberhandler}></textarea>
+            <textarea ref={addresstextAreaRef} className='advertising-board-store-content-textarea' placeholder='상세 주소를 입력해주십시오.' value={advertisingBoardStoreAddress} onChange={onStoreAddresshandler}></textarea>
             <div>
             <Wrapper apiKey="AIzaSyA18GduLmXFchKa4b7jSZNfPOXH8ZmDgyI" libraries={["places"]}>
               <GoogleMapComponent />
