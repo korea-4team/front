@@ -23,20 +23,11 @@
 
 }
 
-.admin-user-item-password {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 100%;
-  font-size: 14px;
-}
-
 .admin-user-item-nickname{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 150px;
   height: 100%;
   font-size: 14px;
 }
@@ -54,7 +45,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 200px;
+  width: 250px;
   height: 100%;
   font-size: 14px;
 }
@@ -64,7 +55,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 150px;
   height: 100%;
   font-size: 14px;
 }
@@ -73,7 +64,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 150px;
   height: 100%;
   font-size: 14px;
 }

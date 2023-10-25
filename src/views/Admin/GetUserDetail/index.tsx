@@ -7,12 +7,11 @@ import { useState, useEffect } from 'react'
 import "./style.css";
 import { GetUserResponseDto } from 'interfaces/response/admin';
 import ResponseDto from 'interfaces/response/response.dto';
+import { getAdminUserDetailRequest } from 'apis';
 
 //          component : 유저 정보 상세 컴포넌트         //
 export default function AdminGetUserDetail() {
   //          state         //
-  // description : 유저 정보 상태 //
-  const {user, setUser} = useUserStore();
 
   //          function          //
   // description : 페이지 이동을 위한 네비게이트 함수 //
@@ -66,25 +65,27 @@ export default function AdminGetUserDetail() {
     //          state         //
     // description : 유저 이메일 정보 상태 //
     const { userEmail } = useParams();
+    
+    // description : 로그인 유저 정보 상태 //
+    const { user } = useUserStore();
 
-    // description : 유저 상태 //
-    const [user, setUser] = useState<GetUserResponseDto | null>(null);
+    // description : 유저 정보 상태 //
+    const [userDetail, setUserDetail] = useState<GetUserResponseDto | null>(null);
 
     //          function          //
     // description : 유저 정보 불러오기 요청 함수 //
-    const getUserDetailListHandler = (responseBody: GetUserResponseDto | ResponseDto) => {
+    const getUserResponseHandler = (responseBody: GetUserResponseDto | ResponseDto) => {
       const { code } = responseBody;
 
-      if (code === "NA") alert("관리자 아이디가 아닙니다.");
-      if (code === "NE") alert("유저 정보가 없습니다.");
-      if (code === "VF") alert("유저 이메일이 잘못되었습니다.");
       if (code === "DE") alert("데이터 베이스 에러입니다.");
+      if (code === "VF") alert("게시물 번호가 잘못되었습니다.");
+      if (code === "NE") alert("유저 정보가 없습니다.");
       if (code !== "SU") {
         navigator(ADMIN_GET_USER_LIST_PATH());
         return;
       }
 
-      setUser(responseBody as GetUserResponseDto);
+      setUserDetail(responseBody as GetUserResponseDto);
     }
 
     //          event handler         //
@@ -94,6 +95,17 @@ export default function AdminGetUserDetail() {
     }
 
     //          effect          //
+    // description : 유저 이메일이 바뀔 때마다 새로운 정보 받아오기 //
+    useEffect(() => {
+      if(!userEmail) {
+        alert("관리자 아이디가 아닙니다.");
+        navigator(ADMIN_GET_USER_LIST_PATH());
+        return;
+      }
+
+      getAdminUserDetailRequest(user?.email as string, userEmail).then(getUserResponseHandler);
+
+    }, [user?.email as string]);
 
     //          render          //
     return (
@@ -102,27 +114,27 @@ export default function AdminGetUserDetail() {
           <div className='admin-user-detail-right-item-box'>
             <div className='admin-user-detail-box'>
               <div className='admin-user-detail-name'> 이메일 </div>
-              <div className='admin-user-detail-content'> {user?.email} </div>
+              <div className='admin-user-detail-content'> {userDetail?.email} </div>
             </div>
             <div className='admin-user-detail-box'>
-              <div className='admin-user-detail-name'> 비밀번호 </div>
-              <div className='admin-user-detail-content'> {user?.password} </div>
+              <div className='admin-user-detail-name'> 닉네임 </div>
+              <div className='admin-user-detail-content'> {userDetail?.nickname} </div>
             </div>
             <div className='admin-user-detail-box'>
               <div className='admin-user-detail-name'> 주소 </div>
-              <div className='admin-user-detail-content'> 부산시 </div>
+              <div className='admin-user-detail-content'> {userDetail?.address} </div>
             </div>
             <div className='admin-user-detail-box'>
               <div className='admin-user-detail-name'> 상세주소 </div>
-              <div className='admin-user-detail-content'> 부산진구</div>
+              <div className='admin-user-detail-content'> {userDetail?.addressDetail}</div>
             </div>
             <div className='admin-user-detail-box'>
               <div className='admin-user-detail-name'> 전화번호 </div>
-              <div className='admin-user-detail-content'> 010-1234-1234 </div>
+              <div className='admin-user-detail-content'> {userDetail?.telNumber} </div>
             </div>
             <div className='admin-user-detail-box'>
               <div className='admin-user-detail-name'> 권한 </div>
-              <div className='admin-user-detail-content'> user</div>
+              <div className='admin-user-detail-content'> {userDetail?.role}</div>
             </div>
           </div>
         </div>

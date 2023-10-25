@@ -46,7 +46,7 @@ export const NOTICE_BOARD_DEATIL_PATH = (boardNumber: number | string) => `${NOT
 
 export const ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH = () => `${ADMIN_PATH}/short-review-board-list`;
 export const ADMIN_GET_USER_LIST_PATH = () => `${ADMIN_PATH}/user-list`;
-export const ADMIN_USER_DETAIL_PATH = (userEmail: string) => `${ADMIN_PATH}/user-list/${userEmail}`;
+export const ADMIN_USER_DETAIL_PATH = (adminId: string, userEmail: string) => `${ADMIN_PATH}/${adminId}/user-detail/${userEmail}`;
 
 export const ADMIN_BANNER_PATH = () => `${ADMIN_PATH}/${BANNER_PATH}`;
 export const ADMIN_BANNER_WRITE_PATH = () => `${ADMIN_PATH}/${BANNER_PATH}/${WRITE_PATH}`;

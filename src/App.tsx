@@ -4,14 +4,13 @@ import {
   ADMIN_BANNER_WRITE_PATH,
   ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH,
   ADMIN_GET_USER_LIST_PATH,
+  ADMIN_ID_PATH_VARIABLE,
   ADMIN_PATH,
   ADMIN_USER_DETAIL_PATH,
   ADVERTISING_BOARD_PATH,
   ADVERTISING_BOARD_SEARCH_LIST_PATH,
   ADVERTISING_BOARD_WRITE_PATH,
   AUTH_PATH,
-  BANNER_NUMBER_PATH_VARIABLE,
-  BANNER_PATH,
   BOARD_NUMBER_PATH_VARIABLE,
   DETAIL_PATH,
   EVENT_BOARD_PATH,
@@ -66,7 +65,6 @@ import AdvertisingBoardDetail from "views/AdvertisingBoard/Detail";
 import AdvertisingBoardSearchList from "views/Search/AdvertisingBoardSearch";
 import ReviewBoardSearchList from "views/Search/ReviewBoardSearch";
 import AdminBannerWrite from "views/Admin/Banner/Write";
-import AdminBannerUpdate from "views/Admin/Banner/Update";
 import AdminGetUserDetail from "views/Admin/GetUserDetail";
 
 //          component: 메인 컴포넌트          //
@@ -138,10 +136,9 @@ function App() {
             <Route path={ADMIN_PATH} element={<AdminMain />} />
             <Route path={ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH()} element={<AdminGetShortReview />} />
             <Route path={ADMIN_GET_USER_LIST_PATH()} element={<AdminGetUserList />} />
-            <Route path={ADMIN_USER_DETAIL_PATH(USER_EMAIL_PATH_VARIABLE)} element = {<AdminGetUserDetail />} />
+            <Route path={ADMIN_USER_DETAIL_PATH(ADMIN_ID_PATH_VARIABLE, USER_EMAIL_PATH_VARIABLE)} element = {<AdminGetUserDetail />} />
             <Route path={ADMIN_BANNER_PATH()} element={<AdminBanner />} />
             <Route path={ADMIN_BANNER_WRITE_PATH()} element={<AdminBannerWrite />} />
-            <Route path={ADMIN_BANNER_UPDATE_PATH(BANNER_NUMBER_PATH_VARIABLE)} element={<AdminBannerUpdate />} />
           </Route>
 
           <Route path={AUTH_PATH} element={<Authentication />} />

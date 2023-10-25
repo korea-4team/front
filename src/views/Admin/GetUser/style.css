@@ -63,18 +63,8 @@
   justify-content: center;
   align-items: center;
 }
-
-.admin-main-password {
-  width: 200px;
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .admin-main-nickname {
-  width: 100px;
+  width: 150px;
   height: 100%;
 
   display: flex;
@@ -92,7 +82,7 @@
 }
 
 .admin-main-address-detail {
-  width: 200px;
+  width: 250px;
   height: 100%;
 
   display: flex;
@@ -101,7 +91,7 @@
 }
 
 .admin-main-telnumber {
-  width: 100px;
+  width: 150px;
   height: 100%;
 
   display: flex;
@@ -110,7 +100,7 @@
 }
 
 .admin-main-role {
-  width: 100px;
+  width: 150px;
   height: 100%;
 
   display: flex;
