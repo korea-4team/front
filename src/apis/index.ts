@@ -1,4 +1,5 @@
 import axios from "axios";
+import { PatchEventBoardRequestDto, PostEventBoardRequestDto } from "interfaces/request/EventBoard";
 import { PostShortReviewDto } from "interfaces/request/advertisingBoard";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
@@ -14,7 +15,7 @@ import {
   PostCommentRequestDto,
   PostReviewBoardRequestDto,
 } from "interfaces/request/reviewBoard";
-import { GetCurrentEventBoardResponseDto } from "interfaces/response/EventBoard";
+import { DeleteEventBoardResponseDto, GetCurrentEventBoardResponseDto, GetEventBoardResponseDto, PatchEventBoardResponseDto, PostEventBoardResponseDto } from "interfaces/response/EventBoard";
 import { GetUserListResponseDto, GetUserResponseDto } from "interfaces/response/admin";
 import DeleteAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-advertising-board.response.dto";
 import DeleteShortCommentAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-shortcomment-advertising-board.response.dto";
@@ -598,6 +599,87 @@ export const getCurrentEventBoardListRequest = async (section: number) => {
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
+  return result;
+};
+
+export const getEventBoardRequest = async (boardNumber: number | string) => {
+  const result = await axios
+    .get(GET_EVENT_BOARD_DETAIL_URL(boardNumber))
+    .then((response) => {
+      const responseBody: GetEventBoardResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const postEventBoardRequest = async (
+  data: PostEventBoardRequestDto,
+  token: string
+) => {
+  const result = await axios
+    .post(POST_EVENT_BOARD_URL(), data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      const responseBody: PostEventBoardResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+
+  return result;
+};
+
+export const patchEventBoardRequest = async (
+  boardNumber: string,
+  data: PatchEventBoardRequestDto,
+  token: string
+) => {
+  const result = await axios
+    .patch(PATCH_EVENT_BOARD_URL(boardNumber), data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      const responseBody: PatchEventBoardResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.datal;
+      const { code } = responseBody;
+      return code;
+    });
+
+  return result;
+};
+
+export const deleteEventBoardRequest = async (
+  boardNumber: number | string,
+  token: string
+) => {
+  const result = await axios
+    .delete(DELETE_EVENT_BOARD_URL(boardNumber), {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      const responseBody: DeleteEventBoardResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+
   return result;
 };
 

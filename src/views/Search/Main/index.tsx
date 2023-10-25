@@ -36,7 +36,7 @@ export default function Search() {
       setAdvertisingBoardCount(advertisingBoardList.length);
       setReviewBoardList(reviewBoardList);
       setReviewBoardCount(reviewBoardList.length);
-      setBoardCount(reviewBoardCount + advertisingBoardCount);
+      setBoardCount(reviewBoardList.length + advertisingBoardList.length);
     }
 
     //          event handler          //
