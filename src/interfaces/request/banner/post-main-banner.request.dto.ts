@@ -1,4 +1,4 @@
 export default interface PostMainBannerRequestDto {
-	imageUrl : string;
-  sequence : number | null;
+	imageUrl? : string | null;
+  sequence : string | null;
 }

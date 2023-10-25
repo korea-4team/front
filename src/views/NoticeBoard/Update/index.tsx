@@ -84,7 +84,7 @@ export default function NoticeBoardUpdate() {
     if (code === "NB") alert("존재하지 않는 게시물입니다.");
     if (code === "VF") alert("잘못된 게시물 번호입니다.");
     if (code === "DE") alert("데이터베이스 에러입니다.");
-    if (code === "SU") {
+    if (code !== "SU") {
       navigator(-1);
       return;
     }

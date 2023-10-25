@@ -3,7 +3,7 @@ import './style.css';
 import { useNavigate } from 'react-router';
 import { NOTICE_BOARD_PATH } from 'constant';
 import { useNoticeBoardWriteStore } from 'stores';
-import { Cookies, useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import { PostNoticeBoardRequestDto } from 'interfaces/request/noticeBoard';
 import { postNoticeBoardRequest, uploadFileRequest } from 'apis';
 
@@ -146,7 +146,7 @@ export default function NoticeBoardWrite() {
                 <div className='image-close-button'></div>
               </div>
             </div>
-        </div>
+          </div>
         )}
       </div>
       <div className="back-button">

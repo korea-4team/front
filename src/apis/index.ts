@@ -3,7 +3,12 @@ import { PatchEventBoardRequestDto, PostEventBoardRequestDto } from "interfaces/
 import { PostShortReviewDto } from "interfaces/request/advertisingBoard";
 import PatchAdvertisingBoardDto from "interfaces/request/advertisingBoard/patch-advertising-board.request.dto";
 import PostAdvertisingBoardDto from "interfaces/request/advertisingBoard/post-advertising-board.request.dto";
-import { AccountFindEmailRequestDto, AccountFindPasswordRequestDto, SignInRequestDto, SignUpRequestDto } from "interfaces/request/auth";
+import {
+  AccountFindEmailRequestDto,
+  AccountFindPasswordRequestDto,
+  SignInRequestDto,
+  SignUpRequestDto,
+} from "interfaces/request/auth";
 import PatchMainBannerRequestDto from "interfaces/request/banner/patch-main-banner.request.dto";
 import PostMainBannerRequestDto from "interfaces/request/banner/post-main-banner.request.dto";
 import {
@@ -30,8 +35,18 @@ import PatchAdvertisingBoardResponseDto from "interfaces/response/advertisingBoa
 import PostAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/post-advertising-board.response.dto";
 import PostShortReviewResponseDto from "interfaces/response/advertisingBoard/post-short-review.response.dto";
 import PutAdvertisingFavoriteListResponseDto from "interfaces/response/advertisingBoard/put-advertising-favorite-list.response.dto";
-import { AccountFindEmailResponseDto, AccountFindPasswordResponseDto, SignInResponseDto, SignUpResponseDto } from "interfaces/response/auth";
-import { DeleteMainBannerResponseDto, GetMainBannerListResponseDto, PatchMainBannerResponseDto, PostMainBannerResponseDto } from "interfaces/response/banner";
+import {
+  AccountFindEmailResponseDto,
+  AccountFindPasswordResponseDto,
+  SignInResponseDto,
+  SignUpResponseDto,
+} from "interfaces/response/auth";
+import {
+  DeleteMainBannerResponseDto,
+  GetMainBannerListResponseDto,
+  PatchMainBannerResponseDto,
+  PostMainBannerResponseDto,
+} from "interfaces/response/banner";
 import {
   DeleteNoticeBoardResponseDto,
   GetNoticeBoardListResponseDto,
@@ -80,9 +95,9 @@ const GET_ADMIN_SHORT_REVIEW_LIST_URL = (adminId: string, section: number) =>
 const GET_ADMIN_USER_LIST_URL = (adminId: string, section: number | string) =>
   `${API_DOMAIN}/admin/${adminId}/user-list/${section}`;
 const GET_ADMIN_USER_DETAIL_URL = (adminId: string, userEmail: string) =>
-  `${API_DOMAIN}/admin/${adminId}/user-list/${userEmail}`;
+  `${API_DOMAIN}/admin/${adminId}/user-detail/${userEmail}`;
 const GET_ADMIN_ADVERTISING_BOARD_LIST_URL = (adminId: string) =>
-`${API_DOMAIN}/admin/${adminId}/advertising-board-list`;
+  `${API_DOMAIN}/admin/${adminId}/advertising-board-list`;
 const GET_ADMIN_USER_STORE_INFO_URL = (adminId: string, userEmail: string) =>
   `${API_DOMAIN}/admin/${adminId}/user-list/${userEmail}/store-info`;
 const GET_ADMIN_USER_REVIEW_BOARD_LIST_URL = (
@@ -109,8 +124,7 @@ const GET_ADMIN_BANNER_DETAIL_URL = (
   adminId: string,
   bannerNumber: number | string
 ) => `${API_DOMAIN}/admin/${adminId}/main-banner/detail/${bannerNumber}`;
-const POST_ADMIN_BANNER_URL = () =>
-  `${API_DOMAIN}/admin/main-banner`;
+const POST_ADMIN_BANNER_URL = (eventBoardNumber: number | string) => `${API_DOMAIN}/admin/${eventBoardNumber}/main-banner`;
 const PATCH_ADMIN_BANNER_URL = (bannerNumber: number | string) =>
   `${API_DOMAIN}/admin/${bannerNumber}/main-banner`;
 const DELETE_ADMIN_BANNER_URL = (bannerNumber: number | string) =>
@@ -198,7 +212,8 @@ const GET_REVIEW_BOARD_LOCATION_BUSINESSTYPE_LIST_URL = (
 ) => `${API_DOMAIN}/review-board/board-list/${location}/${businessType}`;
 const GET_REVIEW_BOARD_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/review-board/${boardNumber}`;
-const GET_REVIEW_BOARD_FAVORITE_LIST_URL = (boardNumber: number | string) => `${API_DOMAIN}/review-board/${boardNumber}/favorite-list`
+const GET_REVIEW_BOARD_FAVORITE_LIST_URL = (boardNumber: number | string) =>
+  `${API_DOMAIN}/review-board/${boardNumber}/favorite-list`;
 const GET_REVIEW_BOARD_COMMENT_LIST_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/review-board/${boardNumber}/comment-list`;
 const GET_REVIEW_BOARD_USER_LIST_URL = (email: string) =>
@@ -265,54 +280,58 @@ export const uploadFileRequest = async (data: FormData) => {
       return imageUrl;
     })
     .catch((error) => null);
-    
+
   return result;
 };
 export const signUpRequest = async (requestBody: SignUpRequestDto) => {
   const result = await axios
     .post(SIGN_UP_URL(), requestBody)
-    .then(response => {
+    .then((response) => {
       const responseBody: SignUpResponseDto = response.data;
       const { code } = responseBody;
       return code;
     })
-    .catch(error => {
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       const { code } = responseBody;
       return code;
     });
   return result;
-}
+};
 
-export const accountFindEmailRequest = async (requestBody: AccountFindEmailRequestDto) => {
+export const accountFindEmailRequest = async (
+  requestBody: AccountFindEmailRequestDto
+) => {
   const result = await axios
     .post(ACCOUNT_FIND_EMAIL_URL(), requestBody)
-    .then(response => {
+    .then((response) => {
       const responseBody: AccountFindEmailResponseDto = response.data;
       return responseBody;
     })
-    .catch(error => {
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
   return result;
-}
+};
 
-export const accountFindPasswordRequest = async (requestBody: AccountFindPasswordRequestDto) => {
+export const accountFindPasswordRequest = async (
+  requestBody: AccountFindPasswordRequestDto
+) => {
   const result = await axios
     .post(ACCOUNT_FIND_PASSWORD_URL(), requestBody)
-    .then(response => {
+    .then((response) => {
       const responseBody: AccountFindPasswordResponseDto = response.data;
       const { code } = responseBody;
       return code;
     })
-    .catch(error => {
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       const { code } = responseBody;
       return code;
     });
   return result;
-}
+};
 
 // description: 유저 모듈 //
 export const getSignInUserRequest = async (token: string) => {
@@ -332,9 +351,7 @@ export const getSignInUserRequest = async (token: string) => {
 };
 
 // description: 기행기 게시판 //
-export const getReviewBoardListRequest = async (
-  section: number | string
-) => {
+export const getReviewBoardListRequest = async (section: number | string) => {
   const result = await axios
     .get(GET_REVIEW_BOARD_LIST_URL(section))
     .then((response) => {
@@ -413,18 +430,21 @@ export const getReviewBoardRequest = async (boardNumber: number | string) => {
   return result;
 };
 
-export const getReviewBoardFavoriteListRequest = async (boardNumber: number | string) => {
-  const result = await axios.get(GET_REVIEW_BOARD_FAVORITE_LIST_URL(boardNumber))
-  .then((response) => {
-    const responseBody: GetFavoriteListResponseDto = response.data;
-    return responseBody;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    return responseBody;
-  });
+export const getReviewBoardFavoriteListRequest = async (
+  boardNumber: number | string
+) => {
+  const result = await axios
+    .get(GET_REVIEW_BOARD_FAVORITE_LIST_URL(boardNumber))
+    .then((response) => {
+      const responseBody: GetFavoriteListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
   return result;
-}
+};
 
 export const getReviewBoardCommentListRequest = async (
   boardNumber: number | string
@@ -786,87 +806,93 @@ export const deleteNoticeBoardRequest = async (
 
 // description : 관리자 게시판 //
 // 기행기 게시글 불러오기
-export const getAdminReviewBoardListRequest = async (adminId: string, section: number) => {
+export const getAdminReviewBoardListRequest = async (
+  adminId: string,
+  section: number
+) => {
   const result = await axios
-  .get(GET_ADMIN_REVIEW_BOARD_LIST_URL(adminId, section))
-  .then((response) => {
-    const responseBody: GetReviewBoardListResponseDto = response.data;
-    return responseBody;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    return responseBody;
-  });
+    .get(GET_ADMIN_REVIEW_BOARD_LIST_URL(adminId, section))
+    .then((response) => {
+      const responseBody: GetReviewBoardListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
 
   return result;
 };
 
 // 한줄 리뷰 불러오기
-export const getAdminShortReviewListRequest = async (adminId: string, section: number) => {
+export const getAdminShortReviewListRequest = async (
+  adminId: string,
+  section: number
+) => {
   const result = await axios
-  .get(GET_ADMIN_SHORT_REVIEW_LIST_URL(adminId, section))
-  .then((response) => {
-    const responseBody: GetShortReviewListResponseDto = response.data;
-    return responseBody;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    return responseBody;
-  });
+    .get(GET_ADMIN_SHORT_REVIEW_LIST_URL(adminId, section))
+    .then((response) => {
+      const responseBody: GetShortReviewListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
 
   return result;
 };
 
 // 유저 목록 불러오기
 export const getAdminUserListRequest = async (
-    adminId: string, section: string | number
-  ) => {
+  adminId: string,
+  section: string | number
+) => {
   const result = await axios
-  .get(GET_ADMIN_USER_LIST_URL(adminId, section))
-  .then((response) => {
-    const responseBody: GetUserListResponseDto = response.data;
-    return responseBody;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    return responseBody;
-  })
+    .get(GET_ADMIN_USER_LIST_URL(adminId, section))
+    .then((response) => {
+      const responseBody: GetUserListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
 
   return result;
 };
 
 // 유저 정보 상세 보기
 export const getAdminUserDetailRequest = async (
-  adminId: string, userEmail: string
+  adminId: string,
+  userEmail: string
 ) => {
   const result = await axios
-  .get(GET_ADMIN_USER_DETAIL_URL(adminId, userEmail))
-  .then((response) => {
-    const responseBody: GetUserResponseDto = response.data;
-    return responseBody;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto =error.response.data;
-    return responseBody;
-  })
+    .get(GET_ADMIN_USER_DETAIL_URL(adminId, userEmail))
+    .then((response) => {
+      const responseBody: GetUserResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
 
   return result;
 };
 
 // 배너 리스트 불러오기
-export const getAdminBannerListRequest = async (
-  adminId: string
-) => {
+export const getAdminBannerListRequest = async (adminId: string) => {
   const result = await axios
-  .get(GET_ADMIN_BANNER_LIST_URL(adminId))
-  .then((response) => {
-    const responseBody: GetMainBannerListResponseDto = response.data;
-    return responseBody;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    return responseBody;
-  })
+    .get(GET_ADMIN_BANNER_LIST_URL(adminId))
+    .then((response) => {
+      const responseBody: GetMainBannerListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
 
   return result;
 };
@@ -874,48 +900,49 @@ export const getAdminBannerListRequest = async (
 // 배너 상세 보기
 
 // 배너 작성하기
-export const postAdminBanenrRequest = async (
+export const postAdminBannerRequest = async (
+  eventBoardNumber: string | number,
   data: PostMainBannerRequestDto,
   token: string
 ) => {
   const result = await axios
-  .post(POST_ADMIN_BANNER_URL(), data, {
-    headers: { Authorization: `Bearer ${token}` }
-  })
-  .then((response) => {
-    const responseBody: PostMainBannerResponseDto = response.data;
-    const { code } = responseBody;
-    return code;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    const { code } = responseBody;
-    return code;
-  })
+    .post(POST_ADMIN_BANNER_URL(eventBoardNumber), data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      const responseBody: PostMainBannerResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
 
   return result;
 };
 
 // 배너 수정하기
 export const patchBannerRequest = async (
-  bannerNumber: number,
+  bannerNumber: string,
   data: PatchMainBannerRequestDto,
   token: string
 ) => {
   const result = await axios
-  .patch(PATCH_ADMIN_BANNER_URL(bannerNumber), data, {
-    headers: { Authorization: `Bearer ${token}`}
-  })
-  .then((response) => {
-    const responseBody: PatchMainBannerResponseDto = response.data;
-    const { code } = responseBody;
-    return code;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    const { code } = responseBody;
-    return code;
-  })
+    .patch(PATCH_ADMIN_BANNER_URL(bannerNumber), data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      const responseBody: PatchMainBannerResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
 
   return result;
 };
@@ -926,20 +953,22 @@ export const deleteBanenrRequest = async (
   token: string
 ) => {
   const result = await axios
-  .delete(DELETE_ADMIN_BANNER_URL(bannerNumber), { headers: { Authorization: `Bearer ${token}`}})
-  .then((response) => {
-    const responseBody: DeleteMainBannerResponseDto = response.data;
-    const { code } = responseBody;
-    return code;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    const { code } = responseBody;
-    return code;
-  })
+    .delete(DELETE_ADMIN_BANNER_URL(bannerNumber), {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      const responseBody: DeleteMainBannerResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
 
   return result;
-}
+};
 
 // description: 광고게시판 //
 export const getCurrentAdvertisingBoardListRequest = async (
@@ -1176,20 +1205,23 @@ export const deleteAdvertisingShortReviewRequest = async (
   return result;
 };
 
-
 // description: 검색게시판 //
-export const getSearchListRequest = async (searchWord: string, location?: string) => {
-  const result = await axios.get(GET_SEARCH_LIST_URL(searchWord, location))
-  .then((response) => {
-    const responseBody: GetSearchResponseDto = response.data;
-    return responseBody;
-  })
-  .catch((error) => {
-    const responseBody: ResponseDto = error.response.data;
-    return responseBody;
-  });
+export const getSearchListRequest = async (
+  searchWord: string,
+  location?: string
+) => {
+  const result = await axios
+    .get(GET_SEARCH_LIST_URL(searchWord, location))
+    .then((response) => {
+      const responseBody: GetSearchResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
   return result;
-}
+};
 
 export const getSearchReviewBoardListRequest = async (searchWord: string, location: string, section: number | string) => {
   const result = await axios.get(GET_SEARCH_REVIEW_BOARD_LIST_URL(searchWord, section, location))
@@ -1202,7 +1234,7 @@ export const getSearchReviewBoardListRequest = async (searchWord: string, locati
     return responseBody;
   });
   return result;
-}
+};
 
 export const getSearchAdvertisingBoardListRequest = async (searchWord: string, location: string, section: number | string) => {
   const result = await axios.get(GET_SEARCH_ADVERTISING_BOARD_LIST_URL(searchWord, section, location))
@@ -1215,4 +1247,4 @@ export const getSearchAdvertisingBoardListRequest = async (searchWord: string, l
     return responseBody;
   });
   return result;
-}
+};

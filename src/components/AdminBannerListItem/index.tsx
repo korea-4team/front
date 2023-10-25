@@ -37,10 +37,6 @@ export default function AdminBannerListItem({item}: Props) {
   }
 
   //          event handler          //
-  // description : 수정 버튼 클릭 이벤트 //
-  const onUpdateButtonClickHanelr =() => {
-    navigator(ADMIN_BANNER_UPDATE_PATH(bannerNumber));
-  }
 
   // description : 삭제 버튼 클릭 이벤트 //
   const ondeleteButtonClickHandler = () => {
@@ -64,10 +60,10 @@ export default function AdminBannerListItem({item}: Props) {
           <div className="admin-banner-item-sequence"> 순서 : {sequence}</div>
           <div className="admin-banner-item-writer"> 작성자 : {writerEmail}</div>
           <div className="admin-banner-item-write-datetime"> 등록 일자 : {dateFormat(writeDatetime)}</div>
+          <div className='admin-banner-item-event-board-number'> 연결된 eventboard 번호 : {eventBoardNumber}</div>
         </div>
       </div>
       <div className='admin-banner-button'>
-        <div className='black-button' onClick={onUpdateButtonClickHanelr} >수정</div>
         <div className='black-button' onClick={ondeleteButtonClickHandler}>삭제</div>
       </div>
     </div>

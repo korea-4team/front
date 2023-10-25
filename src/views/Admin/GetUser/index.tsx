@@ -131,7 +131,6 @@ export default function AdminGetUserList() {
         <div className='admin-user-list-right-top'>
           <div className='admin-user-list-name'>
             <div className="admin-main-email"> 이메일 </div>
-            <div className="admin-main-password"> 비밀번호 </div>
             <div className="admin-main-nickname"> 닉네임 </div>
             <div className="admin-main-address"> 주소 </div>
             <div className="admin-main-address-detail"> 상세 주소 </div>
