@@ -36,7 +36,7 @@ export default function ShortReviewListItem({item, onDelete}:Props){
     <div className="shortReview-list-item-box">
       <div className="shortReview-list-item-writer">
         <div className="shortReview-list-item-writer-nickname">{writerNickname}</div>
-        <div className="shortReview-list-item-writer-divider"></div>
+        <div className="shortReview-list-item-writer-divider">|</div>
         <div className="shortReview-list-item-write-item">{getTimeGap()}</div>
         <div className="shortReview-delete-button" onClick={() => onDelete(shortReviewNumber)}>{'삭제'}</div>
         {/* {writerEmail === user?.email && (
