@@ -4,8 +4,8 @@ export default interface GetEventBoardResponseDto extends ResponseDto {
   boardNumber: number;
   title: string;
   contents: string;
-  imageUrl: string | null;
+  imageUrl: string;
   writeDatetime: string;
-  writerNickname: string;
-  writerEmail: string;
+	adminId : string;
+	adminNickname : string;
 }
