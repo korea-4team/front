@@ -61,9 +61,7 @@ export default function EventBoardWrite() {
   // description : 본문 내용이 바뀔 시 text area 높이 변경 이벤트 //
   const onContentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setEventBoardContents(event.target.value);
-
     if (!textAreaRef.current) return;
-
     textAreaRef.current.style.height = 'auto';
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
   }
@@ -71,9 +69,7 @@ export default function EventBoardWrite() {
   // description : 이미지 변경 시 이미지 미리보기 //
   const onImageInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files.length) return;
-
     const imageUrl = URL.createObjectURL(event.target.files[0]);
-
     setEventBoardImageUrl(imageUrl);
     setEventBoardImage(event.target.files[0]);
   }
@@ -81,14 +77,12 @@ export default function EventBoardWrite() {
   // description : 이미지 업로드 버튼 클릭 이벤트 //
   const onImageUploadButtonClickHandler = () => {
     if (!fileInputRef.current) return;
-
     fileInputRef.current.click();
   }
 
   // description : 이미지 닫기 버튼 클릭 이벤트 //
   const onImageCloseButtonClickHandler = () => {
     if (!fileInputRef.current) return;
-
     fileInputRef.current.value = '';
     setEventBoardImageUrl('');
   }
@@ -101,13 +95,11 @@ export default function EventBoardWrite() {
   // description : 작성 버튼 클릭 이벤트 //
   const onUploadButtonClickHandler = async () => {
     const token = cookies.accessToken;
-
     const imageUrl = await fileUpload();
-
     const data: PostEventBoardRequestDto = {
       title: eventBoardTitle,
       contents: eventBoardContents,
-      imageUrl,
+      imageUrl
     }
     postEventBoardRequest(data, token).then(postEventBoardResponseHandler);
 
@@ -119,17 +111,17 @@ export default function EventBoardWrite() {
 
   //          render          //
   return (
-    <div className="notice-board-write-item-list">
-      <div className='notice-board-write-item'>
-        <div className="notice-board-write-title-container">
-          <input className='notice-board-writer-title-input' type='text' placeholder='제목을 작성해주세요.' onChange={onTitleChangeHandler} value={eventBoardTitle}/>
+    <div className="event-board-write-item-list">
+      <div className='event-board-write-item'>
+        <div className="event-board-write-title-container">
+          <input className='event-board-writer-title-input' type='text' placeholder='제목을 작성해주세요.' onChange={onTitleChangeHandler} value={eventBoardTitle}/>
         </div>
         <div className='divider'></div>
-        <div className='notice-board-write-content-container'>
-          <div className='notice-board-write-content-input-box'>
-            <textarea ref={ textAreaRef } className='notice-board-write-content-textarea' placeholder='내용을 작성해주세요.' onChange={onContentChangeHandler} value={eventBoardContents}></textarea>
+        <div className='event-board-write-content-container'>
+          <div className='event-board-write-content-input-box'>
+            <textarea ref={ textAreaRef } className='event-board-write-content-textarea' placeholder='내용을 작성해주세요.' onChange={onContentChangeHandler} value={eventBoardContents}></textarea>
           </div>
-          <div className='notice-board-write-content-button-box'>
+          <div className='event-board-write-content-button-box'>
             <div className='image-upload-button' onClick={onImageUploadButtonClickHandler}>
               <div className='image-upload-icon'></div>
               <input ref={fileInputRef} type='file' accept='image/*' style={{display: 'none'}} onChange={onImageInputChangeHandler}/>
@@ -137,10 +129,10 @@ export default function EventBoardWrite() {
           </div>
         </div>
         {evnetBoardImageUrl && (
-          <div className="notice-board-write-image-box">
-            <div className='notice-board-write-image'>
-              <img className="notice-board-write-image" src={evnetBoardImageUrl} />
-              <div className='notice-board-write-image-delete-button' onClick={onImageCloseButtonClickHandler}>
+          <div className="event-board-write-image-box">
+            <div className='event-board-write-image'>
+              <img className="event-board-write-image" src={evnetBoardImageUrl} />
+              <div className='event-board-write-image-delete-button' onClick={onImageCloseButtonClickHandler}>
                 <div className='image-close-button'></div>
               </div>
             </div>
