@@ -22,6 +22,7 @@ import {
 } from "interfaces/request/reviewBoard";
 import { DeleteEventBoardResponseDto, GetCurrentEventBoardResponseDto, GetEventBoardResponseDto, PatchEventBoardResponseDto, PostEventBoardResponseDto } from "interfaces/response/EventBoard";
 import { GetUserListResponseDto, GetUserResponseDto } from "interfaces/response/admin";
+import getUserStoreInfoResponseDto from "interfaces/response/admin/get-user-store-info.response.dto";
 import DeleteAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-advertising-board.response.dto";
 import DeleteShortCommentAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/delete-shortcomment-advertising-board.response.dto";
 import GetAdvertisingBoardBusinessTypeResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-businessType-list-responsedto";
@@ -120,13 +121,7 @@ const GET_ADMIN_USER_COMMENT_LIST_URL = (
   `${API_DOMAIN}/admin/${adminId}/user-list/${userEmail}/comment-list/${section}`;
 const GET_ADMIN_BANNER_LIST_URL = (adminId: string) =>
   `${API_DOMAIN}/admin/${adminId}/main-banner/list`;
-const GET_ADMIN_BANNER_DETAIL_URL = (
-  adminId: string,
-  bannerNumber: number | string
-) => `${API_DOMAIN}/admin/${adminId}/main-banner/detail/${bannerNumber}`;
 const POST_ADMIN_BANNER_URL = (eventBoardNumber: number | string) => `${API_DOMAIN}/admin/${eventBoardNumber}/main-banner`;
-const PATCH_ADMIN_BANNER_URL = (bannerNumber: number | string) =>
-  `${API_DOMAIN}/admin/${bannerNumber}/main-banner`;
 const DELETE_ADMIN_BANNER_URL = (bannerNumber: number | string) =>
   `${API_DOMAIN}/admin/${bannerNumber}/main-banner`;
 
@@ -881,6 +876,78 @@ export const getAdminUserDetailRequest = async (
   return result;
 };
 
+// 유저의 사업자 등록증 정보 불러오기
+export const getAdminStoreInfoRequest = async (
+  adminId: string, userEmail: string
+) => {
+  const result = await axios
+  .get(GET_ADMIN_USER_STORE_INFO_URL(adminId, userEmail))
+  .then((response)=>{
+    const responseBody: getUserStoreInfoResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  });
+  
+  return result;
+}
+
+// 유저의 기행기 리스트 불러오기
+export const getAdminUserReviewBoardListRequest = async (
+  adminId: string, userEmail: string, section: number
+) => {
+  const result = await axios
+  .get(GET_ADMIN_USER_REVIEW_BOARD_LIST_URL(adminId, userEmail, section))
+  .then((response) => {
+    const responseBody: GetReviewBoardListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
+
+  return result;
+}
+
+// 유저의 한 줄 리뷰 리스트 불러오기
+export const getAdminUserShortReviewListRequest = async (
+  adminId: string, userEmail: string, section: number
+) => {
+  const result = await axios
+  .get(GET_ADMIN_USER_SHORT_REVIEW_LIST_URL(adminId, userEmail, section))
+  .then((response) => {
+    const responseBody : GetShortReviewListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
+
+  return result;
+}
+
+// 유저의 댓글 리스트 불러오기
+export const getAdminUserCommentListRequest = async (
+  adminId: string, userEmail: string, section: number
+) => {
+  const result = await axios
+  .get(GET_ADMIN_USER_COMMENT_LIST_URL(adminId, userEmail, section))
+  .then((response) => {
+    const responseBody : GetCommentListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
+  
+  return result;
+}
+
 // 배너 리스트 불러오기
 export const getAdminBannerListRequest = async (adminId: string) => {
   const result = await axios
@@ -897,8 +964,6 @@ export const getAdminBannerListRequest = async (adminId: string) => {
   return result;
 };
 
-// 배너 상세 보기
-
 // 배너 작성하기
 export const postAdminBannerRequest = async (
   eventBoardNumber: string | number,
@@ -911,30 +976,6 @@ export const postAdminBannerRequest = async (
     })
     .then((response) => {
       const responseBody: PostMainBannerResponseDto = response.data;
-      const { code } = responseBody;
-      return code;
-    })
-    .catch((error) => {
-      const responseBody: ResponseDto = error.response.data;
-      const { code } = responseBody;
-      return code;
-    });
-
-  return result;
-};
-
-// 배너 수정하기
-export const patchBannerRequest = async (
-  bannerNumber: string,
-  data: PatchMainBannerRequestDto,
-  token: string
-) => {
-  const result = await axios
-    .patch(PATCH_ADMIN_BANNER_URL(bannerNumber), data, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-      const responseBody: PatchMainBannerResponseDto = response.data;
       const { code } = responseBody;
       return code;
     })

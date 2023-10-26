@@ -142,7 +142,7 @@ export default function NoticeBoardMain() {
               ))}
             </div>
           ) : (
-            <div className="my-page-bottom-list-nothing">
+            <div className="notice-board-bottom-list-nothing">
               {" "}
               공지사항이 없습니다.{" "}
             </div>
