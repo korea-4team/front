@@ -59,11 +59,11 @@ export default function AdvertisingBoardMain() {
       if(code === 'DE') alert ('데이터베이스 에러입니다.');
       if(code !== 'SU') return;
 
-      const { advertisingboardlist } = responseBody as GetAdvertisingLocationListResponseDto;
-      setAdvertisingBoardList(advertisingboardlist);
-      setBoardCount(advertisingboardlist.length);
-      getPageAdvertisingBoardList(advertisingboardlist);
-      changeSection(advertisingboardlist.length,COUNT_BY_PAGE);
+      const { advertisingboardList } = responseBody as GetAdvertisingLocationListResponseDto;
+      setAdvertisingBoardList(advertisingboardList);
+      setBoardCount(advertisingboardList.length);
+      getPageAdvertisingBoardList(advertisingboardList);
+      changeSection(advertisingboardList.length,COUNT_BY_PAGE);
     }
 
     const getAdvertisingBoardBusinessTypeListResponseHandler = (responseBody : GetAdvertisingBoardBusinessTypeResponseDto | ResponseDto) => {
