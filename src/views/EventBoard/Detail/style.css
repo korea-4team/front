@@ -1,0 +1,73 @@
+.event-board-detail-item-list {
+	width: 1440px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.event-board-detail-header {
+
+}
+
+.event-board-detail-title {
+	margin-bottom: 20px;
+	font-size: 35px;
+	font-weight: 500;
+	line-height: 100%;
+}
+
+.event-board-detail-data {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+}
+
+.event-board-detail-writer {
+	display: flex;
+	align-items: center;
+}
+
+.event-board-detail-nickname {
+	margin-right: 10px;
+
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 100%;
+}
+
+.event-board-detail-writedatetime {
+	margin-left: 10px;
+
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 100%;
+
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.event-board-detail-footer {
+	margin-top: 20px;
+}
+
+.event-board-detail-contents {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 150%;
+}
+
+.event-board-detail-image-box {
+	margin-top: 20px;
+}
+
+.event-board-detail-image {
+	width: 50%;
+}
+
+.back-button {
+	margin-top: 50px;
+	
+	display: flex;
+	align-items: center;
+	justify-content: end;
+}

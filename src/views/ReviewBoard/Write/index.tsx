@@ -102,7 +102,7 @@ export default function ReviewBoardWrite() {
       contents: reviewBoardContents,
       location: reviewBoardLocation,
       businessType: reviewBoardBusinessType,
-      imageUrl,
+      imageUrl
     }
     postReviewBoardRequest(data, token).then(postReviewBoardResponseHandler);
   }

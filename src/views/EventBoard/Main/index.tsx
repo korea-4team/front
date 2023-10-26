@@ -57,24 +57,32 @@ export default function EventBoardMain() {
       getCurrentEventBoardListRequest(currentSection).then(getEventBoardListResponseHandler);
     },[currentSection])
 
+    useEffect(() => {
+      getPageEventBoardList(eventBoardList);
+    },[currentPage])
+
     //          render          //
     return (
-      <div className="event-board-list-item-box">
-        {user?.role === 'admin' && <div className="event-board-write-button" onClick={onEventBoardWriteButtonClickHandler}>글쓰기</div>}
-        {boardCount ?
-        (
-          <div className="event-board-list-item">
-            {eventBoardList.map((item) => (<EventBoardListItem item={item} />))}
-          </div>
-        ) : (<div className='event-board-list-nothing'>게시물이 존재하지 않습니다.</div>)}
-        { boardCount !== 0 && (
-          <Pagination
-            totalPage= {totalPage}
-            currentPage={currentPage}
-            onPageClickHandler={onPageClickHandler}
-            onNextClickHandler={onNextClickHandler}
-            onPreviusClickHandler={onPreviusClickHandler} />
-        )}
+      <div className="event-board-main-list">
+        <div className="event-board-write-button-box">
+          {user?.role === 'admin' && <div className="event-board-write-button" onClick={onEventBoardWriteButtonClickHandler}>글쓰기</div>}
+        </div>
+        <div className="event-board-list-item-box">
+          {boardCount ?
+          (
+            <div className="event-board-list-item">
+              {pageEventBoardList.map((item) => (<EventBoardListItem item={item} />))}
+            </div>
+          ) : (<div className='event-board-list-nothing'>게시물이 존재하지 않습니다.</div>)}
+          { boardCount !== 0 && (
+            <Pagination
+              totalPage= {totalPage}
+              currentPage={currentPage}
+              onPageClickHandler={onPageClickHandler}
+              onNextClickHandler={onNextClickHandler}
+              onPreviusClickHandler={onPreviusClickHandler} />
+          )}
+        </div>
       </div>
     )
 

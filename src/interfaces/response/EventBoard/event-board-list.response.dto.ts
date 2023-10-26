@@ -3,5 +3,5 @@ export default interface EventBoardListResponseDto {
   imageUrl: string | null;
   title: string;
   writeDatetime: string;
-  writerNickname: string;
+  adminNickname: string;
 }
