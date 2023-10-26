@@ -7,6 +7,7 @@ import { PostAdvertisingBoardDto } from 'interfaces/request/advertisingBoard';
 import { postAdvertisingBoardRequest, uploadFileRequest } from 'apis';
 import { useUserStore } from 'stores';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
+import { PostMenu, PostTag } from 'types';
 
 export default function AdvertisingBoardWrite(){
 
@@ -21,6 +22,13 @@ export default function AdvertisingBoardWrite(){
   const timetextAreaRef = useRef<HTMLTextAreaElement>(null);
   const numbertextAreaRef = useRef<HTMLTextAreaElement>(null);
   const addresstextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const tagtextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const menutextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const infotextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const pricetextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const booktimetextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const booktextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const bookkidsAreaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fileInputRefmiri = useRef<HTMLInputElement>(null);
 
@@ -35,10 +43,21 @@ export default function AdvertisingBoardWrite(){
   const[advertisingBoardStoreTime, setAdvertisingBoardStoreTime] = useState<string>('');
   const[advertisingBoardStoreNumber, setAdvertisingBoardStoreNumber] = useState<string>('');
   const[advertisingBoardStoreAddress, setAdvertisingBoardStoreAddress] = useState<string>('');
+  const[advertisingBoardmenu, setAdvertisingBoardmenu] = useState<string>('');
+  const[advertisingBoardtag, setAdvertisingBoardtag] = useState<string>('');
+  const[advertisingBoardprice, setAdvertisingBoardprice] = useState<string>('');
+  const[advertisingBoardinfo, setAdvertisingBoardinfo] = useState<string>('');
   const[advertisingBoardImages, setAdvertisingBoardImages] = useState<File[]>([]);
   const[advertisingBoardImagesmiri, setAdvertisingBoardImagesmiri] = useState<File[]>([]);
   const[advertisingBoardLocation, setAdvertisingBoardLocation] = useState<string>('');
   const[showMore, setShowMore] = useState<boolean>(false);
+  const[tagList,setTagList] = useState<string[]>([]);
+  const[bookTime,setBookTime] = useState<string>('');
+  const[book,setBook] = useState<string>('');
+  const[bookkids,setBookkdis] = useState<string>('');
+
+  const [menuList, setMenuList] = useState<PostMenu[]>([]);
+
   const {user, setUser} = useUserStore();
   const [locationShowMore, setLocationShowMore] = useState<boolean>(false);
   const [businessTypeShowMore,setBusinessTypeShowMore] = useState<boolean>(false);
@@ -138,6 +157,69 @@ export default function AdvertisingBoardWrite(){
     addresstextAreaRef.current.style.height = 'auto';
     addresstextAreaRef.current.style.height = `${addresstextAreaRef.current.scrollHeight}px`;
   }
+
+  const oninfohandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setAdvertisingBoardinfo(event.target.value);
+
+    if(!infotextAreaRef.current) return;
+
+    infotextAreaRef.current.style.height = 'auto';
+    infotextAreaRef.current.style.height = `${infotextAreaRef.current.scrollHeight}px`;
+  }
+
+  const onMenuhandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setAdvertisingBoardmenu(event.target.value);
+
+    if(!menutextAreaRef.current) return;
+
+    menutextAreaRef.current.style.height = 'auto';
+    menutextAreaRef.current.style.height = `${menutextAreaRef.current.scrollHeight}px`;
+  }
+
+  const ontaghandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setAdvertisingBoardtag(event.target.value);
+
+    if(!tagtextAreaRef.current) return;
+
+    tagtextAreaRef.current.style.height = 'auto';
+    tagtextAreaRef.current.style.height = `${tagtextAreaRef.current.scrollHeight}px`;
+  }
+
+  const onPricehandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setAdvertisingBoardprice(event.target.value);
+
+    if(!pricetextAreaRef.current) return;
+
+    pricetextAreaRef.current.style.height = 'auto';
+    pricetextAreaRef.current.style.height = `${pricetextAreaRef.current.scrollHeight}px`;
+  }
+
+  const onBookTimehandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setBookTime(event.target.value);
+
+    if(!booktimetextAreaRef.current) return;
+
+    booktimetextAreaRef.current.style.height = 'auto';
+    booktimetextAreaRef.current.style.height = `${booktimetextAreaRef.current.scrollHeight}px`;
+  }
+
+  const onBookhandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setBook(event.target.value);
+
+    if(!booktextAreaRef.current) return;
+
+    booktextAreaRef.current.style.height = 'auto';
+    booktextAreaRef.current.style.height = `${booktextAreaRef.current.scrollHeight}px`;
+  }
+
+  const onBookkidshandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setBookkdis(event.target.value);
+
+    if(!bookkidsAreaRef.current) return;
+
+    bookkidsAreaRef.current.style.height = 'auto';
+    bookkidsAreaRef.current.style.height = `${bookkidsAreaRef.current.scrollHeight}px`;
+  }
   
 
   const onImageInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -152,6 +234,9 @@ export default function AdvertisingBoardWrite(){
     const newIamges = advertisingBoardImages.map(item => item);
     newIamges.push(event.target.files[0]);
     setAdvertisingBoardImages(newIamges);
+
+    
+
   }
 
   const onImageInputChangeHandlermiri = (event: ChangeEvent<HTMLInputElement>) => {
@@ -173,6 +258,26 @@ export default function AdvertisingBoardWrite(){
     if (!fileInputRef.current) return;
 
     fileInputRef.current.click();
+  }
+
+  const onAddMenuuttonClickHandler = () => {
+    const menu: PostMenu = {
+      title: advertisingBoardmenu,
+      contents: advertisingBoardinfo,
+      image: advertisingBoardImages,
+      imageUrl: [],
+      preImageUrl: advertisingBoardImageUrls,
+      price: advertisingBoardprice,
+    }
+    const newMenuList = menuList.map(item => item);
+    newMenuList.push(menu);
+    setMenuList(newMenuList);
+
+    setAdvertisingBoardmenu('');
+    setAdvertisingBoardinfo('');
+    setAdvertisingBoardImages([]);
+    setAdvertisingBoardImageUrls([]);
+    setAdvertisingBoardprice('');
   }
 
   const onImageUploadButtonClickHandlermiri = () => {
@@ -223,7 +328,9 @@ export default function AdvertisingBoardWrite(){
       contents: advertisingBoardContent,
       location: advertisingBoardLocation,
       businessType: advertisingBoardBusinessType,
-      imageUrls
+      imageUrls,
+      menuList,
+      tagList
     }
     postAdvertisingBoardRequest(data,token).then(postAdvertisingBoardResponseHandler);
 
@@ -255,7 +362,7 @@ export default function AdvertisingBoardWrite(){
     useEffect(()=>{
       if (!ref.current) return;
         const newMap = new window.google.maps.Map(ref.current, {
-            center : { lat: 37.569227, lng: 126.9777256},
+            center : { lat: 35.1795543, lng: 129.0756416},
             zoom : 16,
         });     
         
@@ -266,6 +373,26 @@ export default function AdvertisingBoardWrite(){
         <div ref={ref} id="map" style={{width:"100%", height: "400px"}}></div>
     )
 }
+
+  const MenuComponent = ({ index } : {index: number}) => {
+
+    return (
+      <div className='advertising-board-menu'>
+        <div className='advertising-board-menu-textarea'>{menuList[index].title}</div>
+        <div className='advertising-board-menu-textarea'>{menuList[index].contents}</div>
+        {menuList[index].preImageUrl.map( (url, index) =>
+        <div className='advertising-board-write-image-container'>
+          <img className='advertising-board-write-image' src={url} />
+          {/* <div className='advertising-board-write-image-delete-button' onClick={() => onImageCloseButtonClickHandler(index)}>
+            <div className='advertising-board-image-close-icon'></div>
+          </div> */}
+        </div>
+        )}
+        <div className='advertising-board-menu-textarea'>{menuList[index].price}</div>
+      </div>
+    )
+
+  }
 
   return(
     <div className='advertising-board-write-wrapper'>
@@ -338,23 +465,39 @@ export default function AdvertisingBoardWrite(){
           </div>
         </div>
         <div className='advertising-board-write-store'>판매목록</div>
+
+
+
         <div className='image-image'>
-          
-        {advertisingBoardImageUrls.map( (url, index) =>
-          <div className='advertising-board-write-image-container'>
-            <img className='advertising-board-write-image' src={url} />
-            <div className='advertising-board-write-image-delete-button' onClick={() => onImageCloseButtonClickHandler(index)}>
-              <div className='advertising-board-image-close-icon'></div>
+          {menuList.map((menu, index) => <MenuComponent index={index} />)}
+          <div className='advertising-board-menu'>
+            <textarea ref={menutextAreaRef} className='advertising-board-menu-textarea' placeholder='제품명을 적어주세요' value={advertisingBoardmenu} onChange={onMenuhandler}></textarea>
+            <textarea ref={infotextAreaRef} className='advertising-board-menu-textarea' placeholder='제품설명을 적어주세요' value={advertisingBoardinfo} onChange={oninfohandler}></textarea>
+            {advertisingBoardImageUrls.map( (url, index) =>
+            <div className='advertising-board-write-image-container'>
+              <img className='advertising-board-write-image' src={url} />
+              <div className='advertising-board-write-image-delete-button' onClick={() => onImageCloseButtonClickHandler(index)}>
+                <div className='advertising-board-image-close-icon'></div>
+              </div>
+            </div>
+            )}
+            <div className='advertising-board-write-content-button-box'>
+              <div className='advertising-board-image-upload-button' onClick={onImageUploadButtonClickHandler}>
+                <div className='advertising-board-image-upload-icon'></div>
+              </div>
+                <input ref={fileInputRef} type='file' accept='image/*' style={{display: 'none'}} onChange={onImageInputChangeHandler} />
+            </div>
+            <textarea ref={pricetextAreaRef} className='advertising-board-menu-textarea' placeholder='가격을 적어주세요' value={advertisingBoardprice} onChange={onPricehandler}></textarea>
+          </div>
+            <div className='advertising-board-write-content-button-box'>
+              <div className='advertising-board-image-upload-button' onClick={onAddMenuuttonClickHandler}>
+                <div className='advertising-board-image-upload-icon2'></div>
+              </div>
             </div>
           </div>
-        )}
-        <div className='advertising-board-write-content-button-box'>
-            <div className='advertising-board-image-upload-button' onClick={onImageUploadButtonClickHandler}>
-              <div className='advertising-board-image-upload-icon'></div>
-            </div>
-            <input ref={fileInputRef} type='file' accept='image/*' style={{display: 'none'}} onChange={onImageInputChangeHandler} />
-          </div>
-        </div>
+
+
+
         <div className='advertising-board-write-store'>업종 세부사항</div>
         <div className='advertising-board-store-conent'>
           <div className='advertising-board-store-input-box'>
@@ -370,12 +513,29 @@ export default function AdvertisingBoardWrite(){
             </div>
           </div>
         </div>
-      </div>
+      <div className='advertising-board-tag'>테그 작성란</div>
+        <div className='advertising-board-tag-input box'>
+          <textarea ref = {tagtextAreaRef} className='advertising-board-tag-content-textarea' placeholder='#테그로 입력해주세요' value={advertisingBoardtag} onChange={ontaghandler}></textarea>
+        </div>
+
+
+        <div className='advertising-board-write-book'>예약 안내사항</div>
+        <div className='advertising-board-book-conent'>
+          <div className='advertising-board-book-input-box'>
+            <textarea ref={booktimetextAreaRef} className='advertising-board-store-content-textarea' placeholder='예약가능한 시간대를 작성해주세요.' value={bookTime} onChange={onBookTimehandler}></textarea>
+            <textarea ref={booktextAreaRef} className='advertising-board-store-content-textarea' placeholder='예약가능한 요일을 작성해주세요.' value={book} onChange={onBookhandler}></textarea>
+            <textarea ref={bookkidsAreaRef} className='advertising-board-store-content-textarea' placeholder='유아동반 가능여부를 작성해주세요' value={bookkids} onChange={onBookkidshandler}></textarea>
+          </div>
+        </div>          
+    </div>
+
+    
       <div className='advertising-board-write-button-box'>
         <div className='black-button' onClick={onBackButtonClickHandler}>목록</div>
         <div className='black-button' onClick={onUploadButtonClickHandler}>작성</div>
       </div>
     </div>
+    
   )
   
 }

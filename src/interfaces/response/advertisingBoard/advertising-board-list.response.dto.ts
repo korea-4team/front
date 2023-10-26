@@ -10,5 +10,6 @@ export default interface AdvertisingBoardListResponseDto{
   writerNickname : string;
   location : string;
   businessType : string;
+  tagWord : string;
 
 }
