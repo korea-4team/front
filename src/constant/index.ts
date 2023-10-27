@@ -47,12 +47,13 @@ export const NOTICE_BOARD_WRITE_PATH = () => `${NOTICE_BOARD_PATH}/${WRITE_PATH}
 export const NOTICE_BOARD_UPDATE_PATH = (boardNumber: number | string) => `${NOTICE_BOARD_PATH}/${UPDATE_PATH(boardNumber)}`;
 export const NOTICE_BOARD_DEATIL_PATH = (boardNumber: number | string) => `${NOTICE_BOARD_PATH}/${DETAIL_PATH(boardNumber)}`;
 
+export const ADMIN_GET_ADVERTISING_BOARD_LIST_PATH = () => `${ADMIN_PATH}/advertising-board-list`;
 export const ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH = () => `${ADMIN_PATH}/short-review-board-list`;
 export const ADMIN_GET_USER_LIST_PATH = () => `${ADMIN_PATH}/user-list`;
 export const ADMIN_USER_DETAIL_PATH = (adminId: string, userEmail: string) => `${ADMIN_PATH}/${adminId}/user-detail/${userEmail}`;
-export const ADMIN_USER_REVIEW_BOARD_LIST_PATH = (adminId: string, userEmail: string, section: number | string) => `${ADMIN_PATH}/${adminId}/user-list/${userEmail}/review-board-lsit/${section}`;
-export const ADMIN_USER_SHORT_REVIEW_BOARD_LIST_PATH = (adminId: string, userEmail: string, section: number | string) => `${ADMIN_PATH}/${adminId}/user-list/${userEmail}/short_review-board-lsit/${section}`;
-export const ADMIN_USER_COMMENT_BOARD_LIST_PATH = (adminId: string, userEmail: string, section: number | string) => `${ADMIN_PATH}/${adminId}/user-list/${userEmail}/comment-lsit/${section}`;
+export const ADMIN_USER_REVIEW_BOARD_LIST_PATH = (adminId: string, userEmail: string, section: number | string) => `${ADMIN_PATH}/${adminId}/user-list/${userEmail}/review-board-list/${section}`;
+export const ADMIN_USER_SHORT_REVIEW_BOARD_LIST_PATH = (adminId: string, userEmail: string, section: number | string) => `${ADMIN_PATH}/${adminId}/user-list/${userEmail}/short_review-board-list/${section}`;
+export const ADMIN_USER_COMMENT_BOARD_LIST_PATH = (adminId: string, userEmail: string, section: number | string) => `${ADMIN_PATH}/${adminId}/user-list/${userEmail}/comment-list/${section}`;
 
 export const ADMIN_BANNER_PATH = () => `${ADMIN_PATH}/${BANNER_PATH}`;
 export const ADMIN_BANNER_WRITE_PATH = () => `${ADMIN_PATH}/${BANNER_PATH}/${WRITE_PATH}`;

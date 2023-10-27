@@ -1,4 +1,4 @@
-import { getAdminReviewBoardListRequest } from "apis";
+import { getAdminAdvertisingBoardListRequest, getAdminReviewBoardListRequest } from "apis";
 import AdminReviewBoardListItem from "components/AdminReviewBoardListItem";
 import Pagination from 'components/Pagination';
 import { ADMIN_BANNER_PATH, ADMIN_GET_ADVERTISING_BOARD_LIST_PATH, ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH, ADMIN_GET_USER_LIST_PATH, ADMIN_PATH, COUNT_BY_PAGE } from "constant";
@@ -9,9 +9,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from "stores";
 import "./style.css";
+import AdvertisingBoardListResponseDto from "interfaces/response/advertisingBoard/advertising-board-list.response.dto";
+import GetUserListAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-user-list-advertising.response.dto";
+import AdvertisingBoardListItem from "components/AdvertisingBoardListItem";
+import AdminAdvertisingBoardListItem from "components/AdminAdvertisingBoardListItem";
 
 //          component          //
-export default function AdminMain() {
+export default function AdminAdvertising() {
 
   //          state         //
   // description : 유저 정보 상태 //
@@ -76,40 +80,40 @@ export default function AdminMain() {
     // description : 페이지네이션 관련 상태 및 함수 //
     const {totalPage, currentPage, currentSection, onPageClickHandler, onPreviusClickHandler, onNextClickHandler, changeSection} = usePagination();
 
-    // description : 전체 기행기 게시물 리스트 상태 //
-    const [reviewBoardList, setReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
+    // description : 전체 광고 게시물 리스트 상태 //
+    const [AdvertisingBoardList, setAdvertisingBoardList] = useState<AdvertisingBoardListResponseDto[]>([]);
 
-    // description : 전체 기행기 게시물 갯수 상태 //
+    // description : 전체 광고 게시물 갯수 상태 //
     const [boardCount, setBoardCount] = useState<number>(0);
 
-    // description : 현재 페이지에서 보여줄 기행기 게시물 리스트 상태 //
-    const [pageReviewBoardList, setPageReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
+    // description : 현재 페이지에서 보여줄 광고 게시물 리스트 상태 //
+    const [pageAdvertisingBoardList, setPageAdvertisingBoardList] = useState<AdvertisingBoardListResponseDto[]>([]);
 
     //          function          //
     // description : 현재 페이지의 게시물 리스트 분류 함수 //
-    const getReviewBoardList = (ReviewBoardList: ReviewBoardListResponseDto[]) => {
+    const getAdvertisingBoardList = (AdvertisingBoardList: AdvertisingBoardListResponseDto[]) => {
       const startIndex = COUNT_BY_PAGE * (currentPage -1);
-      const lastIndex = ReviewBoardList.length > COUNT_BY_PAGE *currentPage
+      const lastIndex = AdvertisingBoardList.length > COUNT_BY_PAGE *currentPage
                         ? COUNT_BY_PAGE * currentPage
-                        : ReviewBoardList.length;
-      const pageReviewBoardList = ReviewBoardList.slice(startIndex, lastIndex);
+                        : AdvertisingBoardList.length;
+      const pageAdvertisingList = AdvertisingBoardList.slice(startIndex, lastIndex);
 
-      setPageReviewBoardList(pageReviewBoardList);
+      setPageAdvertisingBoardList(pageAdvertisingList);
     }
 
     // description : 기행기 게시글 불러오기 응답 처리 함수 //
-    const getReviewBoardListResponseHandler = (
-      responseBody: GetReviewBoardListResponseDto | ResponseDto
+    const getAdvertisingBoardListResponseHandler = (
+      responseBody: GetUserListAdvertisingBoardResponseDto| ResponseDto
     ) => {
       const { code } = responseBody;
       if (code === "DE") alert("데이터 베이스 에러입니다.");
       if (code !== "SU") return;
 
-      const { boardList } = responseBody as GetReviewBoardListResponseDto;
-      setReviewBoardList(boardList);
-      setBoardCount(boardList.length);
-      getReviewBoardList(boardList);
-      changeSection(boardList.length, COUNT_BY_PAGE);
+      const { advertisingboardList } = responseBody as GetUserListAdvertisingBoardResponseDto;
+      setAdvertisingBoardList(advertisingboardList);
+      setBoardCount(advertisingboardList.length);
+      getAdvertisingBoardList(advertisingboardList);
+      changeSection(advertisingboardList.length, COUNT_BY_PAGE);
     }
 
     //          event handler         //
@@ -117,7 +121,7 @@ export default function AdminMain() {
     //          effect          //
     // description : 기행기 게시글 불러오기 //
     useEffect(() => {
-      getAdminReviewBoardListRequest(user?.email as string, currentSection).then(getReviewBoardListResponseHandler);
+      getAdminAdvertisingBoardListRequest(user?.email as string, currentSection).then(getAdvertisingBoardListResponseHandler);
     },[currentSection]);
 
     useEffect(() => {
@@ -125,7 +129,7 @@ export default function AdminMain() {
     },[currentSection])
 
     useEffect(() => {
-      getReviewBoardList(reviewBoardList);
+      getAdvertisingBoardList(AdvertisingBoardList);
     },[currentPage])
 
     //          render          //
@@ -133,18 +137,19 @@ export default function AdminMain() {
       <div className='admin-main-right'>
         <div className='admin-main-right-top'>
           <div className="admin-main-list-name">
-            <div className="admin-main-number"> 번호 </div>
-            <div className="admin-main-title"> 제목 </div>
-            <div className="admin-main-writer"> 작성자 </div>
-            <div className="admin-main-write-datetime"> 작성일자 </div>
-            <div className="admin-main-favorite-count">추천</div>
-            <div className="admin-main-view-count">조회</div>
+            <div className="admin-advertising-number"> 번호 </div>
+            <div className="admin-advertising-title"> 제목 </div>
+            <div className="admin-advertising-short-review"> 리뷰갯수 </div>
+            <div className="admin-advertising-location"> 위치 </div>
+            <div className="admin-advertising-business"> 업종 </div>
+            <div className="admin-advertising-writer"> 작성자</div>
+            <div className="admin-advertising-write-datetime"> 작성날짜</div>
           </div>
           <div className="divider"></div>
           {boardCount ? (
             <div className="review-board-list">
-            {pageReviewBoardList.map((item) => (
-              <AdminReviewBoardListItem item={item} />
+            {pageAdvertisingBoardList.map((item) => (
+              <AdminAdvertisingBoardListItem item={item} />
             ))}
           </div>
           ) : (

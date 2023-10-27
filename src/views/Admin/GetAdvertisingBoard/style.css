@@ -6,10 +6,9 @@
     display: flex;
 }
 
-.admin-main-left {
+.admin-advertising-left {
     width: 288px;
-    height: 280px;
-
+    height: 230px;
     padding: 20px;
 
     flex: 2;
@@ -56,7 +55,7 @@
     font-weight: 600;
 }
 
-.admin-main-number {
+.admin-advertising-number {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,16 +63,16 @@
   height: 100%;
 }
 
-.admin-main-title {
+.admin-advertising-title {
   display: flex;
   justify-content: center;
   align-items: center;
   
-  width: 742px;
+  width: 502px;
   height: 100%;
 }
 
-.admin-main-writer {
+.admin-advertising-short-review {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,7 +80,7 @@
   height: 100%;
 }
 
-.admin-main-write-datetime {
+.admin-advertising-location {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,18 +88,26 @@
   height: 100%;
 }
 
-.admin-main-favorite-count {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 100%;
-  }
-  
-  .admin-main-view-count {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 100%;
-  }
+.admin-advertising-business {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+}
+
+.admin-advertising-writer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+}
+
+.admin-advertising-write-datetime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100%;
+}
