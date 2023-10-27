@@ -172,3 +172,12 @@
 .main-bottom-board-list-item {
   margin-bottom: 10px;
 }
+
+.main-board-list-nothing {
+  margin-top: 50px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #222222;
+  width: 100%;
+  text-align: center;
+}
