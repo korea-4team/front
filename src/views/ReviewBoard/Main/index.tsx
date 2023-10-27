@@ -143,6 +143,7 @@ export default function ReviewBoardList() {
             <div className="review-board-businesstype-list" onClick={() => onBusinessTypeClickHandler('건축')}>건축</div>
             <div className="review-board-businesstype-list" onClick={() => onBusinessTypeClickHandler('기타')}>기타</div>
           </div>
+          <div className="review-board-main-title">기행기 게시판</div>
           {user != null && <div className="review-board-write-button" onClick={onReviewBoardWriteButtonClickHandler}>글쓰기</div>}
           {boardCount ?
           (<div className="review-board-list-top">

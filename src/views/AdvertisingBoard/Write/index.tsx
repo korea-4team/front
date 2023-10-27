@@ -66,13 +66,12 @@ export default function AdvertisingBoardWrite(){
 
   const navigator = useNavigate();
 
-
-  const fileUpload = async() => {
-    if (!advertisingBoardImages.length) return [];
+  const fileUpload = async (files: File[]) => {
+    if (!files.length) return [];
 
     const imageUrls = [];
 
-    for (const file of advertisingBoardImages) {
+    for (const file of files) {
       const data = new FormData();
       data.append("file", file);
   
@@ -260,12 +259,15 @@ export default function AdvertisingBoardWrite(){
     fileInputRef.current.click();
   }
 
-  const onAddMenuuttonClickHandler = () => {
+  const onAddMenuuttonClickHandler = async () => {
+
+    const imageUrl = await fileUpload(advertisingBoardImages);
+
     const menu: PostMenu = {
       title: advertisingBoardmenu,
       contents: advertisingBoardinfo,
       image: advertisingBoardImages,
-      imageUrl: [],
+      imageUrls: imageUrl,
       preImageUrl: advertisingBoardImageUrls,
       price: advertisingBoardprice,
     }
@@ -321,8 +323,11 @@ export default function AdvertisingBoardWrite(){
   const onUploadButtonClickHandler = async () => {
     const token = cookies.accessToken;
 
-    const imageUrls = await fileUpload();
+    const imageUrls = await fileUpload(advertisingBoardImagesmiri);
 
+    let tagList = advertisingBoardtag.split('#').map(tag => tag.trim());
+    tagList = tagList.filter(tag => tag !== '');
+    
     const data: PostAdvertisingBoardDto = {
       title: advertisingBoardTitle,
       contents: advertisingBoardContent,
@@ -465,7 +470,6 @@ export default function AdvertisingBoardWrite(){
           </div>
         </div>
         <div className='advertising-board-write-store'>판매목록</div>
-
 
 
         <div className='image-image'>

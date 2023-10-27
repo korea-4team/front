@@ -2,7 +2,7 @@ export default interface PostMenu {
   title: string;
 	contents: string;
   image: File[];
-	imageUrl: string[];
+	imageUrls: string[];
   preImageUrl: string[];
 	price: string;
 }
