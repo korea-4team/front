@@ -183,7 +183,8 @@ export default function AdvertisingBoardDetail(){
         return;
       }
       const data: PostShortReviewDto = {
-        contents : shortReview
+        contents : shortReview,
+        score: shortReview
       }
       postAdvertisingBoardShortReviewRequest(boardNumber, data, token).then(postShortReviewResponseHandler);
     }

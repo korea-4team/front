@@ -32,6 +32,7 @@ import GetAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard
 import GetCurrentAdvertisingBoardResponeDto from "interfaces/response/advertisingBoard/get-current-advertising-board-response.dto";
 import GetSearchAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-search-advertising-board.response.dto";
 import GetShortReviewListResponseDto from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
+import GetUserListAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-user-list-advertising.response.dto";
 import PatchAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/patch-advertising-board.response.dto";
 import PostAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/post-advertising-board.response.dto";
 import PostShortReviewResponseDto from "interfaces/response/advertisingBoard/post-short-review.response.dto";
@@ -97,8 +98,8 @@ const GET_ADMIN_USER_LIST_URL = (adminId: string, section: number | string) =>
   `${API_DOMAIN}/admin/${adminId}/user-list/${section}`;
 const GET_ADMIN_USER_DETAIL_URL = (adminId: string, userEmail: string) =>
   `${API_DOMAIN}/admin/${adminId}/user-detail/${userEmail}`;
-const GET_ADMIN_ADVERTISING_BOARD_LIST_URL = (adminId: string) =>
-  `${API_DOMAIN}/admin/${adminId}/advertising-board-list`;
+const GET_ADMIN_ADVERTISING_BOARD_LIST_URL = (adminId: string, section: number) =>
+  `${API_DOMAIN}/admin/${adminId}/advertising-board-list/${section}`;
 const GET_ADMIN_USER_STORE_INFO_URL = (adminId: string, userEmail: string) =>
   `${API_DOMAIN}/admin/${adminId}/user-list/${userEmail}/store-info`;
 const GET_ADMIN_USER_REVIEW_BOARD_LIST_URL = (
@@ -815,6 +816,22 @@ export const getAdminReviewBoardListRequest = async (
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
     });
+
+  return result;
+};
+
+// 광고 게시글 불러오기
+export const getAdminAdvertisingBoardListRequest = async (adminId: string, section: number) => {
+  const result = await axios
+  .get(GET_ADMIN_ADVERTISING_BOARD_LIST_URL(adminId, section))
+  .then((response) => {
+    const responseBody: GetUserListAdvertisingBoardResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
 
   return result;
 };

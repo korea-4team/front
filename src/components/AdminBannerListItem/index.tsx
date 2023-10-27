@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { dateFormat } from 'utils';
 import './style.css';
-import { ADMIN_BANNER_PATH, ADMIN_BANNER_UPDATE_PATH } from 'constant';
+import { ADMIN_BANNER_PATH } from 'constant';
 
 interface Props {
   item: MainBannerListResponseDto;

@@ -2,6 +2,7 @@ import {
   ADMIN_BANNER_PATH,
   ADMIN_BANNER_UPDATE_PATH,
   ADMIN_BANNER_WRITE_PATH,
+  ADMIN_GET_ADVERTISING_BOARD_LIST_PATH,
   ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH,
   ADMIN_GET_USER_LIST_PATH,
   ADMIN_ID_PATH_VARIABLE,
@@ -71,6 +72,7 @@ import AdminGetUserDetail from "views/Admin/GetUserDetail";
 import EventBoardDetail from "views/EventBoard/Detail";
 import EventBoardWrite from "views/EventBoard/Write";
 import EventBoardUpdate from "views/EventBoard/Update";
+import AdminAdvertising from "views/Admin/GetAdvertisingBoard";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -144,6 +146,7 @@ function App() {
 
           <Route path={ADMIN_PATH}>
             <Route path={ADMIN_PATH} element={<AdminMain />} />
+            <Route path={ADMIN_GET_ADVERTISING_BOARD_LIST_PATH()} element={<AdminAdvertising />} />
             <Route path={ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH()} element={<AdminGetShortReview />} />
             <Route path={ADMIN_GET_USER_LIST_PATH()} element={<AdminGetUserList />} />
             <Route path={ADMIN_USER_DETAIL_PATH(ADMIN_ID_PATH_VARIABLE, USER_EMAIL_PATH_VARIABLE)} element = {<AdminGetUserDetail />} />

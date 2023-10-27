@@ -1,8 +1,10 @@
 import {
   ADMIN_BANNER_PATH,
+  ADMIN_GET_ADVERTISING_BOARD_LIST_PATH,
   ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH,
   ADMIN_GET_USER_LIST_PATH,
   ADMIN_PATH,
+  COUNT_BY_MAIN_BOARD_PAGE,
   COUNT_BY_PAGE,
 } from "constant";
 
@@ -12,20 +14,28 @@ import { useUserStore } from "stores";
 
 import {
   getAdminStoreInfoRequest,
+  getAdminUserCommentListRequest,
   getAdminUserDetailRequest,
   getAdminUserReviewBoardListRequest,
+  getAdminUserShortReviewListRequest,
 } from "apis";
 import AdminUserReviewBoardListItem from "components/AdminUserReviewBoardListItem";
 import Pagination from "components/Pagination";
 import { usePagination } from "hooks";
 import { GetUserResponseDto } from "interfaces/response/admin";
 import getUserStoreInfoResponseDto from "interfaces/response/admin/get-user-store-info.response.dto";
+import GetShortReviewListResponseDto, {
+  ShortReviewListResponseDto,
+} from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
 import ResponseDto from "interfaces/response/response.dto";
 import {
   GetReviewBoardListResponseDto,
   ReviewBoardListResponseDto,
 } from "interfaces/response/reviewBoard";
 import "./style.css";
+import AdminUserShortReviewBoardListItem from "components/AdminUserShortReviewBoardListItem";
+import GetCommentListResponseDto, { CommentListResponseDto } from "interfaces/response/reviewBoard/get-comment-list.response.dto";
+import AdminUserCommentListItem from "components/AdminUserCommentListItem";
 
 //          component : 유저 정보 상세 컴포넌트         //
 export default function AdminGetUserDetail() {
@@ -36,13 +46,40 @@ export default function AdminGetUserDetail() {
   // description : 로그인 유저 정보 상태 //
   const { user } = useUserStore();
 
-  // description : 유저 정보 상태 //
-  const [userDetail, setUserDetail] = useState<GetUserResponseDto | null>(null);
+  // description : 기행기 버튼 클릭 상태 //
+  const [reviewButton, setReviewButton] = useState<boolean>(true);
+
+  // description : 한줄 리뷰 버튼 클릭 상태 //
+  const [ShortReviewButton, setShortReviewButton] = useState<boolean>(false);
+
+  // description : 기행기 버튼 클릭 상태 //
+  const [commentButton, setCommentButton] = useState<boolean>(false);
+
   //          function          //
   // description : 페이지 이동을 위한 네비게이트 함수 //
   const navigator = useNavigate();
 
   //          event handler         //
+  // description : 기행기 버튼을 눌렀을 때 //
+  const onClickReviewButton = () => {
+    setReviewButton(true);
+    setShortReviewButton(false);
+    setCommentButton(false);
+  }
+
+  // description : 한 줄 리뷰 버튼을 눌렀을 때 //
+  const onClickShortReviewButton = () => {
+    setReviewButton(false);
+    setShortReviewButton(true);
+    setCommentButton(false);
+  }
+
+  // description : 댓글 버튼을 눌렀을 때 //
+  const onClickCommentButton = () => {
+    setReviewButton(false);
+    setShortReviewButton(false);
+    setCommentButton(true);
+  }
 
   //          component : 왼쪽 메뉴 컴포넌트         //
   const AdminUserDetailLeft = () => {
@@ -53,6 +90,11 @@ export default function AdminGetUserDetail() {
     const onReviewButtonClickButton = () => {
       navigator(ADMIN_PATH);
     };
+
+    // description : 광고 게시글 목록 버튼 클릭 이벤트 //
+    const onAdvertisingBoardButtonClickButton = () => {
+      navigator(ADMIN_GET_ADVERTISING_BOARD_LIST_PATH());
+    }
 
     // description : 한 줄 목록 버튼 클릭 이벤트 //
     const onShortReviewButtonClickButton = () => {
@@ -76,30 +118,11 @@ export default function AdminGetUserDetail() {
     //          render          //
     return (
       <div className="admin-user-detail-left">
-        <div
-          className="admin-user-detail-left-button"
-          onClick={onReviewButtonClickButton}
-        >
-          기행기 목록
-        </div>
-        <div
-          className="admin-user-detail-left-button"
-          onClick={onShortReviewButtonClickButton}
-        >
-          한 줄 리뷰 목록
-        </div>
-        <div
-          className="admin-user-detail-left-button"
-          onClick={onUserButtonClickButton}
-        >
-          유저 목록
-        </div>
-        <div
-          className="admin-user-detail-left-button"
-          onClick={onBannerButtonClickButton}
-        >
-          배너
-        </div>
+        <div className="admin-main-left-button" onClick={onReviewButtonClickButton}> 기행기 목록 </div>
+        <div className='admin-main-left-button' onClick={onAdvertisingBoardButtonClickButton}>광고 게시글 목록</div>
+        <div className="admin-main-left-button" onClick={onShortReviewButtonClickButton}> 한 줄 리뷰 목록 </div>
+        <div className="admin-main-left-button" onClick={onUserButtonClickButton}> 유저 목록 </div>
+        <div className="admin-main-left-button" onClick={onBannerButtonClickButton}> 배너 </div>
       </div>
     );
   };
@@ -107,6 +130,9 @@ export default function AdminGetUserDetail() {
   //          component : 오른쪽 컴포넌트        //
   const AdminUserDetailRight = () => {
     //          state         //
+
+    // description : 유저 정보 상태 //
+    const [userDetail, setUserDetail] = useState<GetUserResponseDto | null>(null);
 
     // description : 사업자 등록증 정보 상태 //
     const [userStoreInfo, setUserStoreInfo] =
@@ -127,7 +153,7 @@ export default function AdminGetUserDetail() {
         return;
       }
 
-      // setUserDetail({ ...(responseBody as GetUserResponseDto) });
+      setUserDetail({ ...(responseBody as GetUserResponseDto) });
     };
 
     // description : 사업자 등록증 정보 불러오기 요청 함수 //
@@ -164,6 +190,7 @@ export default function AdminGetUserDetail() {
       getAdminUserDetailRequest(adminId, userEmail).then(
         getUserResponseHandler
       );
+
       getAdminStoreInfoRequest(adminId as string, userEmail).then(
         getUserStoreInfoResponseHandler
       );
@@ -199,7 +226,7 @@ export default function AdminGetUserDetail() {
               <div className="admin-user-detail-name"> 상세주소 </div>
               <div className="admin-user-detail-content">
                 {" "}
-                {userDetail?.addressDetail}
+                {userDetail?.addressDetail}{" "}
               </div>
             </div>
             <div className="admin-user-detail-box">
@@ -213,7 +240,7 @@ export default function AdminGetUserDetail() {
               <div className="admin-user-detail-name"> 권한 </div>
               <div className="admin-user-detail-content">
                 {" "}
-                {userDetail?.role}
+                {userDetail?.role}{" "}
               </div>
             </div>
           </div>
@@ -248,7 +275,7 @@ export default function AdminGetUserDetail() {
                 <div className="admin-user-detail-owner-name"> 상세주소 </div>
                 <div className="admin-user-detail-owner-content">
                   {" "}
-                  {userStoreInfo?.addressDetail}
+                  {userStoreInfo?.addressDetail}{" "}
                 </div>
               </div>
               <div className="admin-user-detail-box">
@@ -297,7 +324,7 @@ export default function AdminGetUserDetail() {
           {user && userDetail?.role === "owner" && userStoreInfo === null && (
             <div className="user-detail-bottom-list-nothing">
               {" "}
-              사업자 등록증 정보가 없습니다.
+              사업자 등록증 정보가 없습니다.{" "}
             </div>
           )}
         </div>
@@ -337,10 +364,10 @@ export default function AdminGetUserDetail() {
     const getReviewBoardList = (
       ReviewBoardList: ReviewBoardListResponseDto[]
     ) => {
-      const startIndex = COUNT_BY_PAGE * (currentPage - 1);
+      const startIndex = COUNT_BY_MAIN_BOARD_PAGE * (currentPage - 1);
       const lastIndex =
-        ReviewBoardList.length > COUNT_BY_PAGE * currentPage
-          ? COUNT_BY_PAGE * currentPage
+        ReviewBoardList.length > COUNT_BY_MAIN_BOARD_PAGE * currentPage
+          ? COUNT_BY_MAIN_BOARD_PAGE * currentPage
           : ReviewBoardList.length;
       const pageReviewBoardList = ReviewBoardList.slice(startIndex, lastIndex);
 
@@ -355,7 +382,7 @@ export default function AdminGetUserDetail() {
       setReviewBoardList(boardList);
       setBoardCount(boardList.length);
       getReviewBoardList(boardList);
-      changeSection(boardList.length, COUNT_BY_PAGE);
+      changeSection(boardList.length, COUNT_BY_MAIN_BOARD_PAGE);
     };
 
     //          event handler         //
@@ -372,23 +399,29 @@ export default function AdminGetUserDetail() {
         userEmail,
         currentSection
       ).then(getReviewBoardListResponseHandler);
-      if (boardCount) changeSection(boardCount, COUNT_BY_PAGE);
+
+      if (boardCount) changeSection(boardCount, COUNT_BY_MAIN_BOARD_PAGE);
     }, [currentSection]);
 
     useEffect(() => {
       getReviewBoardList(reviewBoardList);
-    }, [currentSection]);
+    }, [currentPage]);
 
     // render //
     return (
       <div className="admin-user-detail-right-bottom-item">
         <div className="admin-user-detail-right-bottom">
           <div className="menu-button-box">
-            <div className="menu-button"> 기행기 </div>
-            <div className="menu-button"> 한줄리뷰 </div>
-            <div className="menu-button"> 댓글 </div>
+            <div className="menu-button" onClick={onClickReviewButton}>
+              { reviewButton ? (<div className="menu-button-true"> 기행기 </div>)  : (<div className="menu-button-false"> 기행기 </div>)}
+            </div>
+            <div className="menu-button" onClick={onClickShortReviewButton}>
+              { ShortReviewButton ? (<div className="menu-button-true"> 한줄리뷰 </div>)  : (<div className="menu-button-false"> 한줄리뷰 </div>)}
+            </div>
+            <div className="menu-button" onClick={onClickCommentButton}>
+              { commentButton ? (<div className="menu-button-true"> 댓글 </div>)  : (<div className="menu-button-false"> 댓글 </div>)}
+            </div>
           </div>
-
           <div className="admin-user-board-list-review-board">
             <div className="admin-user-board-list-name-list">
               <div className="admin-user-board-list-name"> 번호 </div>
@@ -411,7 +444,7 @@ export default function AdminGetUserDetail() {
               ) : (
                 <div className="user-review-list-nothing">
                   {" "}
-                  작성된 게시글이 없습니다.{" "}
+                  작성한 게시글이 없습니다.{" "}
                 </div>
               )}
             </div>
@@ -436,17 +469,293 @@ export default function AdminGetUserDetail() {
     );
   };
 
+  // component  : 유저의 한줄 리뷰 리스트 불러오기 컴포넌트 //
+  const UserShortReviewList = () => {
+    //          state         //
+    // description : 페이지 네이션 관련 상태 //
+    const {
+      totalPage,
+      currentPage,
+      currentSection,
+      onPageClickHandler,
+      onPreviusClickHandler,
+      onNextClickHandler,
+      changeSection,
+    } = usePagination();
+
+    // description : 전체 한줄 리뷰 상태 //
+    const [shortReviewList, setShortReviewList] = useState<
+      ShortReviewListResponseDto[]
+    >([]);
+
+    // description : 전체 한줄 리뷰 갯수 상태 //
+    const [boardCount, setBoardCount] = useState<number>(0);
+
+    // description : 현재 페이지에서 보여줄 한줄 리뷰 리스트 상태 //
+    const [pageShortReviewList, setPageShortReviewList] = useState<
+      ShortReviewListResponseDto[]
+    >([]);
+
+    //          function          //
+    // description : 현재 페이지의 한 줄 리뷰 리스트 분류 함수 //
+    const getShortReviewBoardList = (
+      ShortReviewBoardList: ShortReviewListResponseDto[]
+    ) => {
+      const startIndex = COUNT_BY_MAIN_BOARD_PAGE * (currentPage - 1);
+      const lastIndex =
+        ShortReviewBoardList.length > COUNT_BY_MAIN_BOARD_PAGE * currentPage
+          ? COUNT_BY_MAIN_BOARD_PAGE * currentPage
+          : ShortReviewBoardList.length;
+      const pageShortReviewBoardList = ShortReviewBoardList.slice(
+        startIndex,
+        lastIndex
+      );
+
+      setPageShortReviewList(pageShortReviewBoardList);
+    };
+
+    // description : 한 줄 리뷰 불러오기 응답 처리 함수 //
+    const getShortReviewListResponseHandler = (
+      responseBody: GetShortReviewListResponseDto | ResponseDto
+    ) => {
+      const { shortList } = responseBody as GetShortReviewListResponseDto;
+      setShortReviewList(shortList);
+      setBoardCount(shortList.length);
+      getShortReviewBoardList(shortList);
+      changeSection(shortList.length, COUNT_BY_MAIN_BOARD_PAGE);
+    };
+
+    //          event handler          //
+    // description : 목록 버튼 클릭 이벤트 //
+    const onBackButtonClickHandler = () => {
+      navigator(-1);
+    };
+
+    //          effect          //
+    // description : 한 줄 리뷰 불러오기 //
+    useEffect(() => {
+      if (adminId !== "admin" || !userEmail) return;
+
+      getAdminUserShortReviewListRequest(
+        adminId,
+        userEmail,
+        currentSection
+      ).then(getShortReviewListResponseHandler);
+
+      if (boardCount) changeSection(boardCount, COUNT_BY_PAGE);
+    }, [currentSection]);
+
+    useEffect(() => {
+      getShortReviewBoardList(shortReviewList);
+    }, [currentPage]);
+
+    //          render          //
+    return (
+      <div className="admin-user-detail-right-bottom-item">
+        <div className="admin-user-detail-right-bottom">
+          <div className="menu-button-box">
+            <div className="menu-button" onClick={onClickReviewButton}>
+              { reviewButton ? (<div className="menu-button-true"> 기행기 </div>)  : (<div className="menu-button-false"> 기행기 </div>)}
+            </div>
+            <div className="menu-button" onClick={onClickShortReviewButton}>
+              { ShortReviewButton ? (<div className="menu-button-true"> 한줄리뷰 </div>)  : (<div className="menu-button-false"> 한줄리뷰 </div>)}
+            </div>
+            <div className="menu-button" onClick={onClickCommentButton}>
+              { commentButton ? (<div className="menu-button-true"> 댓글 </div>)  : (<div className="menu-button-false"> 댓글 </div>)}
+            </div>
+          </div>
+          <div className="admin-user-board-list-review-board">
+            <div className="admin-user-board-list-name-list">
+              <div className="admin-user-short-review-board-list-name">
+                {" "}
+                번호{" "}
+              </div>
+              <div className="admin-user-short-review-board-list-content">
+                {" "}
+                내용{" "}
+              </div>
+              <div className="admin-user-short-review-board-list-score">
+                {" "}
+                별점{" "}
+              </div>
+              <div className="admin-user-short-review-board-list-write-datetime">
+                {" "}
+                작성일자{" "}
+              </div>
+            </div>
+            <div className="admin-user-board-list-name-list">
+              {boardCount ? (
+                <div>
+                  {pageShortReviewList.map((item) => (
+                    <AdminUserShortReviewBoardListItem item={item} />
+                  ))}
+                </div>
+              ) : (
+                <div className="user-review-list-nothing">
+                  {" "}
+                  작성한 한줄리뷰가 없습니다.{" "}
+                </div>
+              )}
+            </div>
+            {boardCount !== 0 && (
+              <Pagination
+                totalPage={totalPage}
+                currentPage={currentPage}
+                onPageClickHandler={onPageClickHandler}
+                onPreviusClickHandler={onPreviusClickHandler}
+                onNextClickHandler={onNextClickHandler}
+              />
+            )}
+          </div>
+        </div>
+        <div className="back-button">
+          <div className="black-button" onClick={onBackButtonClickHandler}>
+            {" "}
+            목록{" "}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+    // component  : 유저의 댓글 리스트 불러오기 컴포넌트 //
+    const UserCommentList = () => {
+      //          state         //
+      // description : 페이지 네이션 관련 상태 //
+      const {
+        totalPage,
+        currentPage,
+        currentSection,
+        onPageClickHandler,
+        onPreviusClickHandler,
+        onNextClickHandler,
+        changeSection,
+      } = usePagination();
+  
+      // description : 전체 댓글 상태 //
+      const [commentList, setCommentList] = useState<CommentListResponseDto[]>([]);
+  
+      // description : 전체 댓글 갯수 상태 //
+      const [boardCount, setBoardCount] = useState<number>(0);
+  
+      // description : 현재 페이지에서 보여줄 댓글 리스트 상태 //
+      const [pageCommentList, setPageCommentList] = useState<CommentListResponseDto[]>([]);
+  
+      //          function          //
+      // description : 현재 페이지의 댓글 리스트 분류 함수 //
+      const getCommentList = (
+        CommentList: CommentListResponseDto[]
+      ) => {
+        const startIndex = COUNT_BY_MAIN_BOARD_PAGE * (currentPage - 1);
+        const lastIndex =
+        CommentList.length > COUNT_BY_MAIN_BOARD_PAGE * currentPage
+            ? COUNT_BY_MAIN_BOARD_PAGE * currentPage
+            : CommentList.length;
+        const pageCommentList = CommentList.slice(
+          startIndex,
+          lastIndex
+        );
+  
+        setPageCommentList(pageCommentList);
+      };
+  
+      // description : 댓글 불러오기 응답 처리 함수 //
+      const getCommentListResponseHandler = (
+        responseBody: GetCommentListResponseDto | ResponseDto
+      ) => {
+        const { commentList } = responseBody as GetCommentListResponseDto;
+        setCommentList(commentList);
+        setBoardCount(commentList.length);
+        getCommentList(commentList);
+        changeSection(commentList.length, COUNT_BY_MAIN_BOARD_PAGE);
+      };
+  
+      //          event handler          //
+      // description : 목록 버튼 클릭 이벤트 //
+      const onBackButtonClickHandler = () => {
+        navigator(-1);
+      };
+  
+      //          effect          //
+      // description : 댓글 불러오기 //
+      useEffect(() => {
+        if (adminId !== "admin" || !userEmail) return;
+  
+        getAdminUserCommentListRequest(
+          adminId,
+          userEmail,
+          currentSection
+        ).then(getCommentListResponseHandler);
+  
+        if (boardCount) changeSection(boardCount, COUNT_BY_PAGE);
+      }, [currentSection]);
+  
+      useEffect(() => {
+        getCommentList(commentList);
+      }, [currentPage]);
+  
+      //          render          //
+      return (
+        <div className="admin-user-detail-right-bottom-item">
+          <div className="admin-user-detail-right-bottom">
+            <div className="menu-button-box">
+              <div className="menu-button" onClick={onClickReviewButton}>
+                { reviewButton ? (<div className="menu-button-true"> 기행기 </div>)  : (<div className="menu-button-false"> 기행기 </div>)}
+              </div>
+              <div className="menu-button" onClick={onClickShortReviewButton}>
+                { ShortReviewButton ? (<div className="menu-button-true"> 한줄리뷰 </div>)  : (<div className="menu-button-false"> 한줄리뷰 </div>)}
+              </div>
+              <div className="menu-button" onClick={onClickCommentButton}>
+                { commentButton ? (<div className="menu-button-true"> 댓글 </div>)  : (<div className="menu-button-false"> 댓글 </div>)}
+              </div>
+            </div>
+            <div className="admin-user-board-list-review-board">
+              <div className="admin-user-board-list-name-list">
+                <div className="admin-user-comment-list-name"> 번호 </div>
+                <div className="admin-user-comment-list-content"> 내용 </div>
+                <div className="admin-user-comment-list-write-datetime"> 작성일자 </div>
+              </div>
+              <div className="admin-user-board-list-name-list">
+                {boardCount ? (
+                  <div>
+                    {pageCommentList.map((item) => (
+                      <AdminUserCommentListItem item={item} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="user-review-list-nothing">
+                    작성한 댓글이 없습니다.
+                  </div>
+                )}
+              </div>
+              {boardCount !== 0 && (
+                <Pagination
+                  totalPage={totalPage}
+                  currentPage={currentPage}
+                  onPageClickHandler={onPageClickHandler}
+                  onPreviusClickHandler={onPreviusClickHandler}
+                  onNextClickHandler={onNextClickHandler}
+                />
+              )}
+            </div>
+          </div>
+          <div className="back-button">
+            <div className="black-button" onClick={onBackButtonClickHandler}> 목록 </div>
+          </div>
+        </div>
+      );
+    };
   //          effect          //
 
   //          render          //
   return (
     <div className="admin-user-detail">
-      <div className="admin-user-detail-list">
         <AdminUserDetailLeft />
-      </div>
       <div className="admin-user-board-list">
         <AdminUserDetailRight />
-        <UserReviewList />
+        { reviewButton && <UserReviewList />}
+        { ShortReviewButton && <UserShortReviewList /> }
+        { commentButton && <UserCommentList />}
       </div>
     </div>
   );

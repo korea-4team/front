@@ -1,0 +1,67 @@
+.admin-advertising-list-box {
+  margin-top: 3px;
+  display: flex;
+  width: 1152px;
+  height: 30px;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  align-items: center;
+  text-align: center;
+}
+
+.admin-advertising-item-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 100%;
+}
+
+.admin-advertising-item-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 502px;
+  height: 100%;
+}
+
+.admin-advertising-item-short-review-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+}
+
+.admin-advertising-item-location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+}
+
+.admin-advertising-item-business {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+}
+
+.admin-advertising-item-writer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+}
+
+.admin-advertising-item-write-datetime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100%;
+}

@@ -1,7 +1,7 @@
 import { getAdminBannerListRequest } from 'apis';
 import AdminBannerListItem from 'components/AdminBannerListItem';
 import Pagination from 'components/Pagination';
-import { ADMIN_BANNER_PATH, ADMIN_BANNER_WRITE_PATH, ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH, ADMIN_GET_USER_LIST_PATH, ADMIN_PATH, COUNT_BY_PAGE } from 'constant';
+import { ADMIN_BANNER_PATH, ADMIN_BANNER_WRITE_PATH, ADMIN_GET_ADVERTISING_BOARD_LIST_PATH, ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH, ADMIN_GET_USER_LIST_PATH, ADMIN_PATH, COUNT_BY_PAGE } from 'constant';
 import { usePagination } from 'hooks';
 import { GetMainBannerListResponseDto, MainBannerListResponseDto } from 'interfaces/response/banner';
 import ResponseDto from 'interfaces/response/response.dto';
@@ -32,6 +32,11 @@ export default function AdminBanner() {
       navigator(ADMIN_PATH);
     }
 
+    // description : 광고 게시글 목록 버튼 클릭 이벤트 //
+    const onAdvertisingBoardButtonClickButton = () => {
+      navigator(ADMIN_GET_ADVERTISING_BOARD_LIST_PATH());
+    }
+
     // description : 한 줄 목록 버튼 클릭 이벤트 //
     const onShortReviewButtonClickButton = () => {
       navigator(ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH());
@@ -54,11 +59,12 @@ export default function AdminBanner() {
 
     //          render          //
     return (
-      <div className='admin-banner-left'>
-        <div className='admin-banner-left-button' onClick={onReviewButtonClickButton}>기행기 목록</div>
-        <div className='admin-banner-left-button' onClick={onShortReviewButtonClickButton}>한 줄 리뷰 목록</div>
-        <div className='admin-banner-left-button' onClick={onUserButtonClickButton}>유저 목록</div>
-        <div className='admin-banner-left-button' onClick={onBannerButtonClickButton}>배너</div>
+      <div className='admin-main-left'>
+        <div className='admin-main-left-button' onClick={onReviewButtonClickButton}>기행기 목록</div>
+        <div className='admin-main-left-button' onClick={onAdvertisingBoardButtonClickButton}>광고 게시글 목록</div>
+        <div className='admin-main-left-button' onClick={onShortReviewButtonClickButton}>한 줄 리뷰 목록</div>
+        <div className='admin-main-left-button' onClick={onUserButtonClickButton}>유저 목록</div>
+        <div className='admin-main-left-button' onClick={onBannerButtonClickButton}>배너</div>
       </div>
     )
   };
