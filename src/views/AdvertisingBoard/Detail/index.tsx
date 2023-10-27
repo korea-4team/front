@@ -3,7 +3,7 @@ import "./style.css"
 import { FavoriteListResponseDto } from "interfaces/response/advertisingBoard/get-advertising-board-favorite-list-response.dto";
 import { usePagination } from "hooks";
 import { ADVERTISING_BOARD_PATH, ADVERTISING_BOARD_UPDATE_PATH, COUNT_BY_PAGE, COUNT_BY_PAGE_COMMENT } from "constant";
-import { deleteAdvertisingBoardRequest, deleteAdvertisingShortReviewRequest, getAdvertisingBoardRequest, getAdvertisingBoardShortReviewListRequest, postAdvertisingBoardShortReviewRequest, putAdvertisingBoardFavoriteRequest } from "apis";
+import { deleteAdvertisingBoardRequest, deleteAdvertisingShortReviewRequest, getAdvertisingBoardRequest, getAdvertisingBoardShortReviewListRequest, postAdvertisingBoardShortReviewRequest, putAdvertisingBoardFavoriteRequest, uploadFileRequest } from "apis";
 import GetShortReviewListResponseDto, { ShortReviewListResponseDto } from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
 import { PostShortReviewDto } from "interfaces/request/advertisingBoard";
 import { dateFormat } from "utils";
@@ -13,7 +13,8 @@ import { useUserStore } from "stores";
 import { useCookies } from "react-cookie";
 import { ChangeEvent, useEffect, useState } from "react";
 import GetAdvertisingBoardResponseDto from "interfaces/response/advertisingBoard/get-advertising-board.response.dto";
-import ResponseDto from "interfaces/response/response.dto";;
+import ResponseDto from "interfaces/response/response.dto";
+import { PostMenu, PostTag } from 'types';
 
 
 
@@ -50,6 +51,23 @@ export default function AdvertisingBoardDetail(){
 
     const {totalPage, currentPage, currentSection, onNextClickHandler, onPreviusClickHandler, onPageClickHandler,changeSection} = usePagination();
 
+    const [menuList, setMenuList] = useState<PostMenu[]>([]);
+
+    const[advertisingBoardmenu, setAdvertisingBoardmenu] = useState<string>('');
+
+    const[advertisingBoardprice, setAdvertisingBoardprice] = useState<string>('');
+
+    const[advertisingBoardinfo, setAdvertisingBoardinfo] = useState<string>('');
+
+    const[advertisingBoardImages, setAdvertisingBoardImages] = useState<File[]>([]);
+
+    const[advertisingBoardImageUrls,setAdvertisingBoardImageUrls] = useState<string[]>([]);
+
+    const[advertisingBoardImageUrl,setAdvertisingBoardImageUrl] = useState<File[]>([]);
+
+
+    
+
 
 
     const getAdvertisingBoardResponseHandler = (responseBody: GetAdvertisingBoardResponseDto | ResponseDto) => {
@@ -62,6 +80,9 @@ export default function AdvertisingBoardDetail(){
         return;
       }
       setAdvertisingBoard(responseBody as GetAdvertisingBoardResponseDto);
+      const { menuList } = responseBody as GetAdvertisingBoardResponseDto;
+      setMenuList(menuList);
+
     }
 
     const deleteAdvertisingBoardResponseHandler = (code: string) => {
@@ -196,6 +217,66 @@ export default function AdvertisingBoardDetail(){
       deleteAdvertisingShortReviewRequest(getShortReviewNumber, accessToken).then(deleteShortReviewResponseHandler);
     }
 
+
+    const MenuComponent = ({ index } : {index: number}) => {
+
+      return (
+        <div className='advertising-board-menu'>
+          <div className='advertising-board-menu-textarea'>{menuList[index].title}</div>
+          <div className='advertising-board-menu-textarea'>{menuList[index].contents}</div>
+          {menuList[index].imageUrls.map( (url, index) =>
+          <div className='advertising-board-write-image-container'>
+            <img className='advertising-board-write-image' src={url} />
+          </div>
+          )}
+          <div className='advertising-board-menu-textarea'>{menuList[index].price}</div>
+        </div>
+      )
+  
+    }
+
+    const fileUpload = async (files: File[]) => {
+      if (!files.length) return [];
+  
+      const imageUrls = [];
+  
+      for (const file of files) {
+        const data = new FormData();
+        data.append("file", file);
+    
+        const imageUrl = await uploadFileRequest(data);
+        if (!imageUrl) continue;
+        imageUrls.push(imageUrl);
+      }
+  
+      return imageUrls;
+    }
+
+    const onAddMenuuttonClickHandler = async () => {
+
+      const imageUrl = await fileUpload(advertisingBoardImages);
+  
+      const menu: PostMenu = {
+        title: advertisingBoardmenu,
+        contents: advertisingBoardinfo,
+        image: advertisingBoardImages,
+        imageUrls: imageUrl,
+        preImageUrl: advertisingBoardImageUrls,
+        price: advertisingBoardprice,
+      }
+      const newMenuList = menuList.map(item => item);
+      newMenuList.push(menu);
+      setMenuList(newMenuList);
+  
+      setAdvertisingBoardmenu('');
+      setAdvertisingBoardinfo('');
+      setAdvertisingBoardImages([]);
+      setAdvertisingBoardImageUrls([]);
+      setAdvertisingBoardprice('');
+    }
+    
+
+
     let boardNumberFlag = true;
     useEffect(() => {
       if (boardNumberFlag) {
@@ -235,6 +316,7 @@ export default function AdvertisingBoardDetail(){
         <div className="advertising-board-detail-data">
           <div className="advertising-board-detail-title">{advertisingBoard?.title}</div>
           <div className="advertising-board-detail-location-businesstype">[{advertisingBoard?.location},{advertisingBoard?.businessType}]</div>
+          <div className="advertising-board-detail-location-businesstype">[{advertisingBoard?.tagList}]</div>
         </div>
         <div className="advertising-board-detail-write-data">
           <div className="advertising-board-detail-writer-nickname">{advertisingBoard?.writerNickname}</div>
@@ -243,11 +325,33 @@ export default function AdvertisingBoardDetail(){
         </div>
         <div className="divider"></div>
         <div className="advertising-board-detail-body">
-          <div className="advertising-board-detail-contents">{advertisingBoard?.contents}</div>
+        <div className='advertising-board-write-store'>업종 사진</div>
           <div className="advertising-board-detail-image-box">
-            <img className="advertising-board-detail-image" src = {advertisingBoard?.imageUrl ? advertisingBoard.imageUrl: ''} />
+            <img className="advertising-board-detail-image" src = {advertisingBoard?.imageUrls ? advertisingBoard.imageUrls: ''} />
           </div>
+          <div className='advertising-board-write-store'>업종 설명</div>
+          <div className="advertising-board-detail-contents">{advertisingBoard?.contents}</div>  
         </div>
+          <div className='advertising-board-write-store'>판매 목록</div>
+          <div className="advertising-board-detail-image-box">
+          {menuList.map((menu, index) => <MenuComponent index={index} />)}
+          </div>
+          <div className='advertising-board-write-store'>상세보기</div>
+          <div className="advertising-board-detail-contents">
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storename}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storetel}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storetime}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storenumber}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeadrress}</div>
+          </div> 
+          <div className='advertising-board-write-store'>예약 안내사항</div>
+          <div className="advertising-board-detail-contents">
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storename}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storetel}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storetime}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storenumber}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeadrress}</div>
+          </div> 
         <div className="advertising-board-button-box">
           <div className="black-button" onClick={onBackButtonClickHandler}>목록</div>
           {isWriter &&
