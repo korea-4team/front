@@ -28,6 +28,7 @@ export default function ReviewBoardListItem({item}: Props) {
   //          render          //
   return (
     <div className="review-board-list-item-box">
+      <div className="divider"></div>
       <div className="review-board-list-box">
         <div className="review-board-item-number">{boardNumber}</div>
         <div className="review-board-item-title-box" >

@@ -11,7 +11,7 @@ import Pagination from "components/Pagination";
 import { useNavigate, useParams } from "react-router";
 import GetAdvertisingLocationListResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-location-list.response.dto";
 import GetAdvertisingBoardBusinessTypeResponseDto from "interfaces/response/advertisingBoard/get-advertising-board-businessType-list-responsedto";
-import { useUserStore } from "stores";
+import { useAdvertisingSearchStore, useUserStore } from "stores";
 
 export default function AdvertisingBoardMain() {
   const AdvertisingBoardList = () => {
@@ -23,6 +23,7 @@ export default function AdvertisingBoardMain() {
     const [boardCount ,setBoardCount] = useState<number>(0);
     const [pageAdvertisingBoardList, setPageAdvertisingBoardList] = useState<AdvertisingBoardListResponseDto[]>([]);
     const {user , setUser} = useUserStore();
+    const { businessType, location } = useAdvertisingSearchStore();
 
     const navigator = useNavigate();
 
@@ -103,6 +104,14 @@ export default function AdvertisingBoardMain() {
     useEffect(()=> {
       getPageAdvertisingBoardList(AdvertisingBoardList);
     },[currentPage])
+
+    useEffect(()=> {
+      getAdvertisingBoardLocationListRequest(location).then(getAdvertisingBoardListResponseHandler);
+    },[location])
+
+    useEffect(()=> {
+      getAdvertisingBoardBusinessTypeListRequest(businessType).then(getAdvertisingBoardBusinessTypeListResponseHandler);
+    },[businessType])
     
 // render // 
 return (
