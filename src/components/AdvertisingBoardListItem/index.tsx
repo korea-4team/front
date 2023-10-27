@@ -28,7 +28,7 @@ const onClickHandler = () => {
 // render //
   return(
     <div className='advertising-board-list-item-box' onClick={onClickHandler}>
-      <div className="image">{imageUrl}</div>
+      <div className="image" style={{ backgroundImage: `url(${imageUrl})` }}></div>
       <div className="count">
         <div className="short-review-count">{shortReviewCount}</div>
         <div className="favorite-count">{favoriteCount}</div>
