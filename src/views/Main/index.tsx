@@ -232,6 +232,7 @@ export default function Main() {
     const [pageReviewBoardList, setPageReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
     // description: 게시물 수를 저장하는 상태 //
     const [boardCount, setBoardCount] = useState<number>(0);
+    const [advertisingBoardCount, setAdvertisingBoardCount] = useState<number>(0);
 
     //          function          //
     // description: 현재 페이지의 기행기 게시물 리스트 분류 함수 //
@@ -262,7 +263,7 @@ export default function Main() {
       
       const { advertisingboardList } = responseBody as GetCurrentAdvertisingBoardResponeDto;
       setAdvertisingBoardList(advertisingboardList);
-      setBoardCount(advertisingboardList.length);
+      setAdvertisingBoardCount(advertisingboardList.length);
       changeSection(advertisingboardList.length, COUNT_BY_MAIN_BOARD_PAGE);
       getPageAdvertisingBoardList(advertisingboardList);
     }
@@ -299,10 +300,10 @@ export default function Main() {
           <div className="main-bottom-board-text">광고 게시판</div>
           <div className="main-bottom-board-list-box">
             <div className="main-bottom-board-list-item">
-              {boardCount ?
+              {advertisingBoardCount ?
               (<div className="main-review-board-list">
               {pageAdvertisingBoardList.map((item) => (<AdvertisingBoardListItem item={item} />))}
-              </div>) : (<div className="review-board-list-nothing">게시물이 존재하지 않습니다.</div>)}
+              </div>) : (<div className="main-board-list-nothing">게시물이 존재하지 않습니다.</div>)}
             </div>
           </div>
         </div>
@@ -322,7 +323,7 @@ export default function Main() {
               {boardCount ?
               (<div className="main-review-board-list">
               {pageReviewBoardList.map((item) => (<ReviewBoardListItem item={item} />))}
-              </div>) : (<div className="review-board-list-nothing">게시물이 존재하지 않습니다.</div>)}
+              </div>) : (<div className="main-board-list-nothing">게시물이 존재하지 않습니다.</div>)}
             </div>
           </div>
         </div>
