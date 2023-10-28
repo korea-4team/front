@@ -7,7 +7,7 @@ import AdvertisingBoardListResponseDto from 'interfaces/response/advertisingBoar
 import { GetReviewBoardListResponseDto, ReviewBoardListResponseDto } from 'interfaces/response/reviewBoard';
 import ResponseDto from 'interfaces/response/response.dto';
 import GetCurrentAdvertisingBoardResponeDto from 'interfaces/response/advertisingBoard/get-current-advertising-board-response.dto';
-import { getAdvertisingBoardRequest, getCurrentEventBoardListRequest, getNoticeBoardListRequest, getReviewBoardListRequest } from 'apis';
+import { getAdvertisingBoardRequest, getCurrentAdvertisingBoardListRequest, getCurrentEventBoardListRequest, getNoticeBoardListRequest, getReviewBoardListRequest } from 'apis';
 import { usePagination } from 'hooks';
 import { ADVERTISING_BOARD_PATH, COUNT_BY_MAIN_BOARD_PAGE } from 'constant';
 import ReviewBoardListItem from 'components/ReviewBoardListItem';
@@ -290,7 +290,7 @@ export default function Main() {
     },[currentSection]);
 
     useEffect(() => {
-      getAdvertisingBoardRequest(currentSection).then(getAdvertisingBoardListResponseHandler);
+      getCurrentAdvertisingBoardListRequest(currentSection).then(getAdvertisingBoardListResponseHandler);
     },[currentSection]);
 
     //          render          //
