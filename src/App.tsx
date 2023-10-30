@@ -96,7 +96,7 @@ function App() {
   //          effect: path가 변경될 때 마다 실행될 함수          //
   useEffect(() => {
     const accessToken = cookies.accessToken;
-    if (!accessToken) {
+    if (!accessToken || user) {
       setUser(null);
       return;
     }
