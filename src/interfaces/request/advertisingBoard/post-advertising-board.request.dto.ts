@@ -1,4 +1,4 @@
-import { PostMenu, PostTag } from "types";
+import { PostMenu, PostTag, PostDetail } from "types";
 
 export default interface PostAdvertisingBoardDto{
   title : string;
@@ -8,4 +8,5 @@ export default interface PostAdvertisingBoardDto{
   imageUrls : string[];
   menuList: PostMenu[];
   tagList: string[];
+  dtail: PostDetail;
 }
