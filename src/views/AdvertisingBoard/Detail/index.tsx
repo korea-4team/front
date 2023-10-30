@@ -213,7 +213,6 @@ export default function AdvertisingBoardDetail(){
 
     const onDeleteShortReviewButtonClickHandler = (getShortReviewNumber : number) => {
       const accessToken = cookies.accessToken;
-      console.log(getShortReviewNumber);
       if(!getShortReviewNumber) return;
       deleteAdvertisingShortReviewRequest(getShortReviewNumber, accessToken).then(deleteShortReviewResponseHandler);
     }
