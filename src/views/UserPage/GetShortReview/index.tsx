@@ -7,7 +7,7 @@ import ResponseDto from 'interfaces/response/response.dto';
 import { useNavigate } from 'react-router-dom';
 import { getMyPageBoardListRequest, getSignInUserRequest } from 'apis';
 import { useCookies } from 'react-cookie';
-import { COUNT_BY_MAIN_BOARD_PAGE, MY_PAGE_PATH } from 'constant';
+import { COUNT_BY_MAIN_BOARD_PAGE, MY_PAGE_COMMENT_PATH, MY_PAGE_PATH, MY_PAGE_SHORT_REVIEW_PATH } from 'constant';
 import { useStore } from 'zustand';
 import { useUserStore } from 'stores';
 import { usePagination } from 'hooks';
@@ -17,7 +17,7 @@ import AdminUserReviewBoardListItem from 'components/AdminUserReviewBoardListIte
 import Pagination from 'components/Pagination';
 
 //          component : 마이페이지 메인        //
-export default function UserPage() {
+export default function UserShortReviewPage() {
   //          state         //
   // description : Cookie 상태 //
   const [cookies, setCookie] = useCookies();
@@ -89,14 +89,24 @@ export default function UserPage() {
     navigator(MY_PAGE_PATH(user?.email as string));
   }
 
+  // description : 내 댓글 클릭 이벤트 //
+  const onMyCommentClickButton = () => {
+    navigator(MY_PAGE_COMMENT_PATH(user?.email as string));
+  }
+
+  // description : 내 한줄리뷰 클릭 이벤트 //
+  const onMyShortReviewButton = () => {
+    navigator(MY_PAGE_SHORT_REVIEW_PATH(user?.email as string));
+  }
+
   //          effect          //
 
   //          render          //
   return (
     <div className='user-info-bottom-left-item'>
       <div className='user-info-bottom-left-menu-button' onClick={onMyBoardClickButton}> 내 게시글 </div>
-      <div className='user-info-bottom-left-menu-button'> 내 댓글 </div>
-      <div className='user-info-bottom-left-menu-button'> 내 한줄리뷰 </div>
+      <div className='user-info-bottom-left-menu-button' onClick={onMyCommentClickButton}> 내 댓글 </div>
+      <div className='user-info-bottom-left-menu-button' onClick={onMyShortReviewButton}> 내 한줄리뷰 </div>
       <div className='user-info-bottom-left-menu-button'> 내 예약내역 </div>
       <div className='user-info-bottom-left-menu-button'> 내 가게 </div>
       <div className='user-info-bottom-left-menu-button'> 내 가게예약정보</div>
@@ -197,7 +207,7 @@ export default function UserPage() {
           )}
         </div>
       );
-      };
+    };
 
   //          effect          //
 

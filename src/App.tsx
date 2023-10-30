@@ -16,7 +16,9 @@ import {
   DETAIL_PATH,
   EVENT_BOARD_PATH,
   MAIN_PATH,
+  MY_PAGE_COMMENT_PATH,
   MY_PAGE_PATH,
+  MY_PAGE_SHORT_REVIEW_PATH,
   NOTICE_BOARD_PATH,
   REVIEW_BOARD_DETAIL_PATH,
   REVIEW_BOARD_PATH,
@@ -74,7 +76,9 @@ import EventBoardDetail from "views/EventBoard/Detail";
 import EventBoardWrite from "views/EventBoard/Write";
 import EventBoardUpdate from "views/EventBoard/Update";
 import AdminAdvertising from "views/Admin/GetAdvertisingBoard";
-import UserPage from "views/UserPage";
+import UserPage from "views/UserPage/Main";
+import UserCommentPage from "views/UserPage/GetComment";
+import UserShortReviewPage from "views/UserPage/GetShortReview";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -157,7 +161,9 @@ function App() {
           </Route>
 
           <Route path={MY_PAGE_PATH(USER_EMAIL_PATH_VARIABLE)}>
-              <Route path={MY_PAGE_PATH(USER_EMAIL_PATH_VARIABLE)} element={ <UserPage /> }/>
+            <Route path={MY_PAGE_PATH(USER_EMAIL_PATH_VARIABLE)} element={ <UserPage /> }/>
+            <Route path={MY_PAGE_COMMENT_PATH(USER_EMAIL_PATH_VARIABLE)} element={ <UserCommentPage /> } />
+            <Route path={MY_PAGE_SHORT_REVIEW_PATH(USER_EMAIL_PATH_VARIABLE)} element={ <UserShortReviewPage /> } />
           </Route>
 
           <Route path={AUTH_PATH} element={<Authentication />} />

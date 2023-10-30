@@ -60,6 +60,9 @@ export const ADMIN_BANNER_WRITE_PATH = () => `${ADMIN_PATH}/${BANNER_PATH}/${WRI
 export const ADMIN_BANNER_UPDATE_PATH = (bannerNumber: number | string) => `${ADMIN_PATH}/${BANNER_PATH}/${UPDATE_PATH(bannerNumber)}`;
 
 export const MY_PAGE_PATH = (email: string) => `/my-page/${email}`;
+export const MY_PAGE_COMMENT_PATH = (email:string) => `/my-page/${email}/comment-list`;
+export const MY_PAGE_SHORT_REVIEW_PATH = (email: string) => `/my-page/${email}/short-review-list`;
+
 export const SEARCH_BOARD_PATH = (location: string, searchWord: string) => `${SEARCH_PATH}/${location}/${searchWord}`;
 export const ADVERTISING_BOARD_SEARCH_LIST_PATH = (location: string, searchWord: string) => `${SEARCH_PATH}/advertising-board/more/${location}/${searchWord}`;
 export const REVIEW_BOARD_SEARCH_LIST_PATH = (location: string, searchWord: string) => `${SEARCH_PATH}/review-board/more/${location}/${searchWord}`;
