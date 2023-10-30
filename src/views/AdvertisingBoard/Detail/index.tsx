@@ -277,6 +277,7 @@ export default function AdvertisingBoardDetail(){
     useEffect(() => {
       if (boardNumberFlag) {
         boardNumberFlag = false;
+        console.log(boardNumberFlag);
         return
       }
       if (!boardNumber) {
