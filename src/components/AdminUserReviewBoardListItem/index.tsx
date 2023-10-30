@@ -29,9 +29,9 @@ export default function AdminUserReviewBoardListItem({item}: Props) {
           <div className="admin-user-review-board-item-title">
             { title.length > 30 ? title.substring(0, 30) + '...' : title }
           </div>
-          <div className="admin-user-review-board-item-comment-count">[{commentCount}]</div>
         </div>
         <div className="admin-user-review-board-item-write-datetime">{dateFormat(writeDatetime)}</div>
+        <div className="admin-user-review-board-item-comment-count">{commentCount}</div>
         <div className="admin-user-review-board-item-favorite-count">{favoriteCount}</div>
         <div className="admin-user-review-board-item-view-count">{viewCount}</div>
       </div>

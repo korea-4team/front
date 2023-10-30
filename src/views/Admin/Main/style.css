@@ -44,6 +44,19 @@
     background-color: rgba(0,0,0,0.1);
 }
 
+.main-menu-button-true {
+  width: 200px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  border-radius: 3px;
+  background-color: rgb(0, 0, 0, 0.5);
+}
+
 .admin-main-list-name {
     height: 30px;
 

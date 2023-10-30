@@ -26,33 +26,76 @@ export default function AdminMain() {
   //           component : 관리자 메인 페이지 왼쪽         //
   const AdminMainLeft = () => {
     //          state         //
+    // description : 기행기 버튼 클릭 상태 //
+    const [reviewButton, setReviewButton] = useState<boolean>(true);
+
+    // description : 광고 버튼 클릭 상태 //
+    const [advertisingButton, setAdvertisingButton] = useState<boolean>(false);
+
+    // description : 한줄리뷰 버튼 클릭 상태 //
+    const [shortReviewButton, setShortReviewButton] = useState<boolean>(false);
+
+    // description : 유저목록 버튼 클릭 상태 //
+    const [userButton, setUserButton] = useState<boolean>(false);
+
+    // description : 배너 버튼 클릭 상태 //
+    const [bannerButton, setBannerButton] = useState<boolean>(false);
 
     //          function          //
     // description : 기행기 목록 버튼 클릭 이벤트 //
     const onReviewButtonClickButton = () => {
       navigator(ADMIN_PATH);
+
+      setReviewButton(true);
+      setAdvertisingButton(false);
+      setShortReviewButton(false);
+      setUserButton(false);
+      setBannerButton(false);
     }
 
     // description : 광고 게시글 목록 버튼 클릭 이벤트 //
     const onAdvertisingBoardButtonClickButton = () => {
       navigator(ADMIN_GET_ADVERTISING_BOARD_LIST_PATH());
+
+      setReviewButton(false);
+      setAdvertisingButton(true);
+      setShortReviewButton(false);
+      setUserButton(false);
+      setBannerButton(false);
     }
 
     // description : 한 줄 목록 버튼 클릭 이벤트 //
     const onShortReviewButtonClickButton = () => {
       navigator(ADMIN_GET_SHORT_REVIEW_BOARD_LIST_PATH());
+
+      setReviewButton(false);
+      setAdvertisingButton(false);
+      setShortReviewButton(true);
+      setUserButton(false);
+      setBannerButton(false);
     }
 
     // description : 유저 목록 버튼 클릭 이벤트 //
     const onUserButtonClickButton = () => {
       navigator(ADMIN_GET_USER_LIST_PATH());
+
+      setReviewButton(false);
+      setAdvertisingButton(false);
+      setShortReviewButton(false);
+      setUserButton(true);
+      setBannerButton(false);
     }
 
     // description : 배너 버튼 클릭 이벤트 //
     const onBannerButtonClickButton = () => {
       navigator(ADMIN_BANNER_PATH());
-    }
 
+      setReviewButton(false);
+      setAdvertisingButton(false);
+      setShortReviewButton(false);
+      setUserButton(false);
+      setBannerButton(true);
+    }
 
     //          event handler         //
 
@@ -61,7 +104,9 @@ export default function AdminMain() {
     //          render          //
     return (
       <div className='admin-main-left'>
-        <div className='admin-main-left-button' onClick={onReviewButtonClickButton}>기행기 목록</div>
+        <div className='admin-main-left-button' onClick={onReviewButtonClickButton}>
+         { reviewButton ? (<div className="main-menu-button-true"> 기행기 목록 </div>)  : (<div className="menu-button-false"> 기행기 목록 </div>)}
+        </div>
         <div className='admin-main-left-button' onClick={onAdvertisingBoardButtonClickButton}>광고 게시글 목록</div>
         <div className='admin-main-left-button' onClick={onShortReviewButtonClickButton}>한 줄 리뷰 목록</div>
         <div className='admin-main-left-button' onClick={onUserButtonClickButton}>유저 목록</div>
