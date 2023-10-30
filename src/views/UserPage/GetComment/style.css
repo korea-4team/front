@@ -177,29 +177,11 @@
 	font-size: 14px;
 }
 
-.user-info-bottom-right-comment-count {
+.user-info-bottom-right-board-title {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100px;
-	height: 100%;
-	font-size: 14px;
-}
-
-.user-info-bottom-right-favorite {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100px;
-	height: 100%;
-	font-size: 14px;
-}
-
-.user-info-bottom-right-view-count {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100px;
+	width: 380px;
 	height: 100%;
 	font-size: 14px;
 }

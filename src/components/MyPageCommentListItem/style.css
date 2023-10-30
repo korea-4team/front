@@ -15,7 +15,7 @@
   justify-content: center;
   align-items: center;
 
-  width: 200px;
+  width: 100px;
   height: 100%;
 }
 
@@ -24,7 +24,7 @@
   justify-content: center;
   align-items: center;
 
-  width: 712px;
+  width: 432px;
   height: 100%;
 }
 
@@ -35,4 +35,12 @@
 
   width: 200px;
   height: 100%;
+}
+
+.admin-comment-item-title {
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 380px;
+	height: 100%;
 }
