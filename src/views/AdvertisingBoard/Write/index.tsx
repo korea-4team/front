@@ -7,7 +7,7 @@ import { PostAdvertisingBoardDto } from 'interfaces/request/advertisingBoard';
 import { postAdvertisingBoardRequest, uploadFileRequest } from 'apis';
 import { useUserStore } from 'stores';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
-import { PostMenu, PostTag } from 'types';
+import { PostMenu, PostTag , PostDetail} from 'types';
 
 export default function AdvertisingBoardWrite(){
 
@@ -328,6 +328,15 @@ export default function AdvertisingBoardWrite(){
     let tagList = advertisingBoardtag.split('#').map(tag => tag.trim());
     tagList = tagList.filter(tag => tag !== '');
     
+
+    const detail: PostDetail ={
+      storeName: advertisingBoardStore,
+      storeTel: advertisingBoardStoreTel,
+      storeTime: advertisingBoardStoreTime,
+      storeNumber : advertisingBoardStoreNumber,
+      storeAddress : advertisingBoardStoreAddress,
+    }
+
     const data: PostAdvertisingBoardDto = {
       title: advertisingBoardTitle,
       contents: advertisingBoardContent,
@@ -335,7 +344,8 @@ export default function AdvertisingBoardWrite(){
       businessType: advertisingBoardBusinessType,
       imageUrls,
       menuList,
-      tagList
+      tagList,
+      dtail: detail,
     }
     postAdvertisingBoardRequest(data,token).then(postAdvertisingBoardResponseHandler);
 
