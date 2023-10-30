@@ -49,6 +49,9 @@ import {
   PatchMainBannerResponseDto,
   PostMainBannerResponseDto,
 } from "interfaces/response/banner";
+import GetBoardListResponseDto from "interfaces/response/mypage/get-board-list.response.dto";
+import GetMyCommentListResponseDto from "interfaces/response/mypage/get-my-comment-list.response.dto";
+import GetMyShortReviewListResponseDto from "interfaces/response/mypage/get-my-short-review-list.response.dto";
 import {
   DeleteNoticeBoardResponseDto,
   GetNoticeBoardListResponseDto,
@@ -155,7 +158,7 @@ const GET_MY_PAGE_REGISTRANTION_URL = () =>
   `${API_DOMAIN}/my-page/registration-list`;
 const GET_MY_PAGE_BOARD_LIST_URL = () => `${API_DOMAIN}/my-page/board-list`;
 const GET_MY_PAGE_COMMENT_LIST_URL = () => `${API_DOMAIN}/my-page/comment-list`;
-const GET_MY_PAGE_SHORT_REIVEW_URL = () => `${API_DOMAIN}/my-page/short-reivew`;
+const GET_MY_PAGE_SHORT_REVIEW_URL = () => `${API_DOMAIN}/my-page/short-review`;
 const GET_MY_PAGE_STORE_INFO_URL = () => `${API_DOMAIN}/my-page/store-info`;
 const GET_MY_PAGE_STORE_RESERVATION_LIST_URL = () =>
   `${API_DOMAIN}/my-page/store-reservation-list`;
@@ -1306,3 +1309,60 @@ export const getSearchAdvertisingBoardListRequest = async (searchWord: string, l
   });
   return result;
 };
+
+// description : 마이페이지 //
+// 내 기행기 리스트 불러오기
+export const getMyPageBoardListRequest = async (token: string) => {
+  const result = await axios
+  .get(GET_MY_PAGE_BOARD_LIST_URL(), {
+    headers: {Authorization: `Bearer ${token}` },
+  })
+  .then((response) => {
+    const responseBody: GetBoardListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody : ResponseDto = error.response.data;
+    return responseBody;
+  })
+
+  return result;
+};
+
+// 내 댓글 리스트 불러오기
+export const getMyPageCommentListRequest = async (token: string) => {
+  const result = await axios
+  .get(GET_MY_PAGE_COMMENT_LIST_URL(), {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  .then((response) => {
+    const responseBody: GetMyCommentListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
+  
+  return result;
+}
+
+// 내 한줄리뷰 불러오기
+export const getMyPageShortReviewRequest = async (token: string) => {
+  const result = await axios
+  .get(GET_MY_PAGE_SHORT_REVIEW_URL(), {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  .then((response) => {
+    const responseBody: GetMyShortReviewListResponseDto = response.data;
+    return responseBody;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.response.data;
+    return responseBody;
+  })
+
+  return result;
+}
+
+
