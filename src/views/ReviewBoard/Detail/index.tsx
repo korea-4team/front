@@ -219,7 +219,6 @@ export default function ReviewBoardDetail() {
     // description: 댓글삭제 버튼 클릭 이벤트 처리 함수 //
     const onDeleteCommentButtonClickHandler = (commentNumber: number) => {
       const accessToken = cookies.accessToken;
-      console.log(commentNumber);
       if(!commentNumber) return;
       deleteReviewBoardCommentRequest(commentNumber, accessToken).then(deleteCommentResponseHandler);
     }
