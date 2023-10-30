@@ -26,9 +26,6 @@ export default function ReviewBoardDetail() {
   const navigator = useNavigate();
 
   //          component          //
-  // description: 게시물 내용 컴포넌트 //
-  const ReviewBoard = () => {
-
     //          state          //
     // description: 게시물 상태 //
     const [reviewBoard, setReviewBoard] = useState<GetReviewBoardResponseDto | null>(null);
@@ -50,6 +47,8 @@ export default function ReviewBoardDetail() {
     const [isFavorite, setFavorite] = useState<boolean>(false);
     // description: 페이지네이션 관련 상태 //
     const { totalPage, currentPage, currentSection, onNextClickHandler, onPreviusClickHandler, onPageClickHandler, changeSection } = usePagination();
+
+    // const [boardNumberFlag, setBoardNumberFlag] = useState<number>(0);
 
     //          function          //
     // description: 게시물 불러오기 응답 처리 //
@@ -225,12 +224,12 @@ export default function ReviewBoardDetail() {
 
     //          effect          //
     // description: 게시물 번호가 바뀔 때 마다 실행 //
-    let boardNumberFlag = true;
+    let boardNumberFlag = 0;
     useEffect(() => {
-      if (boardNumberFlag) {
-        boardNumberFlag = false;
-        return
+      if (boardNumberFlag > 0) {
+        return;
       }
+      boardNumberFlag++;
       if (!boardNumber) {
         alert('게시물 번호가 잘못되었습니다.');
         navigator(REVIEW_BOARD_PATH);
@@ -333,9 +332,3 @@ export default function ReviewBoardDetail() {
       </div>
     )
   }
-
-  //          render          //
-  return (
-    <ReviewBoard />
-  )
-}
