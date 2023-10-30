@@ -27,10 +27,6 @@ export default function AdvertisingBoardDetail(){
 
   const navigator = useNavigate();
 
-
-  const AdvertisingBoard = () => {
-
-
     const [advertisingBoard, setAdvertisingBoard] = useState<GetAdvertisingBoardResponseDto | null>(null);
 
     const [isWriter, setWriter] = useState<boolean>(false);
@@ -402,9 +398,3 @@ export default function AdvertisingBoardDetail(){
       </div>
     )
   }
-
-  return(
-    <AdvertisingBoard />
-  )
-
-}
