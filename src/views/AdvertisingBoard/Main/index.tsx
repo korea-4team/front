@@ -85,7 +85,7 @@ export default function AdvertisingBoardMain() {
     }
 
     const onAdvertisingboardBusinessTypeClickHandler = (businessType : string) => {
-      getAdvertisingBoardBusinessTypeListRequest(businessType).then(getAdvertisingBoardBusinessTypeListResponseHandler);
+      getAdvertisingBoardBusinessTypeListRequest(businessType).then(getAdvertisingBoardListResponseHandler);
     }
 
     const onAdvertisingboardWriteButtonClickHandler = () => {
@@ -105,13 +105,13 @@ export default function AdvertisingBoardMain() {
       getPageAdvertisingBoardList(AdvertisingBoardList);
     },[currentPage])
 
-    useEffect(()=> {
-      getAdvertisingBoardLocationListRequest(location).then(getAdvertisingBoardListResponseHandler);
-    },[location])
+    // useEffect(()=> {
+    //   getAdvertisingBoardLocationListRequest(location).then(getAdvertisingBoardListResponseHandler);
+    // },[location])
 
-    useEffect(()=> {
-      getAdvertisingBoardBusinessTypeListRequest(businessType).then(getAdvertisingBoardBusinessTypeListResponseHandler);
-    },[businessType])
+    // useEffect(()=> {
+    //   getAdvertisingBoardBusinessTypeListRequest(businessType).then(getAdvertisingBoardBusinessTypeListResponseHandler);
+    // },[businessType])
     
 // render // 
 return (
