@@ -181,3 +181,10 @@
   width: 100%;
   text-align: center;
 }
+
+.main-advertising-board-list {
+  width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
