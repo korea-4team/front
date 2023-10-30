@@ -1,0 +1,163 @@
+.admin-banner-write-main {
+  width: 1440px;
+
+  margin-bottom: 20px;
+
+  display: flex;
+}
+
+.admin-banner-write-left {
+  width: 288px;
+  height: 230px;
+  padding: 20px;
+
+  flex: 2;
+
+  background-color: #d0d0d0;
+}
+
+.admin-banner-write-left-button {
+  margin-bottom: 20px;
+
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 3px;
+  font-size: 18px;
+}
+
+.admin-banner-left-button:hover {
+  cursor: pointer;
+
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.admin-banner-list-item {
+  width: 1152px;
+  margin-left: 50px;
+
+  flex: 7;
+}
+
+.admin-banner-write-right {
+  width: 1152px;
+  height: 100%;
+
+  margin-left: 50px;
+
+  flex: 7;
+}
+
+.admin-banner-write-item-box {
+  width: 1152px;
+  height: 100%;
+
+  margin-bottom: 10px;
+
+  align-items: center;
+
+  font-size: 20px;
+  font-weight: 500;
+
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.admin-banner-write-box {
+  padding: 5px;
+
+  display: flex;
+  align-items: center;
+}
+
+.admin-banner-write-name {
+  width: 200px;
+  height: 30px;
+
+  margin: 10px;
+  padding: 5px;
+
+  display: flex;
+  align-items: center;
+}
+
+.admin-banner-write-content {
+  width: 200px;
+  height: 30px;
+
+  margin-left: 10px;
+  padding: 5px;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.admin-banner-write-button {
+  margin-bottom: 10px;
+  margin-right: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.notice-board-writer-title-input {
+  font-size: 15px;
+}
+
+.admin-banner-write-image-delete-button {
+  width: 24px;
+  height: 24px;
+
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-banner-image-box {
+  width: 1052px;
+
+  margin-left: 50px;
+  padding: 10px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-banner-write-image {
+  display: block;
+
+  width: 100%;
+}
+
+.admin-banner-write-image-delete-button {
+  width: 24px;
+  height: 24px;
+
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-banner-write-image-delete-button :hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}

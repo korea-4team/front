@@ -1,0 +1,56 @@
+.notice-board-list-item {
+  width: 1440px;
+  height: 30px;
+
+  padding: 2px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.notice-board-list-item:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.notice-board-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+  height: 100%;
+}
+
+.notice-board-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 930px;
+  height: 100%;
+}
+
+.notice-board-writer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 150px;
+  height: 100%;
+  font-size: 14px;
+}
+
+.notice-board-write-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 150px;
+  height: 100%;
+  font-size: 14px;
+}

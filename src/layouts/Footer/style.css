@@ -1,0 +1,43 @@
+#footer {
+  width: 1440px;
+  
+  position: relative;
+  bottom: 0;
+}
+
+.footer-top {
+  display: flex;
+
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.footer-logo-text {
+  display: flex;
+
+  font-family: "Noto Sans KR";
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.footer-bottom {
+  padding: 10px;
+  display: block;
+}
+
+.footer-address {
+  margin-bottom: 5px;
+  display: flex;
+
+  font-family: "Noto Sans KR";
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.copyright {
+  display: flex;
+
+  font-family: "Noto Sans KR";
+  font-size: 15px;
+  font-weight: 400;
+}

@@ -1,0 +1,91 @@
+.admin-banner-list-item-box {
+  margin-bottom: 5px;
+  padding: 0px 25px;
+
+  width: 1102px;
+  height: 250px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 18px;
+  font-weight: 600;
+  align-items: center;
+  text-align: center;
+
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.admin-banner-list-item-box:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.admin-banner-list-box {
+  display: flex;
+
+}
+.admin-banner-item-right {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.admin-banner-item-image {
+  width: 200px;
+  height: 200px;
+
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-banner-item-left {
+  margin-left: 50px;
+
+  width: 500px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-banner-item-writer {
+  display: flex;
+  align-items: center;
+  width: 500px;
+  height: 100%;
+  font-size: 14px;
+}
+
+.admin-banner-item-write-datetime {
+  display: flex;
+  align-items: center;
+  width: 500px;
+  height: 100%;
+  font-size: 14px;
+}
+
+.admin-banner-item-sequence {
+  display: flex;
+  align-items: center;
+  width: 500px;
+  height: 100%;
+  font-size: 14px;
+}
+
+.admin-banner-item-event-board-number {
+  display: flex;
+  align-items: center;
+  width: 500px;
+  height: 100%;
+  font-size: 14px;
+}
+
+.admin-banner-button {
+  width: 200px;
+
+  display: flex;
+
+}

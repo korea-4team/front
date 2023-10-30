@@ -1,0 +1,196 @@
+.advertising-board-detail-container {
+  width: 1440px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.advertising-board-detail-data{
+  display: flex;
+  align-items: end;
+}
+
+.advertising-board-detail-title{
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.advertising-board-detail-location-businesstype{
+  color: #777;
+  margin-left: 5px;
+}
+
+.advertising-board-detail-write-data{
+  display: flex;
+  font-size: 18px;
+}
+
+.advertising-board-detail-writer-nickname{
+
+}
+
+.advertising-board-detail-divider{
+  margin: 0 5px;
+  color: #333;
+}
+
+.advertising-board-detail-write-date{
+
+}
+
+.advertising-board-detail-contents{
+  display: flex;
+  flex-direction: row;
+  border: none;
+  outline: auto;
+  background: none;
+  resize: none;
+  height: 100%;
+  width: 1400px;
+  margin-top: 25px;
+  flex: 1;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.advertising-board-detail-image-box{
+  display: flex;
+  flex-direction: row;
+  border: none;
+  outline: auto;
+  background: none;
+  resize: none;
+  height: 100%;
+  width: 1400px;
+  margin-top: 25px;
+  flex: 1;
+  padding: 10px;
+}
+
+.advertising-board-detail-image{
+  display: flex;
+}
+
+.advertising-board-button-box{
+  display: flex;
+  justify-content: end;
+}
+
+.advertising-board-writer-button-box{
+  display: flex;
+}
+
+
+.advertising-board-bottom-container{
+  margin: 30px 0;
+}
+
+.advertising-board-count-box{
+  display: flex;
+  width: 100%;
+}
+
+.advertising-board-count-title{
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 15px 15px 0;
+}
+
+.advertising-board-count-emphasis{
+  font-size: 18px;
+}
+
+
+.advertising-board-favorite-button{
+  border-radius: 24px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.advertising-board-favorite-button:hover{
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.advertising-board-favorite-fill-icon{
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/favorite_fill.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.advertising-board-favorite-icon{
+  width: 21px;
+  height: 21px;
+
+  background-image: url(asset/favorite_light.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+
+.advertising-board-comment-list{
+  
+}
+
+
+.advertising-board-comment-pagination-box{
+  display: flex;
+  justify-content: center;
+}
+
+.advertising-board-comment-input-box{
+  border: 1px solid rgba(0,0,0,0.2);
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.advertising-board-comment-input-container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.advertising-board-comment-input{
+  border: none;
+  outline: none;
+  background: none;
+  resize: none;
+
+  color: rgba(0,0,0,1);
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.advertising-board-comment-button-box{
+  display: flex;
+  justify-content: end;
+}
+
+.advertising-board-write-store{
+  width: 100%;
+
+  border: none;
+  outline: none;
+  background: none;
+  color: #000;
+
+  display: block;
+
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 100%;
+  margin: 10px;
+  line-height: 100%;
+}

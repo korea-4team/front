@@ -1,0 +1,164 @@
+.review-board-container {
+  width: 1440px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.review-board-write-button {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 110px;
+  width: 95px;
+  height: 30px;
+  border-radius: 46px;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #2f2f2f;
+}
+
+.review-board-write-button:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.review-board-location-container {
+  display: flex;
+  justify-content: center;
+  margin: 50px auto;
+  width: 500px;
+  height: 80px;
+  background-color: #d0d0d0;
+  padding: 10px;
+  box-sizing: border-box;
+  flex-wrap: wrap
+}
+
+.review-board-location-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 20px;
+  font-size: 18px;
+  margin: 5px;
+  color: #222222;
+  font-weight: 400;
+}
+
+.review-board-location-list:hover {
+  cursor: pointer;
+  /* color: rgba(0, 0, 0, 0.7); */
+  opacity: 0.7;
+}
+
+.review-board-businesstype-container {
+  display: flex;
+  width: 120px;
+  height: 380px;
+  position: absolute;
+  left: -120px;
+  top: 150px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: start;
+  background-color: #d0d0d0;
+}
+
+.review-board-businesstype-list {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 80px;
+  font-size: 18px;
+  margin: 10px 5px;
+  /* padding-bottom: 5px; */
+  color: #222222;
+  font-weight: 400;
+  /* border-bottom: 1px solid #000; */
+}
+
+.review-board-businesstype-list:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.review-board-main-title {
+  margin: 15px 15px 30px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.review-board-list-top {
+  display: flex;
+  width: 1440px;
+  height: 30px;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.review-board-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 100%;
+}
+
+.review-board-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 900px;
+  height: 100%;
+}
+
+.review-board-writer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100%;
+}
+
+.review-board-write-datetime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100%;
+}
+
+.review-board-favorite-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 100%;
+}
+
+.review-board-view-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 100%;
+}
+
+.review-board-list-nothing {
+  margin-top: 100px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #222222;
+  width: 100%;
+  height: 600px;
+  text-align: center;
+}
