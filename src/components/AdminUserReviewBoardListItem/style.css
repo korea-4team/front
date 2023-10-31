@@ -1,3 +1,6 @@
+.admin-user-review-board-list-item-box:hover {
+  cursor: pointer;
+}
 .admin-user-review-board-list-box {
   margin-top: 3px;
   display: flex;

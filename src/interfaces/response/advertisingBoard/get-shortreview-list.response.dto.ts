@@ -12,5 +12,6 @@ export interface ShortReviewListResponseDto {
   writeDatetime : string;
   writerNickname : string;
   writerEmail: string;
+  boardNumber: number;
 
 }
