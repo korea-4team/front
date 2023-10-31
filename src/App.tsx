@@ -17,6 +17,7 @@ import {
   EVENT_BOARD_PATH,
   MAIN_PATH,
   MY_PAGE_COMMENT_PATH,
+  MY_PAGE_INFO_CHANGE_PATH,
   MY_PAGE_PATH,
   MY_PAGE_SHORT_REVIEW_PATH,
   NOTICE_BOARD_PATH,
@@ -79,6 +80,7 @@ import AdminAdvertising from "views/Admin/GetAdvertisingBoard";
 import UserPage from "views/UserPage/Main";
 import UserCommentPage from "views/UserPage/GetComment";
 import UserShortReviewPage from "views/UserPage/GetShortReview";
+import UserInfoChange from "views/UserPage/UserInfoChange";
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -164,6 +166,7 @@ function App() {
             <Route path={MY_PAGE_PATH(USER_EMAIL_PATH_VARIABLE)} element={ <UserPage /> }/>
             <Route path={MY_PAGE_COMMENT_PATH(USER_EMAIL_PATH_VARIABLE)} element={ <UserCommentPage /> } />
             <Route path={MY_PAGE_SHORT_REVIEW_PATH(USER_EMAIL_PATH_VARIABLE)} element={ <UserShortReviewPage /> } />
+            <Route path={MY_PAGE_INFO_CHANGE_PATH(USER_EMAIL_PATH_VARIABLE)} element={ <UserInfoChange /> } />
           </Route>
 
           <Route path={AUTH_PATH} element={<Authentication />} />
