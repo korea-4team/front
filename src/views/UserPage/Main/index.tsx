@@ -1,9 +1,8 @@
-import React from 'react'
 import "./style.css";
 import { useEffect, useState } from "react";
 import ResponseDto from 'interfaces/response/response.dto';
 import { useNavigate } from 'react-router-dom';
-import { getMyPageBoardListRequest, getSignInUserRequest } from 'apis';
+import { getMyPageBoardListRequest } from 'apis';
 import { useCookies } from 'react-cookie';
 import { COUNT_BY_MAIN_BOARD_PAGE } from 'constant';
 import { useUserStore } from 'stores';
@@ -71,9 +70,7 @@ export default function UserPage() {
       getReviewBoardList(boardList);
       changeSection(boardList.length, COUNT_BY_MAIN_BOARD_PAGE);
     }
-  
-    //          event handler         //
-  
+    
     //          effect          //
     // description : 기행기 게시글 불러오기 //
     useEffect(() => {
@@ -112,7 +109,6 @@ export default function UserPage() {
             작성한 게시글이 없습니다.{" "}
           </div>
           )}
-        </div>
         {boardCount !== 0 && (
           <Pagination
             totalPage={totalPage}
@@ -122,6 +118,7 @@ export default function UserPage() {
             onNextClickHandler={onNextClickHandler} />
         )}
       </div>
+    </div>
     );
   };
 

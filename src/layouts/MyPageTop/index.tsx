@@ -6,6 +6,7 @@ import ResponseDto from 'interfaces/response/response.dto';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from 'stores';
 import { useNavigate } from 'react-router-dom';
+import { MY_PAGE_INFO_CHANGE_PATH } from 'constant';
 
 //          component : 상단 내 정보 컴포넌트          //
 export default function MyPageTop() {
@@ -37,7 +38,13 @@ export default function MyPageTop() {
   }
 
   //          event handler         //
-  
+  const onInfoChangeClickButton = () => {
+    navigator(MY_PAGE_INFO_CHANGE_PATH(user?.email as string));
+  }
+
+  const onStoreClickButton = () => {
+    alert("서비스 준비중입니다.")
+  }
   //          effect          //
   useEffect(() => {
     const token = cookies.accessToken;
@@ -55,9 +62,9 @@ export default function MyPageTop() {
         <div className='user-info-telnumber'>{userDetail?.telNumber}</div>
       </div>
       <div className='user-info-top-right'>
-        <div className='user-info-top-update'> 수정하기 </div>
-        <div className='user-info-top-store-info'> 사업자등록증 등록하기</div>
-      </div>
+          <div className='user-info-top-update' onClick={onInfoChangeClickButton}> 수정하기 </div>
+          <div className='user-info-top-store-info' onClick={onStoreClickButton}> 사업자등록증 등록하기</div>
+        </div>
     </div>
   );
 };

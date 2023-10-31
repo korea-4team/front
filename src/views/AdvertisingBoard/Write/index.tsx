@@ -7,7 +7,7 @@ import { PostAdvertisingBoardDto } from 'interfaces/request/advertisingBoard';
 import { postAdvertisingBoardRequest, uploadFileRequest } from 'apis';
 import { useUserStore } from 'stores';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
-import { PostMenu, PostTag , PostDetail} from 'types';
+import { PostMenu, PostTag} from 'types';
 
 export default function AdvertisingBoardWrite(){
 
@@ -328,15 +328,6 @@ export default function AdvertisingBoardWrite(){
     let tagList = advertisingBoardtag.split('#').map(tag => tag.trim());
     tagList = tagList.filter(tag => tag !== '');
     
-
-    const detail: PostDetail ={
-      storeName: advertisingBoardStore,
-      storeTel: advertisingBoardStoreTel,
-      storeTime: advertisingBoardStoreTime,
-      storeNumber : advertisingBoardStoreNumber,
-      storeAddress : advertisingBoardStoreAddress,
-    }
-
     const data: PostAdvertisingBoardDto = {
       title: advertisingBoardTitle,
       contents: advertisingBoardContent,
@@ -345,7 +336,14 @@ export default function AdvertisingBoardWrite(){
       imageUrls,
       menuList,
       tagList,
-      dtail: detail,
+      storeName: advertisingBoardStore,
+      storeTel: advertisingBoardStoreTel,
+      storeTime: advertisingBoardStoreTime,
+      storeNumber : advertisingBoardStoreNumber,
+      storeAddress : advertisingBoardStoreAddress,
+      bookTime: bookTime,
+      book: book,
+      bookKids: bookkids,
     }
     postAdvertisingBoardRequest(data,token).then(postAdvertisingBoardResponseHandler);
 
@@ -370,24 +368,7 @@ export default function AdvertisingBoardWrite(){
     setBusinessTypeShowMore(false);
   }
 
-  const GoogleMapComponent = ()=>{
-    const [map, setMap] = useState<google.maps.Map | null>(null);
-    const ref = useRef<HTMLDivElement | null>(null);
-
-    useEffect(()=>{
-      if (!ref.current) return;
-        const newMap = new window.google.maps.Map(ref.current, {
-            center : { lat: 35.1795543, lng: 129.0756416},
-            zoom : 16,
-        });     
-        
-        setMap(newMap);
-    },[])
-
-    return (
-        <div ref={ref} id="map" style={{width:"100%", height: "400px"}}></div>
-    )
-}
+ 
 
   const MenuComponent = ({ index } : {index: number}) => {
 
@@ -520,11 +501,6 @@ export default function AdvertisingBoardWrite(){
             <textarea ref={timetextAreaRef} className='advertising-board-store-content-textarea' placeholder='영업시간을 작성해주십시오' value={advertisingBoardStoreTime} onChange={onStoreTimehandler}></textarea>
             <textarea ref={numbertextAreaRef} className='advertising-board-store-content-textarea' placeholder='사업자등록번호를 작성해주십시오.' value={advertisingBoardStoreNumber} onChange={onStoreNumberhandler}></textarea>
             <textarea ref={addresstextAreaRef} className='advertising-board-store-content-textarea' placeholder='상세 주소를 입력해주십시오.' value={advertisingBoardStoreAddress} onChange={onStoreAddresshandler}></textarea>
-            <div>
-            <Wrapper apiKey="AIzaSyA18GduLmXFchKa4b7jSZNfPOXH8ZmDgyI" libraries={["places"]}>
-              <GoogleMapComponent />
-            </Wrapper>
-            </div>
           </div>
         </div>
       <div className='advertising-board-tag'>테그 작성란</div>
@@ -540,7 +516,7 @@ export default function AdvertisingBoardWrite(){
             <textarea ref={booktextAreaRef} className='advertising-board-store-content-textarea' placeholder='예약가능한 요일을 작성해주세요.' value={book} onChange={onBookhandler}></textarea>
             <textarea ref={bookkidsAreaRef} className='advertising-board-store-content-textarea' placeholder='유아동반 가능여부를 작성해주세요' value={bookkids} onChange={onBookkidshandler}></textarea>
           </div>
-        </div>          
+        </div>         
     </div>
 
     
