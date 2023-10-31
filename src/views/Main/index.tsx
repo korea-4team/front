@@ -301,7 +301,7 @@ export default function Main() {
           <div className="main-bottom-board-list-box">
             <div className="main-bottom-board-list-item">
               {advertisingBoardCount ?
-              (<div className="main-advertising-board-list">
+              (<div className="main-review-board-list">
               {pageAdvertisingBoardList.map((item) => (<AdvertisingBoardListItem item={item} />))}
               </div>) : (<div className="main-board-list-nothing">게시물이 존재하지 않습니다.</div>)}
             </div>

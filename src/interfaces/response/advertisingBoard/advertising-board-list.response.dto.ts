@@ -11,5 +11,12 @@ export default interface AdvertisingBoardListResponseDto{
   location : string;
   businessType : string;
   tagWord : string;
-
+  storeName: string;
+  storeTel: string;
+  storeTime: string;
+  storeNumber : string;
+  storeAddress: string;
+  bookTime: string;
+  book: string;
+  bookKids: string;
 }
