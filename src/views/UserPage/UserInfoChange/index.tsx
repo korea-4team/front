@@ -50,10 +50,10 @@ export default function UserInfoChange() {
       <div className="user-email">{userDetail?.email}</div>
       <div className="user-password"></div>
       <div className="user-password-check"></div>
-      <div className="user-nickname"></div>
-      <div className="user-address"></div>
-      <div className="user-address-detail"></div>
-      <div className="user-telnumber"></div>
+      <div className="user-nickname">{userDetail?.nickname}</div>
+      <div className="user-address">{userDetail?.address}</div>
+      <div className="user-address-detail">{userDetail?.addressDetail}</div>
+      <div className="user-telnumber">{userDetail?.telNumber}</div>
     </div>
   )
 }
