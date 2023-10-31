@@ -76,9 +76,13 @@ import EventBoardDetail from "views/EventBoard/Detail";
 import EventBoardWrite from "views/EventBoard/Write";
 import EventBoardUpdate from "views/EventBoard/Update";
 import AdminAdvertising from "views/Admin/GetAdvertisingBoard";
+<<<<<<< HEAD
+import AdvertisingBoardUpdate from "views/AdvertisingBoard/Update";
+=======
 import UserPage from "views/UserPage/Main";
 import UserCommentPage from "views/UserPage/GetComment";
 import UserShortReviewPage from "views/UserPage/GetShortReview";
+>>>>>>> 8cb1faba860454ce2b429829f0e31bd2112c13c6
 
 //          component: 메인 컴포넌트          //
 function App() {
@@ -141,6 +145,7 @@ function App() {
             <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
             <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<AdvertisingBoardDetail />} />
             <Route path={WRITE_PATH} element={<AdvertisingBoardWrite />} />
+            <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={ <AdvertisingBoardUpdate /> }/>
           </Route>
 
           <Route path={NOTICE_BOARD_PATH}>
