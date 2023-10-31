@@ -1,0 +1,93 @@
+.user-info-top-item {
+	width: 1000px;
+	height: 200px;
+
+	background-color: rgba(0, 0, 0, 0.1);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.user-info-top-left {
+	margin: 10px;
+}
+
+.user-info-email {
+  width: 200px;
+	height: 30px;
+	
+	margin-bottom: 10px;
+	margin-left: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-nickname{
+  width: 200px;
+	height: 30px;
+
+	margin-bottom: 10px;
+	margin-left: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-telnumber {
+  width: 200px;
+	height: 30px;
+	
+	margin-left: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-top-right {
+	margin: 10px;
+}
+
+.user-info-top-update {
+  width: 200px;
+	height: 30px;
+	
+	margin-bottom: 10px;
+	margin-right: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-top-store-info {
+	width: 200px;
+	height: 30px;
+	
+	margin-right: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
