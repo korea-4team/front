@@ -7,7 +7,7 @@ import ResponseDto from 'interfaces/response/response.dto';
 import { useNavigate } from 'react-router-dom';
 import { getMyPageBoardListRequest, getSignInUserRequest } from 'apis';
 import { useCookies } from 'react-cookie';
-import { COUNT_BY_MAIN_BOARD_PAGE, MY_PAGE_COMMENT_PATH, MY_PAGE_PATH, MY_PAGE_SHORT_REVIEW_PATH } from 'constant';
+import { COUNT_BY_MAIN_BOARD_PAGE, MY_PAGE_COMMENT_PATH, MY_PAGE_INFO_CHANGE_PATH, MY_PAGE_PATH, MY_PAGE_SHORT_REVIEW_PATH } from 'constant';
 import { useStore } from 'zustand';
 import { useUserStore } from 'stores';
 import { usePagination } from 'hooks';
@@ -52,6 +52,13 @@ export default function UserPage() {
     }
 
     //          event handler         //
+    const onInfoChangeClickButton = () => {
+      navigator(MY_PAGE_INFO_CHANGE_PATH(user?.email as string));
+    }
+
+    const onStoreClickButton = () => {
+      alert("서비스 준비중입니다.")
+    }
     
     //          effect          //
     useEffect(() => {
@@ -70,8 +77,8 @@ export default function UserPage() {
           <div className='user-info-telnumber'>{userDetail?.telNumber}</div>
         </div>
         <div className='user-info-top-right'>
-          <div className='user-info-top-update'> 수정하기 </div>
-          <div className='user-info-top-store-info'> 사업자등록증 등록하기</div>
+          <div className='user-info-top-update' onClick={onInfoChangeClickButton}> 수정하기 </div>
+          <div className='user-info-top-store-info' onClick={onStoreClickButton}> 사업자등록증 등록하기</div>
         </div>
       </div>
     );
