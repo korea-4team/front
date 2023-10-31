@@ -19,6 +19,8 @@ import { CommentListResponseDto } from 'interfaces/response/reviewBoard/get-comm
 import GetMyCommentListResponseDto, { userCommentList } from 'interfaces/response/mypage/get-my-comment-list.response.dto';
 import AdminUserCommentListItem from 'components/AdminUserCommentListItem';
 import MyPageCommentListItem from 'components/MyPageCommentListItem';
+import MyPageTop from 'layouts/MyPageTop';
+import MyPageMenu from 'layouts/MyPageMenu';
 
 //          component : 마이페이지 메인        //
 export default function UserCommentPage() {
@@ -34,88 +36,6 @@ export default function UserCommentPage() {
   const navigator = useNavigate();
 
   //          event handler         //
-
-  //          component : 상단 내 정보 컴포넌트          //
-  const UserInfoTop = () => {
-    //          state         //
-    const [userDetail, setUserDetail] = useState<GetSignInUserResponseDto | null>(null);
-
-    //          function          //
-    // description : 유저 정보 불러오기 요청 함수 //
-    const getUserResponseHandler = (responseBody: GetSignInUserResponseDto | ResponseDto) => {
-      const { code } = responseBody;
-
-      if (code === "DE") alert("데이터베이스 에러입니다.");
-      if (code === "NE") alert("유저 정보가 업습니다.")
-      if (code !== "SU") {
-        navigator("/");
-        return;
-      }
-
-      setUserDetail(responseBody as GetSignInUserResponseDto);
-    }
-
-    //          event handler         //
-    
-    //          effect          //
-    useEffect(() => {
-      const token = cookies.accessToken;
-
-      getSignInUserRequest(token).then(getUserResponseHandler);
-
-    },[])
-
-    //          render          //
-    return (
-      <div className='user-info-top-item'>
-        <div className='user-info-top-left'>
-          <div className='user-info-email'>{userDetail?.email}</div>
-          <div className='user-info-nickname'>{userDetail?.nickname}</div>
-          <div className='user-info-telnumber'>{userDetail?.telNumber}</div>
-        </div>
-        <div className='user-info-top-right'>
-          <div className='user-info-top-update'> 수정하기 </div>
-          <div className='user-info-top-store-info'> 사업자등록증 등록하기</div>
-        </div>
-      </div>
-    );
-  };
-
-  //          component : 마이페이지 하단 왼쪽 컴포넌트 //
-  const UserInfoBottomLeft = () => {
-  //          state         //
-
-  //          function          //
-
-  //          event handler         //
-  // description : 내 게시글 클릭 이벤트 //
-  const onMyBoardClickButton = () => {
-    navigator(MY_PAGE_PATH(user?.email as string));
-  }
-
-  // description : 내 댓글 클릭 이벤트 //
-  const onMyCommentClickButton = () => {
-    navigator(MY_PAGE_COMMENT_PATH(user?.email as string));
-  }
-
-  // description : 내 한줄리뷰 클릭 이벤트 //
-  const onMyShortReviewButton = () => {
-    navigator(MY_PAGE_SHORT_REVIEW_PATH(user?.email as string));
-  }
-  //          effect          //
-
-  //          render          //
-  return (
-    <div className='user-info-bottom-left-item'>
-      <div className='user-info-bottom-left-menu-button' onClick={onMyBoardClickButton}> 내 게시글 </div>
-      <div className='user-info-bottom-left-menu-button' onClick={onMyCommentClickButton}> 내 댓글 </div>
-      <div className='user-info-bottom-left-menu-button' onClick={onMyShortReviewButton}> 내 한줄리뷰 </div>
-      <div className='user-info-bottom-left-menu-button'> 내 예약내역 </div>
-      <div className='user-info-bottom-left-menu-button'> 내 가게 </div>
-      <div className='user-info-bottom-left-menu-button'> 내 가게예약정보</div>
-    </div>
-  );
-  };
 
     //          component : 마이페이지 하단 오른쪽 컴포넌트 //
     const UserInfoBottomright = () => {
@@ -214,10 +134,10 @@ export default function UserCommentPage() {
   return (
     <div className='user-info-wrapper'>
       <div className='user-info-top'>
-        <UserInfoTop />
+        <MyPageTop />
       </div>
       <div className='user-info-bottom'>
-        <UserInfoBottomLeft />
+        <MyPageMenu />
         <UserInfoBottomright />
       </div>
     </div>
