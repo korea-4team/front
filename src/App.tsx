@@ -76,13 +76,10 @@ import EventBoardDetail from "views/EventBoard/Detail";
 import EventBoardWrite from "views/EventBoard/Write";
 import EventBoardUpdate from "views/EventBoard/Update";
 import AdminAdvertising from "views/Admin/GetAdvertisingBoard";
-<<<<<<< HEAD
 import AdvertisingBoardUpdate from "views/AdvertisingBoard/Update";
-=======
-import UserPage from "views/UserPage/Main";
 import UserCommentPage from "views/UserPage/GetComment";
 import UserShortReviewPage from "views/UserPage/GetShortReview";
->>>>>>> 8cb1faba860454ce2b429829f0e31bd2112c13c6
+import UserPage from "views/UserPage/Main";
 
 //          component: 메인 컴포넌트          //
 function App() {
