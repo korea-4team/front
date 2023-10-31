@@ -21,7 +21,7 @@ export default function AdminUserCommentListItem({item}: Props) {
     <div className="admin-comment-list-item-box">
       <div className="admin-comment-list-box">
         <div className='admin-comment-item-number'>{commentNumber}</div>
-        <div className='admin-comment-item-contents'> {contents} </div>
+        <div className='admin-comment-item-user-contents'> {contents} </div>
         <div className='admin-comment-item-write-datetime'> {dateFormat(writeDatetime)} </div>
       </div>
     </div>
