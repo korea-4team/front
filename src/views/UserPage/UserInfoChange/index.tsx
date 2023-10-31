@@ -1,6 +1,7 @@
+import { getSignInUserRequest } from 'apis';
 import ResponseDto from 'interfaces/response/response.dto';
 import { GetSignInUserResponseDto } from 'interfaces/response/user';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from 'stores';
@@ -36,12 +37,17 @@ export default function UserInfoChange() {
   //          event handler          //
 
   //          effect          //
-  
+  useEffect(() => {
+    const token = cookies.accessToken;
+
+    getSignInUserRequest(token).then(getUserResponseHandler);
+
+  },[])
 
   //          render          //
   return (
     <div className="user-info-change-box">
-      <div className="user-email"></div>
+      <div className="user-email">{userDetail?.email}</div>
       <div className="user-password"></div>
       <div className="user-password-check"></div>
       <div className="user-nickname"></div>
