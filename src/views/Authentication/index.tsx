@@ -1,5 +1,5 @@
 import InputBox from 'components/InputBox';
-import React, { useState, useRef, ChangeEvent } from 'react';
+import React, { useState, useRef, ChangeEvent, KeyboardEvent } from 'react';
 import './style.css';
 import { AccountFindEmailRequestDto, AccountFindPasswordRequestDto, SignInRequestDto, SignUpRequestDto } from 'interfaces/request/auth';
 import { accountFindEmailRequest, accountFindPasswordRequest, signInRequest, signUpRequest } from 'apis';
@@ -63,6 +63,12 @@ export default function Authentication() {
       navigator(MAIN_PATH);
     }
 
+
+    // description: 비밀번호 인풋 key down 이벤트 //
+    const onPasswordKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+      if(event.key !== 'Enter') return;
+      onSignInButtonClickHandler();
+    }
     //          event handler: 이메일 변경 이벤트 처리          //
     const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
@@ -108,7 +114,7 @@ export default function Authentication() {
         <div className='sign-in-title'>{'로그인'}</div>
         <div className='sign-in-input-container'>
           <InputBox ref={emailRef} label='이메일' type='text' placeholder='이메일을 입력하세요.' value={email} onChange={onEmailChangeHandler} error={isEmailError} errorMessage={emailErrorMessage} />
-          <InputBox ref={passwordRef} label='비밀번호' type='password' placeholder='비밀번호를 입력하세요.' value={password} onChange={onPasswordChangeHandler} error={isPasswordError} errorMessage={passwordErrorMessage} />
+          <InputBox ref={passwordRef} label='비밀번호' type='password' placeholder='비밀번호를 입력하세요.' value={password} onChange={onPasswordChangeHandler} error={isPasswordError} errorMessage={passwordErrorMessage} onKeyDown={onPasswordKeyDownHandler} />
         </div>
         <div className='sign-in-action-container'>
           { isError && <div className='sign-in-error-message'>{'로그인 정보가 일치하지 않습니다.'}</div> }

@@ -11,6 +11,7 @@ import {
 } from "interfaces/request/auth";
 import PatchMainBannerRequestDto from "interfaces/request/banner/patch-main-banner.request.dto";
 import PostMainBannerRequestDto from "interfaces/request/banner/post-main-banner.request.dto";
+import { PatchUserRequestDto } from "interfaces/request/mypage";
 import {
   PatchNoticeBoardRequestDto,
   PostNoticeBoardRequestDto,
@@ -52,6 +53,7 @@ import {
 import GetBoardListResponseDto from "interfaces/response/mypage/get-board-list.response.dto";
 import GetMyCommentListResponseDto from "interfaces/response/mypage/get-my-comment-list.response.dto";
 import GetMyShortReviewListResponseDto from "interfaces/response/mypage/get-my-short-review-list.response.dto";
+import PatchUserResponseDto from "interfaces/response/mypage/patch-user.response.dto";
 import {
   DeleteNoticeBoardResponseDto,
   GetNoticeBoardListResponseDto,
@@ -1365,4 +1367,17 @@ export const getMyPageShortReviewRequest = async (token: string) => {
   return result;
 }
 
-
+export const patchUserInfoChangeRequest = async (data:PatchUserRequestDto ,token: string) => {
+  const result = await axios.patch(PATCH_MY_PAGE_INFO_CHANGE_URL(), data, {headers: { Authorization: `Bearer ${token}`}} )
+  .then((response) => {
+    const responseBody: PatchUserResponseDto = response.data;
+    const { code } = responseBody;
+    return code;
+  })
+  .catch((error) => {
+    const responseBody: ResponseDto = error.respones.data;
+    const { code } = responseBody;
+    return code;
+  })
+  return result;
+}

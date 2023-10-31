@@ -27,7 +27,6 @@ export default function ReviewBoardDetail() {
 
   //          component          //
   // description: 게시물 내용 컴포넌트 //
-  const ReviewBoard = () => {
 
     //          state          //
     // description: 게시물 상태 //
@@ -334,9 +333,3 @@ export default function ReviewBoardDetail() {
       </div>
     )
   }
-
-  //          render          //
-  return (
-    <ReviewBoard />
-  )
-}
