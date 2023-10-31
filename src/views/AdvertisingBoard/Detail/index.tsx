@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom"
 import "./style.css"
-import { FavoriteListResponseDto } from "interfaces/response/advertisingBoard/get-advertising-board-favorite-list-response.dto";
+import GetFavoriteListResponseDto, { FavoriteListResponseDto } from "interfaces/response/advertisingBoard/get-advertising-board-favorite-list-response.dto";
 import { usePagination } from "hooks";
 import { ADVERTISING_BOARD_PATH, ADVERTISING_BOARD_UPDATE_PATH, COUNT_BY_PAGE, COUNT_BY_PAGE_COMMENT } from "constant";
-import { deleteAdvertisingBoardRequest, deleteAdvertisingShortReviewRequest, getAdvertisingBoardRequest, getAdvertisingBoardShortReviewListRequest, postAdvertisingBoardShortReviewRequest, putAdvertisingBoardFavoriteRequest, uploadFileRequest } from "apis";
+import { deleteAdvertisingBoardRequest, deleteAdvertisingShortReviewRequest, getAdvertisingBoardFavoriteListRequest, getAdvertisingBoardRequest, getAdvertisingBoardShortReviewListRequest, postAdvertisingBoardShortReviewRequest, putAdvertisingBoardFavoriteRequest, uploadFileRequest } from "apis";
 import GetShortReviewListResponseDto, { ShortReviewListResponseDto } from "interfaces/response/advertisingBoard/get-shortreview-list.response.dto";
 import { PostShortReviewDto } from "interfaces/request/advertisingBoard";
 import { dateFormat } from "utils";
@@ -85,6 +85,21 @@ export default function AdvertisingBoardDetail(){
 
     }
 
+    const getFavoriteListResponseHandler = (responseBody: GetFavoriteListResponseDto | ResponseDto) => {
+      const { code } = responseBody;
+      if (code === 'VF') alert('잘못된 게시물번호입니다.');
+      if (code === 'DE') alert('데이터베이스 에러입니다.');
+      if (code !== 'SU') {
+        setFavoriteList([]);
+        setFavoriteCount(0);
+        return;
+      }
+
+      const { favoriteList } = responseBody as GetFavoriteListResponseDto;
+      setFavoriteList(favoriteList);
+      setFavoriteCount(favoriteList.length);
+    }
+
     const deleteAdvertisingBoardResponseHandler = (code: string) => {
       if (code === 'NU') alert('존재하지 않는 유저입니다.');
       if (code === 'NB') alert('존재하지 않는 게시물입니다.');
@@ -106,6 +121,9 @@ export default function AdvertisingBoardDetail(){
       if (code === 'AF') alert('로그인이 필요합니다.');
       if (code === 'DE') alert('데이터베이스 오류입니다.');
       if (code !== 'SU') return;
+
+      if(!boardNumber) return;
+      getAdvertisingBoardFavoriteListRequest(boardNumber).then(getFavoriteListResponseHandler);
     }
 
 
@@ -291,6 +309,7 @@ export default function AdvertisingBoardDetail(){
       }
       getAdvertisingBoardRequest(boardNumber).then(getAdvertisingBoardResponseHandler);
       getAdvertisingBoardShortReviewListRequest(boardNumber).then(getShortReviewResponseHandler);
+      getAdvertisingBoardFavoriteListRequest(boardNumber).then(getFavoriteListResponseHandler);
     },[boardNumber])
 
 
@@ -307,6 +326,12 @@ export default function AdvertisingBoardDetail(){
     useEffect(() => {
       changeSection(shortReviewCount,COUNT_BY_PAGE_COMMENT);
     },[currentSection]);
+
+    useEffect(() => {
+      setFavorite(false);
+      if (!user) return;
+      favoriteList.forEach(item => {if(item.email === user.email) setFavorite(true)})
+    }, [favoriteList]);
 
 
 

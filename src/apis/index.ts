@@ -1138,6 +1138,22 @@ export const getAdvertisingBoardShortReviewListRequest = async (
   return result;
 };
 
+export const getAdvertisingBoardFavoriteListRequest = async (
+  boardNumber: number | string
+) => {
+  const result = await axios
+    .get(GET_REVIEW_BOARD_FAVORITE_LIST_URL(boardNumber))
+    .then((response) => {
+      const responseBody: GetFavoriteListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
 export const postAdvertisingBoardRequest = async (
   data: PostAdvertisingBoardDto,
   token: string
