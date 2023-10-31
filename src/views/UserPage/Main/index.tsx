@@ -1,18 +1,18 @@
-import "./style.css";
+import { getMyPageBoardListRequest } from "apis";
+import AdminUserReviewBoardListItem from "components/AdminUserReviewBoardListItem";
+import Pagination from "components/Pagination";
+import { COUNT_BY_MAIN_BOARD_PAGE } from "constant";
+import { usePagination } from "hooks";
+import GetBoardListResponseDto from "interfaces/response/mypage/get-board-list.response.dto";
+import ResponseDto from "interfaces/response/response.dto";
+import { ReviewBoardListResponseDto } from "interfaces/response/reviewBoard";
+import MyPageMenu from "layouts/MyPageMenu";
+import MyPageTop from "layouts/MyPageTop";
 import { useEffect, useState } from "react";
-import ResponseDto from 'interfaces/response/response.dto';
-import { useNavigate } from 'react-router-dom';
-import { getMyPageBoardListRequest } from 'apis';
-import { useCookies } from 'react-cookie';
-import { COUNT_BY_MAIN_BOARD_PAGE } from 'constant';
-import { useUserStore } from 'stores';
-import { usePagination } from 'hooks';
-import { ReviewBoardListResponseDto } from 'interfaces/response/reviewBoard';
-import GetBoardListResponseDto from 'interfaces/response/mypage/get-board-list.response.dto';
-import AdminUserReviewBoardListItem from 'components/AdminUserReviewBoardListItem';
-import Pagination from 'components/Pagination';
-import MyPageTop from 'layouts/MyPageTop';
-import MyPageMenu from 'layouts/MyPageMenu';
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import { useUserStore } from "stores";
+import "./style.css";
 
 //          component : 마이페이지 메인        //
 export default function UserPage() {
@@ -21,7 +21,7 @@ export default function UserPage() {
   const [cookies, setCookie] = useCookies();
 
   // description: 유저 정보 상태 //
-  const {user} = useUserStore();
+  const { user } = useUserStore();
 
   //          function          //
   // description : 네비게이트 함수//
@@ -33,28 +33,43 @@ export default function UserPage() {
   const UserInfoBottomright = () => {
     //          state         //
     // description : 페이지 네이션 관련 상태 및 함수 //
-    const {totalPage, currentPage, currentSection, onPageClickHandler, onPreviusClickHandler, onNextClickHandler, changeSection} = usePagination();
+    const {
+      totalPage,
+      currentPage,
+      currentSection,
+      onPageClickHandler,
+      onPreviusClickHandler,
+      onNextClickHandler,
+      changeSection,
+    } = usePagination();
 
     // description : 전체 기행기 게시물 리스트 상태 //
-    const [reviewBoardList, setReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
+    const [reviewBoardList, setReviewBoardList] = useState<
+      ReviewBoardListResponseDto[]
+    >([]);
 
     // description : 전체 기행기 게시물 갯수 상태 //
     const [boardCount, setBoardCount] = useState<number>(0);
 
     // description : 현재 페이지에서 보여줄 기행기 게시물 리스트 상태 //
-    const [pageReviewBoardList, setPageReviewBoardList] = useState<ReviewBoardListResponseDto[]>([]);
+    const [pageReviewBoardList, setPageReviewBoardList] = useState<
+      ReviewBoardListResponseDto[]
+    >([]);
 
     //          function          //
     // description : 현재 페이지의 게시물 리스트 분류 함수 //
-    const getReviewBoardList = (ReviewBoardList: ReviewBoardListResponseDto[]) => {
-      const startIndex = COUNT_BY_MAIN_BOARD_PAGE * (currentPage -1);
-      const lastIndex = ReviewBoardList.length > COUNT_BY_MAIN_BOARD_PAGE * currentPage
-                        ? COUNT_BY_MAIN_BOARD_PAGE * currentPage
-                        : ReviewBoardList.length;
+    const getReviewBoardList = (
+      ReviewBoardList: ReviewBoardListResponseDto[]
+    ) => {
+      const startIndex = COUNT_BY_MAIN_BOARD_PAGE * (currentPage - 1);
+      const lastIndex =
+        ReviewBoardList.length > COUNT_BY_MAIN_BOARD_PAGE * currentPage
+          ? COUNT_BY_MAIN_BOARD_PAGE * currentPage
+          : ReviewBoardList.length;
       const pageReviewBoardList = ReviewBoardList.slice(startIndex, lastIndex);
 
       setPageReviewBoardList(pageReviewBoardList);
-    }
+    };
 
     // description : 기행기 게시글 불러오기 응답 처리 함수 //
     const getReviewBoardListResponseHandler = (
@@ -69,8 +84,8 @@ export default function UserPage() {
       setBoardCount(boardList.length);
       getReviewBoardList(boardList);
       changeSection(boardList.length, COUNT_BY_MAIN_BOARD_PAGE);
-    }
-    
+    };
+
     //          effect          //
     // description : 기행기 게시글 불러오기 //
     useEffect(() => {
@@ -78,25 +93,25 @@ export default function UserPage() {
 
       getMyPageBoardListRequest(token).then(getReviewBoardListResponseHandler);
 
-      if(!boardCount) changeSection(boardCount, COUNT_BY_MAIN_BOARD_PAGE);
-    },[currentSection]);
+      if (!boardCount) changeSection(boardCount, COUNT_BY_MAIN_BOARD_PAGE);
+    }, [currentSection]);
 
     useEffect(() => {
       getReviewBoardList(reviewBoardList);
-    },[currentPage]);
+    }, [currentPage]);
 
     //          render          //
     return (
-      <div className='user-info-bottom-right-item'>
-        <div className='user-info-bottom-right-name-list'>
-          <div className='user-info-bottom-right-number'>번호</div>
-          <div className='user-info-bottom-right-title'>제목</div>
-          <div className='user-info-bottom-right-write-datetime'>작성일자</div>
-          <div className='user-info-bottom-right-comment-count'> 댓글 </div>
-          <div className='user-info-bottom-right-favorite'>추천</div>
-          <div className='user-info-bottom-right-view-count'>조회</div>
+      <div className="user-info-bottom-right-item">
+        <div className="user-info-bottom-right-name-list">
+          <div className="user-info-bottom-right-number">번호</div>
+          <div className="user-info-bottom-right-title">제목</div>
+          <div className="user-info-bottom-right-write-datetime">작성일자</div>
+          <div className="user-info-bottom-right-comment-count"> 댓글 </div>
+          <div className="user-info-bottom-right-favorite">추천</div>
+          <div className="user-info-bottom-right-view-count">조회</div>
         </div>
-        <div className='user-info-bottom-right-name-list'>
+        <div className="user-info-bottom-right-name-list">
           {boardCount ? (
             <div>
               {pageReviewBoardList.map((item) => (
@@ -105,37 +120,36 @@ export default function UserPage() {
             </div>
           ) : (
             <div className="user-review-list-nothing">
-            {" "}
-            작성한 게시글이 없습니다.{" "}
-          </div>
+              {" "}
+              작성한 게시글이 없습니다.{" "}
+            </div>
           )}
+        </div>
         {boardCount !== 0 && (
           <Pagination
             totalPage={totalPage}
             currentPage={currentPage}
             onPageClickHandler={onPageClickHandler}
             onPreviusClickHandler={onPreviusClickHandler}
-            onNextClickHandler={onNextClickHandler} />
+            onNextClickHandler={onNextClickHandler}
+          />
         )}
       </div>
-    </div>
     );
   };
 
-//          effect          //
+  //          effect          //
 
-//          render          //
-return (
-  <div className='user-info-wrapper'>
-    <div className='user-info-top'>
-      <MyPageTop />
+  //          render          //
+  return (
+    <div className="user-info-wrapper">
+      <div className="user-info-top">
+        <MyPageTop />
+      </div>
+      <div className="user-info-bottom">
+        <MyPageMenu />
+        <UserInfoBottomright />
+      </div>
     </div>
-    <div className='user-info-bottom'>
-      <MyPageMenu />
-      <UserInfoBottomright />
-    </div>
-  </div>
-  
-)
-
+  );
 }
