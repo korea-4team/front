@@ -77,6 +77,7 @@ import EventBoardDetail from "views/EventBoard/Detail";
 import EventBoardWrite from "views/EventBoard/Write";
 import EventBoardUpdate from "views/EventBoard/Update";
 import AdminAdvertising from "views/Admin/GetAdvertisingBoard";
+import AdvertisingBoardUpdate from "views/AdvertisingBoard/Update";
 import UserPage from "views/UserPage/Main";
 import UserCommentPage from "views/UserPage/GetComment";
 import UserShortReviewPage from "views/UserPage/GetShortReview";
@@ -143,6 +144,7 @@ function App() {
             <Route path={ADVERTISING_BOARD_PATH} element={<AdvertisingBoardMain />} />
             <Route path={DETAIL_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={<AdvertisingBoardDetail />} />
             <Route path={WRITE_PATH} element={<AdvertisingBoardWrite />} />
+            <Route path={UPDATE_PATH(BOARD_NUMBER_PATH_VARIABLE)} element={ <AdvertisingBoardUpdate /> }/>
           </Route>
 
           <Route path={NOTICE_BOARD_PATH}>

@@ -14,9 +14,12 @@ export default interface GetAdvertisingBoardResponseDto extends ResponseDto{
   businessType: string;
   tagList: string;
   menuList: PostMenu[];
-  storename: string;
-  storeadrress : string;
-  storetel : string;
-  storenumber : string;
-  storetime : string;
+  storeName: string;
+  storeTel: string;
+  storeTime: string;
+  storeNumber : string;
+  storeAddress: string;
+  bookTime: string;
+  book: string;
+  bookKids: string;
 }

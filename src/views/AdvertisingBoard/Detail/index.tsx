@@ -27,6 +27,10 @@ export default function AdvertisingBoardDetail(){
 
   const navigator = useNavigate();
 
+
+  const AdvertisingBoard = () => {
+
+
     const [advertisingBoard, setAdvertisingBoard] = useState<GetAdvertisingBoardResponseDto | null>(null);
 
     const [isWriter, setWriter] = useState<boolean>(false);
@@ -209,6 +213,7 @@ export default function AdvertisingBoardDetail(){
 
     const onDeleteShortReviewButtonClickHandler = (getShortReviewNumber : number) => {
       const accessToken = cookies.accessToken;
+      console.log(getShortReviewNumber);
       if(!getShortReviewNumber) return;
       deleteAdvertisingShortReviewRequest(getShortReviewNumber, accessToken).then(deleteShortReviewResponseHandler);
     }
@@ -277,7 +282,6 @@ export default function AdvertisingBoardDetail(){
     useEffect(() => {
       if (boardNumberFlag) {
         boardNumberFlag = false;
-        console.log(boardNumberFlag);
         return
       }
       if (!boardNumber) {
@@ -335,20 +339,19 @@ export default function AdvertisingBoardDetail(){
           </div>
           <div className='advertising-board-write-store'>상세보기</div>
           <div className="advertising-board-detail-contents">
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storename}</div>
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storetel}</div>
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storetime}</div>
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storenumber}</div>
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeadrress}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeName}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeTel}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeTime}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeNumber}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeAddress}</div>
           </div> 
           <div className='advertising-board-write-store'>예약 안내사항</div>
           <div className="advertising-board-detail-contents">
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storename}</div>
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storetel}</div>
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storetime}</div>
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storenumber}</div>
-            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.storeadrress}</div>
-          </div> 
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.book}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.bookTime}</div>
+            <div className="advertising-board-store-content-textarea" >{advertisingBoard?.bookKids}</div>
+          </div>
+          <div className='advertising-board-book'>예약은 전화로만 가능합니다.</div>  
         <div className="advertising-board-button-box">
           <div className="black-button" onClick={onBackButtonClickHandler}>목록</div>
           {isWriter &&
@@ -399,3 +402,9 @@ export default function AdvertisingBoardDetail(){
       </div>
     )
   }
+
+  return(
+    <AdvertisingBoard />
+  )
+
+}

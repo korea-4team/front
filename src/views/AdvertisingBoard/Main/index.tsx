@@ -105,13 +105,13 @@ export default function AdvertisingBoardMain() {
       getPageAdvertisingBoardList(AdvertisingBoardList);
     },[currentPage])
 
-    // useEffect(()=> {
-    //   getAdvertisingBoardLocationListRequest(location).then(getAdvertisingBoardListResponseHandler);
-    // },[location])
+     useEffect(()=> {
+      getAdvertisingBoardLocationListRequest(location ? location : '전체').then(getAdvertisingBoardListResponseHandler);
+     },[location])
 
-    // useEffect(()=> {
-    //   getAdvertisingBoardBusinessTypeListRequest(businessType).then(getAdvertisingBoardBusinessTypeListResponseHandler);
-    // },[businessType])
+     useEffect(()=> {
+       getAdvertisingBoardBusinessTypeListRequest(businessType ? businessType : '전체').then(getAdvertisingBoardListResponseHandler);
+     },[businessType])
     
 // render // 
 return (
