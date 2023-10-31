@@ -31,10 +31,10 @@ export default function AdvertisingBoardMain() {
     const getPageAdvertisingBoardList = (advertisingBoardList: AdvertisingBoardListResponseDto[]) => {
       const lastIndex = advertisingBoardList.length > COUNT_BY_PAGE * currentPage ? COUNT_BY_PAGE * currentPage : advertisingBoardList.length;
       const startIndex = COUNT_BY_PAGE * (currentPage - 1);
+
       const pageAdvertisingBoardList = advertisingBoardList.slice(startIndex, lastIndex);
 
-
-      setAdvertisingBoardList(pageAdvertisingBoardList);
+      setPageAdvertisingBoardList(pageAdvertisingBoardList);
     }
 
 
@@ -49,7 +49,7 @@ export default function AdvertisingBoardMain() {
       const { advertisingboardList } = responseBody as GetCurrentAdvertisingBoardResponeDto;
       changeSection(advertisingboardList.length, COUNT_BY_PAGE);
       setAdvertisingBoardList(advertisingboardList);
-      setPageAdvertisingBoardList(advertisingboardList);
+      getPageAdvertisingBoardList(advertisingboardList);
       setBoardCount(advertisingboardList.length);
     }
 
@@ -102,6 +102,7 @@ export default function AdvertisingBoardMain() {
     },[currentSection])
 
     useEffect(()=> {
+      if (!AdvertisingBoardList.length) return;
       getPageAdvertisingBoardList(AdvertisingBoardList);
     },[currentPage])
 
