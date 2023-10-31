@@ -1,10 +1,11 @@
 .admin-user-review-board-list-item-box:hover {
   cursor: pointer;
 }
+
 .admin-user-review-board-list-box {
   margin-top: 3px;
   display: flex;
-  width: 1132px;
+  width: 1112px;
   height: 30px;
   justify-content: center;
   font-size: 18px;
@@ -37,7 +38,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 .admin-user-review-board-item-comment-count {
   display: flex;
