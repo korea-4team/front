@@ -178,7 +178,7 @@ export default function ReviewBoardDetail() {
 
     // description: 목록 버튼 클릭 이벤트 처리 //
     const onBackButtonClickHandler = () => {
-      navigator(REVIEW_BOARD_PATH);
+      navigator(-1);
     }
 
     // description: 댓글 변경 이벤트 처리 함수 //

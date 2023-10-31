@@ -1,0 +1,187 @@
+.user-info-top-item {
+	width: 1000px;
+	height: 200px;
+
+	background-color: rgba(0, 0, 0, 0.1);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.user-info-bottom {
+	margin-top: 30px;
+	margin-bottom: 10px;
+	
+	width: 1440px;
+
+	display: flex;
+}
+
+.user-info-bottom-left-item {
+	width: 288px;
+	height: 340px;
+
+	padding: 20px;
+
+	flex: 2;
+
+	background-color: #d0d0d0;
+}
+
+.user-info-bottom-right-item {
+	margin-left: 30px;
+
+	width: 1140px;
+	height: 450px;
+	
+	flex: 7;
+
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.user-info-top-left {
+	margin: 10px;
+}
+
+.user-info-email {
+  width: 200px;
+	height: 30px;
+	
+	margin-bottom: 10px;
+	margin-left: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-nickname{
+  width: 200px;
+	height: 30px;
+
+	margin-bottom: 10px;
+	margin-left: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-telnumber {
+  width: 200px;
+	height: 30px;
+	
+	margin-left: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-top-right {
+	margin: 10px;
+}
+
+.user-info-top-update {
+  width: 200px;
+	height: 30px;
+	
+	margin-bottom: 10px;
+	margin-right: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-top-store-info {
+	width: 200px;
+	height: 30px;
+	
+	margin-right: 10px;
+	padding: 5px 10px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.user-info-bottom-left-menu-button {
+	margin-bottom: 20px;
+
+	height: 40px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background-color: rgba(255, 255, 255, 1);
+	border-radius: 3px;
+	font-size: 18px;
+}
+
+.user-info-bottom-left-menu-button:hover {
+	cursor: pointer;
+
+	background-color: rgba(0,0,0,0.1);
+}
+
+.user-info-bottom-right-name-list {
+	width: 1112px;
+
+	padding: 10px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.user-info-bottom-right-number {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	height: 100%;
+}
+
+.user-info-bottom-right-title {
+	display: flex;
+	justify-content: center;
+	width: 432px;
+	height: 100%;
+}
+
+.user-info-bottom-right-write-datetime {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	height: 100%;
+	font-size: 14px;
+}
+
+.user-info-bottom-right-board-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 380px;
+	height: 100%;
+	font-size: 14px;
+}

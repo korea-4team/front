@@ -430,6 +430,7 @@ export default function AdminGetUserDetail() {
                 {" "}
                 작성일자{" "}
               </div>
+              <div className="admin-user-board-list-favorite"> 댓글 </div>
               <div className="admin-user-board-list-favorite"> 추천 </div>
               <div className="admin-user-board-list-view-count"> 조회 </div>
             </div>
