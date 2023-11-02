@@ -1,5 +1,6 @@
 import React, { ChangeEvent, Dispatch, KeyboardEvent, MutableRefObject, SetStateAction, forwardRef, useRef } from 'react';
 import './style.css';
+import { INPUT_ICON } from 'constant';
 
 //          interface: Input 상자 컴포넌트 Props          //
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
   placeholder: string;
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  icon?: string;
+  icon?: INPUT_ICON;
   errorMessage?: string;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   onButtonClick?: () => void;
@@ -34,11 +35,17 @@ const InputBox = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
       <div className='inputbox-label'>{label}</div>
       <div className={error ? 'inputbox-container-error' : 'inputbox-container'}>
         <input ref={ref} className='input' type={type} placeholder={placeholder} value={value} onChange={onChange} onKeyDown={onKeyDownHandler} />
-        {onButtonClick !== undefined && (
+        { icon && (
+        <div className="input-box-icon" onClick={onButtonClick}>
+          { icon === INPUT_ICON.ON ? (<div className="input-on-icon"></div>) :
+            icon === INPUT_ICON.OFF ? (<div className="input-off-icon"></div>) :
+            icon === INPUT_ICON.ARROW ? (<div className="input-right-arrow-icon"></div>) : (<></>) }
+        </div> ) }
+        {/* {onButtonClick !== undefined && (
           <div className='icon-button' onClick={onButtonClick}>
             {icon !== undefined && <div className={icon}></div>}
           </div>
-        )}
+        )} */}
       </div>
       <div className='inputbox-message'>{errorMessage}</div>
     </div>
