@@ -3,10 +3,11 @@ import React, { useState, useRef, ChangeEvent, KeyboardEvent } from 'react';
 import './style.css';
 import { AccountFindEmailRequestDto, AccountFindPasswordRequestDto, SignInRequestDto, SignUpRequestDto } from 'interfaces/request/auth';
 import { accountFindEmailRequest, accountFindPasswordRequest, signInRequest, signUpRequest } from 'apis';
-import { MAIN_PATH } from 'constant';
+import { INPUT_ICON, MAIN_PATH } from 'constant';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { AccountFindEmailResponseDto, AccountFindPasswordResponseDto, SignInResponseDto, SignUpResponseDto } from 'interfaces/response/auth';
+import { useDaumPostcodePopup, Address } from 'react-daum-postcode';
 import ResponseDto from 'interfaces/response/response.dto';
 
 //          component: 인증 페이지 컴포넌트          //
@@ -32,6 +33,8 @@ export default function Authentication() {
     const [email, setEmail] = useState<string>('');
     //          state: 비밀번호 상태          //
     const [password, setPassword] = useState<string>('');
+    // description: 비밀번호 인풋 타입상태 //
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     //          state: 이메일 에러 상태          //
     const [isEmailError, setEmailError] = useState<boolean>(false);
     //          state: 비밀번호 에러 상태          //
@@ -83,6 +86,10 @@ export default function Authentication() {
       setPasswordErrorMessage('');
       setPassword(value);
     }
+    // description: 비밀번호 타입 변경 버튼 클릭 이벤트 //
+    const onPasswordIconClickHandler = () => {
+      setShowPassword(!showPassword);
+    }
     //          event handler: 로그인 버튼 클릭 이벤트 처리          //
     const onSignInButtonClickHandler = () => {
       if (!email) {
@@ -114,7 +121,7 @@ export default function Authentication() {
         <div className='sign-in-title'>{'로그인'}</div>
         <div className='sign-in-input-container'>
           <InputBox ref={emailRef} label='이메일' type='text' placeholder='이메일을 입력하세요.' value={email} onChange={onEmailChangeHandler} error={isEmailError} errorMessage={emailErrorMessage} />
-          <InputBox ref={passwordRef} label='비밀번호' type='password' placeholder='비밀번호를 입력하세요.' value={password} onChange={onPasswordChangeHandler} error={isPasswordError} errorMessage={passwordErrorMessage} onKeyDown={onPasswordKeyDownHandler} />
+          <InputBox ref={passwordRef} label='비밀번호' type={showPassword ? 'text' : 'password'} icon={showPassword ? INPUT_ICON.ON : INPUT_ICON.OFF} onButtonClick={onPasswordIconClickHandler} placeholder='비밀번호를 입력하세요.' value={password} onChange={onPasswordChangeHandler} error={isPasswordError} errorMessage={passwordErrorMessage} onKeyDown={onPasswordKeyDownHandler} />
         </div>
         <div className='sign-in-action-container'>
           { isError && <div className='sign-in-error-message'>{'로그인 정보가 일치하지 않습니다.'}</div> }
@@ -132,63 +139,70 @@ export default function Authentication() {
   //          component: 회원가입 컴포넌트          //
   const SignUp = () => {
 
-    //          state: email input 참조 상태          //
+    //          state          //
+    // description: 다음 포스트 (우편번호검색) 팝업 상태 //
+    const open = useDaumPostcodePopup();
+    // description: email input 참조 상태          //
     const emailRef = useRef<HTMLInputElement | null>(null);
-    //          state: password input 참조 상태          //
+    // description: password input 참조 상태          //
     const passwordRef = useRef<HTMLInputElement | null>(null);
-    //          state: password check input 참조 상태          //
+    // description: password check input 참조 상태          //
     const passwordCheckRef = useRef<HTMLInputElement | null>(null);
-    //          state: nickname input 참조 상태          //
+    // description: nickname input 참조 상태          //
     const nicknameRef = useRef<HTMLInputElement | null>(null);
-    //          state: address input 참조 상태          //
+    // description: address input 참조 상태          //
     const addressRef = useRef<HTMLInputElement | null>(null);
-    //          state: address detail input 참조 상태          //
+    // description: address detail input 참조 상태          //
     const addressDetailRef = useRef<HTMLInputElement | null>(null);
-    //          state: tel number input 참조 상태          //
+    // description: tel number input 참조 상태          //
     const telNumberRef = useRef<HTMLInputElement | null>(null);
 
-    //          state: 이메일 상태          //
+    // description: 이메일 상태          //
     const [email, setEmail] = useState<string>('');
-    //          state: 비밀번호 상태          //
+    // description: 비밀번호 상태          //
     const [password, setPassword] = useState<string>('');
-    //          state: 비밀번호 확인 상태          //
+    // description: 비밀번호 인풋 타입상태 //
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    // description: 비밀번호 확인 상태          //
     const [passwordCheck, setPasswordCheck] = useState<string>('');
-    //          state: 닉네임 상태          //
+    // description: 비밀번호 확인 인풋 타입 상태 //
+    const [showPasswordCheck, setShowPasswordCheck] = useState<boolean>(false);
+    // description: 닉네임 상태          //
     const [nickname, setNickname] = useState<string>('');
-    //          state: 주소 상태          //
+    // description: 주소 상태          //
     const [address, setAddress] = useState<string>('');
-    //          state: 상세주소 상태          //
+    // description: 상세주소 상태          //
     const [addressDetail, setAddressDetail] = useState<string>('');
-    //          state: 전화번호 상태          //
+    // description: 전화번호 상태          //
     const [telNumber, setTelNumber] = useState<string>('');
-    //          state: 이메일 에러 상태          //
+    // description: 이메일 에러 상태          //
     const [isEmailError, setEmailError] = useState<boolean>(false);
-    //          state: 비밀번호 에러 상태          //
+    // description: 비밀번호 에러 상태          //
     const [isPasswordError, setPasswordError] = useState<boolean>(false);
-    //          state: 패스워드 확인 에러 상태          //
+    // description: 패스워드 확인 에러 상태          //
     const [isPasswordCheckError, setPasswordCheckError] = useState<boolean>(false);
-    //          state: 닉네임 에러 상태          //
+    // description: 닉네임 에러 상태          //
     const [isNicknameError, setNicknameError] = useState<boolean>(false);
-    //          state: 주소 에러 상태          //
+    // description: 주소 에러 상태          //
     const [isAddressError, setAddressError] = useState<boolean>(false);
-    //          state: 상세 주소 에러 상태          //
+    // description: 상세 주소 에러 상태          //
     const [isAddressDetailError, setAddressDetailError] = useState<boolean>(false);
-    //          state: 전화번호 에러 상태          //
+    // description: 전화번호 에러 상태          //
     const [isTelNumberError, setTelNumberError] = useState<boolean>(false);
 
-    //          state: 이메일 에러 메세지 상태          //
+    // description: 이메일 에러 메세지 상태          //
     const [emailErrorMessage, setEmailErrorMessage] = useState<string>('');
-    //          state: 비밀번호 에러 메세지 상태          //
+    // description: 비밀번호 에러 메세지 상태          //
     const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>('');
-    //          state: 비밀번호 확인 에러 메세지 상태          //
+    // description: 비밀번호 확인 에러 메세지 상태          //
     const [passwordCheckErrorMessage, setPasswordCheckErrorMessage] = useState<string>('');
-    //          state: 닉네임 에러 메세지 상태          //
+    // description: 닉네임 에러 메세지 상태          //
     const [nicknameErrorMessage, setNicknameErrorMessage] = useState<string>('');
-    //          state: 주소 에러 메세지 상태          //
+    // description: 주소 에러 메세지 상태          //
     const [addressErrorMessage, setAddressErrorMessage] = useState<string>('');
-    //          state: 상세 주소 에러 메세지 상태          //
+    // description: 상세 주소 에러 메세지 상태          //
     const [addressDetailErrorMessage, setAddressDetailErrorMessage] = useState<string>('');
-    //          state: 휴대전화번호 에러 메세지 상태          //
+    // description: 휴대전화번호 에러 메세지 상태          //
     const [telNumberErrorMessage, setTelNumberErrorMessage] = useState<string>('');
 
     //          function: sign up response 처리 함수          //
@@ -226,12 +240,20 @@ export default function Authentication() {
       setPasswordErrorMessage('');
       setPassword(value);
     }
+    // description: 비밀번호 타입 변경 버튼 클릭 이벤트 //
+    const onPasswordIconClickHandler = () => {
+      setShowPassword(!showPassword);
+    }
     //          event handler: 비밀번호 확인 변경 이벤트 처리          //
     const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       setPasswordCheckError(false);
       setPasswordCheckErrorMessage('');
       setPasswordCheck(value);
+    }
+    // description: 비밀번호 확인 타입 변경 버튼 클릭 이벤트 //
+    const onPasswordCheckIconClickHandler = () => {
+      setShowPasswordCheck(!showPasswordCheck);
     }
     //          event handler: 닉네임 변경 이벤트 처리          //
     const onNicknameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -246,6 +268,15 @@ export default function Authentication() {
       setAddressError(false);
       setAddressErrorMessage('');
       setAddress(value);
+    }
+    // description: 주소 검색 버튼 클릭 이벤트 //
+    const onAddressIcnClickHandler = () => {
+      open({ onComplete });
+    }
+    // description: 주소 검색 완료 이벤트 //
+    const onComplete = (data: Address) => {
+      const address = data.address;
+      setAddress(address);
     }
     //          event handler: 상세 주소 변경 이벤트 처리          //
     const onAddressDetailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -335,18 +366,16 @@ export default function Authentication() {
       setPage('sign-in');
     }
 
-    // TODO: 비밀번호, 비밀번호 확인, 주소 아이콘 버튼 추가
-    // TODO: 주소 검색 기능 추가
     //          render: 회원가입 컴포넌트 렌더링          //
     return (
       <div id='sign-up-card'>
         <div className='sign-up-title'>{'회원가입'}</div>
         <div className='sign-up-input-container'>
           <InputBox ref={emailRef} label='이메일' type='text' placeholder='이메일을 입력하세요.' value={email} onChange={onEmailChangeHandler} error={isEmailError} errorMessage={emailErrorMessage} />
-          <InputBox ref={passwordRef} label='비밀번호' type='password' placeholder='비밀번호를 입력하세요.' value={password} onChange={onPasswordChangeHandler} error={isPasswordError} errorMessage={passwordErrorMessage} />
-          <InputBox ref={passwordCheckRef} label='비밀번호 확인' type='password' placeholder='비밀번호 확인을 입력하세요.' value={passwordCheck} onChange={onPasswordCheckChangeHandler} error={isPasswordCheckError} errorMessage={passwordCheckErrorMessage} />
+          <InputBox ref={passwordRef} label='비밀번호' type={showPassword ? 'text' : 'password'} placeholder='비밀번호를 입력하세요.' icon={showPassword ? INPUT_ICON.ON : INPUT_ICON.OFF} onButtonClick={onPasswordIconClickHandler} value={password} onChange={onPasswordChangeHandler} error={isPasswordError} errorMessage={passwordErrorMessage} />
+          <InputBox ref={passwordCheckRef} label='비밀번호 확인' type={showPasswordCheck ? 'text' : 'password'} placeholder='비밀번호 확인을 입력하세요.' icon={showPasswordCheck ? INPUT_ICON.ON : INPUT_ICON.OFF} onButtonClick={onPasswordCheckIconClickHandler} value={passwordCheck} onChange={onPasswordCheckChangeHandler} error={isPasswordCheckError} errorMessage={passwordCheckErrorMessage} />
           <InputBox ref={nicknameRef} label='닉네임' type='text' placeholder='닉네임을 입력하세요.' value={nickname} onChange={onNicknameChangeHandler} error={isNicknameError} errorMessage={nicknameErrorMessage} />
-          <InputBox ref={addressRef} label='주소' type='text' placeholder='주소를 입력하세요.' value={address} onChange={onAddressChangeHandler} error={isAddressError} errorMessage={addressErrorMessage} />
+          <InputBox ref={addressRef} label='주소' type='text' placeholder='주소를 입력하세요.' icon={INPUT_ICON.ARROW} value={address} onChange={onAddressChangeHandler} error={isAddressError} errorMessage={addressErrorMessage} onButtonClick={onAddressIcnClickHandler} />
           <InputBox ref={addressDetailRef} label='상세 주소' type='text' placeholder='상세 주소를 입력하세요.' value={addressDetail} onChange={onAddressDetailChangeHandler} error={isAddressDetailError} errorMessage={addressDetailErrorMessage} />
           <InputBox ref={telNumberRef} label='휴대 전화번호' type='text' placeholder='휴대전화 번호를 입력하세요.' value={telNumber} onChange={onTelNumberChangeHandler} error={isTelNumberError} errorMessage={telNumberErrorMessage} />
         </div>
